@@ -1,0 +1,1826 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Sesión diaria — Acompañamiento Vocal Afirmativo</title>
+<meta name="description" content="Sesión diaria de acompañamiento vocal afirmativo: registro de práctica, grabaciones y seguimiento centrado en la persona." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='7' fill='%23e0559e'/%3E%3Cpath d='M8 17c-2.5-2.3-4-4.2-4-6.3A3.2 3.2 0 0 1 7.3 7.4C8.6 7.4 9.6 8 10 9c.4-1 1.4-1.6 2.7-1.6a3.2 3.2 0 0 1 3.3 3.3c0 2.1-1.5 4-4 6.3l-2 1.8Z' fill='white'/%3E%3C/svg%3E">
+<script>document.documentElement.setAttribute('data-pastel-theme', (function(){try{return localStorage.getItem('cv-pastel-theme')||'rosa';}catch(e){return 'rosa';}})());</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/shared.css">
+<style>
+  :root{
+    /* Paleta base: ROSA (pastel, por defecto) */
+    --bg-1:#fff6f9;
+    --bg-2:#fdeef4;
+    --card:#ffffff;
+    --card-2:#fff9fb;
+    --text:#472234;
+    --muted:#8a6b78;
+    --primary:#f4a6c6;
+    --primary-2:#f7c6dc;
+    --primary-deep:#e783ad;
+    --accent:#c9a8e0;
+    --border:#f4d9e6;
+    --ok:#5cb894;
+    --warn:#e2896f;
+    --shadow: 0 10px 30px rgba(228,140,175,0.16);
+    --radius:16px;
+    --focus: 0 0 0 3px rgba(244,166,198,0.45);
+  }
+
+  :root[data-pastel-theme="lavanda"]{
+    --bg-1:#f8f5ff; --bg-2:#efe8fb; --card:#ffffff; --card-2:#fbf9ff;
+    --text:#3c2d4d; --muted:#7f709a;
+    --primary:#c6b1ef; --primary-2:#dccdf7; --primary-deep:#a687da;
+    --accent:#f4a6c6; --border:#e6dbf9; --shadow:0 10px 30px rgba(166,135,218,0.16);
+  }
+  :root[data-pastel-theme="menta"]{
+    --bg-1:#f2fbf7; --bg-2:#e4f6ed; --card:#ffffff; --card-2:#f7fdfa;
+    --text:#204036; --muted:#5f8b78;
+    --primary:#9fdcbd; --primary-2:#c4ecd9; --primary-deep:#67c096;
+    --accent:#f4a6c6; --border:#d7f0e3; --shadow:0 10px 30px rgba(103,192,150,0.18);
+  }
+  :root[data-pastel-theme="durazno"]{
+    --bg-1:#fff8f2; --bg-2:#ffeede; --card:#ffffff; --card-2:#fffaf4;
+    --text:#4a2f1d; --muted:#9a7355;
+    --primary:#ffc79a; --primary-2:#ffdcb8; --primary-deep:#f7a35c;
+    --accent:#f4a6c6; --border:#ffe4c7; --shadow:0 10px 30px rgba(247,163,92,0.18);
+  }
+  :root[data-pastel-theme="cielo"]{
+    --bg-1:#f1f8ff; --bg-2:#e3f0fd; --card:#ffffff; --card-2:#f7fbff;
+    --text:#1f3b53; --muted:#6d8ba3;
+    --primary:#a7d2f5; --primary-2:#c9e5fb; --primary-deep:#6fb2e8;
+    --accent:#f4a6c6; --border:#d8ebfb; --shadow:0 10px 30px rgba(111,178,232,0.18);
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0}
+  body{
+    font-family:'Inter',system-ui,Segoe UI,Roboto,Arial;
+    color:var(--text);
+    background:
+      radial-gradient(1200px 600px at 90% -10%, var(--bg-2), transparent),
+      radial-gradient(1000px 500px at -10% 10%, var(--primary-2) 0%, transparent 40%),
+      var(--bg-1);
+    background-attachment:fixed;
+    transition:background .3s ease, color .3s ease;
+  }
+  h1,h2,h3,.brand-font{font-family:'Fraunces',Georgia,serif;font-weight:600}
+
+  .wrap{max-width:1240px;margin:0 auto;padding:22px 20px 60px}
+
+  /* ---------- Header ---------- */
+  header{display:flex;flex-direction:column;gap:14px;margin-bottom:20px}
+  .titleBar{
+    background:linear-gradient(120deg, var(--primary) 0%, var(--accent) 100%);
+    border-radius:20px;padding:20px 22px;color:#3a1c2b;
+    box-shadow:var(--shadow);
+    display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;
+  }
+  .titleBar h1{margin:0;font-size:22px;font-weight:700;color:#3a1c2b}
+  .titleBar p{margin:6px 0 0;font-size:13px;font-weight:600;color:rgba(58,28,43,0.75)}
+  .titleActions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+
+
+  .metaGrid{display:grid;grid-template-columns:1.3fr 1fr;gap:14px}
+  @media (max-width:960px){ .metaGrid{grid-template-columns:1fr} }
+
+  .card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:18px;
+    box-shadow: 0 6px 18px rgba(180,120,150,0.08);
+  }
+  .cardTitle{font-weight:700;font-size:14px;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+  .cardTitle .dot{width:8px;height:8px;border-radius:50%;background:var(--primary-deep)}
+  .fieldLabel{font-size:12px;font-weight:600;color:var(--muted);margin-bottom:5px;display:block}
+  .row{display:flex;gap:8px;flex-wrap:wrap}
+
+  input[type="text"], input[type="date"], input[type="number"], select, textarea{
+    padding:9px 10px;border-radius:10px;border:1px solid var(--border);
+    background:var(--card-2);color:var(--text);font-family:inherit;font-size:13px;
+    outline:none; transition:box-shadow .15s ease, border-color .15s ease;
+  }
+  input:focus, select:focus, textarea:focus{ box-shadow:var(--focus); border-color:var(--primary-deep) }
+
+  button{font-family:inherit;cursor:pointer}
+  button.primary{
+    background:linear-gradient(120deg, var(--primary), var(--primary-deep));
+    border:0;padding:10px 14px;border-radius:12px;color:#3a1c2b;font-weight:700;font-size:13px;
+    box-shadow:0 8px 18px rgba(231,131,173,0.28);transition:transform .12s ease, box-shadow .12s ease;
+  }
+  button.primary:hover{transform:translateY(-2px);box-shadow:0 14px 26px rgba(231,131,173,0.32)}
+  button.primary:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+  button.ghost{
+    background:var(--card-2);border:1px solid var(--border);color:var(--text);
+    padding:9px 12px;border-radius:12px;font-weight:600;font-size:13px;transition:all .12s ease;
+  }
+  button.ghost:hover{background:var(--primary-2);border-color:var(--primary-deep)}
+  button.ghost:disabled{opacity:.5;cursor:not-allowed}
+  button.warn{background:var(--warn);color:#fff;border:0;padding:9px 12px;border-radius:12px;font-weight:600;font-size:13px}
+  button.iconBtn{background:rgba(255,255,255,0.55);border:1px solid rgba(255,255,255,0.6);padding:6px 9px;border-radius:9px;color:#3a1c2b;font-weight:700}
+
+  .subtle{font-size:12.5px;color:var(--muted);line-height:1.5}
+  .small{font-size:12.5px;color:var(--muted)}
+
+  .goalBadge{
+    display:inline-flex;align-items:center;gap:6px;background:var(--primary-2);color:#5c2e46;
+    padding:6px 10px;border-radius:999px;font-size:12px;font-weight:700;
+  }
+
+  .infoBtn{background:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.7);color:#3a1c2b;border-radius:999px;width:30px;height:30px;font-weight:800}
+
+  /* ---------- Layout principal ---------- */
+  .grid{display:grid;grid-template-columns:1fr 440px;gap:18px;margin-top:18px}
+  @media (max-width:1040px){ .grid{grid-template-columns:1fr} }
+
+  .sectionTitle{font-weight:700;font-size:15px;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .sectionTitle .dot{width:9px;height:9px;border-radius:50%;background:var(--primary-deep)}
+
+  .activity{margin-bottom:14px;padding:14px;border-radius:14px;background:var(--card-2);border:1px solid var(--border)}
+  .activityHeader{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}
+  .activityHeader .blockName{font-weight:700;font-size:14px;color:var(--text)}
+  .activityNote{font-size:12px;color:var(--muted);margin-top:3px;max-width:520px}
+
+  .rep-line{margin-top:10px}
+  .rep-label{font-weight:600;color:var(--text);font-size:13px;min-width:170px;display:inline-block}
+  .goalTag{background:var(--primary-2);padding:4px 9px;border-radius:8px;color:#5c2e46;font-size:12px;font-weight:700;margin-left:8px}
+
+  .checkboxes{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+  .rep-box{display:flex;align-items:center;gap:6px;padding:6px 9px;border-radius:9px;background:#fff;border:1px solid var(--border);transition:all .12s ease}
+  .rep-box:hover{transform:translateY(-2px);border-color:var(--primary-deep)}
+  .rep-box input[type="checkbox"]{width:16px;height:16px;margin:0;accent-color:var(--primary-deep)}
+  .rep-box span{font-size:12px;color:var(--muted);font-weight:600}
+
+  .meterWrap{display:flex;gap:12px;align-items:center;margin-top:10px}
+  .meter{flex:1;height:16px;background:var(--bg-2);border-radius:8px;overflow:hidden;border:1px solid var(--border)}
+  .meterBar{height:100%;width:0%;background:linear-gradient(90deg,var(--primary),var(--accent));transition:width .08s ease}
+  .meterValue{min-width:76px;text-align:right;font-weight:700;color:var(--text);font-size:13px}
+
+  .controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+
+  .logArea{height:150px;overflow:auto;background:var(--bg-2);border-radius:10px;padding:10px;border:1px solid var(--border);font-family:'IBM Plex Mono','SFMono-Regular',Consolas,monospace;font-size:12px;color:var(--text)}
+
+  .recording-item{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 10px;border-radius:10px;background:var(--card-2);border:1px solid var(--border);margin-top:8px}
+  .analysisBadge{display:inline-block;background:var(--bg-2);padding:5px 8px;border-radius:8px;color:#5c2e46;font-weight:700;margin-left:8px;font-size:12px;border:1px solid var(--border)}
+
+  footer{margin-top:20px;color:var(--muted);font-size:12.5px;text-align:center;padding-bottom:10px}
+
+  /* ---------- Panel flotante ---------- */
+  #floatingPanel{position:sticky;top:20px;z-index:20;transition:box-shadow .18s ease}
+  #floatingPanel.floating{position:fixed;box-shadow:0 24px 60px rgba(120,70,100,0.28);border-radius:14px;background:var(--card);left:calc(100% - 470px);top:80px;width:420px;border:1px solid var(--border)}
+  #floatingPanel.compact{width:300px}
+  #floatingPanel.compact .rightContent .card:nth-child(2){display:none}
+  #floatingPanel.compact .recording-item{display:none}
+
+  .dragHandle{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:14px 14px 0 0;background:linear-gradient(120deg,var(--primary-2),var(--accent));cursor:grab;border:1px solid var(--border)}
+  .dragHandle:active{cursor:grabbing}
+  .dragTitle{font-weight:700;color:#3a1c2b;font-size:13px}
+  .panelActions{display:flex;gap:6px;align-items:center}
+  #floatingPanel.minimized .rightContent{display:none}
+  #floatingPanel.minimized{width:260px}
+  .rightContent{display:flex;flex-direction:column;gap:12px;padding:12px}
+  #floatingPanel:not(.floating) .rightContent{padding:0}
+
+  /* ---------- Ventana F0 ---------- */
+  #pitchWindow{
+    position:fixed;z-index:60;left:60px;top:80px;width:420px;border-radius:14px;
+    background:var(--card);border:1px solid var(--border);box-shadow:0 24px 60px rgba(120,70,100,0.28);
+    overflow:hidden;display:flex;flex-direction:column;resize:both;
+  }
+  #pitchWindow.minimized{height:44px;width:240px}
+  #pitchWindow.hidden{display:none}
+  #pitchWindow .pHandle{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 11px;cursor:grab;background:linear-gradient(120deg,var(--primary-2),var(--accent));border-bottom:1px solid var(--border)}
+  #pitchWindow .pHandle span{font-weight:700;color:#3a1c2b;font-size:12.5px}
+  #pitchWindow .pContent{padding:10px}
+  #pitchWindow .resizer{position:absolute;right:6px;bottom:6px;width:14px;height:14px;cursor:se-resize;background:var(--primary-2);border-radius:4px}
+
+  .pitchCard canvas{width:100%;height:170px;border-radius:10px;background:var(--bg-2);display:block}
+
+  /* ---------- Modal info ---------- */
+  .modalOverlay{position:fixed;inset:0;background:rgba(70,30,50,0.35);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
+  .modalOverlay.open{display:flex}
+  .modalBox{background:var(--card);border-radius:18px;max-width:620px;width:100%;max-height:82vh;overflow:auto;padding:22px;box-shadow:0 30px 80px rgba(90,40,60,0.35);border:1px solid var(--border)}
+  .modalBox h2{margin-top:0;font-size:18px}
+  .modalBox p{font-size:13.5px;line-height:1.6;color:var(--text)}
+  .modalBox ul{font-size:13.5px;line-height:1.6;color:var(--text);padding-left:18px}
+  .modalClose{float:right}
+
+  /* satisfacción slider */
+  .satisfWrap{display:flex;flex-direction:column;gap:6px}
+  input[type="range"]{-webkit-appearance:none;width:100%;height:8px;border-radius:8px;background:var(--bg-2);border:1px solid var(--border)}
+  input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--primary-deep);border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,0.2);cursor:pointer}
+  input[type="range"]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--primary-deep);border:3px solid #fff;cursor:pointer}
+
+  @media (max-width:1020px){
+    #floatingPanel{position:static;width:100%}
+    #floatingPanel.floating{position:fixed;left:10px;right:10px;width:auto}
+    #pitchWindow{left:10px;right:10px;width:auto}
+  }
+</style>
+</head>
+<body>
+<a href="../index.html" class="cv-back-link"><span class="cv-back-arrow" aria-hidden="true">←</span><span class="cv-back-text">Volver al portal</span></a>
+  <div class="wrap">
+
+    <header>
+      <div class="titleBar">
+        <div>
+          <h1>💗 Sesión diaria — Acompañamiento Vocal Afirmativo</h1>
+          <p>Registro de práctica, autopercepción y datos acústicos de apoyo — centrado en la congruencia vocal e identitaria de la persona.</p>
+        </div>
+        <div class="titleActions">
+          <button class="infoBtn" id="infoBtn" title="Sobre este enfoque" aria-label="Información sobre este enfoque">i</button>
+          <button id="togglePitchVisibilityBtn" class="ghost" title="Mostrar / Ocultar gráfico F0">Ocultar gráfico F0</button>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:0 4px">
+        <div class="small" id="pitchVisibilityLabel">Gráfico F0: visible (ventana flotante)</div>
+        <div class="small" id="sessionSummarySmall" style="color:var(--muted)"></div>
+      </div>
+
+      <div class="metaGrid">
+        <div class="card">
+          <div class="cardTitle"><span class="dot"></span>Datos de la sesión</div>
+          <div class="row">
+            <div style="flex:1;min-width:180px">
+              <label class="fieldLabel" for="patientNameInput">Nombre de la persona</label>
+              <input id="patientNameInput" type="text" placeholder="Nombre de la persona" style="width:100%">
+            </div>
+            <div style="min-width:160px">
+              <label class="fieldLabel" for="sessionDateInput">Fecha de sesión</label>
+              <input id="sessionDateInput" type="date" style="width:100%">
+            </div>
+          </div>
+          <div class="row" style="margin-top:10px">
+            <button class="primary" id="saveDateBtn">Guardar datos</button>
+            <span id="savedDateBadge" class="small" style="align-self:center">Sin guardar aún</span>
+          </div>
+          <div class="subtle" style="margin-top:12px">Marca las casillas conforme se completa cada repetición. El micrófono es opcional y sirve solo como apoyo — nunca como criterio único de progreso.</div>
+        </div>
+
+        <div class="card">
+          <div class="cardTitle"><span class="dot"></span>Objetivo vocal de esta persona</div>
+          <label class="fieldLabel" for="goalTypeSelect">Orientación del trabajo (definida junto a la persona)</label>
+          <select id="goalTypeSelect" style="width:100%">
+            <option value="feminizacion">Feminización vocal</option>
+            <option value="masculinizacion">Masculinización vocal</option>
+            <option value="personalizado">Rango personalizado / no binario</option>
+            <option value="ninguno">Sin meta de tono — foco en resonancia, calidad y confort</option>
+          </select>
+          <div class="row" style="margin-top:10px">
+            <div style="flex:1">
+              <label class="fieldLabel" for="goalMinInput">F0 referencia mín. (Hz)</label>
+              <input id="goalMinInput" type="number" style="width:100%">
+            </div>
+            <div style="flex:1">
+              <label class="fieldLabel" for="goalMaxInput">F0 referencia máx. (Hz)</label>
+              <input id="goalMaxInput" type="number" style="width:100%">
+            </div>
+          </div>
+          <div class="subtle" style="margin-top:8px">Este rango es solo una <strong>referencia orientativa y editable</strong>, no un umbral clínico fijo. La evidencia disponible muestra que la satisfacción vocal no se correlaciona necesariamente con alcanzar un valor acústico exacto: lo central es la congruencia percibida por la persona (ver botón "i").</div>
+        </div>
+      </div>
+    </header>
+
+    <div class="grid">
+      <!-- Columna izquierda -->
+      <div>
+        <div class="card">
+          <div class="sectionTitle"><span class="dot"></span>Bloques de práctica</div>
+
+          <!-- BLOQUE 1 -->
+          <div id="b1" class="activity">
+            <div class="activityHeader">
+              <div>
+                <div class="blockName">Bloque 1 — Resonancia y calentamiento con /M/</div>
+                <div class="activityNote">Ejercicios de "humming" y fonación nasal para favorecer una resonancia anterior cómoda, sin forzar la laringe. Marca cada repetición realizada.</div>
+              </div>
+              <div class="small row">
+                <button class="ghost borg-toggle" data-act="b1">Registrar esfuerzo (Borg)</button>
+                <button class="ghost" onclick="resetActivity('b1')">Reiniciar</button>
+              </div>
+            </div>
+
+            <div style="margin-top:6px">
+              <div class="rep-line"><span class="rep-label">M sostenida</span><span class="goalTag">Meta: 5</span><div class="checkboxes" data-activity="b1_m_sostenida"></div></div>
+              <div class="rep-line"><span class="rep-label">M glissando (ascendente/descendente)</span><span class="goalTag">Meta: 5</span><div class="checkboxes" data-activity="b1_m_gliss"></div></div>
+              <div class="rep-line"><span class="rep-label">M en tono de sirena</span><span class="goalTag">Meta: 5</span><div class="checkboxes" data-activity="b1_m_siren"></div></div>
+              <div class="rep-line"><span class="rep-label">Melodía libre ("cumpleaños") con /M/</span><span class="goalTag">Meta: 3</span><div class="checkboxes" data-activity="b1_m_cumple"></div></div>
+              <div class="rep-line"><span class="rep-label">Humming libre con /M/</span><span class="goalTag">Meta: 3</span><div class="checkboxes" data-activity="b1_m_humming"></div></div>
+            </div>
+          </div>
+
+          <!-- BLOQUE 2 -->
+          <div id="b2" class="activity">
+            <div class="activityHeader">
+              <div>
+                <div class="blockName">Bloque 2 — Fonación en tracto semiocluido con /U/</div>
+                <div class="activityNote">Ejercicios de fonación en tubo/vocal /U/ para favorecer eficiencia glótica y flujo de aire equilibrado antes de pasar al habla funcional.</div>
+              </div>
+              <div class="small row">
+                <button class="ghost borg-toggle" data-act="b2">Registrar esfuerzo (Borg)</button>
+                <button class="ghost" onclick="resetActivity('b2')">Reiniciar</button>
+              </div>
+            </div>
+
+            <div style="margin-top:6px">
+              <div class="rep-line"><span class="rep-label">U sostenida</span><span class="goalTag">Meta: 5</span><div class="checkboxes" data-activity="b2_u_sost"></div></div>
+              <div class="rep-line"><span class="rep-label">U glissando</span><span class="goalTag">Meta: 5</span><div class="checkboxes" data-activity="b2_u_gliss"></div></div>
+              <div class="rep-line"><span class="rep-label">U tono de sirena</span><span class="goalTag">Meta: 5</span><div class="checkboxes" data-activity="b2_u_siren"></div></div>
+              <div class="rep-line"><span class="rep-label">U tono en espiral</span><span class="goalTag">Meta: 5</span><div class="checkboxes" data-activity="b2_u_espiral"></div></div>
+              <div class="rep-line"><span class="rep-label">U con acento rítmico (UuUuUu)</span><span class="goalTag">Meta: 5</span><div class="checkboxes" data-activity="b2_u_accent"></div></div>
+              <div class="rep-line"><span class="rep-label">Melodía libre ("cumpleaños") con /U/</span><span class="goalTag">Meta: 3</span><div class="checkboxes" data-activity="b2_u_cumple"></div></div>
+            </div>
+          </div>
+
+          <!-- BLOQUE 3 -->
+          <div id="b3" class="activity">
+            <div class="activityHeader">
+              <div>
+                <div class="blockName">Bloque 3 — Lectura y comunicación funcional</div>
+                <div class="activityNote">Traspaso de los ajustes trabajados al habla espontánea y a la lectura, con énfasis prosódico e intencional. Las mediciones acústicas son un dato de apoyo, no la meta.</div>
+              </div>
+              <div class="small row">
+                <button class="ghost borg-toggle" data-act="b3">Registrar esfuerzo (Borg)</button>
+                <button class="ghost" onclick="resetActivity('b3')">Reiniciar</button>
+              </div>
+            </div>
+
+            <div style="margin-top:6px">
+              <div class="rep-line"><span class="rep-label">Lectura de frases con énfasis</span><span class="goalTag">Mediciones por frase</span><div class="checkboxes" data-activity="b3_frases"></div></div>
+
+              <div style="margin-top:14px">
+                <div style="font-weight:700;margin-bottom:6px;font-size:13px">Frases con variantes de énfasis</div>
+                <div class="subtle" style="margin-bottom:6px">Pulsa <strong>Medir</strong> y lee la frase en voz alta durante la medición (requiere micrófono activo).</div>
+                <div id="phrasesContainer"></div>
+              </div>
+
+              <div style="margin-top:12px" class="rep-line">
+                <span class="rep-label">Lectura de texto en voz alta</span>
+                <span class="goalTag">Veces</span>
+                <div class="checkboxes" data-activity="b3_texto" style="display:inline-flex;margin-left:8px"></div>
+                <div style="margin-top:8px" class="row">
+                  <button class="ghost" id="measure_texto_btn">Medir y grabar (12 s)</button>
+                  <span id="texto_result" class="analysisBadge">Sin medir</span>
+                </div>
+              </div>
+
+              <div style="margin-top:12px" class="rep-line">
+                <span class="rep-label">Lectura de cuento a otra persona</span>
+                <span class="goalTag">Veces</span>
+                <div class="checkboxes" data-activity="b3_cuento" style="display:inline-flex;margin-left:8px"></div>
+                <div style="margin-top:8px" class="row">
+                  <button class="ghost" id="measure_cuento_btn">Medir y grabar (25 s)</button>
+                  <span id="cuento_result" class="analysisBadge">Sin medir</span>
+                </div>
+              </div>
+
+              <div style="margin-top:14px;padding:12px;border-radius:10px;background:var(--bg-2);border:1px solid var(--border)">
+                <div style="font-weight:700;margin-bottom:6px;font-size:13px">Texto — "Lectura de texto en voz alta"</div>
+                <div class="subtle">"El shoegaze es un estilo musical que nació en el Reino Unido a finales de los años ochenta. Se caracteriza por el uso de guitarras con muchos efectos, voces etéreas y un sonido envolvente, casi hipnótico. El nombre proviene de la costumbre de los músicos de mirar sus pedales de efectos durante los conciertos, como si miraran sus propios zapatos. Bandas como My Bloody Valentine y Slowdive son referentes del género. Hoy, el shoegaze sigue inspirando a artistas de todo el mundo por su atmósfera soñadora y profunda."</div>
+              </div>
+
+              <div style="margin-top:10px;padding:12px;border-radius:10px;background:var(--bg-2);border:1px solid var(--border)">
+                <div style="font-weight:700;margin-bottom:6px;font-size:13px">Texto — "Lectura de cuento a alguien más"</div>
+                <div class="subtle">El faro y la mariposa<br><br>Había una vez un faro solitario, que cada noche encendía su luz para guiar a los barcos en la oscuridad. Un día, mientras brillaba, una pequeña mariposa se posó sobre su cristal. El faro, sorprendido, le preguntó: —¿No te asusta tanta claridad? La mariposa respondió: —Al contrario, me recuerda que incluso en la noche más oscura, siempre hay un punto de luz.<br><br>Desde entonces, el faro ya no se sintió solo, porque comprendió que su luz no solo servía para los barcos, sino también para iluminar corazones pequeños, como el de aquella mariposa.</div>
+              </div>
+
+              <div style="margin-top:14px">
+                <div style="font-weight:700;margin-bottom:6px;font-size:13px">Lectura visual — apoyo de proyección vocal</div>
+                <div class="subtle">Si el nivel supera el umbral de referencia, se contabiliza un "cruce" y se guarda su marca de tiempo. Esto mide volumen/proyección, no género.</div>
+                <div style="margin-top:10px;padding:10px;border-radius:10px;background:var(--bg-2);border:1px solid var(--border)">
+                  <div style="display:flex;justify-content:space-between;align-items:center">
+                    <div style="font-weight:700;font-size:13px">Lectura de texto (visual)</div>
+                    <span class="goalTag">Meta: <span id="a_lectura_texto_target_label">65 dB</span></span>
+                  </div>
+                  <div style="margin-top:8px">
+                    <div class="meter" id="a_lectura_texto_visual_meter"><div id="a_lectura_texto_visual_meter_bar" class="meterBar"></div></div>
+                    <div style="display:flex;justify-content:space-between;margin-top:6px">
+                      <div class="subtle">Nivel: <strong id="a_lectura_texto_visual_meter_db">-- dB</strong></div>
+                      <div style="font-weight:700;font-size:13px">Cruces: <span id="a_lectura_texto_counter">0</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:14px">
+          <div class="cardTitle"><span class="dot"></span>Autoevaluación de la persona (medida central)</div>
+          <div class="subtle" style="margin-bottom:10px">La evidencia disponible indica que la satisfacción autopercibida —no los valores acústicos— es el mejor indicador de éxito del acompañamiento vocal. Esta escala se guarda en el informe junto con el resto de los datos.</div>
+          <div class="satisfWrap">
+            <label class="fieldLabel" for="satisfSlider">¿Qué tan congruente y cómoda sintió su voz hoy? (0 = nada — 10 = totalmente)</label>
+            <input type="range" id="satisfSlider" min="0" max="10" step="1" value="5">
+            <div class="small">Valor actual: <strong id="satisfValue">5</strong> / 10</div>
+          </div>
+          <div style="margin-top:10px">
+            <label class="fieldLabel" for="satisfNotes">Comentarios de la persona (opcional)</label>
+            <textarea id="satisfNotes" rows="2" style="width:100%" placeholder="Ej.: hoy me sentí más cómoda leyendo en voz alta..."></textarea>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:14px;display:flex;flex-direction:column;gap:12px">
+          <div class="cardTitle"><span class="dot"></span>Acciones</div>
+          <div class="controls">
+            <button class="primary" onclick="exportZipSession()">Exportar ZIP (PDF + audios)</button>
+            <button class="ghost" onclick="exportInformeSesionCompleto()">Exportar PDF</button>
+            <button class="ghost" onclick="generateSessionCSV()">Exportar CSV</button>
+            <button class="ghost" onclick="showLog()">Mostrar registro</button>
+            <button class="warn" onclick="resetAll()">Reiniciar todo</button>
+          </div>
+          <div class="subtle">El ZIP incluye el informe en PDF y todas las grabaciones de la sesión. El PDF y el CSV incluyen repeticiones, autoevaluación, Borg, datos acústicos de apoyo (F0 media/min/max/rango, % de muestras dentro del rango de referencia) y el registro de eventos.</div>
+        </div>
+      </div>
+
+      <!-- Columna derecha: panel flotante -->
+      <aside>
+        <div id="floatingPanel">
+          <div class="dragHandle" id="dragHandle">
+            <div class="dragTitle">Herramientas · Sonómetro y grabaciones</div>
+            <div class="panelActions">
+              <button class="iconBtn" id="toggleDockBtn" title="Anclar / Flotar" aria-label="Anclar o flotar el panel">Flotar</button>
+              <button class="iconBtn" id="shrinkBtn" title="Compactar / Expandir" aria-label="Compactar o expandir el panel">Compactar</button>
+              <button class="iconBtn" id="minimizeBtn" title="Minimizar" aria-label="Minimizar el panel">—</button>
+            </div>
+          </div>
+
+          <div class="rightContent">
+            <div class="card">
+              <div class="cardTitle"><span class="dot"></span>Sonómetro — control</div>
+              <div class="controls" style="margin-bottom:10px">
+                <button class="primary" id="startAudio">Iniciar micrófono</button>
+                <button class="ghost" id="stopAudio" disabled>Detener</button>
+              </div>
+              <div class="row">
+                <button class="ghost" id="setCalib">Calibrar</button>
+                <input id="calibKnown" type="number" placeholder="Valor dB de referencia (ej: 70)" style="flex:1">
+              </div>
+
+              <div class="meterWrap">
+                <div class="meter"><div id="meterFill" class="meterBar"></div></div>
+                <div class="meterValue" id="splDisplay">-- dB</div>
+              </div>
+              <div class="subtle" style="margin-top:8px">Medición aproximada de volumen (no calibrada como sonómetro profesional). Útil como apoyo visual de proyección de voz.</div>
+            </div>
+
+            <div class="card pitchCard">
+              <div class="cardTitle"><span class="dot"></span>Grabaciones — registrar avances</div>
+              <div class="row">
+                <button class="primary" id="startRecBtn">Grabar</button>
+                <button class="ghost" id="stopRecBtn" disabled>Detener</button>
+              </div>
+              <div style="margin-top:8px">
+                <label class="fieldLabel" for="uploadAudio">Subir audio existente</label>
+                <input type="file" id="uploadAudio" accept="audio/*" multiple style="width:100%">
+              </div>
+              <div id="recordingsList" style="margin-top:8px"></div>
+              <div class="subtle" style="margin-top:8px">Las mediciones de frases/lecturas generan grabaciones automáticas con nombre descriptivo.</div>
+            </div>
+
+            <div class="card">
+              <div class="cardTitle"><span class="dot"></span>Registro de sesión</div>
+              <div id="logArea" class="logArea">Interfaz lista. El micrófono es opcional; actívalo para apoyo visual de volumen y F0. Pulsa "Medir" en cada frase/lectura para obtener un análisis acústico de apoyo.</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      Acompañamiento Vocal Afirmativo — registro de sesión centrado en la persona, no en umbrales acústicos binarios.
+      <details style="margin-top:14px;text-align:left;max-width:900px;margin-left:auto;margin-right:auto">
+        <summary style="cursor:pointer;text-align:center;color:var(--muted);font-size:12.5px;font-weight:600;list-style:none">Referencias bibliográficas (APA 7) ▾</summary>
+        <ol style="margin-top:10px;padding-left:22px;color:var(--muted);font-size:11.5px;line-height:1.55">
+          <li>Azul, D., &amp; Hancock, A. B. (2020). Who or what has the capacity to influence voice production? Development of a transdisciplinary theoretical approach to clinical practice addressing voice and the communication of speaker socio-cultural positioning. <em>International Journal of Speech-Language Pathology, 22</em>(5), 559–570. <a href="https://doi.org/10.1080/17549507.2019.1709544" target="_blank" rel="noopener">https://doi.org/10.1080/17549507.2019.1709544</a></li>
+          <li>Buckley, D. P., Dahl, K. L., Cler, G. J., &amp; Stepp, C. E. (2020). Transmasculine voice modification: A case study. <em>Journal of Voice, 34</em>(6), 903–910. <a href="https://doi.org/10.1016/j.jvoice.2019.05.003" target="_blank" rel="noopener">https://doi.org/10.1016/j.jvoice.2019.05.003</a></li>
+          <li>Chadwick, K. A., Coleman, R., Andreadis, K., Pitti, M., &amp; Rameau, A. (2022). Outcomes of gender-affirming voice and communication modification for transgender individuals. <em>The Laryngoscope, 132</em>(8), 1615–1621. <a href="https://doi.org/10.1002/lary.29946" target="_blank" rel="noopener">https://doi.org/10.1002/lary.29946</a></li>
+          <li>Chambers, S. A. (2007). "An incalculable effect": Subversions of heteronormativity. <em>Political Studies, 55</em>(3), 656–679. <a href="https://doi.org/10.1111/j.1467-9248.2007.00654.x" target="_blank" rel="noopener">https://doi.org/10.1111/j.1467-9248.2007.00654.x</a></li>
+          <li>Coleman, E., Bockting, W., Botzer, M., Cohen-Kettenis, P., De Cuypere, G., Feldman, J., Fraser, L., Green, J., Knudson, G., Meyer, W. J., Monstrey, S., Adler, R. K., Brown, G. R., Devor, A. H., Ehrbar, R., Ettner, R., Eyler, E., Garofalo, R., Karasic, D. H., … Zucker, K. (2012). Standards of care for the health of transsexual, transgender and gender-nonconforming people (Version 7). <em>International Journal of Transgenderism, 13</em>(4), 165–232. <a href="https://doi.org/10.1080/15532739.2011.700873" target="_blank" rel="noopener">https://doi.org/10.1080/15532739.2011.700873</a></li>
+          <li>Coleman, E., Radix, A. E., Bouman, W. P., Brown, G. R., de Vries, A. L. C., Deutsch, M. B., Ettner, R., Fraser, L., Goodman, M., Green, J., Hancock, A. B., Johnson, T. W., Karasic, D. H., Knudson, G. A., Leibowitz, S. F., Meyer-Bahlburg, H. F. L., Monstrey, S. J., Motmans, J., Nahata, L., … Arcelus, J. (2022). Standards of Care for the Health of Transgender and Gender Diverse People, Version 8. <em>International Journal of Transgender Health, 23</em>(S1), S1–S260. <a href="https://doi.org/10.1080/26895269.2022.2100644" target="_blank" rel="noopener">https://doi.org/10.1080/26895269.2022.2100644</a></li>
+          <li>Crow, K. M., van Mersbergen, M., &amp; Payne, A. E. (2021). Vocal congruence: The voice and the self measured by interoceptive awareness. <em>Journal of Voice, 35</em>(2), 324.e15–324.e28. <a href="https://doi.org/10.1016/j.jvoice.2019.08.027" target="_blank" rel="noopener">https://doi.org/10.1016/j.jvoice.2019.08.027</a></li>
+          <li>Guzmán-González, M., Barrientos, J., Saiz, J., Gómez, F., Cárdenas, M., Espinoza-Tapia, R., Bahamondes, J., Lovera, L., &amp; Giami, A. (2020). Salud mental en población transgénero y género no conforme en Chile. <em>Revista Médica de Chile, 148</em>(8), 1113–1120. <a href="https://doi.org/10.4067/S0034-98872020000801113" target="_blank" rel="noopener">https://doi.org/10.4067/S0034-98872020000801113</a></li>
+          <li>Hancock, A. B., Krissinger, J., &amp; Owen, K. (2011). Voice perceptions and quality of life of transgender people. <em>Journal of Voice, 25</em>(5), 553–558. <a href="https://doi.org/10.1016/j.jvoice.2010.07.013" target="_blank" rel="noopener">https://doi.org/10.1016/j.jvoice.2010.07.013</a></li>
+          <li>Hardy, T. L., Boliek, C. A., Wells, K., &amp; Rieger, J. M. (2013). The ICF and male-to-female transsexual communication. <em>International Journal of Transgenderism, 14</em>(4), 196–208. <a href="https://doi.org/10.1080/15532739.2014.890561" target="_blank" rel="noopener">https://doi.org/10.1080/15532739.2014.890561</a></li>
+          <li>Hecht, M. L. (1978). Measures of communication satisfaction. <em>Human Communication Research, 4</em>(4), 350–368. <a href="https://doi.org/10.1111/j.1468-2958.1978.tb00721.x" target="_blank" rel="noopener">https://doi.org/10.1111/j.1468-2958.1978.tb00721.x</a></li>
+          <li>Holmberg, J., Linander, I., Södersten, M., &amp; Karlsson, F. (2023). Exploring motives and perceived barriers for voice modification: The views of transgender and gender-diverse voice clients. <em>Journal of Speech, Language, and Hearing Research, 66</em>(7), 2246–2259. <a href="https://doi.org/10.1044/2023_JSLHR-23-00042" target="_blank" rel="noopener">https://doi.org/10.1044/2023_JSLHR-23-00042</a></li>
+          <li>Kennedy, E., &amp; Thibeault, S. L. (2020). Voice–gender incongruence and voice health information-seeking behaviors in the transgender community. <em>American Journal of Speech-Language Pathology, 29</em>(3), 1563–1573. <a href="https://doi.org/10.1044/2020_AJSLP-19-00188" target="_blank" rel="noopener">https://doi.org/10.1044/2020_AJSLP-19-00188</a></li>
+          <li>Leyns, C., Alighieri, C., De Wilde, J., Van Lierde, K., T'Sjoen, G., &amp; D'haeseleer, E. (2022). Experiences of transgender women with speech feminization training: A qualitative study. <em>Healthcare, 10</em>(11), 2295. <a href="https://doi.org/10.3390/healthcare10112295" target="_blank" rel="noopener">https://doi.org/10.3390/healthcare10112295</a></li>
+          <li>Link, B. G., &amp; Phelan, J. (2014). Stigma power. <em>Social Science &amp; Medicine, 103</em>, 24–32. <a href="https://doi.org/10.1016/j.socscimed.2013.07.035" target="_blank" rel="noopener">https://doi.org/10.1016/j.socscimed.2013.07.035</a></li>
+          <li>Martínez, C., Tomicic, A., Rodríguez, J., Rosenbaum, C., Aguayo, F., &amp; Gálvez, C. (2025). El trauma nuestro de cada día: Construcción subjetiva sobre procesos suicidas de jóvenes trans. <em>Psykhe, 34</em>. <a href="https://doi.org/10.7764/psykhe.2024.81556" target="_blank" rel="noopener">https://doi.org/10.7764/psykhe.2024.81556</a></li>
+          <li>Novais Valente Júnior, C., &amp; Mesquita de Medeiros, A. (2022). Voice and gender incongruence: Relationship between vocal self-perception and mental health of trans women. <em>Journal of Voice, 36</em>(6), 808–813. <a href="https://doi.org/10.1016/j.jvoice.2020.10.002" target="_blank" rel="noopener">https://doi.org/10.1016/j.jvoice.2020.10.002</a></li>
+          <li>Nuttbrock, L. A., Bockting, W. O., Hwahng, S., Rosenblum, A., Mason, M., Macri, M., &amp; Becker, J. (2009). Gender identity affirmation among male-to-female transgender persons: A life course analysis across types of relationships and cultural/lifestyle factors. <em>Sexual and Relationship Therapy, 24</em>, 108–125. <a href="https://doi.org/10.1080/14681990902926764" target="_blank" rel="noopener">https://doi.org/10.1080/14681990902926764</a></li>
+          <li>Owen-Smith, A. A., Gerth, J., Sineath, R. C., Barzilay, J., Becerra-Culqui, T. A., Getahun, D., Giammattei, S., Hunkeler, E., Lash, T., Millman, A., Nash, R., Quinn, V., Robinson, B., Roblin, D., Sanchez, T., Silverberg, M., Tangpricha, V., Valentine, C., Winter, S., … Goodman, M. (2018). Association between gender confirmation treatments and perceived gender congruence, body image satisfaction, and mental health in a cohort of transgender individuals. <em>The Journal of Sexual Medicine, 15</em>(4), 591–600. <a href="https://doi.org/10.1016/j.jsxm.2018.01.017" target="_blank" rel="noopener">https://doi.org/10.1016/j.jsxm.2018.01.017</a></li>
+          <li>Papeleu, T., Leyns, C., Tomassen, P., T'Sjoen, G., Van Lierde, K., &amp; D'haeseleer, E. (2023). Intonation parameters in gender-diverse people. <em>Journal of Voice, 39</em>(3), 845.e23–845.e38. <a href="https://doi.org/10.1016/j.jvoice.2022.12.020" target="_blank" rel="noopener">https://doi.org/10.1016/j.jvoice.2022.12.020</a></li>
+          <li>Pasricha, N., Dacakis, G., &amp; Oates, J. (2008). Communicative satisfaction of male-to-female transsexuals. <em>Logopedics Phoniatrics Vocology, 33</em>(1), 25–34. <a href="https://doi.org/10.1080/14015430701514500" target="_blank" rel="noopener">https://doi.org/10.1080/14015430701514500</a></li>
+          <li>Podesva, R. J., &amp; Callier, P. (2015). Voice quality and identity. <em>Annual Review of Applied Linguistics, 35</em>, 173–194. <a href="https://doi.org/10.1017/S0267190514000270" target="_blank" rel="noopener">https://doi.org/10.1017/S0267190514000270</a></li>
+          <li>Quinn, S., Oates, J., &amp; Dacakis, G. (2022). The effectiveness of gender-affirming voice training for transfeminine clients: A comparison of traditional versus intensive delivery schedules. <em>Journal of Voice, 38</em>(5), 1250.e25–1250.e52. <a href="https://doi.org/10.1016/j.jvoice.2022.03.001" target="_blank" rel="noopener">https://doi.org/10.1016/j.jvoice.2022.03.001</a></li>
+          <li>Quinn, S., Oates, J., &amp; Dacakis, G. (2021). The experiences of trans and gender-diverse clients in an intensive voice training program: A mixed-methodological study. <em>Journal of Voice, 37</em>(2), 292.e15–292.e33. <a href="https://doi.org/10.1016/j.jvoice.2020.12.033" target="_blank" rel="noopener">https://doi.org/10.1016/j.jvoice.2020.12.033</a></li>
+          <li>Schwarz, K., Cielo, C. A., Spritzer, P. M., Villas-Boas, P., Brandelli Costa, A., Fontanari, V., Gomes, B. C., Cardoso da Silva, D., Schneider, M. A., Inês, M., &amp; Lobato, R. (2023). Speech therapy for transgender women: An updated systematic review and meta-analysis. <em>Systematic Reviews, 12</em>(1), 128. <a href="https://doi.org/10.1186/s13643-023-02267-5" target="_blank" rel="noopener">https://doi.org/10.1186/s13643-023-02267-5</a></li>
+          <li>Sevelius, J. M. (2013). Gender affirmation: A framework for conceptualizing risk behavior among transgender women of color. <em>Sex Roles, 68</em>, 675–689. <a href="https://doi.org/10.1007/s11199-012-0216-5" target="_blank" rel="noopener">https://doi.org/10.1007/s11199-012-0216-5</a></li>
+          <li>Stewart, L., Oates, J., &amp; O'Halloran, P. (2020). "My voice is my identity": The role of voice for trans women's participation in sport. <em>Journal of Voice, 34</em>(1), 78–87. <a href="https://doi.org/10.1016/j.jvoice.2018.05.015" target="_blank" rel="noopener">https://doi.org/10.1016/j.jvoice.2018.05.015</a></li>
+          <li>Van Borsel, J., De Cuypere, G., Rubens, R., &amp; Destaerke, B. (2000). Voice problems in female-to-male transsexuals. <em>International Journal of Language &amp; Communication Disorders, 35</em>(3), 427–442. <a href="https://doi.org/10.1080/136828200410672" target="_blank" rel="noopener">https://doi.org/10.1080/136828200410672</a></li>
+          <li>Watt, S. O., Tskhay, K. O., &amp; Rule, N. O. (2017). Masculine voices predict well-being in female-to-male transgender individuals. <em>Archives of Sexual Behavior, 47</em>(4), 963–972. <a href="https://doi.org/10.1007/s10508-017-1095-1" target="_blank" rel="noopener">https://doi.org/10.1007/s10508-017-1095-1</a></li>
+          <li>Ziegler, A., Henke, T., Wiedrick, J., &amp; Helou, L. B. (2018). Effectiveness of testosterone therapy for masculinizing voice in transgender patients: A meta-analytic review. <em>International Journal of Transgenderism, 19</em>(1), 25–45. <a href="https://doi.org/10.1080/15532739.2017.1411857" target="_blank" rel="noopener">https://doi.org/10.1080/15532739.2017.1411857</a></li>
+          <li>D'haeseleer, E., Papeleu, T., Leyns, C., Adriaansen, A., &amp; De Leyn, P. (2023). Voice outcome of glottoplasty in trans women. <em>Journal of Voice, 37</em>(3), 345–352. <a href="https://doi.org/10.1016/j.jvoice.2023.01.013" target="_blank" rel="noopener">https://doi.org/10.1016/j.jvoice.2023.01.013</a></li>
+          <li>Papeleu, T., Leyns, C., Alighieri, C., Vermeeren, A., Motmans, J., T'Sjoen, G., &amp; D'haeseleer, E. (2024). Voice and communication in transmasculine individuals one year under testosterone therapy: A qualitative study. <em>Journal of Voice</em>. Advance online publication. <a href="https://doi.org/10.1016/j.jvoice.2024.04.003" target="_blank" rel="noopener">https://doi.org/10.1016/j.jvoice.2024.04.003</a></li>
+          <li>Hughes, C. K., McGarey, P., Morrison, D., Gawlik, A. E., Domínguez, L., &amp; Dion, G. R. (2023). Vocal fold thinning in transgender patients. <em>Journal of Voice, 37</em>(6), 957–962. <a href="https://doi.org/10.1016/j.jvoice.2021.06.026" target="_blank" rel="noopener">https://doi.org/10.1016/j.jvoice.2021.06.026</a></li>
+          <li>Bøyesen, B., &amp; Hide, Ø. (2024). Using twang and medialization techniques to gain feminine-sounding speech in trans women. <em>Journal of Voice</em>. Advance online publication. <a href="https://doi.org/10.1016/j.jvoice.2024.10.020" target="_blank" rel="noopener">https://doi.org/10.1016/j.jvoice.2024.10.020</a></li>
+          <li>Pan, A. Y., Grail, G. P. O., &amp; colleagues. (2024). What contributes to masculine perception of voice among transmasculine people? <em>Journal of Voice</em>. Advance online publication. <a href="https://doi.org/10.1016/j.jvoice.2024.12.037" target="_blank" rel="noopener">https://doi.org/10.1016/j.jvoice.2024.12.037</a></li>
+          <li>Irineu, R. d. A., Dassie-Leite, A. P., Cristianne, E., &amp; colleagues. (2025). Vocal markers in the gender perception of trans women and trans men. <em>Journal of Voice</em>. Advance online publication. <a href="https://doi.org/10.1016/j.jvoice.2025.03.002" target="_blank" rel="noopener">https://doi.org/10.1016/j.jvoice.2025.03.002</a></li>
+          <li>Azul, D., Nygren, U., &amp; Södersten, M. (2017). Transmasculine people's voice function: A review of the currently available evidence. <em>Journal of Voice, 31</em>(2), 261.e9–261.e23. <a href="https://doi.org/10.1016/j.jvoice.2016.05.005" target="_blank" rel="noopener">https://doi.org/10.1016/j.jvoice.2016.05.005</a></li>
+          <li>Robotti, C., Mozzanica, F., Atzori, C., Cavalot, A., Cossu, D., Primov-Fever, A., Benazzo, M., Negri, L., &amp; Schindler, A. (2022). Translation, cross-cultural adaptation and preliminary validation of the Transsexual Voice Questionnaire for Male-to-Female (I-TVQMtF) into Italian. <em>Journal of Voice, 36</em>(4), 587.e1–587.e11. <a href="https://doi.org/10.1016/j.jvoice.2020.07.018" target="_blank" rel="noopener">https://doi.org/10.1016/j.jvoice.2020.07.018</a></li>
+          <li>Park, C., Brown, S., &amp; Courey, M. (2021). Trans Woman Voice Questionnaire scores highlight specific benefits of adjunctive glottoplasty with voice therapy in treating voice feminization. <em>Journal of Voice, 38</em>(1), 214–218. <a href="https://doi.org/10.1016/j.jvoice.2021.07.017" target="_blank" rel="noopener">https://doi.org/10.1016/j.jvoice.2021.07.017</a></li>
+          <li>Webb, H., Free, N., Oates, J., &amp; Paddle, P. (2022). The use of vocal fold injection augmentation in a transmasculine patient unsatisfied with voice following testosterone therapy and voice training (case report). <em>Journal of Voice</em>. <a href="https://doi.org/10.1016/j.jvoice.2020.08.011" target="_blank" rel="noopener">https://doi.org/10.1016/j.jvoice.2020.08.011</a></li>
+          <li>Leyns, C., Alighieri, C., &amp; D'haeseleer, E. (2021). Effects of speech therapy for transgender women: Outcomes on pitch, resonance and self-perception. <em>Journal of Voice</em>. (Clinical cohort study).</li>
+          <li>Orellana-Venegas, C. (2025). Voz y salud mental en personas trans y de género diverso: Un diálogo necesario. <em>Revista Chilena de Fonoaudiología</em>, 1–9. <a href="https://doi.org/10.5354/0719-4692.2025.79487" target="_blank" rel="noopener">https://doi.org/10.5354/0719-4692.2025.79487</a></li>
+          <li>da Cruz Leal, G., Gilbert, A., &amp; colleagues. (2025). What do we know about speech-language-hearing practice, service provision and outcomes for gender-diverse people? A scoping review (protocol registered on OSF). <em>OSF Preprint / Journal in press</em>. <a href="https://doi.org/10.17605/OSF.IO/BUCRG" target="_blank" rel="noopener">https://doi.org/10.17605/OSF.IO/BUCRG</a></li>
+          <li>Rhuan, S., Cíntia, S., &amp; João, L. (2023). Analysis of speech-therapeutic conduct in the vocal treatment of trans and transvestite women in a cisnormative context. <em>Advances in Clinical and Medical Research, 4</em>(2), 1–11. <a href="https://doi.org/10.52793/ACMR.2023.4(2)-56" target="_blank" rel="noopener">https://doi.org/10.52793/ACMR.2023.4(2)-56</a></li>
+        </ol>
+      </details>
+    </footer>
+  </div>
+
+  <!-- Ventana flotante de F0 -->
+  <div id="pitchWindow" aria-label="Gráfico de tono F0">
+    <div class="pHandle" id="pHandle">
+      <span>Gráfico de tono (F0) — tiempo real</span>
+      <div style="display:flex;gap:6px;align-items:center">
+        <span id="f0Estimate" class="small" style="color:#3a1c2b;font-weight:700">F0: —</span>
+        <button class="iconBtn" id="togglePitchMin" title="Minimizar" aria-label="Minimizar gráfico F0">—</button>
+        <button class="iconBtn" id="closePitch" title="Cerrar" aria-label="Cerrar gráfico F0">✕</button>
+      </div>
+    </div>
+    <div class="pContent" id="pContent">
+      <canvas id="pitchCanvas" width="420" height="200"></canvas>
+      <div class="subtle" style="margin-top:8px">La franja coloreada muestra el rango de referencia personalizado definido arriba (editable en cualquier momento). No representa una norma de género fija.</div>
+    </div>
+    <div class="resizer" id="pitchResizer" title="Redimensionar"></div>
+  </div>
+
+  <!-- Modal informativo -->
+  <div class="modalOverlay" id="infoModal">
+    <div class="modalBox">
+      <button class="ghost modalClose" id="infoCloseBtn">Cerrar ✕</button>
+      <h2>Sobre este enfoque</h2>
+      <p>Este acompañamiento se apoya en evidencia actual sobre voz, género e identidad en personas trans y de género diverso (estándares WPATH v8, literatura en fonoaudiología y estudios de resultados centrados en la persona).</p>
+      <ul>
+        <li>La voz es un fenómeno biopsicosocial: no depende solo de la anatomía, sino también de cómo se usa y de cómo la interpretan quienes escuchan.</li>
+        <li>La satisfacción con la propia voz no se correlaciona de forma directa con alcanzar un valor acústico específico (como una frecuencia fundamental determinada). Lo que más se asocia a bienestar es la <strong>congruencia identitaria percibida</strong>, el confort y la sensación de agencia sobre la propia comunicación.</li>
+        <li>Por eso, los datos acústicos (F0, decibeles) que ofrece esta herramienta son un <strong>apoyo complementario y opcional</strong>, nunca la meta final ni un criterio de "corrección".</li>
+        <li>Los rangos de referencia de esta app son totalmente editables y deben ajustarse junto con la persona, según sus propios objetivos — que pueden incluir opciones no binarias o centradas solo en resonancia/calidad vocal, sin meta de tono.</li>
+        <li>Se recomienda un trabajo interdisciplinario (fonoaudiología y salud mental) cuando sea posible, dado el vínculo entre incongruencia vocal y bienestar psicológico descrito en la literatura.</li>
+      </ul>
+      <p class="small">Esta herramienta es un registro de práctica y no reemplaza la evaluación ni el criterio clínico profesional.</p>
+    </div>
+  </div>
+
+  <!-- Librerías externas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="../assets/shared.js"></script>
+
+<script>
+/* =========================================================
+   Acompañamiento Vocal Afirmativo — v11
+   Reescritura: tema pastel personalizable, perfil editable,
+   marco de referencia (no binario) en vez de etiquetas de
+   género fijas, autoevaluación como medida central, y
+   correcciones de errores del cálculo de calibración/estadísticas.
+   ========================================================= */
+
+/* ---------- Modal info ---------- */
+document.getElementById('infoBtn').addEventListener('click', ()=> document.getElementById('infoModal').classList.add('open'));
+document.getElementById('infoCloseBtn').addEventListener('click', ()=> document.getElementById('infoModal').classList.remove('open'));
+document.getElementById('infoModal').addEventListener('click', (e)=>{ if(e.target.id === 'infoModal') e.currentTarget.classList.remove('open'); });
+
+/* ---------- Log ---------- */
+function log(txt){
+  const la = document.getElementById('logArea');
+  const time = new Date().toLocaleTimeString();
+  if(la) la.insertAdjacentText('afterbegin', '['+time+'] ' + txt + '\n');
+}
+
+/* ---------- Perfil / objetivo (personalizable, no hardcodeado) ---------- */
+let profile = { name:'', date:'', goalType:'feminizacion', min:160, max:220, satisf:5, satisfNotes:'' };
+
+const goalPresets = {
+  feminizacion:   { min:160, max:220 },
+  masculinizacion:{ min:80,  max:150 },
+  personalizado:  { min:140, max:180 },
+  ninguno:        { min:null, max:null }
+};
+
+function loadProfile(){
+  try{
+    const s = localStorage.getItem('vaa_profile');
+    if(s) profile = Object.assign(profile, JSON.parse(s));
+  }catch(e){}
+  document.getElementById('patientNameInput').value = profile.name || '';
+  document.getElementById('sessionDateInput').value = profile.date || '';
+  document.getElementById('goalTypeSelect').value = profile.goalType || 'feminizacion';
+  document.getElementById('goalMinInput').value = (profile.min ?? '');
+  document.getElementById('goalMaxInput').value = (profile.max ?? '');
+  document.getElementById('satisfSlider').value = profile.satisf ?? 5;
+  document.getElementById('satisfValue').textContent = profile.satisf ?? 5;
+  document.getElementById('satisfNotes').value = profile.satisfNotes || '';
+  updateSavedBadge();
+}
+function updateSavedBadge(){
+  const badge = document.getElementById('savedDateBadge');
+  if(!badge) return;
+  if(profile.name || profile.date){
+    badge.textContent = 'Guardado: ' + (profile.name || 'Sin nombre') + (profile.date ? ' · ' + profile.date : '');
+  } else {
+    badge.textContent = 'Sin guardar aún';
+  }
+}
+document.getElementById('goalTypeSelect').addEventListener('change', function(){
+  const preset = goalPresets[this.value];
+  if(preset){
+    document.getElementById('goalMinInput').value = preset.min ?? '';
+    document.getElementById('goalMaxInput').value = preset.max ?? '';
+  }
+});
+document.getElementById('saveDateBtn').addEventListener('click', function(){
+  profile.name = document.getElementById('patientNameInput').value.trim();
+  profile.date = document.getElementById('sessionDateInput').value;
+  profile.goalType = document.getElementById('goalTypeSelect').value;
+  const minV = parseFloat(document.getElementById('goalMinInput').value);
+  const maxV = parseFloat(document.getElementById('goalMaxInput').value);
+  profile.min = isNaN(minV) ? null : minV;
+  profile.max = isNaN(maxV) ? null : maxV;
+  localStorage.setItem('vaa_profile', JSON.stringify(profile));
+  updateSavedBadge();
+  log('Datos de sesión guardados: ' + (profile.name || '(sin nombre)') + (profile.date ? (' — ' + profile.date) : ''));
+});
+document.getElementById('satisfSlider').addEventListener('input', function(){
+  document.getElementById('satisfValue').textContent = this.value;
+  profile.satisf = parseInt(this.value, 10);
+});
+document.getElementById('satisfNotes').addEventListener('change', function(){
+  profile.satisfNotes = this.value;
+});
+
+/* ---------- Actividades / checkboxes ---------- */
+const activities = {
+  'b1_m_sostenida': 5,'b1_m_gliss': 5,'b1_m_siren': 5,'b1_m_cumple': 3,'b1_m_humming': 3,
+  'b2_u_sost': 5,'b2_u_gliss': 5,'b2_u_siren': 5,'b2_u_espiral': 5,'b2_u_accent': 5,'b2_u_cumple': 3,
+  'b3_frases': 6,'b3_texto': 6,'b3_cuento': 4
+};
+const labels = {
+  'b1_m_sostenida':'B1 - M sostenida','b1_m_gliss':'B1 - M glissando','b1_m_siren':'B1 - M tono sirena','b1_m_cumple':'B1 - Melodía libre /M/','b1_m_humming':'B1 - Humming /M/',
+  'b2_u_sost':'B2 - U sostenida','b2_u_gliss':'B2 - U glissando','b2_u_siren':'B2 - U tono sirena','b2_u_espiral':'B2 - U tono espiral','b2_u_accent':'B2 - U con acento','b2_u_cumple':'B2 - Melodía libre /U/',
+  'b3_frases':'B3 - Lectura frases con énfasis','b3_texto':'B3 - Lectura texto en voz alta','b3_cuento':'B3 - Lectura cuento a otra persona'
+};
+document.querySelectorAll('.checkboxes').forEach(function(container){
+  const activity = container.getAttribute('data-activity');
+  const n = activities[activity] || 6;
+  container.innerHTML = '';
+  for(let i=1;i<=n;i++){
+    const box = document.createElement('label');
+    box.className = 'rep-box';
+    const cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.name = activity + '_cb';
+    cb.dataset.activity = activity;
+    cb.dataset.index = i;
+    cb.addEventListener('change', onCheckboxChange);
+    box.appendChild(cb);
+    const txt = document.createElement('span'); txt.textContent = i;
+    box.appendChild(txt);
+    container.appendChild(box);
+  }
+});
+function onCheckboxChange(e){
+  const cb = e.target;
+  const activity = cb.dataset.activity;
+  const count = document.querySelectorAll('input[name="'+activity+'_cb"]:checked').length;
+  log(`[${labels[activity]||activity}] casillas marcadas: ${count}`);
+}
+
+/* ---------- Sonómetro / lectura visual / F0 ---------- */
+let globalStream = null;
+let audioCtx, analyser, sourceNode, running=false, rafId;
+let calibrationOffset=0; window._lastSpl = null;
+const splDisplay = document.getElementById('splDisplay');
+const meterFill = document.getElementById('meterFill');
+
+async function startAudio(){
+  if(running) return;
+  try{
+    const stream = await navigator.mediaDevices.getUserMedia({audio:{channelCount:1},video:false});
+    globalStream = stream;
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    analyser = audioCtx.createAnalyser();
+    analyser.fftSize = 2048;
+    analyser.smoothingTimeConstant = 0.15;
+    sourceNode = audioCtx.createMediaStreamSource(stream);
+    sourceNode.connect(analyser);
+    running = true;
+    document.getElementById('startAudio').disabled = true;
+    document.getElementById('stopAudio').disabled = false;
+    loopAudio();
+    if(!pitchProcessor.initialized){ pitchProcessor.init(stream); }
+    log('Micrófono: activo');
+  }catch(e){
+    alert('No se pudo acceder al micrófono: ' + (e.message||e));
+  }
+}
+function stopAudio(){
+  if(!running) return;
+  if(sourceNode && sourceNode.mediaStream) sourceNode.mediaStream.getTracks().forEach(t=>t.stop());
+  if(audioCtx) audioCtx.close();
+  running=false;
+  document.getElementById('startAudio').disabled=false;
+  document.getElementById('stopAudio').disabled=true;
+  cancelAnimationFrame(rafId);
+  meterFill.style.width='0%';
+  if(splDisplay) splDisplay.textContent='-- dB';
+  window._lastSpl = null;
+  pitchProcessor.stop();
+  log('Micrófono: detenido');
+}
+function computeDB(buffer){
+  let sum=0;
+  for(let i=0;i<buffer.length;i++){ const v=buffer[i]; sum += v*v; }
+  const rms = Math.sqrt(sum / buffer.length);
+  if(rms <= 0) return null;
+  const dbfs = 20 * Math.log10(rms);
+  return Math.round((dbfs + calibrationOffset) * 10) / 10;
+}
+function loopAudio(){
+  const buffer = new Float32Array(analyser.fftSize);
+  analyser.getFloatTimeDomainData(buffer);
+  const spl = computeDB(buffer);
+  window._lastSpl = spl;
+  updateGlobalMeter(spl);
+  updateReadingVisualFromGlobal();
+  rafId = requestAnimationFrame(loopAudio);
+}
+function updateGlobalMeter(spl){
+  const min = 30, max = 95;
+  if(spl === null || isNaN(spl)){ splDisplay.textContent='-- dB'; meterFill.style.width='0%'; return; }
+  splDisplay.textContent = spl + ' dB';
+  const pct = Math.max(0, Math.min(100, ((spl - min) / (max - min)) * 100));
+  meterFill.style.width = pct + '%';
+}
+document.getElementById('startAudio').addEventListener('click', startAudio);
+document.getElementById('stopAudio').addEventListener('click', stopAudio);
+document.getElementById('setCalib').addEventListener('click', async ()=>{
+  const v = parseFloat(document.getElementById('calibKnown').value);
+  if(!running){ alert('Inicia el micrófono antes de calibrar.'); return; }
+  if(isNaN(v)){ alert('Ingresa un valor numérico de referencia en dB.'); return; }
+  const samples = [];
+  for(let i=0;i<8;i++){
+    await new Promise(r=>setTimeout(r,120));
+    if(window._lastSpl !== null && !isNaN(window._lastSpl)) samples.push(window._lastSpl);
+  }
+  if(samples.length === 0){ alert('No se detectó señal de audio suficiente para calibrar. Habla frente al micrófono e inténtalo de nuevo.'); return; }
+  const measured = samples.reduce((a,b)=>a+b,0) / samples.length;
+  const offset = v - measured;
+  calibrationOffset += offset;
+  window._calibrationInfo = 'Offset aplicado: ' + (Math.round(calibrationOffset*10)/10) + ' dB — referencia ' + v + ' dB (' + samples.length + ' muestras válidas)';
+  alert('Calibración aplicada. ' + window._calibrationInfo);
+  log('Calibración: ' + window._calibrationInfo);
+});
+
+/* lectura visual (volumen/proyección) */
+const READING_TARGET_DB = 65;
+window.__a_lectura_texto_counter = 0;
+window.__a_lectura_texto_prevBelow = true;
+window.__a_lectura_texto_timestamps = [];
+function updateReadingVisualFromGlobal(){
+  const elBar = document.getElementById('a_lectura_texto_visual_meter_bar');
+  const elDb = document.getElementById('a_lectura_texto_visual_meter_db');
+  const elCounter = document.getElementById('a_lectura_texto_counter');
+  const spl = (window._lastSpl !== undefined && window._lastSpl !== null) ? window._lastSpl : null;
+  if(spl === null || isNaN(spl)){
+    if(elBar) elBar.style.width='0%';
+    if(elDb) elDb.textContent='-- dB';
+    return;
+  }
+  const min=30, max=95;
+  let pc = ((spl - min) / (max - min)) * 100; pc = Math.max(0,Math.min(100,pc));
+  if(elBar) elBar.style.width = pc + '%';
+  if(elDb) elDb.textContent = spl + ' dB';
+
+  const crossed = spl >= READING_TARGET_DB;
+  if(crossed && window.__a_lectura_texto_prevBelow){
+    window.__a_lectura_texto_counter += 1;
+    if(elCounter) elCounter.textContent = window.__a_lectura_texto_counter;
+    window.__a_lectura_texto_timestamps.push({ ts: new Date().toISOString(), spl: String(spl), count: window.__a_lectura_texto_counter });
+    if(elBar) elBar.animate([{ boxShadow: '0 0 0px rgba(0,0,0,0)' }, { boxShadow: '0 0 18px rgba(231,131,173,0.35)' }, { boxShadow: '0 0 0px rgba(0,0,0,0)' }], { duration: 420, easing: 'ease-out' });
+    log('Lectura visual: cruces → ' + window.__a_lectura_texto_counter + ' (' + spl + ' dB)');
+  }
+  window.__a_lectura_texto_prevBelow = !crossed;
+}
+
+/* ---------- Detección de tono (F0) y gráfico ---------- */
+const pitchCanvas = document.getElementById('pitchCanvas');
+const pitchCtx = pitchCanvas.getContext('2d');
+const pitchData = [];
+const maxPoints = 250;
+const f0LabelEl = document.getElementById('f0Estimate');
+const pitchParams = { sampleRate: 44100, minFreq: 60, maxFreq: 500 };
+
+function currentRange(){
+  return { min: (profile.min===null||profile.min===undefined||isNaN(profile.min)) ? null : profile.min,
+           max: (profile.max===null||profile.max===undefined||isNaN(profile.max)) ? null : profile.max };
+}
+function classifyF0(f){
+  const r = currentRange();
+  if(f === null) return '—';
+  if(r.min === null || r.max === null) return Math.round(f) + ' Hz';
+  if(f < r.min) return Math.round(f) + ' Hz · por debajo del rango de referencia';
+  if(f > r.max) return Math.round(f) + ' Hz · por encima del rango de referencia';
+  return Math.round(f) + ' Hz · dentro del rango de referencia';
+}
+
+const pitchProcessor = {
+  initialized: false, running: false, stream: null, analyserNode: null, ctx: null, tempBuf: null,
+  init: function(stream){
+    if(this.initialized) return;
+    try{
+      this.stream = stream;
+      this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+      pitchParams.sampleRate = this.ctx.sampleRate || 44100;
+      this.analyserNode = this.ctx.createAnalyser();
+      this.analyserNode.fftSize = 4096;
+      this.analyserNode.smoothingTimeConstant = 0.02;
+      this.source = this.ctx.createMediaStreamSource(stream);
+      this.source.connect(this.analyserNode);
+      this.tempBuf = new Float32Array(this.analyserNode.fftSize);
+      this.initialized = true;
+      this.running = true;
+      this.processLoop();
+    }catch(e){ console.warn('Pitch init error', e); }
+  },
+  stop: function(){
+    this.running = false;
+    try{ if(this.ctx) this.ctx.close(); }catch(e){}
+    this.initialized = false;
+  },
+  processLoop: function(){
+    if(!this.running) return;
+    this.analyserNode.getFloatTimeDomainData(this.tempBuf);
+    const f = detectPitchAutoCorr(this.tempBuf, pitchParams.sampleRate, pitchParams.minFreq, pitchParams.maxFreq);
+    if(f && !isNaN(f) && f > 0){
+      pitchData.push({ t: Date.now(), f: Math.round(f*10)/10 });
+      if(pitchData.length > maxPoints) pitchData.shift();
+      f0LabelEl.textContent = 'F0: ' + classifyF0(f);
+    } else {
+      pitchData.push({ t: Date.now(), f: null });
+      if(pitchData.length > maxPoints) pitchData.shift();
+      f0LabelEl.textContent = 'F0: —';
+    }
+    drawPitchCanvas();
+    requestAnimationFrame(()=>this.processLoop());
+  }
+};
+
+function detectPitchAutoCorr(buf, sampleRate, minFreq=60, maxFreq=500){
+  let size = buf.length;
+  let rms=0;
+  for(let i=0;i<size;i++){ const val=buf[i]; rms+=val*val; }
+  rms = Math.sqrt(rms/size);
+  if(rms < 0.001) return null;
+  let bestOffset = -1; let bestCorr = 0;
+  const minLag = Math.floor(sampleRate / maxFreq);
+  const maxLag = Math.floor(sampleRate / minFreq);
+  for(let lag = minLag; lag <= maxLag; lag++){
+    let corr = 0;
+    for(let i=0;i+lag < size; i++){ corr += Math.abs(buf[i] - buf[i+lag]); }
+    corr = 1 - (corr / (size - maxLag));
+    if(corr > bestCorr){ bestCorr = corr; bestOffset = lag; }
+  }
+  if(bestCorr > 0.4 && bestOffset > 0) return sampleRate / bestOffset;
+  return null;
+}
+
+function drawPitchCanvas(){
+  const ctx = pitchCtx;
+  const W = pitchCanvas.width = Math.max(260, pitchCanvas.clientWidth);
+  const H = pitchCanvas.height = Math.max(120, pitchCanvas.clientHeight);
+  function yFromHz(hz){
+    const minHz = 50, maxHz = 450;
+    const clamped = Math.max(minHz, Math.min(maxHz, hz));
+    const pct = (clamped - minHz) / (maxHz - minHz);
+    return H - (pct * H);
+  }
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--bg-2') || '#fdeef4';
+  ctx.fillRect(0,0,W,H);
+
+  const r = currentRange();
+  if(r.min !== null && r.max !== null){
+    const yMin = yFromHz(r.max);
+    const yMax = yFromHz(r.min);
+    ctx.fillStyle = 'rgba(231,131,173,0.16)';
+    ctx.fillRect(0, yMin, W, yMax - yMin);
+  }
+
+  ctx.strokeStyle = 'rgba(90,50,70,0.12)'; ctx.lineWidth=1;
+  [100,150,200,250,300,350,400].forEach(freq=>{
+    const y = yFromHz(freq);
+    ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke();
+    ctx.fillStyle = 'rgba(90,50,70,0.45)'; ctx.font='10px Inter';
+    ctx.fillText(freq + ' Hz', 4, y - 4);
+  });
+
+  ctx.beginPath();
+  const len = pitchData.length;
+  for(let i=0;i<len;i++){
+    const el = pitchData[i];
+    const x = (i / Math.max(1, maxPoints-1)) * W;
+    const f = el.f;
+    const y = f ? yFromHz(f) : H - 2;
+    if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+  }
+  ctx.strokeStyle = 'rgba(231,131,173,0.95)'; ctx.lineWidth = 2.4; ctx.stroke();
+
+  const last = pitchData[pitchData.length-1];
+  if(last && last.f){
+    const x = W * ((pitchData.length-1) / Math.max(1, maxPoints-1));
+    const y = yFromHz(last.f);
+    ctx.fillStyle = '#7a3a56';
+    ctx.beginPath(); ctx.arc(x,y,3.4,0,Math.PI*2); ctx.fill();
+  }
+}
+for(let i=0;i<maxPoints;i++) pitchData.push({ t: Date.now() - (maxPoints-i)*100, f: null });
+drawPitchCanvas();
+
+/* ---------- Grabaciones & subida ---------- */
+let mediaRecorder = null;
+let recordedChunks = [];
+const recordings = [];
+document.getElementById('startRecBtn').addEventListener('click', startRecording);
+document.getElementById('stopRecBtn').addEventListener('click', stopRecording);
+document.getElementById('uploadAudio').addEventListener('change', handleUploadFiles);
+
+async function startRecording(){
+  try{
+    const stream = await navigator.mediaDevices.getUserMedia({ audio:true });
+    mediaRecorder = new MediaRecorder(stream);
+    recordedChunks = [];
+    mediaRecorder.ondataavailable = e => { if(e.data && e.data.size) recordedChunks.push(e.data); };
+    mediaRecorder.onstop = () => {
+      const blob = new Blob(recordedChunks, { type:'audio/webm' });
+      const url = URL.createObjectURL(blob);
+      const name = 'grabacion_' + new Date().toISOString().replace(/[:.]/g,'-') + '.webm';
+      recordings.push({ name, blob, date: new Date().toISOString(), url });
+      renderRecordings();
+      log('Grabación guardada: ' + name);
+      try{ stream.getTracks().forEach(t=>t.stop()); }catch(e){}
+    };
+    mediaRecorder.start();
+    document.getElementById('startRecBtn').disabled=true;
+    document.getElementById('stopRecBtn').disabled=false;
+    log('Grabación: iniciada');
+  }catch(e){
+    alert('No se pudo iniciar la grabación: ' + (e.message||e));
+  }
+}
+function stopRecording(){
+  if(mediaRecorder && mediaRecorder.state === 'recording'){
+    mediaRecorder.stop();
+    document.getElementById('startRecBtn').disabled=false;
+    document.getElementById('stopRecBtn').disabled=true;
+    log('Grabación: detenida');
+  }
+}
+function handleUploadFiles(e){
+  const files = Array.from(e.target.files || []);
+  files.forEach(file=>{
+    const url = URL.createObjectURL(file);
+    recordings.push({ name: file.name, blob: file, date: new Date().toISOString(), url, uploaded: true });
+    log('Archivo subido: ' + file.name);
+  });
+  renderRecordings();
+  e.target.value = '';
+}
+function renderRecordings(){
+  const list = document.getElementById('recordingsList');
+  list.innerHTML = '';
+  recordings.forEach((r)=>{
+    const div = document.createElement('div'); div.className = 'recording-item';
+    const info = document.createElement('div'); info.style.flex='1';
+    info.innerHTML = '<div style="font-weight:700;font-size:13px">'+ escapeHtml(r.name) +'</div><div class="subtle">' + escapeHtml(r.date) + (r.phraseText ? ' · ' + escapeHtml(r.phraseText.length>40? r.phraseText.slice(0,40)+'...': r.phraseText) : '') + '</div>';
+    const controls = document.createElement('div'); controls.style.display='flex'; controls.style.gap='6px';
+    const play = document.createElement('button'); play.className='ghost'; play.textContent='▶'; play.setAttribute('aria-label','Reproducir grabación'); play.addEventListener('click', ()=>{ const audio = new Audio(r.url); audio.play(); });
+    const dl = document.createElement('a'); dl.className='ghost'; dl.style.textDecoration='none'; dl.style.display='inline-flex'; dl.style.alignItems='center'; dl.textContent='⬇'; dl.href = r.url; dl.download = r.name;
+    controls.appendChild(play); controls.appendChild(dl);
+    div.appendChild(info); div.appendChild(controls);
+    list.appendChild(div);
+  });
+}
+
+/* ---------- Frases / mediciones ---------- */
+const phraseGroups = [
+  { id:'p1', base:'Yo no dije que ella lo hizo.', variants:[
+    'Yo no dije que ella lo hizo. (fui otra persona).',
+    'Yo no dije que ella lo hizo. (lo negué).',
+    'Yo no dije que ella lo hizo. (lo insinué, no lo dije).',
+    'Yo no dije que ella lo hizo. (fue otra persona).',
+    'Yo no dije que ella lo hizo. (lo pensó, lo intentó, etc.).'
+  ]},
+  { id:'p2', base:'Mañana vamos al parque.', variants:[
+    'Mañana vamos al parque. (no hoy).',
+    'Mañana vamos al parque. (sí o sí iremos).',
+    'Mañana vamos al parque. (no a otro lugar).'
+  ]},
+  { id:'p3', base:'Quiero que vengas conmigo.', variants:[
+    'Quiero que vengas conmigo. (es mi deseo).',
+    'Quiero que vengas conmigo. (no que te quedes).',
+    'Quiero que vengas conmigo. (no con otra persona).'
+  ]},
+  { id:'p4', base:'Ese libro es muy interesante.', variants:[
+    'Ese libro es muy interesante. (no otro).',
+    'Ese libro es muy interesante. (no la película).',
+    'Ese libro es muy interesante. (no solo un poco).',
+    'Ese libro es muy interesante. (la cualidad que destaco).'
+  ]},
+  { id:'p5', base:'Hoy sí voy a terminar la tarea.', variants:[
+    'Hoy sí voy a terminar la tarea. (no mañana).',
+    'Hoy sí voy a terminar la tarea. (esta vez de verdad).',
+    'Hoy sí voy a terminar la tarea. (nadie más).',
+    'Hoy sí voy a terminar la tarea. (no otra cosa).'
+  ]},
+  { id:'p6', base:'Tú sabes lo que quiero decir.', variants:[
+    'Tú sabes lo que quiero decir. (no otra persona).',
+    'Tú sabes lo que quiero decir. (sí lo entiendes).',
+    'Tú sabes lo que quiero decir. (no otra cosa).'
+  ]}
+];
+
+const phraseResults = {};
+
+const phrasesContainer = document.getElementById('phrasesContainer');
+phraseGroups.forEach(group=>{
+  const gDiv = document.createElement('div');
+  gDiv.style.borderTop = '1px dashed var(--border)';
+  gDiv.style.paddingTop = '10px';
+  gDiv.style.marginTop = '8px';
+  const title = document.createElement('div'); title.style.fontWeight='700'; title.style.fontSize='13px'; title.textContent = group.base;
+  gDiv.appendChild(title);
+  group.variants.forEach((v, idx)=>{
+    const key = group.id + '_v' + (idx+1);
+    const row = document.createElement('div'); row.style.display='flex'; row.style.justifyContent='space-between'; row.style.alignItems='center'; row.style.gap='8px'; row.style.marginTop='6px'; row.style.fontSize='12.5px';
+    const left = document.createElement('div'); left.style.flex='1'; left.textContent = (idx+1) + '. ' + v;
+    const controls = document.createElement('div'); controls.style.display='flex'; controls.style.gap='6px'; controls.style.alignItems='center';
+    const measureBtn = document.createElement('button'); measureBtn.className='ghost'; measureBtn.textContent='Medir (3 s)'; measureBtn.dataset.key=key;
+    measureBtn.addEventListener('click', ()=>measurePhrase(key, v, 3000));
+    const resultSpan = document.createElement('span'); resultSpan.id = key + '_result'; resultSpan.className='analysisBadge'; resultSpan.textContent = 'Sin medir';
+    controls.appendChild(measureBtn); controls.appendChild(resultSpan);
+    row.appendChild(left); row.appendChild(controls);
+    gDiv.appendChild(row);
+    phraseResults[key] = null;
+  });
+  phrasesContainer.appendChild(gDiv);
+});
+
+function statsFromArray(arr){
+  const vals = arr.filter(v=>v && !isNaN(v));
+  if(vals.length===0) return null;
+  vals.sort((a,b)=>a-b);
+  const sum = vals.reduce((a,b)=>a+b,0);
+  const mean = sum/vals.length;
+  const median = vals.length%2 ? vals[(vals.length-1)/2] : (vals[vals.length/2-1]+vals[vals.length/2])/2;
+  const min = vals[0], max = vals[vals.length-1];
+  return { mean, median, min, max, range: max-min, n: vals.length };
+}
+
+async function measurePhrase(key, text, durationMs){
+  if(!globalStream){
+    alert('Activa el micrófono primero (Iniciar micrófono) en el panel de Sonómetro.');
+    return;
+  }
+  const resultEl = document.getElementById(key + '_result') || null;
+  if(resultEl) resultEl.textContent = 'Midiendo…';
+  log('Medición iniciada: ' + text);
+
+  const mr = new MediaRecorder(globalStream);
+  const chunks = [];
+  mr.ondataavailable = e => { if(e.data && e.data.size) chunks.push(e.data); };
+
+  const samples = [];
+  const sampleInterval = 150;
+  let samplerTimer = null;
+  let elapsed = 0;
+
+  if(!pitchProcessor.initialized){ pitchProcessor.init(globalStream); }
+
+  mr.start();
+  const startTime = Date.now();
+
+  await new Promise(resolve=>{
+    samplerTimer = setInterval(()=>{
+      try{
+        const buf = pitchProcessor.tempBuf;
+        if(buf){
+          pitchProcessor.analyserNode.getFloatTimeDomainData(buf);
+          const f = detectPitchAutoCorr(buf, pitchParams.sampleRate, pitchParams.minFreq, pitchParams.maxFreq);
+          samples.push(f === null ? null : Math.round(f*10)/10);
+        }
+      }catch(e){}
+      elapsed = Date.now() - startTime;
+      if(elapsed >= durationMs){ clearInterval(samplerTimer); resolve(); }
+    }, sampleInterval);
+  });
+
+  await new Promise(resolve=>{ mr.onstop = ()=> resolve(); mr.stop(); });
+
+  const blob = new Blob(chunks, { type:'audio/webm' });
+  const url = URL.createObjectURL(blob);
+  const name = 'medicion_' + key + '_' + (new Date().toISOString().replace(/[:.]/g,'-')) + '.webm';
+  recordings.push({ name, blob, date: new Date().toISOString(), url, phraseKey: key, phraseText: text });
+  renderRecordings();
+
+  const numericSamples = samples.filter(s=>s!==null && !isNaN(s));
+  const sstats = statsFromArray(numericSamples);
+  const r = currentRange();
+  let pctInRange = 0;
+  if(numericSamples.length && r.min !== null && r.max !== null){
+    pctInRange = (numericSamples.filter(v=>v>=r.min && v<=r.max).length / numericSamples.length) * 100;
+  }
+  const result = {
+    key, text, samples,
+    meanF0: sstats ? Math.round(sstats.mean*10)/10 : null,
+    medianF0: sstats ? Math.round(sstats.median*10)/10 : null,
+    minF0: sstats ? sstats.min : null,
+    maxF0: sstats ? sstats.max : null,
+    rangeF0: sstats ? Math.round(sstats.range*10)/10 : null,
+    nSamples: sstats ? sstats.n : 0,
+    pctInRange: Math.round(pctInRange*10)/10,
+    recordingName: name
+  };
+  phraseResults[key] = result;
+
+  let summary = '';
+  if(result.meanF0 === null){
+    summary = 'Sin detección';
+  } else if(r.min === null || r.max === null){
+    summary = `media ${result.meanF0} Hz · mín ${result.minF0} · máx ${result.maxF0}`;
+  } else {
+    summary = `media ${result.meanF0} Hz · mín ${result.minF0} · máx ${result.maxF0} · ${result.pctInRange}% dentro de ${r.min}-${r.max} Hz`;
+  }
+  if(resultEl) resultEl.textContent = summary;
+  log('Medición finalizada: ' + key + ' → ' + summary);
+
+  if(key === 'texto') { const el = document.getElementById('texto_result'); if(el) el.textContent = summary; }
+  if(key === 'cuento') { const el = document.getElementById('cuento_result'); if(el) el.textContent = summary; }
+
+  updateSmallSummaryLabel();
+}
+
+document.getElementById('measure_texto_btn').addEventListener('click', function(){
+  measurePhrase('texto', 'Lectura de texto en voz alta — párrafo shoegaze', 12000);
+});
+document.getElementById('measure_cuento_btn').addEventListener('click', function(){
+  measurePhrase('cuento', 'Lectura de cuento — El faro y la mariposa', 25000);
+});
+
+/* ---------- Borg CR-10 (esfuerzo / fatiga vocal percibida) ---------- */
+function createBorgWrap(actId, title){
+  if(document.getElementById(actId + '_borg_wrap')) return;
+  const parent = document.getElementById(actId);
+  if(!parent) return;
+  const wrap = document.createElement('div');
+  wrap.id = actId + '_borg_wrap';
+  wrap.style.display = 'none';
+  wrap.style.marginTop = '12px';
+  wrap.style.padding = '12px';
+  wrap.style.borderRadius = '12px';
+  wrap.style.background = 'var(--bg-2)';
+  wrap.style.border = '1px solid var(--border)';
+  const descriptors = ['Fatiga vocal','Sequedad','Dolor/irritación','Tensión/rigidez','Disfonía','Dificultad respiratoria','Esfuerzo','Sin cambios'];
+  let descHtml = '<div style="font-size:12.5px"><strong>Sensaciones (marca las que apliquen):</strong><div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">';
+  descriptors.forEach(function(d){ descHtml += '<label style="display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:8px;background:#fff;border:1px solid var(--border);cursor:pointer;font-size:12px"><input type="checkbox" name="borg_desc_'+actId+'" value="'+d+'"> '+d+'</label>'; });
+  descHtml += '</div></div>';
+  const borgNumbers = [0,0.5,1,2,3,4,5,6,7,8.5,10];
+  let borgHtml = '<div style="margin-top:10px;font-size:12.5px"><strong>Escala Borg CR-10 (esfuerzo/fatiga vocal percibida):</strong><div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">';
+  borgNumbers.forEach(function(opt){ var label = opt === 8.5 ? '8-9' : String(opt); borgHtml += '<label style="display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:8px;background:#fff;border:1px solid var(--border);cursor:pointer;font-size:12px"><input type="radio" name="borg_num_'+actId+'" value="'+opt+'"> '+label+'</label>'; });
+  borgHtml += '</div></div>';
+  const saveBtn = '<div style="margin-top:10px" class="row"><button class="primary" id="'+actId+'_borg_save">Guardar</button> <button class="ghost" id="'+actId+'_borg_close">Cerrar</button> <span id="'+actId+'_borg_value" class="analysisBadge"></span></div>';
+  wrap.innerHTML = '<div style="font-weight:700;font-size:13px">Registro de esfuerzo — ' + escapeHtml(title) + '</div><div class="subtle" style="margin-top:4px">Registra cómo se sintió la persona después de esta actividad. No busca un valor "correcto".</div>' + descHtml + borgHtml + saveBtn;
+  parent.appendChild(wrap);
+  document.getElementById(actId + '_borg_save').addEventListener('click', function(){
+    const checks = Array.from(document.querySelectorAll('input[name="borg_desc_' + actId + '"]:checked')).map(n=>n.value);
+    const sel = document.querySelector('input[name="borg_num_' + actId + '"]:checked');
+    if(!sel){ alert('Selecciona un valor de la escala Borg antes de guardar.'); return; }
+    const v = sel.value;
+    wrap.dataset.borgValue = v;
+    wrap.dataset.borgDescs = checks.join('; ');
+    document.getElementById(actId + '_borg_value').textContent = 'Guardado: ' + v + (checks.length ? ' · ' + checks.join(', ') : '');
+    log('Borg guardado — ' + title + ': ' + v + (checks.length? (' — ' + checks.join('; ')) : ''));
+  });
+  document.getElementById(actId + '_borg_close').addEventListener('click', function(){ wrap.style.display='none'; });
+}
+createBorgWrap('b1','Bloque 1 — /M/');
+createBorgWrap('b2','Bloque 2 — /U/');
+createBorgWrap('b3','Bloque 3 — Lecturas');
+document.querySelectorAll('.borg-toggle').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    const act = btn.getAttribute('data-act');
+    const wrap = document.getElementById(act + '_borg_wrap');
+    if(!wrap) return;
+    wrap.style.display = (wrap.style.display === 'none' || wrap.style.display === '') ? 'block' : 'none';
+  });
+});
+function collectBorgSummary(){
+  const arr = [];
+  ['b1','b2','b3'].forEach(function(id){
+    const wrap = document.getElementById(id + '_borg_wrap');
+    const title = (id==='b1'?'Bloque 1 - /M/': (id==='b2'?'Bloque 2 - /U/':'Bloque 3 - Lecturas'));
+    let borg = null, descs = '';
+    if(wrap){
+      borg = wrap.dataset.borgValue !== undefined ? wrap.dataset.borgValue : null;
+      descs = wrap.dataset.borgDescs || '';
+    }
+    arr.push({ id, title, borg, descs });
+  });
+  return arr;
+}
+
+/* ---------- Recolección de repeticiones ---------- */
+function collectReps(){
+  const out = [];
+  for(const key in activities){
+    const checked = document.querySelectorAll('input[name="'+key+'_cb"]:checked').length;
+    out.push({ id: key, label: labels[key]||key, count: checked, goal: activities[key] || 0 });
+  }
+  return out;
+}
+
+/* ---------- Resumen analítico ---------- */
+function buildAnalysisSummary(){
+  const keys = Object.keys(phraseResults);
+  let totalMeanSum = 0, totalMeanCount = 0;
+  let totalSamples = 0, inRangeSamples = 0;
+  for(const k of keys){
+    const r = phraseResults[k];
+    if(r && r.meanF0 !== null){
+      totalMeanSum += r.meanF0;
+      totalMeanCount += 1;
+      totalSamples += (r.nSamples || 0);
+      inRangeSamples += ((r.nSamples || 0) * ((r.pctInRange||0)/100));
+    }
+  }
+  const avgMeanF0 = totalMeanCount ? Math.round((totalMeanSum/totalMeanCount)*10)/10 : null;
+  const pctInRangeOverall = totalSamples ? Math.round((inRangeSamples / totalSamples)*1000)/10 : 0;
+
+  const reps = collectReps();
+  let done = 0, goal = 0;
+  reps.forEach(r=>{ done += r.count; goal += (r.goal||0); });
+  const repsPct = goal ? Math.round((done / goal)*1000)/10 : 0;
+
+  const borgs = collectBorgSummary();
+  const borgVals = borgs.map(b=> (b.borg !== null && b.borg !== undefined) ? parseFloat(b.borg) : null ).filter(v=>v!==null && !isNaN(v));
+  const borgAvg = borgVals.length ? Math.round((borgVals.reduce((a,b)=>a+b,0)/borgVals.length)*10)/10 : null;
+
+  const tsArr = window.__a_lectura_texto_timestamps || [];
+  const splVals = tsArr.map(t=> parseFloat(t.spl)).filter(v=>!isNaN(v));
+  const splAvg = splVals.length ? Math.round((splVals.reduce((a,b)=>a+b,0)/splVals.length)*10)/10 : null;
+
+  const r = currentRange();
+  let obs = [];
+  obs.push('Autoevaluación de congruencia/comodidad vocal (medida central, 0-10): ' + (profile.satisf ?? '—') + '.');
+  if(avgMeanF0 !== null){
+    if(r.min !== null && r.max !== null){
+      obs.push('F0 media global de apoyo: ' + avgMeanF0 + ' Hz, frente a un rango de referencia personalizado de ' + r.min + '-' + r.max + ' Hz.');
+    } else {
+      obs.push('F0 media global de apoyo: ' + avgMeanF0 + ' Hz (sin rango de referencia definido para esta sesión).');
+    }
+  } else {
+    obs.push('No hay mediciones de F0 suficientes en esta sesión.');
+  }
+  if(r.min !== null && r.max !== null) obs.push('Porcentaje de muestras dentro del rango de referencia: ' + pctInRangeOverall + '%. Este dato es solo de apoyo: la evidencia disponible indica que no se correlaciona necesariamente con la satisfacción autopercibida.');
+  if(borgAvg !== null) obs.push('Esfuerzo/fatiga vocal (Borg) promedio: ' + borgAvg + '.');
+  if(splAvg !== null) obs.push('Nivel sonoro promedio en cruces de lectura: ' + splAvg + ' dB (' + tsArr.length + ' eventos).');
+
+  const summaryObj = { avgMeanF0, pctInRangeOverall, totalMeasuredItems: totalMeanCount, totalSamples, repsDone: done, repsGoal: goal, repsPct, borgAvg, splAvg, splEvents: tsArr.length, observations: obs, satisf: profile.satisf };
+
+  let text = 'Resumen — Sesión\n';
+  text += 'Persona: ' + (profile.name || 'Sin nombre registrado') + '\n';
+  text += 'Fecha de sesión: ' + (profile.date || 'No guardada') + '\n';
+  text += 'Orientación del trabajo: ' + goalTypeLabel(profile.goalType) + (r.min!==null&&r.max!==null? (' (' + r.min + '-' + r.max + ' Hz de referencia)') : '') + '\n\n';
+  text += '- Autoevaluación de congruencia/comodidad (0-10): ' + (profile.satisf ?? '—') + '\n';
+  if(profile.satisfNotes) text += '- Comentario de la persona: ' + profile.satisfNotes + '\n';
+  text += '- Mediciones F0 (ítems medidos): ' + totalMeanCount + '\n';
+  if(avgMeanF0 !== null) text += '- F0 media global de apoyo: ' + avgMeanF0 + ' Hz\n';
+  if(r.min !== null && r.max !== null) text += '- % de muestras dentro del rango de referencia (' + r.min + '-' + r.max + ' Hz): ' + pctInRangeOverall + '%\n';
+  text += '- Repeticiones completadas: ' + done + ' / ' + goal + ' (' + repsPct + '%)\n';
+  if(borgAvg !== null) text += '- Esfuerzo/fatiga vocal (Borg) promedio: ' + borgAvg + '\n';
+  if(splAvg !== null) text += '- Nivel sonoro promedio en cruces: ' + splAvg + ' dB (' + tsArr.length + ' eventos)\n';
+  text += '\nObservaciones:\n';
+  obs.forEach(o=> text += '- ' + o + '\n');
+
+  return { text, obj: summaryObj, csvLines: [
+    '---RESUMEN---',
+    'Autoevaluacion_congruencia_0_10;' + (profile.satisf ?? ''),
+    'F0_media_global_Hz;' + (avgMeanF0 !== null ? avgMeanF0 : ''),
+    'Rango_referencia_Hz;' + (r.min!==null&&r.max!==null ? (r.min + '-' + r.max) : 'no definido'),
+    'Pct_muestras_dentro_de_rango;' + pctInRangeOverall,
+    'Items_medidos;' + totalMeanCount,
+    'Muestras_totales;' + totalSamples,
+    'Reps_completadas;' + done,
+    'Reps_objetivo;' + goal,
+    'Reps_pct;' + repsPct,
+    'Borg_promedio;' + (borgAvg !== null ? borgAvg : ''),
+    'SPL_promedio_cruces_dB;' + (splAvg !== null ? splAvg : ''),
+    'SPL_eventos;' + tsArr.length,
+    'Observaciones;"' + obs.join(' ; ') + '"'
+  ]};
+}
+function goalTypeLabel(t){
+  return { feminizacion:'Feminización vocal', masculinizacion:'Masculinización vocal', personalizado:'Rango personalizado / no binario', ninguno:'Sin meta de tono (foco en resonancia/calidad/confort)' }[t] || t || '—';
+}
+
+/* ---------- CSV / PDF / ZIP ---------- */
+function fileSafeName(){
+  const n = (profile.name || 'sesion').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'_').replace(/^_+|_+$/g,'');
+  return n || 'sesion';
+}
+
+function generateSessionCSV(){
+  try{
+    const analysis = buildAnalysisSummary();
+    const lines = [];
+    lines.push('Persona;' + (profile.name || 'Sin nombre'));
+    lines.push('Fecha de sesión;' + (profile.date || 'No guardada'));
+    lines.push('Orientación del trabajo;' + goalTypeLabel(profile.goalType));
+    lines.push('Export Fecha;' + new Date().toLocaleString());
+    lines.push('');
+    lines.push(...analysis.csvLines);
+    lines.push('');
+    lines.push('Repeticiones');
+    lines.push('Actividad;Repeticiones');
+    collectReps().forEach(function(r){ lines.push('"' + r.label + '";' + r.count); });
+
+    lines.push('');
+    lines.push('Lectura de frases - análisis por variante');
+    lines.push('Frase;Media_F0(Hz);Mediana_F0;Min_F0;Max_F0;Rango_F0;N_samples;Pct_dentro_de_rango;Grabacion');
+    for(const key in phraseResults){
+      const res = phraseResults[key];
+      if(!res){ lines.push('"' + key + '";No medido;;;;;;;'); continue; }
+      lines.push('"' + (res.text||key).replace(/"/g,'""') + '";' + (res.meanF0||'') + ';' + (res.medianF0||'') + ';' + (res.minF0||'') + ';' + (res.maxF0||'') + ';' + (res.rangeF0||'') + ';' + (res.nSamples||0) + ';' + (res.pctInRange||0) + ';' + (res.recordingName||''));
+    }
+
+    lines.push('');
+    lines.push('Lectura visual - Timestamps (index;timestamp_iso;SPL_dB;contador)');
+    const tsArr = window.__a_lectura_texto_timestamps || [];
+    if(tsArr.length === 0) lines.push('No hay timestamps registrados');
+    tsArr.forEach(function(t,i){ lines.push((i+1) + ';' + (t.ts||'') + ';' + (t.spl||'') + ';' + (t.count||'')); });
+
+    lines.push('');
+    lines.push('Grabaciones (nombre;fecha)');
+    recordings.forEach(function(r){ lines.push('"' + r.name.replace(/"/g,'""') + '";' + r.date); });
+
+    const csv = lines.join('\n');
+    const blob = new Blob([csv], {type: 'text/csv;charset=utf-8;'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = 'informe_sesion_' + fileSafeName() + '_' + (new Date()).toISOString().slice(0,10) + '.csv'; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),5000);
+    log('CSV generado y descargado.');
+  }catch(e){
+    alert('Error generando CSV: ' + e.message);
+  }
+}
+
+async function buildPdfBlob(){
+  const reps = collectReps();
+  const borgs = collectBorgSummary();
+  const tsArr = window.__a_lectura_texto_timestamps || [];
+  const logTextEl = document.getElementById('logArea');
+  const logText = logTextEl ? (logTextEl.innerText || logTextEl.textContent || '') : '';
+  const analysis = buildAnalysisSummary();
+
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({unit:'pt',format:'a4',orientation:'portrait'});
+  const marginLeft = 40; let y = 40;
+  doc.setFont('helvetica','bold'); doc.setFontSize(14);
+  doc.text('Informe de sesión — Acompañamiento Vocal Afirmativo', marginLeft, y); y += 18;
+  doc.setFont('helvetica','normal'); doc.setFontSize(10);
+  doc.text('Persona: ' + (profile.name || 'Sin nombre registrado'), marginLeft, y); y += 12;
+  doc.text('Fecha de sesión: ' + (profile.date || 'No guardada'), marginLeft, y); y += 12;
+  doc.text('Orientación del trabajo: ' + goalTypeLabel(profile.goalType), marginLeft, y); y += 12;
+  doc.text('Fecha de exportación: ' + new Date().toLocaleString(), marginLeft, y); y += 18;
+
+  doc.setFont('helvetica','bold'); doc.setFontSize(12); doc.text('A) Resumen (autoevaluación y datos de apoyo)', marginLeft, y); y += 14;
+  doc.setFont('helvetica','normal'); doc.setFontSize(10);
+  analysis.text.split('\n').forEach(function(line){
+    if(y > 740){ doc.addPage(); y = 40; }
+    doc.text(line, marginLeft + 8, y);
+    y += 12;
+  });
+  y += 8;
+
+  if(y > 720){ doc.addPage(); y = 40; }
+  doc.setFont('helvetica','bold'); doc.setFontSize(12); doc.text('B) Repeticiones por actividad', marginLeft, y); y += 14;
+  doc.setFont('helvetica','normal'); doc.setFontSize(10);
+  reps.forEach(function(r){
+    if(y > 740){ doc.addPage(); y = 40; }
+    doc.text('- ' + r.label + ': ' + r.count, marginLeft + 8, y);
+    y += 12;
+  });
+  y += 8;
+
+  if(y > 720){ doc.addPage(); y = 40; }
+  doc.setFont('helvetica','bold'); doc.setFontSize(12); doc.text('C) Lectura de frases y lecturas — análisis de apoyo', marginLeft, y); y += 14;
+  doc.setFont('helvetica','normal'); doc.setFontSize(10);
+  const r = currentRange();
+  for(const key in phraseResults){
+    if(y > 740){ doc.addPage(); y = 40; }
+    const res = phraseResults[key];
+    if(!res){
+      doc.text('- ' + key + ': No medido', marginLeft + 8, y); y += 12;
+    } else {
+      const extra = (r.min!==null && r.max!==null) ? (res.pctInRange||0) + '% dentro de ' + r.min + '-' + r.max + ' Hz' : 'sin rango de referencia definido';
+      const line = '- ' + (res.text || key) + ' → media ' + (res.meanF0||'') + ' Hz; mín ' + (res.minF0||'') + '; máx ' + (res.maxF0||'') + '; ' + extra + '; audio: ' + (res.recordingName||'');
+      const wrapped = doc.splitTextToSize(line, 500);
+      wrapped.forEach(function(l){ if(y > 740){ doc.addPage(); y = 40; } doc.text(l, marginLeft + 8, y); y += 12; });
+    }
+  }
+  y += 8;
+
+  if(y > 720){ doc.addPage(); y = 40; }
+  doc.setFont('helvetica','bold'); doc.setFontSize(12); doc.text('D) Registro de esfuerzo/fatiga vocal (Borg CR-10)', marginLeft, y); y += 14;
+  doc.setFont('helvetica','normal'); doc.setFontSize(10);
+  borgs.forEach(function(b){
+    if(y > 740){ doc.addPage(); y = 40; }
+    const line = '- ' + b.title + ': Borg = ' + (b.borg !== null && typeof b.borg !== 'undefined' ? b.borg : 'No registrado') + (b.descs ? ('; ' + b.descs) : '');
+    const wrapped = doc.splitTextToSize(line, 500);
+    wrapped.forEach(function(l){ if(y > 740){ doc.addPage(); y = 40; } doc.text(l, marginLeft + 8, y); y += 12; });
+  });
+  y += 8;
+
+  if(y > 720){ doc.addPage(); y = 40; }
+  doc.setFont('helvetica','bold'); doc.setFontSize(12); doc.text('E) Lectura visual — marcas de proyección vocal', marginLeft, y); y += 14;
+  doc.setFont('helvetica','normal'); doc.setFontSize(10);
+  if(tsArr.length === 0){
+    doc.text('No hay marcas registradas.', marginLeft + 8, y); y += 12;
+  } else {
+    tsArr.forEach(function(t,i){
+      if(y > 740){ doc.addPage(); y = 40; }
+      doc.text((i+1) + '. ' + (t.ts || '') + ' — ' + (t.spl || '') + ' dB — cruce nº ' + (t.count||''), marginLeft + 8, y);
+      y += 12;
+    });
+  }
+  y += 12;
+
+  if(y > 700){ doc.addPage(); y = 40; }
+  doc.setFont('helvetica','bold'); doc.setFontSize(12); doc.text('F) Grabaciones', marginLeft, y); y += 14;
+  doc.setFont('helvetica','normal'); doc.setFontSize(10);
+  if(recordings.length === 0){
+    doc.text('No hay grabaciones registradas.', marginLeft + 8, y); y += 12;
+  } else {
+    recordings.forEach(function(r,i){
+      if(y > 740){ doc.addPage(); y = 40; }
+      doc.text((i+1) + '. ' + r.name + ' — ' + (r.date || ''), marginLeft + 8, y);
+      y += 12;
+    });
+  }
+
+  y += 12;
+  if(y > 700){ doc.addPage(); y = 40; }
+  doc.setFont('helvetica','bold'); doc.setFontSize(12); doc.text('G) Registro de eventos de la sesión', marginLeft, y); y += 12;
+  doc.setFont('helvetica','normal'); doc.setFontSize(9);
+  const wrapped = doc.splitTextToSize(logText || 'Sin registro', 520);
+  wrapped.forEach(function(line){
+    if(y > 760){ doc.addPage(); y = 40; }
+    doc.text(line, marginLeft, y);
+    y += 10;
+  });
+
+  return doc.output('blob');
+}
+
+async function exportInformeSesionCompleto(){
+  try{
+    const pdfBlob = await buildPdfBlob();
+    const url = URL.createObjectURL(pdfBlob);
+    const a = document.createElement('a'); a.href = url; a.download = 'informe_sesion_' + fileSafeName() + '.pdf'; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),5000);
+    log('PDF generado y descargado.');
+  }catch(err){
+    alert('Error generando PDF: ' + err.message);
+  }
+}
+
+async function exportZipSession(){
+  try{
+    log('Generando PDF y empaquetando en ZIP...');
+    const pdfBlob = await buildPdfBlob();
+    const zip = new JSZip();
+    const base = fileSafeName();
+    zip.file('informe_sesion_' + base + '.pdf', pdfBlob);
+
+    const folder = zip.folder('grabaciones');
+    for(let i=0;i<recordings.length;i++){
+      const r = recordings[i];
+      if(r.blob){
+        folder.file(r.name, r.blob);
+      } else if(r.url){
+        try{ const fetched = await fetch(r.url); const b = await fetched.blob(); folder.file(r.name, b); }
+        catch(e){ console.warn('No se pudo incluir audio:', r.name, e); }
+      }
+    }
+
+    const analysis = buildAnalysisSummary();
+    const csvText = (function(){
+      const lines = [];
+      lines.push('Persona;' + (profile.name || 'Sin nombre'));
+      lines.push('Fecha de sesión;' + (profile.date || 'No guardada'));
+      lines.push('Orientación del trabajo;' + goalTypeLabel(profile.goalType));
+      lines.push('Export Fecha;' + new Date().toLocaleString());
+      lines.push('');
+      lines.push(...analysis.csvLines);
+      lines.push('');
+      lines.push('Repeticiones');
+      lines.push('Actividad;Repeticiones');
+      collectReps().forEach(function(r){ lines.push('"' + r.label + '";' + r.count); });
+      lines.push('');
+      lines.push('Lectura de frases - análisis por variante');
+      lines.push('Frase;Media_F0(Hz);Mediana_F0;Min_F0;Max_F0;Rango_F0;N_samples;Pct_dentro_de_rango;Grabacion');
+      for(const key in phraseResults){
+        const res = phraseResults[key];
+        if(!res){ lines.push('"' + key + '";No medido;;;;;;;'); continue; }
+        lines.push('"' + (res.text||key).replace(/"/g,'""') + '";' + (res.meanF0||'') + ';' + (res.medianF0||'') + ';' + (res.minF0||'') + ';' + (res.maxF0||'') + ';' + (res.rangeF0||'') + ';' + (res.nSamples||0) + ';' + (res.pctInRange||0) + ';' + (res.recordingName||''));
+      }
+      lines.push('');
+      lines.push('Lectura visual - Timestamps (index;timestamp_iso;SPL_dB;contador)');
+      const tsArr = window.__a_lectura_texto_timestamps || [];
+      if(tsArr.length === 0) lines.push('No hay timestamps registrados');
+      tsArr.forEach(function(t,i){ lines.push((i+1) + ';' + (t.ts||'') + ';' + (t.spl||'') + ';' + (t.count||'')); });
+      lines.push('');
+      lines.push('Grabaciones (nombre;fecha)');
+      recordings.forEach(function(r){ lines.push('"' + r.name.replace(/"/g,'""') + '";' + r.date); });
+      return lines.join('\n');
+    })();
+    zip.file('informe_sesion_' + base + '.csv', csvText);
+
+    const contentBlob = await zip.generateAsync({type:'blob'});
+    const url = URL.createObjectURL(contentBlob);
+    const a = document.createElement('a'); a.href = url; a.download = 'sesion_' + base + '_export_' + (new Date()).toISOString().slice(0,10) + '.zip';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),5000);
+    log('ZIP generado y descargado (incluye PDF y grabaciones).');
+  }catch(e){
+    alert('Error generando ZIP: ' + (e.message || e));
+  }
+}
+
+function showLog(){
+  const la = document.getElementById('logArea');
+  const reps = collectReps();
+  const borgs = collectBorgSummary();
+  const analysis = buildAnalysisSummary();
+  let txt = 'Registro actual — Persona: ' + (profile.name || 'Sin nombre') + '\n\nFecha de sesión: ' + (profile.date || 'No guardada') + '\n\n' + analysis.text + '\n\nRepeticiones:\n';
+  reps.forEach(function(r){ txt += '- ' + r.label + ': ' + r.count + '\n'; });
+  txt += '\nLectura de frases:\n';
+  for(const k in phraseResults){
+    const r = phraseResults[k];
+    txt += '- ' + k + ': ' + (r ? ('media ' + (r.meanF0||'') + ' Hz') : 'No medido') + '\n';
+  }
+  txt += '\nBorg:\n';
+  borgs.forEach(function(b){ txt += '- ' + b.title + ': ' + (b.borg!==null?b.borg:'No registrado') + (b.descs?(' · ' + b.descs):'') + '\n'; });
+  txt += '\nLectura visual: ' + ((window.__a_lectura_texto_timestamps||[]).length) + ' eventos registrados\n\nGrabaciones:\n';
+  recordings.forEach(function(r){ txt += '- ' + r.name + ' (' + (r.date||'') + ')\n'; });
+  txt += '\n(Últimos eventos arriba)';
+  if(la) la.textContent = txt;
+  updateSmallSummaryLabel();
+}
+
+/* ---------- Reinicio ---------- */
+function resetActivity(blockId){
+  const block = document.getElementById(blockId);
+  if(!block) return;
+  block.querySelectorAll('input[type="checkbox"]').forEach(cb => { cb.checked = false; });
+  log(`Reiniciado: ${blockId}`);
+}
+function resetAll(){
+  document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+  window.__a_lectura_texto_counter = 0; window.__a_lectura_texto_prevBelow = true; window.__a_lectura_texto_timestamps = [];
+  const elC = document.getElementById('a_lectura_texto_counter'); if(elC) elC.textContent = '0';
+  ['b1','b2','b3'].forEach(function(id){ const wrap=document.getElementById(id + '_borg_wrap'); if(wrap){ delete wrap.dataset.borgValue; delete wrap.dataset.borgDescs; const valEl=document.getElementById(id + '_borg_value'); if(valEl) valEl.textContent=''; }});
+  for(const k in phraseResults) phraseResults[k] = null;
+  if(document.getElementById('texto_result')) document.getElementById('texto_result').textContent = 'Sin medir';
+  if(document.getElementById('cuento_result')) document.getElementById('cuento_result').textContent = 'Sin medir';
+  document.getElementById('satisfSlider').value = 5;
+  document.getElementById('satisfValue').textContent = 5;
+  document.getElementById('satisfNotes').value = '';
+  profile.satisf = 5; profile.satisfNotes = '';
+  const la = document.getElementById('logArea'); if(la) la.textContent = 'Contadores reiniciados.';
+  log('Reiniciado: todos los contadores y registros de esta sesión.');
+  updateSmallSummaryLabel();
+}
+
+window.exportZipSession = exportZipSession;
+window.exportInformeSesionCompleto = exportInformeSesionCompleto;
+window.generateSessionCSV = generateSessionCSV;
+window.resetAll = resetAll;
+window.resetActivity = resetActivity;
+window.showLog = showLog;
+
+/* ---------- Panel arrastrable ---------- */
+(function setupDraggablePanel(){
+  const panel = document.getElementById('floatingPanel');
+  const handle = document.getElementById('dragHandle');
+  const toggleBtn = document.getElementById('toggleDockBtn');
+  const minimizeBtn = document.getElementById('minimizeBtn');
+  const shrinkBtn = document.getElementById('shrinkBtn');
+  let dragging = false;
+  let offset = { x: 0, y: 0 };
+
+  function persist(){
+    try{
+      const rect = panel.getBoundingClientRect();
+      const state = { isFloating: panel.classList.contains('floating'), pos:{ left: Math.round(rect.left), top: Math.round(rect.top) }, isMinimized: panel.classList.contains('minimized'), isCompact: panel.classList.contains('compact') };
+      localStorage.setItem('vaa_panel_state', JSON.stringify(state));
+    }catch(e){}
+  }
+  try{
+    const stored = localStorage.getItem('vaa_panel_state');
+    if(stored){
+      const obj = JSON.parse(stored);
+      if(obj.isFloating){ panel.classList.add('floating'); panel.style.left = (obj.pos && obj.pos.left)? obj.pos.left + 'px' : ''; panel.style.top = (obj.pos && obj.pos.top)? obj.pos.top + 'px' : ''; }
+      if(obj.isMinimized) panel.classList.add('minimized');
+      if(obj.isCompact) panel.classList.add('compact');
+    }
+  }catch(e){}
+
+  toggleBtn.addEventListener('click', function(){
+    if(panel.classList.contains('floating')){
+      panel.classList.remove('floating'); panel.style.left=''; panel.style.top=''; toggleBtn.textContent = 'Flotar';
+    } else {
+      panel.classList.add('floating');
+      panel.style.left = (window.innerWidth - 500) + 'px';
+      panel.style.top = '80px';
+      toggleBtn.textContent = 'Anclar';
+    }
+    persist();
+  });
+  minimizeBtn.addEventListener('click', function(){ panel.classList.toggle('minimized'); persist(); });
+  shrinkBtn.addEventListener('click', function(){ panel.classList.toggle('compact'); persist(); });
+
+  handle.addEventListener('mousedown', function(e){
+    if(!panel.classList.contains('floating')) return;
+    dragging = true;
+    const rect = panel.getBoundingClientRect();
+    offset = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+    document.body.style.userSelect = 'none'; handle.style.cursor = 'grabbing';
+  });
+  document.addEventListener('mousemove', function(e){
+    if(!dragging) return;
+    const margin = 10;
+    const maxX = window.innerWidth - panel.offsetWidth - margin;
+    const maxY = window.innerHeight - panel.offsetHeight - margin;
+    panel.style.left = Math.max(margin, Math.min(maxX, e.clientX - offset.x)) + 'px';
+    panel.style.top = Math.max(margin, Math.min(maxY, e.clientY - offset.y)) + 'px';
+  });
+  document.addEventListener('mouseup', function(){ if(dragging){ dragging=false; handle.style.cursor='grab'; document.body.style.userSelect=''; persist(); } });
+
+  handle.addEventListener('touchstart', function(ev){
+    if(!panel.classList.contains('floating')) return;
+    dragging = true;
+    const t = ev.touches[0];
+    const rect = panel.getBoundingClientRect();
+    offset = { x: t.clientX - rect.left, y: t.clientY - rect.top };
+    document.body.style.userSelect = 'none';
+  }, {passive:false});
+  document.addEventListener('touchmove', function(ev){
+    if(!dragging) return;
+    const t = ev.touches[0];
+    const margin = 10;
+    const maxX = window.innerWidth - panel.offsetWidth - margin;
+    const maxY = window.innerHeight - panel.offsetHeight - margin;
+    panel.style.left = Math.max(margin, Math.min(maxX, t.clientX - offset.x)) + 'px';
+    panel.style.top = Math.max(margin, Math.min(maxY, t.clientY - offset.y)) + 'px';
+    ev.preventDefault();
+  }, {passive:false});
+  document.addEventListener('touchend', function(){ if(dragging){ dragging=false; document.body.style.userSelect=''; persist(); } });
+})();
+
+/* ---------- Ventana F0 arrastrable / redimensionable ---------- */
+(function setupPitchWindow(){
+  const win = document.getElementById('pitchWindow');
+  const handle = document.getElementById('pHandle');
+  const minBtn = document.getElementById('togglePitchMin');
+  const closeBtn = document.getElementById('closePitch');
+  const resizer = document.getElementById('pitchResizer');
+  const toggleVisibilityBtn = document.getElementById('togglePitchVisibilityBtn');
+  const pitchVisibilityLabel = document.getElementById('pitchVisibilityLabel');
+  let dragging = false, dragOffset={x:0,y:0}, resizing=false, startRect=null;
+
+  try{
+    const s = localStorage.getItem('vaa_pitch_state');
+    if(s){
+      const obj = JSON.parse(s);
+      if(obj.pos){ win.style.left = obj.pos.left + 'px'; win.style.top = obj.pos.top + 'px'; }
+      if(obj.size){ win.style.width = obj.size.w + 'px'; win.style.height = obj.size.h + 'px'; }
+      if(obj.minimized) win.classList.add('minimized');
+      if(obj.visible === false){ win.classList.add('hidden'); toggleVisibilityBtn.textContent = 'Mostrar gráfico F0'; pitchVisibilityLabel.textContent = 'Gráfico F0: oculto'; }
+      else { toggleVisibilityBtn.textContent = 'Ocultar gráfico F0'; pitchVisibilityLabel.textContent = 'Gráfico F0: visible (ventana flotante)'; }
+    } else {
+      toggleVisibilityBtn.textContent = 'Ocultar gráfico F0';
+      pitchVisibilityLabel.textContent = 'Gráfico F0: visible (ventana flotante)';
+    }
+  }catch(e){}
+
+  function persist(){ try{
+    const rect = win.getBoundingClientRect();
+    localStorage.setItem('vaa_pitch_state', JSON.stringify({ pos:{ left: Math.round(rect.left), top: Math.round(rect.top) }, size:{ w: Math.round(rect.width), h: Math.round(rect.height) }, minimized: win.classList.contains('minimized'), visible: !win.classList.contains('hidden') }));
+  }catch(e){} }
+
+  handle.addEventListener('mousedown', function(e){
+    dragging = true;
+    const rect = win.getBoundingClientRect();
+    dragOffset = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+    document.body.style.userSelect='none'; handle.style.cursor='grabbing';
+  });
+  document.addEventListener('mousemove', function(e){
+    if(dragging){
+      const margin=6;
+      const maxX = window.innerWidth - win.offsetWidth - margin;
+      const maxY = window.innerHeight - win.offsetHeight - margin;
+      win.style.left = Math.max(margin, Math.min(maxX, e.clientX - dragOffset.x)) + 'px';
+      win.style.top = Math.max(margin, Math.min(maxY, e.clientY - dragOffset.y)) + 'px';
+    } else if(resizing && startRect){
+      const w = Math.max(220, startRect.width + (e.clientX - startRect.mx));
+      const h = Math.max(120, startRect.height + (e.clientY - startRect.my));
+      win.style.width = w + 'px'; win.style.height = h + 'px';
+      drawPitchCanvas();
+    }
+  });
+  document.addEventListener('mouseup', function(){
+    if(dragging){ dragging=false; handle.style.cursor='grab'; document.body.style.userSelect=''; persist(); }
+    if(resizing){ resizing=false; startRect=null; persist(); }
+  });
+
+  handle.addEventListener('touchstart', function(ev){ dragging=true; const t=ev.touches[0]; const rect=win.getBoundingClientRect(); dragOffset={x:t.clientX-rect.left,y:t.clientY-rect.top}; document.body.style.userSelect='none'; }, {passive:false});
+  document.addEventListener('touchmove', function(ev){ if(!dragging) return; const t=ev.touches[0]; win.style.left = (t.clientX - dragOffset.x) + 'px'; win.style.top = (t.clientY - dragOffset.y) + 'px'; ev.preventDefault(); }, {passive:false});
+  document.addEventListener('touchend', function(){ if(dragging){ dragging=false; document.body.style.userSelect=''; persist(); } });
+
+  resizer.addEventListener('mousedown', function(e){
+    resizing = true;
+    const rect = win.getBoundingClientRect();
+    startRect = { width: rect.width, height: rect.height, mx: e.clientX, my: e.clientY };
+    document.body.style.userSelect='none';
+  });
+  resizer.addEventListener('touchstart', function(ev){
+    resizing = true;
+    const t = ev.touches[0];
+    const rect = win.getBoundingClientRect();
+    startRect = { width: rect.width, height: rect.height, mx: t.clientX, my: t.clientY };
+  }, {passive:false});
+
+  minBtn.addEventListener('click', function(){ win.classList.toggle('minimized'); persist(); });
+  closeBtn.addEventListener('click', function(){
+    win.classList.add('hidden');
+    toggleVisibilityBtn.textContent = 'Mostrar gráfico F0';
+    pitchVisibilityLabel.textContent = 'Gráfico F0: oculto';
+    persist();
+  });
+  toggleVisibilityBtn.addEventListener('click', function(){
+    if(win.classList.contains('hidden')){
+      win.classList.remove('hidden');
+      toggleVisibilityBtn.textContent = 'Ocultar gráfico F0';
+      pitchVisibilityLabel.textContent = 'Gráfico F0: visible (ventana flotante)';
+    } else {
+      win.classList.add('hidden');
+      toggleVisibilityBtn.textContent = 'Mostrar gráfico F0';
+      pitchVisibilityLabel.textContent = 'Gráfico F0: oculto';
+    }
+    persist();
+  });
+})();
+
+function updateSmallSummaryLabel(){
+  try{
+    const analysis = buildAnalysisSummary();
+    const el = document.getElementById('sessionSummarySmall');
+    if(!el) return;
+    let s = '';
+    if(analysis.obj.avgMeanF0 !== null) s += 'F0 media: ' + analysis.obj.avgMeanF0 + ' Hz · ';
+    s += 'Autoevaluación: ' + (analysis.obj.satisf ?? '—') + '/10 · ';
+    s += 'Reps: ' + analysis.obj.repsDone + '/' + analysis.obj.repsGoal;
+    el.textContent = s;
+  }catch(e){}
+}
+
+(function init(){
+  loadProfile();
+  const tb = document.getElementById('toggleDockBtn');
+  if(tb) tb.textContent = (document.getElementById('floatingPanel').classList.contains('floating')) ? 'Anclar' : 'Flotar';
+  updateSmallSummaryLabel();
+})();
+</script>
+<script src="../assets/theme-switcher.js" defer></script>
+</body>
+</html>

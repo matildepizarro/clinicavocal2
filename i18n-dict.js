@@ -1,0 +1,230 @@
+/* Consultorio Vocal — diccionario de traducción del portal principal (index.html) */
+window.CV_I18N_DICT = {
+  es: {
+    pageTitle: 'Consultorio Vocal — Matilde Pizarro Toro',
+    metaDescription: 'Plataforma integrada de herramientas para fonoaudiología vocal: entrenador de voz, analizador acústico, bitácora clínica, sesiones diarias, esfuerzo vocal y respiración.',
+    brandVocal: 'Vocal',
+    navEntrenamiento: 'Entrenamiento',
+    navClinico: 'Uso clínico',
+    tourBtn: '✨ Tour guiado',
+    heroTitlePre: 'Centro de herramientas para ',
+    heroTitleEm: 'Fonoaudiología',
+    heroLede: 'Desde la evaluación hasta el seguimiento, todas las herramientas que necesitas reunidas en un único entorno, diseñadas para agilizar el trabajo diario del profesional.',
+
+    sectionEntrenamiento: 'Entrenamiento &amp; análisis',
+    countTools3: '03 herramientas',
+    sectionClinico: 'Uso clínico diario',
+
+    badgePwa: 'instalable · offline',
+    vocalizerTitle: 'Vocalizer 2026',
+    vocalizerDesc: 'Entrenador vocal completo: 34 ejercicios en 7 categorías, afinador en tiempo real, evaluación de grabaciones con curva de pitch, entrenamiento de vibrato, rutinas personalizadas y clasificación de tipo de voz.',
+    vocalizerFeat1: 'Afinador', vocalizerFeat2: 'Grabadora', vocalizerFeat3: 'Vibrato', vocalizerFeat4: 'IndexedDB', vocalizerFeat5: 'PWA',
+    vocalizerGo: 'Abrir entrenador',
+
+    praatTitle: 'PRAAT.WEB',
+    praatDesc: 'Analizador acústico en el navegador: inspecciona frecuencia fundamental, formantes y demás métricas de una grabación de voz, sin instalar nada.',
+    praatFeat1: 'Análisis acústico', praatFeat2: 'F0 / formantes',
+    praatGo: 'Abrir analizador',
+
+    respiracionTitle: 'Respira Cuadrada',
+    respiracionDesc: 'Temporizador de respiración cuadrada con biblioteca de patrones, editor propio, animación guía y metrónomo en BPM para marcar el ritmo.',
+    respiracionFeat1: 'Biblioteca de patrones', respiracionFeat2: 'Editor', respiracionFeat3: 'Animación', respiracionFeat4: 'Metrónomo',
+    respiracionGo: 'Abrir temporizador',
+
+    bitacoraTitle: 'Bitácora de sesiones',
+    bitacoraDesc: 'Registro clínico sesión a sesión con cronómetros de ejercicios, piano en vivo con detector de nota, cola de sesiones y exportación a PDF.',
+    bitacoraFeat1: 'Registro clínico', bitacoraFeat2: 'Cronómetro', bitacoraFeat3: 'Piano + detector', bitacoraFeat4: 'PDF',
+    bitacoraGo: 'Abrir bitácora',
+
+    sesionTitle: 'Sesión diaria',
+    sesionDesc: 'Acompañamiento vocal afirmativo día a día: panel de seguimiento y estado del pitch persistente, con exportación de sesiones en PDF y ZIP.',
+    sesionFeat1: 'Seguimiento diario', sesionFeat2: 'Estado persistente', sesionFeat3: 'PDF / ZIP',
+    sesionGo: 'Abrir sesión diaria',
+
+    esfuerzoTitle: 'Esfuerzo vocal',
+    esfuerzoDesc: 'Medición del esfuerzo vocal percibido durante la práctica o la sesión clínica, con referencia a la literatura especializada y exportación a PDF.',
+    esfuerzoFeat1: 'Escala de esfuerzo', esfuerzoFeat2: 'Referencia científica', esfuerzoFeat3: 'PDF',
+    esfuerzoGo: 'Abrir medición',
+
+    footNote: 'Todas las herramientas de entrenamiento y práctica vocal son autoría de <b>Matilde Pizarro Toro</b>, Fonoaudióloga. © 2026 Matilde Pizarro Toro — desarrollo e integración de esta plataforma. Todos los derechos reservados.<br>Atención profesional en <a href="https://matildepizarro.github.io/fonoaudiologia/" target="_blank" rel="noopener" style="color:var(--rose); text-decoration:underline;">matildepizarro.github.io/fonoaudiologia</a>',
+    footBrand: '<b>Consultorio Vocal</b><br>Matilde Pizarro Toro · Fonoaudióloga',
+
+    musicHint: 'Música de fondo',
+    musicFabLabel: 'Reproducir música de fondo',
+
+    tourWelcomeTitle: '¡Bienvenido/a a Consultorio Vocal!',
+    tourWelcomeText: 'Soy tu asistente de bienvenida. ¿Quieres que te muestre en un minuto cómo está organizada la plataforma y qué herramienta usar en cada momento?',
+    tourStart: 'Sí, tomar el tour',
+    tourDismiss: 'Ahora no',
+    tourSkip: 'Saltar tour',
+    tourPrev: 'Atrás',
+    tourNext: 'Siguiente',
+    tourFinish: 'Terminar',
+    tourStepOf: 'Paso {n} de {total}',
+
+    tourStep1Title: 'La plataforma en un vistazo',
+    tourStep1Text: 'Aquí tienes el acceso a todas las herramientas de la práctica y el trabajo clínico vocal, reunidas en un mismo lugar.',
+    tourStep2Title: 'Navegación rápida',
+    tourStep2Text: 'Usa estos enlaces para saltar directo a las herramientas de entrenamiento o a las de uso clínico diario.',
+    tourStep3Title: 'Entrenamiento & análisis',
+    tourStep3Text: 'Vocalizer, PRAAT.WEB y Respira Cuadrada: para practicar, analizar la voz y trabajar la respiración.',
+    tourStep4Title: 'Uso clínico diario',
+    tourStep4Text: 'Bitácora de sesiones, Sesión diaria y Esfuerzo vocal: para registrar y acompañar el trabajo con cada paciente.',
+    tourStep5Title: 'Personaliza los colores',
+    tourStep5Text: 'Con este botón puedes cambiar entre 5 temas pastel: Rosa, Lavanda, Menta, Durazno y Cielo. Tu elección se aplica en toda la plataforma.',
+    tourStep6Title: 'Música de fondo',
+    tourStep6Text: 'Aquí puedes activar o pausar una música suave de fondo mientras trabajas.'
+  },
+
+  pt: {
+    pageTitle: 'Consultório Vocal — Matilde Pizarro Toro',
+    metaDescription: 'Plataforma integrada de ferramentas para fonoaudiologia vocal: treinador de voz, analisador acústico, diário clínico, sessões diárias, esforço vocal e respiração.',
+    brandVocal: 'Vocal',
+    navEntrenamiento: 'Treinamento',
+    navClinico: 'Uso clínico',
+    tourBtn: '✨ Tour guiado',
+    heroTitlePre: 'Central de ferramentas para ',
+    heroTitleEm: 'Fonoaudiologia',
+    heroLede: 'Da avaliação ao acompanhamento, todas as ferramentas que você precisa reunidas em um único ambiente, pensadas para agilizar o trabalho diário do profissional.',
+
+    sectionEntrenamiento: 'Treinamento &amp; análise',
+    countTools3: '03 ferramentas',
+    sectionClinico: 'Uso clínico diário',
+
+    badgePwa: 'instalável · offline',
+    vocalizerTitle: 'Vocalizer 2026',
+    vocalizerDesc: 'Treinador vocal completo: 34 exercícios em 7 categorias, afinador em tempo real, avaliação de gravações com curva de pitch, treinamento de vibrato, rotinas personalizadas e classificação de tipo de voz.',
+    vocalizerFeat1: 'Afinador', vocalizerFeat2: 'Gravador', vocalizerFeat3: 'Vibrato', vocalizerFeat4: 'IndexedDB', vocalizerFeat5: 'PWA',
+    vocalizerGo: 'Abrir treinador',
+
+    praatTitle: 'PRAAT.WEB',
+    praatDesc: 'Analisador acústico no navegador: inspecione frequência fundamental, formantes e demais métricas de uma gravação de voz, sem instalar nada.',
+    praatFeat1: 'Análise acústica', praatFeat2: 'F0 / formantes',
+    praatGo: 'Abrir analisador',
+
+    respiracionTitle: 'Respiração Quadrada',
+    respiracionDesc: 'Temporizador de respiração quadrada com biblioteca de padrões, editor próprio, animação-guia e metrônomo em BPM para marcar o ritmo.',
+    respiracionFeat1: 'Biblioteca de padrões', respiracionFeat2: 'Editor', respiracionFeat3: 'Animação', respiracionFeat4: 'Metrônomo',
+    respiracionGo: 'Abrir temporizador',
+
+    bitacoraTitle: 'Diário de sessões',
+    bitacoraDesc: 'Registro clínico sessão a sessão com cronômetros de exercícios, piano ao vivo com detector de nota, fila de sessões e exportação em PDF.',
+    bitacoraFeat1: 'Registro clínico', bitacoraFeat2: 'Cronômetro', bitacoraFeat3: 'Piano + detector', bitacoraFeat4: 'PDF',
+    bitacoraGo: 'Abrir diário',
+
+    sesionTitle: 'Sessão diária',
+    sesionDesc: 'Acompanhamento vocal afirmativo dia a dia: painel de acompanhamento e estado do pitch persistente, com exportação de sessões em PDF e ZIP.',
+    sesionFeat1: 'Acompanhamento diário', sesionFeat2: 'Estado persistente', sesionFeat3: 'PDF / ZIP',
+    sesionGo: 'Abrir sessão diária',
+
+    esfuerzoTitle: 'Esforço vocal',
+    esfuerzoDesc: 'Medição do esforço vocal percebido durante a prática ou a sessão clínica, com referência à literatura especializada e exportação em PDF.',
+    esfuerzoFeat1: 'Escala de esforço', esfuerzoFeat2: 'Referência científica', esfuerzoFeat3: 'PDF',
+    esfuerzoGo: 'Abrir medição',
+
+    footNote: 'Todas as ferramentas de treinamento e prática vocal são de autoria de <b>Matilde Pizarro Toro</b>, Fonoaudióloga. © 2026 Matilde Pizarro Toro — desenvolvimento e integração desta plataforma. Todos os direitos reservados.<br>Atendimento profissional em <a href="https://matildepizarro.github.io/fonoaudiologia/" target="_blank" rel="noopener" style="color:var(--rose); text-decoration:underline;">matildepizarro.github.io/fonoaudiologia</a>',
+    footBrand: '<b>Consultório Vocal</b><br>Matilde Pizarro Toro · Fonoaudióloga',
+
+    musicHint: 'Música de fundo',
+    musicFabLabel: 'Tocar música de fundo',
+
+    tourWelcomeTitle: 'Bem-vindo(a) ao Consultório Vocal!',
+    tourWelcomeText: 'Sou seu assistente de boas-vindas. Quer que eu mostre em um minuto como a plataforma está organizada e qual ferramenta usar em cada momento?',
+    tourStart: 'Sim, fazer o tour',
+    tourDismiss: 'Agora não',
+    tourSkip: 'Pular tour',
+    tourPrev: 'Voltar',
+    tourNext: 'Próximo',
+    tourFinish: 'Concluir',
+    tourStepOf: 'Passo {n} de {total}',
+
+    tourStep1Title: 'A plataforma em um relance',
+    tourStep1Text: 'Aqui você tem acesso a todas as ferramentas da prática e do trabalho clínico vocal, reunidas em um só lugar.',
+    tourStep2Title: 'Navegação rápida',
+    tourStep2Text: 'Use estes links para ir direto às ferramentas de treinamento ou às de uso clínico diário.',
+    tourStep3Title: 'Treinamento & análise',
+    tourStep3Text: 'Vocalizer, PRAAT.WEB e Respiração Quadrada: para praticar, analisar a voz e trabalhar a respiração.',
+    tourStep4Title: 'Uso clínico diário',
+    tourStep4Text: 'Diário de sessões, Sessão diária e Esforço vocal: para registrar e acompanhar o trabalho com cada paciente.',
+    tourStep5Title: 'Personalize as cores',
+    tourStep5Text: 'Com este botão você pode alternar entre 5 temas pastel: Rosa, Lavanda, Menta, Pêssego e Céu. Sua escolha se aplica a toda a plataforma.',
+    tourStep6Title: 'Música de fundo',
+    tourStep6Text: 'Aqui você pode ativar ou pausar uma música suave de fundo enquanto trabalha.'
+  },
+
+  en: {
+    pageTitle: 'Vocal Practice — Matilde Pizarro Toro',
+    metaDescription: 'An integrated platform of tools for vocal speech-language pathology: voice trainer, acoustic analyzer, clinical log, daily sessions, vocal effort and breathing.',
+    brandVocal: 'Vocal',
+    navEntrenamiento: 'Training',
+    navClinico: 'Clinical use',
+    tourBtn: '✨ Guided tour',
+    heroTitlePre: 'A toolkit for ',
+    heroTitleEm: 'Speech-Language Pathology',
+    heroLede: 'From assessment to follow-up, every tool you need brought together in one place, designed to streamline the clinician\u2019s daily work.',
+
+    sectionEntrenamiento: 'Training &amp; analysis',
+    countTools3: '03 tools',
+    sectionClinico: 'Daily clinical use',
+
+    badgePwa: 'installable · offline',
+    vocalizerTitle: 'Vocalizer 2026',
+    vocalizerDesc: 'A complete voice trainer: 34 exercises across 7 categories, a real-time tuner, recording evaluation with a pitch curve, vibrato training, custom routines and voice-type classification.',
+    vocalizerFeat1: 'Tuner', vocalizerFeat2: 'Recorder', vocalizerFeat3: 'Vibrato', vocalizerFeat4: 'IndexedDB', vocalizerFeat5: 'PWA',
+    vocalizerGo: 'Open trainer',
+
+    praatTitle: 'PRAAT.WEB',
+    praatDesc: 'An in-browser acoustic analyzer: inspect fundamental frequency, formants and other metrics of a voice recording, with nothing to install.',
+    praatFeat1: 'Acoustic analysis', praatFeat2: 'F0 / formants',
+    praatGo: 'Open analyzer',
+
+    respiracionTitle: 'Square Breathing',
+    respiracionDesc: 'A square-breathing timer with a pattern library, a custom editor, a guiding animation and a BPM metronome to keep the pace.',
+    respiracionFeat1: 'Pattern library', respiracionFeat2: 'Editor', respiracionFeat3: 'Animation', respiracionFeat4: 'Metronome',
+    respiracionGo: 'Open timer',
+
+    bitacoraTitle: 'Session log',
+    bitacoraDesc: 'A session-by-session clinical record with exercise timers, a live piano with note detection, a session queue and PDF export.',
+    bitacoraFeat1: 'Clinical record', bitacoraFeat2: 'Timer', bitacoraFeat3: 'Piano + detector', bitacoraFeat4: 'PDF',
+    bitacoraGo: 'Open log',
+
+    sesionTitle: 'Daily session',
+    sesionDesc: 'Day-to-day gender-affirming voice support: a tracking panel with persistent pitch state, and session export to PDF and ZIP.',
+    sesionFeat1: 'Daily tracking', sesionFeat2: 'Persistent state', sesionFeat3: 'PDF / ZIP',
+    sesionGo: 'Open daily session',
+
+    esfuerzoTitle: 'Vocal effort',
+    esfuerzoDesc: 'Measuring perceived vocal effort during practice or a clinical session, referencing the specialized literature, with PDF export.',
+    esfuerzoFeat1: 'Effort scale', esfuerzoFeat2: 'Scientific reference', esfuerzoFeat3: 'PDF',
+    esfuerzoGo: 'Open measurement',
+
+    footNote: 'All the vocal training and practice tools are authored by <b>Matilde Pizarro Toro</b>, Speech-Language Pathologist. © 2026 Matilde Pizarro Toro — development and integration of this platform. All rights reserved.<br>Professional care at <a href="https://matildepizarro.github.io/fonoaudiologia/" target="_blank" rel="noopener" style="color:var(--rose); text-decoration:underline;">matildepizarro.github.io/fonoaudiologia</a>',
+    footBrand: '<b>Vocal Practice</b><br>Matilde Pizarro Toro · Speech-Language Pathologist',
+
+    musicHint: 'Background music',
+    musicFabLabel: 'Play background music',
+
+    tourWelcomeTitle: 'Welcome to Vocal Practice!',
+    tourWelcomeText: 'I\u2019m your welcome guide. Want me to show you in a minute how the platform is organized and which tool to use for each task?',
+    tourStart: 'Yes, take the tour',
+    tourDismiss: 'Not now',
+    tourSkip: 'Skip tour',
+    tourPrev: 'Back',
+    tourNext: 'Next',
+    tourFinish: 'Finish',
+    tourStepOf: 'Step {n} of {total}',
+
+    tourStep1Title: 'The platform at a glance',
+    tourStep1Text: 'Here you have access to every tool for vocal practice and clinical work, all in one place.',
+    tourStep2Title: 'Quick navigation',
+    tourStep2Text: 'Use these links to jump straight to the training tools or the daily clinical-use tools.',
+    tourStep3Title: 'Training & analysis',
+    tourStep3Text: 'Vocalizer, PRAAT.WEB and Square Breathing: to practice, analyze the voice and work on breathing.',
+    tourStep4Title: 'Daily clinical use',
+    tourStep4Text: 'Session log, Daily session and Vocal effort: to record and support the work with each patient.',
+    tourStep5Title: 'Customize the colors',
+    tourStep5Text: 'This button lets you switch between 5 pastel themes: Pink, Lavender, Mint, Peach and Sky. Your choice applies across the whole platform.',
+    tourStep6Title: 'Background music',
+    tourStep6Text: 'Here you can turn on or pause some soft background music while you work.'
+  }
+};

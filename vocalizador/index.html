@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Vocalizer 2026 — Entrenador vocal</title>
+<meta name="description" content="Entrenador vocal offline: rango vocal, ejercicios de solfeo, afinador, evaluación de grabaciones y vibrato. Funciona sin conexión." />
+<meta name="theme-color" content="#150c1c" />
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="icons/icon-192.png" />
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="../assets/shared.css" />
+<script>document.documentElement.setAttribute('data-pastel-theme', (function(){try{return localStorage.getItem('cv-pastel-theme')||'rosa';}catch(e){return 'rosa';}})());</script>
+</head>
+<body>
+
+<a href="../index.html" class="cv-back-link"><span class="cv-back-arrow" aria-hidden="true">←</span><span class="cv-back-text">Volver al portal</span></a>
+
+<div id="toastRegion" class="toastRegion" role="status" aria-live="polite" aria-atomic="true"></div>
+
+<main class="wrap" id="app">
+
+  <header class="topbar">
+    <div class="brand">
+      <svg class="logo" viewBox="0 0 48 48" aria-hidden="true">
+        <circle cx="24" cy="24" r="22" fill="url(#g)"/>
+        <path d="M24 12a6 6 0 0 1 6 6v8a6 6 0 0 1-12 0v-8a6 6 0 0 1 6-6Z" fill="#150c1c" opacity="0.85"/>
+        <path d="M15 24a9 9 0 0 0 18 0M24 33v5M20 38h8" stroke="#150c1c" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.85"/>
+        <defs><linearGradient id="g" x1="0" y1="0" x2="48" y2="48"><stop offset="0" stop-color="#f0b429"/><stop offset="1" stop-color="#ff6f61"/></linearGradient></defs>
+      </svg>
+      <div>
+        <h1>Vocalizer<span class="ver">2026</span></h1>
+        <p class="tag">Estudio de calentamiento vocal — 100% local, sin cuentas ni nube</p>
+      </div>
+    </div>
+    <div class="topActions">
+      <button id="themeToggle" class="iconBtn" type="button" aria-pressed="false" aria-label="Cambiar a tema claro" title="Cambiar tema">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z" fill="currentColor"/></svg>
+      </button>
+      <span class="author">Autora original: <strong>Matilde Pizarro Toro</strong></span>
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Secciones">
+    <button class="tab active" role="tab" aria-selected="true" aria-controls="panel-practicar" id="tab-practicar">Practicar</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="panel-afinador" id="tab-afinador">Afinador</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="panel-evaluar" id="tab-evaluar">Evaluar</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="panel-vibrato" id="tab-vibrato">Vibrato</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="panel-grabaciones" id="tab-grabaciones">Grabaciones</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="panel-rutinas" id="tab-rutinas">Rutinas</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="panel-ajustes" id="tab-ajustes">Ajustes</button>
+  </nav>
+
+  <section class="content">
+
+    <!-- ============ PRACTICAR ============ -->
+    <div id="panel-practicar" class="tabpanel" role="tabpanel" aria-labelledby="tab-practicar">
+      <div class="layout3">
+
+        <aside class="panel controls">
+          <h2>Controles</h2>
+
+          <label class="field">Rango vocal
+            <select id="rangeSelect" aria-label="Selector de rango vocal">
+              <option value="soprano">Soprano</option>
+              <option value="mezzo">Mezzosoprano</option>
+              <option value="alto">Contralto</option>
+              <option value="tenor">Tenor</option>
+              <option value="baritone">Barítono</option>
+              <option value="bass">Bajo</option>
+              <option value="custom">Personalizado</option>
+            </select>
+          </label>
+          <label class="field" id="customRangeLabel" hidden>Nota raíz (MIDI)
+            <input id="customRoot" type="number" min="36" max="84" value="60" aria-label="MIDI raíz"/>
+          </label>
+
+          <div class="field transposeField">
+            <span class="fieldLabel">Tono actual (transponer)</span>
+            <div class="transposeRow">
+              <button id="transposeDownBtn" class="btn" type="button" aria-label="Bajar medio tono">▼</button>
+              <div class="transposeDisplay" id="transposeDisplay">Do4</div>
+              <button id="transposeUpBtn" class="btn" type="button" aria-label="Subir medio tono">▲</button>
+            </div>
+            <button id="transposeResetBtn" class="btn linkBtn" type="button">Reiniciar tono</button>
+          </div>
+          <label class="fieldCheck">
+            <input type="checkbox" id="autoTranspose"/> Subir/bajar de tono automáticamente en cada repetición (bucle)
+          </label>
+          <label class="field" id="autoTransposeDirWrap">Dirección del cambio automático
+            <select id="autoTransposeDir">
+              <option value="up">Subir hacia lo agudo</option>
+              <option value="down">Bajar hacia lo grave</option>
+            </select>
+          </label>
+
+          <label class="field">Tempo del metrónomo
+            <div class="rangeRow">
+              <input id="bpm" type="range" min="40" max="200" value="90" aria-label="Tempo en BPM"/>
+              <span id="bpmVal" class="rangeVal">90 <small>BPM</small></span>
+            </div>
+          </label>
+
+          <label class="field">Velocidad del ejercicio
+            <div class="rangeRow">
+              <input id="speedSlider" type="range" min="50" max="150" value="100" aria-label="Velocidad de reproducción"/>
+              <span id="speedVal" class="rangeVal">1.00×</span>
+            </div>
+          </label>
+
+          <label class="field">Timbre del piano guía
+            <select id="timbreSelect" aria-label="Timbre del sonido guía">
+              <option value="voz">Voz humana (ahh) — recomendado</option>
+              <option value="piano">Piano real (grabación, Salamander)</option>
+              <option value="sine">Suave (seno)</option>
+              <option value="triangle">Cálido (triángulo)</option>
+              <option value="sawtooth">Brillante (sierra)</option>
+            </select>
+          </label>
+
+          <div class="buttons">
+            <button id="playBtn" class="btn primary">▶ Reproducir</button>
+            <button id="stopBtn" class="btn">■ Detener</button>
+            <button id="loopBtn" class="btn" aria-pressed="false">⟲ Bucle: Off</button>
+          </div>
+
+          <div class="buttons secondary">
+            <button id="metronomeBtn" class="btn" aria-pressed="false">🥁 Metrónomo</button>
+            <button id="findRangeBtn" class="btn">🎯 Encontrar mi rango</button>
+          </div>
+
+          <div class="buttons secondary">
+            <button id="recordBtn" class="btn" aria-pressed="false">⏺ Grabar</button>
+          </div>
+
+          <p class="help">Consejo: toca cualquier parte de la página una vez para activar el audio y el micrófono.</p>
+        </aside>
+
+        <div class="panel library">
+          <h2>Biblioteca de ejercicios</h2>
+          <input id="exerciseSearch" type="search" placeholder="Buscar ejercicio…" class="searchInput" aria-label="Buscar ejercicio"/>
+          <div class="chipRow" id="categoryChips" role="group" aria-label="Filtrar por categoría"></div>
+          <ul id="exerciseList" class="exerciseList" aria-label="Lista de ejercicios"></ul>
+
+          <h3 class="subhead">Progresiones guiadas</h3>
+          <ul id="progressionList" class="progressionList"></ul>
+        </div>
+
+        <div class="panel mainpanel">
+          <div class="tunerCard">
+            <svg id="gauge" class="gauge" viewBox="0 0 240 140" aria-hidden="true">
+              <path d="M20 120 A100 100 0 0 1 220 120" fill="none" stroke="var(--gauge-track)" stroke-width="10" stroke-linecap="round"/>
+              <path id="gaugeActive" d="M20 120 A100 100 0 0 1 220 120" fill="none" stroke="var(--accent-gold)" stroke-width="10" stroke-linecap="round" stroke-dasharray="314" stroke-dashoffset="157"/>
+              <line id="needle" x1="120" y1="120" x2="120" y2="35" stroke="var(--accent-coral)" stroke-width="4" stroke-linecap="round"/>
+              <circle cx="120" cy="120" r="7" fill="var(--accent-coral)"/>
+            </svg>
+            <div class="solfege" id="solfege" aria-hidden="true">—</div>
+            <div class="noteInfo" role="status" aria-live="polite">
+              <div><span>Nota</span><strong id="detectedNote">--</strong></div>
+              <div><span>Frecuencia</span><strong id="detectedFreq">--</strong> Hz</div>
+              <div><span>Desviación</span><strong id="detectedCents">--</strong> cents</div>
+            </div>
+          </div>
+          <div class="vizCard panel">
+            <canvas id="viz" aria-label="Forma de onda del micrófono en vivo" role="img"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ AFINADOR ============ -->
+    <div id="panel-afinador" class="tabpanel" role="tabpanel" aria-labelledby="tab-afinador" hidden>
+      <div class="layout2">
+        <aside class="panel controls">
+          <h2>Afinador vocal</h2>
+          <div class="segmented" role="radiogroup" aria-label="Modo del afinador">
+            <button class="segBtn active" id="tunerModeSelectBtn" role="radio" aria-checked="true">Seleccionar nota</button>
+            <button class="segBtn" id="tunerModeAutoBtn" role="radio" aria-checked="false">Detectar automático</button>
+          </div>
+
+          <div id="tunerNoteControls">
+            <label class="field">Nota objetivo
+              <select id="tunerNoteSelect" aria-label="Nota objetivo"></select>
+            </label>
+            <label class="field">Octava
+              <input id="tunerOctave" type="number" min="2" max="6" value="4"/>
+            </label>
+            <button id="tunerPlayNoteBtn" class="btn primary" aria-pressed="false">🔊 Reproducir tono guía</button>
+          </div>
+
+          <div id="tunerAutoControls" hidden>
+            <p class="help">Canta cualquier nota. El indicador reacciona en vivo.</p>
+            <button id="tunerFollowBtn" class="btn primary" aria-pressed="false">🔊 Tono guía sigue mi voz</button>
+          </div>
+
+          <div class="statGrid">
+            <div class="statCard"><span>Ataque</span><strong id="statAttack">--</strong></div>
+            <div class="statCard"><span>Sostenido</span><strong id="statSustain">--</strong></div>
+            <div class="statCard"><span>Intonación</span><strong id="statIntonation">--</strong></div>
+          </div>
+        </aside>
+
+        <div class="panel mainpanel">
+          <div class="tunerCard">
+            <svg id="gauge2" class="gauge" viewBox="0 0 240 140" aria-hidden="true">
+              <path d="M20 120 A100 100 0 0 1 220 120" fill="none" stroke="var(--gauge-track)" stroke-width="10" stroke-linecap="round"/>
+              <path id="gaugeActive2" d="M20 120 A100 100 0 0 1 220 120" fill="none" stroke="var(--accent-gold)" stroke-width="10" stroke-linecap="round" stroke-dasharray="314" stroke-dashoffset="157"/>
+              <line id="needle2" x1="120" y1="120" x2="120" y2="35" stroke="var(--accent-coral)" stroke-width="4" stroke-linecap="round"/>
+              <circle cx="120" cy="120" r="7" fill="var(--accent-coral)"/>
+            </svg>
+            <div class="noteInfo" role="status" aria-live="polite">
+              <div><span>Nota</span><strong id="detectedNote2">--</strong></div>
+              <div><span>Frecuencia</span><strong id="detectedFreq2">--</strong> Hz</div>
+              <div><span>Desviación</span><strong id="detectedCents2">--</strong> cents</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ EVALUAR ============ -->
+    <div id="panel-evaluar" class="tabpanel" role="tabpanel" aria-labelledby="tab-evaluar" hidden>
+      <div class="layout2">
+        <aside class="panel controls">
+          <h2>Evaluar grabación</h2>
+          <label class="field">Ejercicio de referencia
+            <select id="evalExerciseSelect" aria-label="Ejercicio de referencia"></select>
+          </label>
+          <label class="fieldCheck"><input type="checkbox" id="evalFollowExercise" checked/> Seguir el ejercicio al grabar</label>
+
+          <div class="buttons">
+            <button id="evalRecordBtn" class="btn primary" aria-pressed="false">⏺ Grabar</button>
+          </div>
+          <p id="evalStatus" class="help" aria-live="polite"></p>
+          <label class="field importField">Importar audio
+            <input id="importAudioInput" type="file" accept="audio/*"/>
+          </label>
+          <p class="help">Al presionar «Grabar» primero escucharás el ejemplo del ejercicio y luego un contador (3, 2, 1) antes de que empiece la grabación. Se analiza tu afinación nota por nota comparándola con el ejercicio elegido.</p>
+        </aside>
+
+        <div class="panel mainpanel">
+          <div id="evalEmpty" class="empty">Graba tu voz o importa un audio para ver el análisis aquí.</div>
+          <div id="evalResults" hidden>
+            <div class="scoreRow">
+              <div class="scoreBig"><strong id="evalScore">--</strong><span>% afinado</span></div>
+              <audio id="evalAudio" controls></audio>
+              <button id="evalPlaySelectionBtn" class="btn" disabled>🔁 Reproducir selección en bucle</button>
+            </div>
+            <div class="vizCard panel">
+              <canvas id="evalCanvas" aria-label="Curva de afinación de la grabación" role="img"></canvas>
+              <p class="help">Arrastra sobre la línea de tiempo para seleccionar y repetir una sección.</p>
+            </div>
+            <h3 class="subhead">Desglose nota por nota</h3>
+            <ul id="evalBreakdown" class="breakdownList"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ VIBRATO ============ -->
+    <div id="panel-vibrato" class="tabpanel" role="tabpanel" aria-labelledby="tab-vibrato" hidden>
+      <div class="layout2">
+        <aside class="panel controls">
+          <h2>Entrenamiento de vibrato</h2>
+          <label class="field">Sostén la nota durante
+            <select id="vibratoDuration">
+              <option value="4">4 segundos</option>
+              <option value="6" selected>6 segundos</option>
+              <option value="8">8 segundos</option>
+            </select>
+          </label>
+          <div class="buttons">
+            <button id="vibratoRecordBtn" class="btn primary" aria-pressed="false">⏺ Grabar sostenido</button>
+          </div>
+          <p class="help">Canta y sostén una nota cómoda con vibrato natural durante toda la grabación.</p>
+          <div class="statGrid">
+            <div class="statCard"><span>Velocidad</span><strong id="vibRate">--</strong></div>
+            <div class="statCard"><span>Extensión</span><strong id="vibExtent">--</strong></div>
+            <div class="statCard"><span>Consistencia</span><strong id="vibConsistency">--</strong></div>
+          </div>
+        </aside>
+        <div class="panel mainpanel">
+          <div class="vizCard panel">
+            <canvas id="vibratoCurveCanvas" aria-label="Curva de vibrato de la última grabación" role="img"></canvas>
+          </div>
+          <div class="vizCard panel">
+            <h3 class="subhead">Progreso en el tiempo</h3>
+            <canvas id="vibratoHistoryCanvas" aria-label="Historial de velocidad de vibrato" role="img"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ GRABACIONES ============ -->
+    <div id="panel-grabaciones" class="tabpanel" role="tabpanel" aria-labelledby="tab-grabaciones" hidden>
+      <div class="panel recordings">
+        <div class="recHeader">
+          <h2>Tus grabaciones</h2>
+          <button id="clearRecordingsBtn" class="btn danger">Borrar todas</button>
+        </div>
+        <p class="help">Se guardan en este dispositivo (IndexedDB), no se suben a ningún servidor.</p>
+        <ul id="recordingsList" class="recList" aria-live="polite"></ul>
+        <p id="emptyRecordings" class="empty">Aún no tienes grabaciones. Ve a «Practicar» y pulsa «Grabar».</p>
+      </div>
+    </div>
+
+    <!-- ============ RUTINAS ============ -->
+    <div id="panel-rutinas" class="tabpanel" role="tabpanel" aria-labelledby="tab-rutinas" hidden>
+      <div class="layout2">
+        <aside class="panel controls">
+          <h2>Crear rutina</h2>
+          <label class="field">Nombre de la rutina
+            <input id="routineName" type="text" placeholder="Mi calentamiento"/>
+          </label>
+          <label class="field">Agregar ejercicio
+            <select id="routineAddSelect"></select>
+          </label>
+          <button id="routineAddBtn" class="btn">+ Agregar a la rutina</button>
+          <ol id="routineSteps" class="routineSteps"></ol>
+          <button id="routineSaveBtn" class="btn primary">Guardar rutina</button>
+        </aside>
+        <div class="panel mainpanel">
+          <h2>Mis rutinas</h2>
+          <ul id="savedRoutinesList" class="recList"></ul>
+          <p id="emptyRoutines" class="empty">Aún no has guardado rutinas.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ AJUSTES ============ -->
+    <div id="panel-ajustes" class="tabpanel" role="tabpanel" aria-labelledby="tab-ajustes" hidden>
+      <div class="panel">
+        <h2>Ajustes</h2>
+        <label class="field">Micrófono
+          <select id="micDeviceSelect" aria-label="Elegir micrófono">
+            <option value="">Predeterminado del sistema</option>
+          </select>
+        </label>
+        <label class="field">Sensibilidad del micrófono
+          <div class="rangeRow">
+            <input id="micGainSlider" type="range" min="0.2" max="3" step="0.1" value="1"/>
+            <span id="micGainVal" class="rangeVal">1.0×</span>
+          </div>
+        </label>
+        <div class="buttons">
+          <button id="micTestBtn" class="btn" type="button" aria-pressed="false">🎙 Probar micrófono</button>
+        </div>
+        <div class="micMeter" aria-hidden="true"><div id="micMeterFill" class="micMeterFill"></div></div>
+        <p class="help">Elige qué micrófono debe usar la app y ajusta su sensibilidad; se aplica tanto al afinador en vivo como a todas las grabaciones (Practicar, Evaluar, Vibrato, Encontrar mi rango).</p>
+        <label class="field">Notación de las sílabas
+          <select id="notationSelect">
+            <option value="solfege">Solfeo (Do Re Mi…)</option>
+            <option value="letters">Cifrado (C D E…)</option>
+          </select>
+        </label>
+        <label class="field">Diapasón (La4)
+          <div class="rangeRow">
+            <input id="a4Tuning" type="range" min="415" max="466" value="440"/>
+            <span id="a4Val" class="rangeVal">440 <small>Hz</small></span>
+          </div>
+        </label>
+        <label class="field">Tolerancia de afinación
+          <div class="rangeRow">
+            <input id="toleranceSlider" type="range" min="5" max="40" value="15"/>
+            <span id="toleranceVal" class="rangeVal">15 <small>cents</small></span>
+          </div>
+        </label>
+        <label class="field">Compensación de latencia
+          <div class="rangeRow">
+            <input id="latencySlider" type="range" min="0" max="600" value="0" step="10"/>
+            <span id="latencyVal" class="rangeVal">0 <small>ms</small></span>
+          </div>
+        </label>
+        <label class="fieldCheck">
+          <input type="checkbox" id="reduceMotion"/> Reducir animaciones
+        </label>
+        <label class="fieldCheck">
+          <input type="checkbox" id="skipOnboarding"/> Omitir el asistente de bienvenida al iniciar
+        </label>
+        <button id="repeatOnboardingBtn" class="btn">Repetir asistente de bienvenida</button>
+        <p class="help">Vocalizer 2026 es una app web instalable (PWA): funciona sin conexión y puedes «Añadir a pantalla de inicio» desde el menú de tu navegador.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <footer class="foot">
+    <small>Vocalizer 2026 · Proyecto offline, todo local · Compatible con Chrome, Edge, Firefox y Safari · Autora original: Matilde Pizarro Toro</small>
+  </footer>
+</main>
+
+<!-- Asistente de bienvenida / buscador de rango -->
+<dialog id="onboardingDialog" class="dialog wide">
+  <form method="dialog" class="dialogForm">
+    <h3 id="onbTitle">Bienvenida a Vocalizer</h3>
+    <p id="onbText">Para adaptar los ejercicios a tu voz, dinos tu tipo de voz o descúbrelo cantando.</p>
+
+    <div id="onbStepType">
+      <label class="field">Tipo de voz
+        <select id="onbTypeSelect">
+          <option value="soprano">Soprano</option>
+          <option value="mezzo">Mezzosoprano</option>
+          <option value="alto">Contralto</option>
+          <option value="tenor">Tenor</option>
+          <option value="baritone">Barítono</option>
+          <option value="bass">Bajo</option>
+          <option value="custom">Personalizada (descubrir cantando)</option>
+        </select>
+      </label>
+    </div>
+
+    <div id="onbStepRecord" hidden>
+      <div class="dialogProgress"><div id="onbProgressBar" class="dialogProgressBar"></div></div>
+    </div>
+
+    <div id="onbResult" class="rangeResult" hidden></div>
+
+    <div class="dialogButtons">
+      <button id="onbSkipBtn" value="cancel" class="btn" formnovalidate>Omitir</button>
+      <button id="onbContinueBtn" value="continue" class="btn primary">Continuar</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="rangeDialog" class="dialog">
+  <form method="dialog" class="dialogForm">
+    <h3>Detectar tu rango vocal</h3>
+    <p id="rangeDialogText">Vamos a grabar 5 segundos. Canta desde tu nota más grave hasta tu nota más aguda, con volumen medio.</p>
+    <div class="dialogProgress"><div id="rangeProgressBar" class="dialogProgressBar"></div></div>
+    <div id="rangeResult" class="rangeResult" hidden></div>
+    <div class="dialogButtons">
+      <button id="rangeStartBtn" value="start" class="btn primary">Empezar grabación</button>
+      <button value="cancel" class="btn">Cerrar</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="../assets/shared.js" defer></script>
+<script type="module" src="js/app.js"></script>
+<script src="../assets/theme-switcher.js" defer></script>
+</body>
+</html>
