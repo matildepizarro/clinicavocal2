@@ -311,3 +311,37 @@ Se cerraron los dos pendientes no bloqueantes que quedaban documentados:
   (dato clínico editable), como estaba documentado.
 
 **No queda ningún pendiente de traducción documentado en la plataforma.**
+
+## ✅ Lector de accesibilidad (nueva funcionalidad transversal)
+Se agregó `assets/a11y-reader.js`, un widget flotante 🔊 compartido por las
+7 piezas (mismo patrón que el selector de tema 🎨 y de idioma 🌐):
+
+- Al activarlo, lee en voz alta (Web Speech API / `SpeechSynthesis`) el
+  texto accesible de cualquier elemento al pasar el mouse (hover, con un
+  pequeño delay de 160ms para no disparar en cada píxel) o al enfocarlo
+  con teclado (Tab/foco) — ambos disparadores activos a la vez.
+- El propio panel del botón flotante funciona como el "Ajustes" de este
+  modo (switch on/off + control de velocidad de lectura), ya que es el
+  mismo mecanismo que ya usan tema/idioma para configuración transversal
+  sin duplicar UI en cada herramienta.
+- Extrae el texto accesible con prioridad: `aria-label` →
+  `aria-labelledby` → casos especiales de `input`/`select`/`textarea`
+  (label asociado + valor/placeholder, o "activado"/"desactivado" para
+  checkboxes) → `alt` de imágenes → `title` → `textContent`.
+- Respeta el idioma activo (ES/PT/EN): elige voz de síntesis por idioma
+  (`es-ES`/`pt-BR`/`en-US`) y traduce las palabras de estado
+  ("activado"/"desactivado"/"seleccionado") vía claves nuevas agregadas
+  al `CORE_DICT` compartido de `assets/i18n-engine.js` (se propagan
+  automáticamente a las 7 piezas sin tocar sus diccionarios locales).
+- Muestra además una leyenda (caption) abajo de la pantalla con el texto
+  que se está leyendo, útil para personas sordas/hipoacúsicas o si el
+  navegador no tiene voces de síntesis instaladas.
+- Resalta con un contorno visual (`outline`) el elemento que se está
+  leyendo.
+- Esc detiene la lectura en curso en cualquier momento.
+- Estado y velocidad persisten en `localStorage` (`cv-a11y-on`,
+  `cv-a11y-rate`), compartidos entre toda la plataforma.
+- Se agregó `<script src=".../assets/a11y-reader.js" defer></script>`
+  justo después de `theme-switcher.js` en las 7 páginas (portal + 6
+  herramientas). `node --check` sin errores en los 7 bloques `<script>`
+  inline tras la inserción.

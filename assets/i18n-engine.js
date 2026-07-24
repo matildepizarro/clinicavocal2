@@ -54,7 +54,14 @@
       changeLanguage: 'Cambiar idioma / Change language / Mudar idioma',
       langPanelTitle: 'Idioma / Language',
       themeRosa: 'Rosa', themeLavanda: 'Lavanda', themeMenta: 'Menta',
-      themeDurazno: 'Durazno', themeCielo: 'Cielo'
+      themeDurazno: 'Durazno', themeCielo: 'Cielo',
+      a11yToggleLabel: 'Lector de accesibilidad (leer al pasar el mouse o enfocar)',
+      a11yPanelTitle: 'Lector de accesibilidad',
+      a11yToggleText: 'Leer en voz alta al pasar el mouse o enfocar',
+      a11yHint: 'Recorré la pantalla con el mouse o el teclado (Tab) y vas a escuchar el texto de cada elemento. Presioná Esc para detener la lectura.',
+      a11yRateLabel: 'Velocidad de lectura',
+      a11yStateOn: 'activado', a11yStateOff: 'desactivado', a11yStateSelected: 'seleccionado',
+      a11yNoSupport: 'Tu navegador no admite lectura en voz alta.'
     },
     pt: {
       backToPortal: 'Voltar ao portal',
@@ -63,7 +70,14 @@
       changeLanguage: 'Cambiar idioma / Change language / Mudar idioma',
       langPanelTitle: 'Idioma / Language',
       themeRosa: 'Rosa', themeLavanda: 'Lavanda', themeMenta: 'Menta',
-      themeDurazno: 'Pêssego', themeCielo: 'Céu'
+      themeDurazno: 'Pêssego', themeCielo: 'Céu',
+      a11yToggleLabel: 'Leitor de acessibilidade (ler ao passar o mouse ou focar)',
+      a11yPanelTitle: 'Leitor de acessibilidade',
+      a11yToggleText: 'Ler em voz alta ao passar o mouse ou focar',
+      a11yHint: 'Percorra a tela com o mouse ou o teclado (Tab) e você vai ouvir o texto de cada elemento. Pressione Esc para parar a leitura.',
+      a11yRateLabel: 'Velocidade de leitura',
+      a11yStateOn: 'ativado', a11yStateOff: 'desativado', a11yStateSelected: 'selecionado',
+      a11yNoSupport: 'Seu navegador não é compatível com leitura em voz alta.'
     },
     en: {
       backToPortal: 'Back to portal',
@@ -72,7 +86,14 @@
       changeLanguage: 'Cambiar idioma / Change language / Mudar idioma',
       langPanelTitle: 'Idioma / Language',
       themeRosa: 'Pink', themeLavanda: 'Lavender', themeMenta: 'Mint',
-      themeDurazno: 'Peach', themeCielo: 'Sky'
+      themeDurazno: 'Peach', themeCielo: 'Sky',
+      a11yToggleLabel: 'Accessibility reader (read on hover or focus)',
+      a11yPanelTitle: 'Accessibility reader',
+      a11yToggleText: 'Read aloud on hover or focus',
+      a11yHint: 'Move over the screen with the mouse or keyboard (Tab) and you\u2019ll hear each element\u2019s text. Press Esc to stop reading.',
+      a11yRateLabel: 'Reading speed',
+      a11yStateOn: 'on', a11yStateOff: 'off', a11yStateSelected: 'selected',
+      a11yNoSupport: 'Your browser does not support text-to-speech.'
     }
   };
 
