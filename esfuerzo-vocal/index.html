@@ -3,10 +3,12 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Medición del esfuerzo vocal</title>
-<meta name="description" content="Registro del esfuerzo vocal percibido: escala Borg CR-10, síntomas asociados y evolución de las sesiones." />
+<title data-i18n="pageTitle">Medición del esfuerzo vocal</title>
+<meta name="description" data-i18n-content="metaDescription" content="Registro del esfuerzo vocal percibido: escala Borg CR-10, síntomas asociados y evolución de las sesiones." />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='7' fill='%23e0559e'/%3E%3Cpath d='M8 17c-2.5-2.3-4-4.2-4-6.3A3.2 3.2 0 0 1 7.3 7.4C8.6 7.4 9.6 8 10 9c.4-1 1.4-1.6 2.7-1.6a3.2 3.2 0 0 1 3.3 3.3c0 2.1-1.5 4-4 6.3l-2 1.8Z' fill='white'/%3E%3C/svg%3E">
 <script>document.documentElement.setAttribute('data-pastel-theme', (function(){try{return localStorage.getItem('cv-pastel-theme')||'rosa';}catch(e){return 'rosa';}})());</script>
+<script src="i18n-dict.js"></script>
+<script src="../assets/i18n-engine.js"></script>
 
 <!-- jsPDF (UMD) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" crossorigin="anonymous"></script>
@@ -81,112 +83,112 @@
     <header class="header">
       <div class="brand" aria-hidden="true">MP</div>
       <div class="title-wrap">
-        <h1>Medición del esfuerzo vocal</h1>
-        <p class="lead">Formulario clínico para registro post-sesión — Escala Borg CR-10 aplicada al esfuerzo vocal.</p>
+        <h1 data-i18n="headerTitle">Medición del esfuerzo vocal</h1>
+        <p class="lead" data-i18n="headerLead">Formulario clínico para registro post-sesión — Escala Borg CR-10 aplicada al esfuerzo vocal.</p>
       </div>
     </header>
 
     <!-- INSTRUCCIONES -->
     <section class="card" aria-labelledby="instr">
-      <h2 id="instr">Instrucciones</h2>
-      <p>
+      <h2 id="instr" data-i18n="instrTitle">Instrucciones</h2>
+      <p data-i18n="instrText">
         El esfuerzo vocal se refiere a la cantidad de esfuerzo físico que siente necesario para producir o emitir la voz. Si realiza un gran esfuerzo para producir la voz (quizás con una mayor inspiración, tensión o fuerza para producir su voz) entonces el esfuerzo vocal podría ser mayor. Si siente que es fácil producir su voz (con poca tensión o poco esfuerzo respiratorio), el esfuerzo vocal podría ser bajo.
       </p>
-      <p style="font-weight:700;margin-top:8px">Instrucciones: Por favor, seleccione el número que corresponde a la cantidad de esfuerzo vocal que sintió al producir su voz durante la tarea anterior.</p>
+      <p style="font-weight:700;margin-top:8px" data-i18n="instrText2">Instrucciones: Por favor, seleccione el número que corresponde a la cantidad de esfuerzo vocal que sintió al producir su voz durante la tarea anterior.</p>
     </section>
 
     <!-- FORM -->
     <form id="registroForm" class="card" onsubmit="event.preventDefault(); addRegistro();" aria-label="Formulario de registro">
       <div class="grid">
         <div>
-          <label for="participantId">ID participante</label>
-          <input id="participantId" type="text" placeholder="Ej: P001" aria-label="ID participante">
+          <label for="participantId" data-i18n="labelParticipantId">ID participante</label>
+          <input id="participantId" type="text" placeholder="Ej: P001" data-i18n-placeholder="placeholderParticipantId" aria-label="ID participante" data-i18n-aria="labelParticipantId">
         </div>
         <div>
-          <label for="evaluador">Evaluador</label>
-          <input id="evaluador" type="text" placeholder="Nombre del evaluador">
+          <label for="evaluador" data-i18n="labelEvaluador">Evaluador</label>
+          <input id="evaluador" type="text" placeholder="Nombre del evaluador" data-i18n-placeholder="placeholderEvaluador">
         </div>
         <div>
-          <label for="fecha">Fecha / Hora</label>
+          <label for="fecha" data-i18n="labelFecha">Fecha / Hora</label>
           <input id="fecha" type="datetime-local">
         </div>
       </div>
 
-      <label for="task">Valoración correspondiente a:</label>
+      <label for="task" data-i18n="labelTask">Valoración correspondiente a:</label>
       <select id="task" onchange="onTaskChange()">
-        <option value="a">/a/ sostenida (3-5 s)</option>
-        <option value="i">/i/ sostenida (3-5 s)</option>
-        <option value="capev">Lectura CAPE-V</option>
-        <option value="relato">Relato espontáneo</option>
-        <option value="personalizada">Tarea Personalizada</option>
+        <option value="a" data-i18n="taskA">/a/ sostenida (3-5 s)</option>
+        <option value="i" data-i18n="taskI">/i/ sostenida (3-5 s)</option>
+        <option value="capev" data-i18n="taskCapev">Lectura CAPE-V</option>
+        <option value="relato" data-i18n="taskRelato">Relato espontáneo</option>
+        <option value="personalizada" data-i18n="taskPersonalizada">Tarea Personalizada</option>
       </select>
 
       <div id="customTaskContainer" style="display:none;margin-top:10px;">
-        <label for="customTask">Describa la tarea realizada</label>
-        <input id="customTask" type="text" placeholder="Ej: lectura de texto técnico 2 min / intervención en reunión">
+        <label for="customTask" data-i18n="labelCustomTask">Describa la tarea realizada</label>
+        <input id="customTask" type="text" placeholder="Ej: lectura de texto técnico 2 min / intervención en reunión" data-i18n-placeholder="placeholderCustomTask">
       </div>
 
-      <label style="margin-top:12px">Sensaciones (opcional)</label>
+      <label style="margin-top:12px" data-i18n="labelSensaciones">Sensaciones (opcional)</label>
       <div style="margin-bottom:8px">
-        <button type="button" class="btn btn-ghost" onclick="toggleSensaciones()" id="sensBtn" aria-expanded="false">Agregar sensaciones (opcional)</button>
+        <button type="button" class="btn btn-ghost" onclick="toggleSensaciones()" id="sensBtn" aria-expanded="false" data-i18n="btnAgregarSensaciones">Agregar sensaciones (opcional)</button>
       </div>
       <div class="chips" id="sensaciones" style="display:none;" aria-hidden="true">
-        <label class="chip"><input type="checkbox" value="Cortes/quiebres en la voz">Cortes/quiebres en la voz</label>
-        <label class="chip"><input type="checkbox" value="Ronquera">Ronquera</label>
-        <label class="chip"><input type="checkbox" value="Falta de aire al hablar">Falta de aire al hablar</label>
-        <label class="chip"><input type="checkbox" value="Ardor al hablar">Ardor al hablar</label>
-        <label class="chip"><input type="checkbox" value="Picazón">Picazón</label>
-        <label class="chip"><input type="checkbox" value="Dolor al hablar">Dolor al hablar</label>
-        <label class="chip"><input type="checkbox" value="Fatiga al hablar">Fatiga al hablar</label>
-        <label class="chip"><input type="checkbox" value="Esfuerzo o tensión">Esfuerzo o tensión</label>
-        <label class="chip"><input type="checkbox" value="Tos">Tos</label>
-        <label class="chip"><input type="checkbox" value="Sensación cuerpo extraño">Sensación cuerpo extraño</label>
-        <label class="chip"><input type="checkbox" value="Sensación de que tu voz dura menos">Sensación de que tu voz dura menos</label>
-        <label class="chip"><input type="checkbox" value="Necesidad de carraspear">Necesidad de carraspear</label>
-        <label class="chip"><input type="checkbox" value="Acidez">Acidez</label>
+        <label class="chip"><input type="checkbox" value="Cortes/quiebres en la voz"><span data-i18n="sensCortes">Cortes/quiebres en la voz</span></label>
+        <label class="chip"><input type="checkbox" value="Ronquera"><span data-i18n="sensRonquera">Ronquera</span></label>
+        <label class="chip"><input type="checkbox" value="Falta de aire al hablar"><span data-i18n="sensFaltaAire">Falta de aire al hablar</span></label>
+        <label class="chip"><input type="checkbox" value="Ardor al hablar"><span data-i18n="sensArdor">Ardor al hablar</span></label>
+        <label class="chip"><input type="checkbox" value="Picazón"><span data-i18n="sensPicazon">Picazón</span></label>
+        <label class="chip"><input type="checkbox" value="Dolor al hablar"><span data-i18n="sensDolor">Dolor al hablar</span></label>
+        <label class="chip"><input type="checkbox" value="Fatiga al hablar"><span data-i18n="sensFatiga">Fatiga al hablar</span></label>
+        <label class="chip"><input type="checkbox" value="Esfuerzo o tensión"><span data-i18n="sensEsfuerzo">Esfuerzo o tensión</span></label>
+        <label class="chip"><input type="checkbox" value="Tos"><span data-i18n="sensTos">Tos</span></label>
+        <label class="chip"><input type="checkbox" value="Sensación cuerpo extraño"><span data-i18n="sensCuerpoExtrano">Sensación cuerpo extraño</span></label>
+        <label class="chip"><input type="checkbox" value="Sensación de que tu voz dura menos"><span data-i18n="sensVozDuraMenos">Sensación de que tu voz dura menos</span></label>
+        <label class="chip"><input type="checkbox" value="Necesidad de carraspear"><span data-i18n="sensCarraspear">Necesidad de carraspear</span></label>
+        <label class="chip"><input type="checkbox" value="Acidez"><span data-i18n="sensAcidez">Acidez</span></label>
       </div>
 
-      <label style="margin-top:12px">Escala Borg" CR-10 (seleccione uno)</label>
+      <label style="margin-top:12px" data-i18n="labelBorg">Escala Borg CR-10 (seleccione uno)</label>
       <div class="scale" role="radiogroup" aria-label="Escala Borg CR-10">
-        <label><input type="radio" name="score" value="0"> Ningún esfuerzo vocal en absoluto — 0</label>
-        <label><input type="radio" name="score" value="1"> Esfuerzo vocal muy leve — 1</label>
-        <label><input type="radio" name="score" value="2"> Esfuerzo vocal leve — 2</label>
-        <label><input type="radio" name="score" value="3"> Esfuerzo vocal moderado — 3</label>
-        <label><input type="radio" name="score" value="4"> Esfuerzo vocal algo severo — 4</label>
-        <label><input type="radio" name="score" value="5"> Esfuerzo vocal severo — 5</label>
-        <label><input type="radio" name="score" value="6"> 6</label>
-        <label><input type="radio" name="score" value="7"> Esfuerzo vocal muy severo — 7</label>
-        <label><input type="radio" name="score" value="8"> 8</label>
-        <label><input type="radio" name="score" value="9"> Esfuerzo vocal muy, muy severo (casi máximo) — 9</label>
-        <label><input type="radio" name="score" value="10"> Esfuerzo vocal máximo — 10</label>
+        <label><input type="radio" name="score" value="0"> <span data-i18n="borg0">Ningún esfuerzo vocal en absoluto — 0</span></label>
+        <label><input type="radio" name="score" value="1"> <span data-i18n="borg1">Esfuerzo vocal muy leve — 1</span></label>
+        <label><input type="radio" name="score" value="2"> <span data-i18n="borg2">Esfuerzo vocal leve — 2</span></label>
+        <label><input type="radio" name="score" value="3"> <span data-i18n="borg3">Esfuerzo vocal moderado — 3</span></label>
+        <label><input type="radio" name="score" value="4"> <span data-i18n="borg4">Esfuerzo vocal algo severo — 4</span></label>
+        <label><input type="radio" name="score" value="5"> <span data-i18n="borg5">Esfuerzo vocal severo — 5</span></label>
+        <label><input type="radio" name="score" value="6"> <span data-i18n="borg6">6</span></label>
+        <label><input type="radio" name="score" value="7"> <span data-i18n="borg7">Esfuerzo vocal muy severo — 7</span></label>
+        <label><input type="radio" name="score" value="8"> <span data-i18n="borg8">8</span></label>
+        <label><input type="radio" name="score" value="9"> <span data-i18n="borg9">Esfuerzo vocal muy, muy severo (casi máximo) — 9</span></label>
+        <label><input type="radio" name="score" value="10"> <span data-i18n="borg10">Esfuerzo vocal máximo — 10</span></label>
       </div>
 
-      <label for="observaciones" style="margin-top:12px">Observaciones</label>
-      <textarea id="observaciones" placeholder="Anote discrepancias semánticas o comentarios (opcional)"></textarea>
+      <label for="observaciones" style="margin-top:12px" data-i18n="labelObservaciones">Observaciones</label>
+      <textarea id="observaciones" placeholder="Anote discrepancias semánticas o comentarios (opcional)" data-i18n-placeholder="placeholderObservaciones"></textarea>
 
-      <label for="evidence" style="margin-top:12px">Imagen de evidencia (opcional)</label>
+      <label for="evidence" style="margin-top:12px" data-i18n="labelEvidencia">Imagen de evidencia (opcional)</label>
       <input id="evidence" type="file" accept="image/*">
 
       <div class="controls">
-        <button type="button" class="btn btn-ghost" onclick="resetForm()">Limpiar</button>
-        <button type="submit" class="btn btn-primary btn-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2v12" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 9l-7-7-7 7" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Guardar registro</button>
+        <button type="button" class="btn btn-ghost" onclick="resetForm()" data-i18n="btnLimpiar">Limpiar</button>
+        <button type="submit" class="btn btn-primary btn-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2v12" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 9l-7-7-7 7" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="btnGuardarRegistro">Guardar registro</span></button>
       </div>
     </form>
 
     <!-- REGISTROS -->
     <section class="card" aria-labelledby="regs">
-      <h2 id="regs">Registros guardados</h2>
-      <div id="registrosContainer">No hay registros aún.</div>
+      <h2 id="regs" data-i18n="regsTitle">Registros guardados</h2>
+      <div id="registrosContainer" data-i18n="noRegistros">No hay registros aún.</div>
 
       <div class="controls" style="margin-top:12px">
-        <button class="btn btn-ghost" onclick="exportJSON()">Exportar JSON</button>
-        <button class="btn btn-primary" id="pdfBtn" onclick="generatePDF()">Generar informe PDF</button>
-        <button class="btn btn-danger" onclick="clearAll()">Borrar todos</button>
+        <button class="btn btn-ghost" onclick="exportJSON()" data-i18n="btnExportarJSON">Exportar JSON</button>
+        <button class="btn btn-primary" id="pdfBtn" onclick="generatePDF()" data-i18n="btnGenerarPDF">Generar informe PDF</button>
+        <button class="btn btn-danger" onclick="clearAll()" data-i18n="btnBorrarTodos">Borrar todos</button>
       </div>
     </section>
 
     <footer class="footer">
-      <div class="note">Nota: Informe generado localmente. Basado en "Fuentes-Aracena, C., & Correa-Forno, S. (2025). Propuesta de adaptación para la medición del esfuerzo vocal basada
+      <div class="note" data-i18n-html="footerNote">Nota: Informe generado localmente. Basado en "Fuentes-Aracena, C., & Correa-Forno, S. (2025). Propuesta de adaptación para la medición del esfuerzo vocal basada
 en el Índice de Esfuerzo Percibido (IEP). Revista Chilena de Fonoaudiología, 24, 1–11.
 https://doi.org/10.5354/0719-4692.2025.75587" .</div>
     </footer>
@@ -197,6 +199,7 @@ https://doi.org/10.5354/0719-4692.2025.75587" .</div>
 /* Almacenamiento y comportamiento */
 const LS_KEY = 'medicion_esfuerzo_v2';
 let registros = JSON.parse(localStorage.getItem(LS_KEY) || '[]');
+const tt = (key, fallback) => (window.CV_I18N ? window.CV_I18N.t(key) : (fallback ?? key));
 
 document.addEventListener('DOMContentLoaded', ()=>{
   const f = document.getElementById('fecha');
@@ -218,12 +221,12 @@ function toggleSensaciones(){
   if(cont.style.display === 'none' || cont.style.display === ''){
     cont.style.display = 'flex';
     cont.setAttribute('aria-hidden','false');
-    btn.textContent = 'Ocultar sensaciones (opcional)';
+    btn.textContent = tt('btnOcultarSensaciones', 'Ocultar sensaciones (opcional)');
     btn.setAttribute('aria-expanded','true');
   } else {
     cont.style.display = 'none';
     cont.setAttribute('aria-hidden','true');
-    btn.textContent = 'Agregar sensaciones (opcional)';
+    btn.textContent = tt('btnAgregarSensaciones', 'Agregar sensaciones (opcional)');
     btn.setAttribute('aria-expanded','false');
   }
 }
@@ -235,11 +238,11 @@ function addRegistro(){
   const evaluador = document.getElementById('evaluador').value.trim();
   const fecha = document.getElementById('fecha').value;
   let task = document.getElementById('task').value;
-  if(task==='personalizada'){ const c = document.getElementById('customTask').value.trim(); task = c || 'Tarea personalizada (no descrita)'; }
+  if(task==='personalizada'){ const c = document.getElementById('customTask').value.trim(); task = c || tt('taskPersonalizadaNoDescrita', 'Tarea personalizada (no descrita)'); }
   const obs = document.getElementById('observaciones').value.trim();
   const sens = Array.from(document.querySelectorAll('#sensaciones input[type="checkbox"]')).filter(i=>i.checked).map(i=>i.value);
   const scoreN = document.querySelector('input[name="score"]:checked');
-  if(!scoreN){ alert('Seleccione un valor en la Escala Borg CR-10.'); return; }
+  if(!scoreN){ alert(tt('alertSeleccioneBorg', 'Seleccione un valor en la Escala Borg CR-10.')); return; }
   const score = scoreN.value;
   const file = document.getElementById('evidence').files[0];
 
@@ -247,35 +250,41 @@ function addRegistro(){
 
   const push = ()=>{ registros.push(registro); localStorage.setItem(LS_KEY, JSON.stringify(registros)); renderRegistros(); resetForm(); };
 
-  if(file){ const reader = new FileReader(); reader.onload = e=>{ registro.evidencia = e.target.result; push(); }; reader.onerror = ()=>{ alert('Error leyendo la imagen.'); }; reader.readAsDataURL(file); } else { push(); }
+  if(file){ const reader = new FileReader(); reader.onload = e=>{ registro.evidencia = e.target.result; push(); }; reader.onerror = ()=>{ alert(tt('alertErrorImagen', 'Error leyendo la imagen.')); }; reader.readAsDataURL(file); } else { push(); }
 }
 
-function renderRegistros(){ const cont = document.getElementById('registrosContainer'); if(registros.length===0){ cont.innerHTML = '<div>No hay registros aún.</div>'; return; } let html = '<table><thead><tr><th>ID</th><th>Fecha</th><th>Tarea</th><th>Sensaciones</th><th>Borg</th><th>Observaciones</th><th>Evidencia</th><th>Acciones</th></tr></thead><tbody>'; registros.forEach((r,i)=>{ html += `<tr><td>${escapeHtml(r.participantId)}</td><td>${escapeHtml(r.fecha)}</td><td>${escapeHtml(r.task)}</td><td>${r.sensaciones.length?escapeHtml(r.sensaciones.join(', ')):'-'}</td><td>${escapeHtml(r.score)}</td><td>${r.observaciones?escapeHtml(r.observaciones):'-'}</td><td>${r.evidencia?'<img class="thumb" src="'+r.evidencia+'">':'-'}</td><td><button class="btn btn-ghost" onclick="exportRegistro(${i})">Exportar</button> <button class="btn" onclick="deleteRegistro(${i})">Eliminar</button></td></tr>` }); html += '</tbody></table>'; cont.innerHTML = html; }
+function renderRegistros(){ const cont = document.getElementById('registrosContainer'); if(registros.length===0){ cont.innerHTML = `<div>${escapeHtml(tt('noRegistros','No hay registros aún.'))}</div>`; return; } let html = `<table><thead><tr><th>${escapeHtml(tt('thId','ID'))}</th><th>${escapeHtml(tt('thFecha','Fecha'))}</th><th>${escapeHtml(tt('thTarea','Tarea'))}</th><th>${escapeHtml(tt('thSensaciones','Sensaciones'))}</th><th>${escapeHtml(tt('thBorg','Borg'))}</th><th>${escapeHtml(tt('thObservaciones','Observaciones'))}</th><th>${escapeHtml(tt('thEvidencia','Evidencia'))}</th><th>${escapeHtml(tt('thAcciones','Acciones'))}</th></tr></thead><tbody>`; registros.forEach((r,i)=>{ html += `<tr><td>${escapeHtml(r.participantId)}</td><td>${escapeHtml(r.fecha)}</td><td>${escapeHtml(r.task)}</td><td>${r.sensaciones.length?escapeHtml(r.sensaciones.join(', ')):'-'}</td><td>${escapeHtml(r.score)}</td><td>${r.observaciones?escapeHtml(r.observaciones):'-'}</td><td>${r.evidencia?'<img class="thumb" src="'+r.evidencia+'">':'-'}</td><td><button class="btn btn-ghost" onclick="exportRegistro(${i})">${escapeHtml(tt('btnExportar','Exportar'))}</button> <button class="btn" onclick="deleteRegistro(${i})">${escapeHtml(tt('btnEliminar','Eliminar'))}</button></td></tr>` }); html += '</tbody></table>'; cont.innerHTML = html; }
 
-function deleteRegistro(i){ if(!confirm('Eliminar registro?')) return; registros.splice(i,1); localStorage.setItem(LS_KEY, JSON.stringify(registros)); renderRegistros(); }
-function clearAll(){ if(!confirm('Borrar todos los registros?')) return; registros=[]; localStorage.removeItem(LS_KEY); renderRegistros(); }
+function deleteRegistro(i){ if(!confirm(tt('confirmEliminarRegistro','Eliminar registro?'))) return; registros.splice(i,1); localStorage.setItem(LS_KEY, JSON.stringify(registros)); renderRegistros(); }
+function clearAll(){ if(!confirm(tt('confirmBorrarTodos','Borrar todos los registros?'))) return; registros=[]; localStorage.removeItem(LS_KEY); renderRegistros(); }
 function exportRegistro(i){ const blob=new Blob([JSON.stringify(registros[i], null, 2)], {type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=`registro_${registros[i].participantId||'NA'}_${i+1}.json`; a.click(); URL.revokeObjectURL(url); }
 function exportJSON(){ const blob=new Blob([JSON.stringify(registros, null, 2)], {type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=`registros_medicion_esfuerzo_${new Date().toISOString().slice(0,10)}.json`; a.click(); URL.revokeObjectURL(url); }
 
+window.addEventListener('cv-lang-changed', ()=>{
+  const btn = document.getElementById('sensBtn');
+  if(btn){ const expanded = btn.getAttribute('aria-expanded')==='true'; btn.textContent = expanded ? tt('btnOcultarSensaciones','Ocultar sensaciones (opcional)') : tt('btnAgregarSensaciones','Agregar sensaciones (opcional)'); }
+  renderRegistros();
+});
+
 /* GENERACION PDF: solo jsPDF (texto + addImage con base64) */
-async function generatePDF(){ if(registros.length===0){ alert('No hay registros para generar informe.'); return; }
+async function generatePDF(){ if(registros.length===0){ alert(tt('alertSinRegistrosPDF', 'No hay registros para generar informe.')); return; }
   const { jsPDF } = window.jspdf; const pdf = new jsPDF({unit:'mm', format:'a4', orientation:'portrait'}); const pageWidth = pdf.internal.pageSize.getWidth(); const pageHeight = pdf.internal.pageSize.getHeight(); const margin = 12; const lineHeight = 7; const maxWidth = pageWidth - margin*2;
 
   const apaCitation = 'Fuentes-Aracena, C., & Correa-Forno, S. (2025). Propuesta de adaptación para la medición del esfuerzo vocal basada en el Índice de Esfuerzo Percibido (IEP). Revista Chilena de Fonoaudiología, 24, 1–11. https://doi.org/10.5354/0719-4692.2025.75587';
-  const authorLine = 'Autora: Matilde Pizarro Toro';
+  const authorLine = tt('pdfAuthorLine', 'Autora: Matilde Pizarro Toro');
 
   pdf.setFont('helvetica'); let cursorY = margin;
-  function addHeader(){ pdf.setFontSize(14); pdf.setTextColor(20,20,20); pdf.text('Medición del esfuerzo vocal - Informe', margin, cursorY); pdf.setFontSize(9); pdf.setTextColor(100,100,100); pdf.text(`Generado: ${new Date().toLocaleString()}`, pageWidth - margin, cursorY, {align:'right'}); cursorY += 8; pdf.setDrawColor(230,230,230); pdf.line(margin, cursorY, pageWidth - margin, cursorY); cursorY += 8; }
+  function addHeader(){ pdf.setFontSize(14); pdf.setTextColor(20,20,20); pdf.text(tt('pdfHeaderTitle', 'Medición del esfuerzo vocal - Informe'), margin, cursorY); pdf.setFontSize(9); pdf.setTextColor(100,100,100); pdf.text(`${tt('pdfGenerado', 'Generado')}: ${new Date().toLocaleString()}`, pageWidth - margin, cursorY, {align:'right'}); cursorY += 8; pdf.setDrawColor(230,230,230); pdf.line(margin, cursorY, pageWidth - margin, cursorY); cursorY += 8; }
   function newPage(){ pdf.addPage(); cursorY = margin; addHeader(); }
   function writeWrapped(title, text){ pdf.setFontSize(10); pdf.setFont(undefined,'bold'); pdf.text(title, margin, cursorY); cursorY += lineHeight - 2; pdf.setFont(undefined,'normal'); const lines = pdf.splitTextToSize(text||'-', maxWidth); for(const ln of lines){ if(cursorY + lineHeight > pageHeight - margin) newPage(); pdf.text(ln, margin, cursorY); cursorY += lineHeight; } cursorY += 4; }
 
   addHeader();
 
   for(let i=0;i<registros.length;i++){
-    const r = registros[i]; if(cursorY + 40 > pageHeight - margin) newPage(); pdf.setFontSize(11); pdf.setFont(undefined,'bold'); const headerLine = `Registro ${i+1} — ID: ${r.participantId || '-'}   Evaluador: ${r.evaluador || '-'}   Fecha: ${r.fecha || '-'}`; const hLines = pdf.splitTextToSize(headerLine, maxWidth); for(const hl of hLines){ if(cursorY + lineHeight > pageHeight - margin) newPage(); pdf.text(hl, margin, cursorY); cursorY += lineHeight; } cursorY += 2; writeWrapped('Tarea:', r.task || '-'); writeWrapped('Sensaciones:', r.sensaciones.length? r.sensaciones.join(', '): '-'); writeWrapped('Escala Borg CR-10:', r.score || '-'); writeWrapped('Observaciones:', r.observaciones || '-'); if(r.evidencia){ try{ const dims = await getImageDimensions(r.evidencia); const imgWmm = dims.w * 25.4 / 96; const imgHmm = dims.h * 25.4 / 96; let dw = Math.min(imgWmm, maxWidth); let dh = (imgHmm * dw)/imgWmm; const maxH = pageHeight - margin - cursorY - 20; if(dh > maxH){ const s = maxH/dh; dw *= s; dh *= s; } if(cursorY + dh > pageHeight - margin) newPage(); pdf.addImage(r.evidencia, detectImageType(r.evidencia), margin, cursorY, dw, dh); cursorY += dh + 8; }catch(e){ console.warn('Imagen no procesada', e);} }
+    const r = registros[i]; if(cursorY + 40 > pageHeight - margin) newPage(); pdf.setFontSize(11); pdf.setFont(undefined,'bold'); const headerLine = `${tt('pdfRegistro','Registro')} ${i+1} — ID: ${r.participantId || '-'}   ${tt('pdfEvaluador','Evaluador')}: ${r.evaluador || '-'}   ${tt('pdfFecha','Fecha')}: ${r.fecha || '-'}`; const hLines = pdf.splitTextToSize(headerLine, maxWidth); for(const hl of hLines){ if(cursorY + lineHeight > pageHeight - margin) newPage(); pdf.text(hl, margin, cursorY); cursorY += lineHeight; } cursorY += 2; writeWrapped(tt('pdfTarea','Tarea:'), r.task || '-'); writeWrapped(tt('pdfSensaciones','Sensaciones:'), r.sensaciones.length? r.sensaciones.join(', '): '-'); writeWrapped(tt('pdfEscalaBorg','Escala Borg CR-10:'), r.score || '-'); writeWrapped(tt('pdfObservaciones','Observaciones:'), r.observaciones || '-'); if(r.evidencia){ try{ const dims = await getImageDimensions(r.evidencia); const imgWmm = dims.w * 25.4 / 96; const imgHmm = dims.h * 25.4 / 96; let dw = Math.min(imgWmm, maxWidth); let dh = (imgHmm * dw)/imgWmm; const maxH = pageHeight - margin - cursorY - 20; if(dh > maxH){ const s = maxH/dh; dw *= s; dh *= s; } if(cursorY + dh > pageHeight - margin) newPage(); pdf.addImage(r.evidencia, detectImageType(r.evidencia), margin, cursorY, dw, dh); cursorY += dh + 8; }catch(e){ console.warn('Imagen no procesada', e);} }
     pdf.setDrawColor(230); pdf.line(margin, cursorY, pageWidth - margin, cursorY); cursorY += 8; }
 
-  if(cursorY + 30 > pageHeight - margin) newPage(); pdf.setFontSize(10); pdf.setFont(undefined,'bold'); pdf.text('Referencia (APA 7):', margin, cursorY); cursorY += lineHeight - 2; pdf.setFont(undefined,'normal'); const apaLines = pdf.splitTextToSize(apaCitation, maxWidth); for(const ln of apaLines){ if(cursorY + lineHeight > pageHeight - margin) newPage(); pdf.text(ln, margin, cursorY); cursorY += lineHeight; } if(cursorY + lineHeight > pageHeight - margin) newPage(); cursorY += 4; pdf.setFont(undefined,'bold'); pdf.text(authorLine, margin, cursorY);
+  if(cursorY + 30 > pageHeight - margin) newPage(); pdf.setFontSize(10); pdf.setFont(undefined,'bold'); pdf.text(tt('pdfReferenciaAPA','Referencia (APA 7):'), margin, cursorY); cursorY += lineHeight - 2; pdf.setFont(undefined,'normal'); const apaLines = pdf.splitTextToSize(apaCitation, maxWidth); for(const ln of apaLines){ if(cursorY + lineHeight > pageHeight - margin) newPage(); pdf.text(ln, margin, cursorY); cursorY += lineHeight; } if(cursorY + lineHeight > pageHeight - margin) newPage(); cursorY += 4; pdf.setFont(undefined,'bold'); pdf.text(authorLine, margin, cursorY);
 
   const filename = `Medicion_Esfuerzo_Vocal_Informe_${new Date().toISOString().slice(0,19).replace(/[:T]/g,'_')}.pdf`;
   pdf.save(filename);

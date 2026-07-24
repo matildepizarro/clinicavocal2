@@ -1,4 +1,4 @@
-// sw.js — cachea el "app shell" para que Vocalizer 2026 funcione completamente offline
+// sw.js — cachea el "app shell" para que Ejercicios Vocales funcione completamente offline
 // tras la primera visita. Estrategia: cache-first con actualización en segundo plano.
 
 const CACHE_NAME = 'vocalizer2026-v3';

@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Vocalizer 2026 — Entrenador vocal</title>
-<meta name="description" content="Entrenador vocal offline: rango vocal, ejercicios de solfeo, afinador, evaluación de grabaciones y vibrato. Funciona sin conexión." />
+<title data-i18n="pageTitle">Ejercicios Vocales — Entrenador vocal</title>
+<meta name="description" data-i18n-content="metaDescription" content="Entrenador vocal offline: rango vocal, ejercicios de solfeo, afinador, evaluación de grabaciones y vibrato. Funciona sin conexión." />
 <meta name="theme-color" content="#150c1c" />
 <link rel="manifest" href="manifest.webmanifest" />
 <link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
@@ -12,6 +12,8 @@
 <link rel="stylesheet" href="style.css" />
 <link rel="stylesheet" href="../assets/shared.css" />
 <script>document.documentElement.setAttribute('data-pastel-theme', (function(){try{return localStorage.getItem('cv-pastel-theme')||'rosa';}catch(e){return 'rosa';}})());</script>
+<script src="i18n-dict.js"></script>
+<script src="../assets/i18n-engine.js"></script>
 </head>
 <body>
 
@@ -30,26 +32,26 @@
         <defs><linearGradient id="g" x1="0" y1="0" x2="48" y2="48"><stop offset="0" stop-color="#f0b429"/><stop offset="1" stop-color="#ff6f61"/></linearGradient></defs>
       </svg>
       <div>
-        <h1>Vocalizer<span class="ver">2026</span></h1>
-        <p class="tag">Estudio de calentamiento vocal — 100% local, sin cuentas ni nube</p>
+        <h1>Ejercicios Vocales</h1>
+        <p class="tag" data-i18n="tagline">Estudio de calentamiento vocal — 100% local, sin cuentas ni nube</p>
       </div>
     </div>
     <div class="topActions">
-      <button id="themeToggle" class="iconBtn" type="button" aria-pressed="false" aria-label="Cambiar a tema claro" title="Cambiar tema">
+      <button id="themeToggle" class="iconBtn" type="button" aria-pressed="false" data-i18n-aria="themeToggleLight" aria-label="Cambiar a tema claro" data-i18n-title="themeToggleTitle" title="Cambiar tema">
         <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z" fill="currentColor"/></svg>
       </button>
-      <span class="author">Autora original: <strong>Matilde Pizarro Toro</strong></span>
+      <span class="author"><span data-i18n="authorLabel">Autora original: </span><strong>Matilde Pizarro Toro</strong></span>
     </div>
   </header>
 
   <nav class="tabs" role="tablist" aria-label="Secciones">
-    <button class="tab active" role="tab" aria-selected="true" aria-controls="panel-practicar" id="tab-practicar">Practicar</button>
-    <button class="tab" role="tab" aria-selected="false" aria-controls="panel-afinador" id="tab-afinador">Afinador</button>
-    <button class="tab" role="tab" aria-selected="false" aria-controls="panel-evaluar" id="tab-evaluar">Evaluar</button>
-    <button class="tab" role="tab" aria-selected="false" aria-controls="panel-vibrato" id="tab-vibrato">Vibrato</button>
-    <button class="tab" role="tab" aria-selected="false" aria-controls="panel-grabaciones" id="tab-grabaciones">Grabaciones</button>
-    <button class="tab" role="tab" aria-selected="false" aria-controls="panel-rutinas" id="tab-rutinas">Rutinas</button>
-    <button class="tab" role="tab" aria-selected="false" aria-controls="panel-ajustes" id="tab-ajustes">Ajustes</button>
+    <button class="tab active" role="tab" aria-selected="true" aria-controls="panel-practicar" id="tab-practicar" data-i18n="tabPracticar">Practicar</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="panel-afinador" id="tab-afinador" data-i18n="tabAfinador">Afinador</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="panel-evaluar" id="tab-evaluar" data-i18n="tabEvaluar">Evaluar</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="panel-vibrato" id="tab-vibrato" data-i18n="tabVibrato">Vibrato</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="panel-grabaciones" id="tab-grabaciones" data-i18n="tabGrabaciones">Grabaciones</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="panel-rutinas" id="tab-rutinas" data-i18n="tabRutinas">Rutinas</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="panel-ajustes" id="tab-ajustes" data-i18n="tabAjustes">Ajustes</button>
   </nav>
 
   <section class="content">
@@ -59,91 +61,91 @@
       <div class="layout3">
 
         <aside class="panel controls">
-          <h2>Controles</h2>
+          <h2 data-i18n="controlesTitle">Controles</h2>
 
-          <label class="field">Rango vocal
+          <label class="field"><span data-i18n="rangoVocalLabel">Rango vocal</span>
             <select id="rangeSelect" aria-label="Selector de rango vocal">
-              <option value="soprano">Soprano</option>
-              <option value="mezzo">Mezzosoprano</option>
-              <option value="alto">Contralto</option>
-              <option value="tenor">Tenor</option>
-              <option value="baritone">Barítono</option>
-              <option value="bass">Bajo</option>
-              <option value="custom">Personalizado</option>
+              <option value="soprano" data-i18n="optSoprano">Soprano</option>
+              <option value="mezzo" data-i18n="optMezzo">Mezzosoprano</option>
+              <option value="alto" data-i18n="optAlto">Contralto</option>
+              <option value="tenor" data-i18n="optTenor">Tenor</option>
+              <option value="baritone" data-i18n="optBaritone">Barítono</option>
+              <option value="bass" data-i18n="optBass">Bajo</option>
+              <option value="custom" data-i18n="optCustom">Personalizado</option>
             </select>
           </label>
-          <label class="field" id="customRangeLabel" hidden>Nota raíz (MIDI)
+          <label class="field" id="customRangeLabel" hidden><span data-i18n="notaRaizLabel">Nota raíz (MIDI)</span>
             <input id="customRoot" type="number" min="36" max="84" value="60" aria-label="MIDI raíz"/>
           </label>
 
           <div class="field transposeField">
-            <span class="fieldLabel">Tono actual (transponer)</span>
+            <span class="fieldLabel" data-i18n="tonoActualLabel">Tono actual (transponer)</span>
             <div class="transposeRow">
-              <button id="transposeDownBtn" class="btn" type="button" aria-label="Bajar medio tono">▼</button>
+              <button id="transposeDownBtn" class="btn" type="button" data-i18n-aria="bajarMedioTono" aria-label="Bajar medio tono">▼</button>
               <div class="transposeDisplay" id="transposeDisplay">Do4</div>
-              <button id="transposeUpBtn" class="btn" type="button" aria-label="Subir medio tono">▲</button>
+              <button id="transposeUpBtn" class="btn" type="button" data-i18n-aria="subirMedioTono" aria-label="Subir medio tono">▲</button>
             </div>
-            <button id="transposeResetBtn" class="btn linkBtn" type="button">Reiniciar tono</button>
+            <button id="transposeResetBtn" class="btn linkBtn" type="button" data-i18n="reiniciarTono">Reiniciar tono</button>
           </div>
           <label class="fieldCheck">
-            <input type="checkbox" id="autoTranspose"/> Subir/bajar de tono automáticamente en cada repetición (bucle)
+            <input type="checkbox" id="autoTranspose"/> <span data-i18n="autoTransposeLabel">Subir/bajar de tono automáticamente en cada repetición (bucle)</span>
           </label>
-          <label class="field" id="autoTransposeDirWrap">Dirección del cambio automático
+          <label class="field" id="autoTransposeDirWrap"><span data-i18n="autoTransposeDirLabel">Dirección del cambio automático</span>
             <select id="autoTransposeDir">
-              <option value="up">Subir hacia lo agudo</option>
-              <option value="down">Bajar hacia lo grave</option>
+              <option value="up" data-i18n="optSubirAgudo">Subir hacia lo agudo</option>
+              <option value="down" data-i18n="optBajarGrave">Bajar hacia lo grave</option>
             </select>
           </label>
 
-          <label class="field">Tempo del metrónomo
+          <label class="field"><span data-i18n="tempoLabel">Tempo del metrónomo</span>
             <div class="rangeRow">
               <input id="bpm" type="range" min="40" max="200" value="90" aria-label="Tempo en BPM"/>
               <span id="bpmVal" class="rangeVal">90 <small>BPM</small></span>
             </div>
           </label>
 
-          <label class="field">Velocidad del ejercicio
+          <label class="field"><span data-i18n="velocidadLabel">Velocidad del ejercicio</span>
             <div class="rangeRow">
               <input id="speedSlider" type="range" min="50" max="150" value="100" aria-label="Velocidad de reproducción"/>
               <span id="speedVal" class="rangeVal">1.00×</span>
             </div>
           </label>
 
-          <label class="field">Timbre del piano guía
+          <label class="field"><span data-i18n="timbreLabel">Timbre del piano guía</span>
             <select id="timbreSelect" aria-label="Timbre del sonido guía">
-              <option value="voz">Voz humana (ahh) — recomendado</option>
-              <option value="piano">Piano real (grabación, Salamander)</option>
-              <option value="sine">Suave (seno)</option>
-              <option value="triangle">Cálido (triángulo)</option>
-              <option value="sawtooth">Brillante (sierra)</option>
+              <option value="voz" data-i18n="optVozHumana">Voz humana (ahh) — recomendado</option>
+              <option value="piano" data-i18n="optPianoReal">Piano real (grabación, Salamander)</option>
+              <option value="sine" data-i18n="optSeno">Suave (seno)</option>
+              <option value="triangle" data-i18n="optTriangulo">Cálido (triángulo)</option>
+              <option value="sawtooth" data-i18n="optSierra">Brillante (sierra)</option>
             </select>
           </label>
 
           <div class="buttons">
-            <button id="playBtn" class="btn primary">▶ Reproducir</button>
-            <button id="stopBtn" class="btn">■ Detener</button>
-            <button id="loopBtn" class="btn" aria-pressed="false">⟲ Bucle: Off</button>
+            <button id="playBtn" class="btn primary" data-i18n="btnReproducir">▶ Reproducir</button>
+            <button id="stopBtn" class="btn" data-i18n="btnDetener">■ Detener</button>
+            <button id="loopBtn" class="btn" aria-pressed="false" data-i18n="btnBucleOff">⟲ Bucle: Off</button>
           </div>
 
           <div class="buttons secondary">
-            <button id="metronomeBtn" class="btn" aria-pressed="false">🥁 Metrónomo</button>
-            <button id="findRangeBtn" class="btn">🎯 Encontrar mi rango</button>
+            <button id="metronomeBtn" class="btn" aria-pressed="false" data-i18n="btnMetronomo">🥁 Metrónomo</button>
+            <button id="findRangeBtn" class="btn" data-i18n="btnEncontrarRango">🎯 Encontrar mi rango</button>
           </div>
 
           <div class="buttons secondary">
-            <button id="recordBtn" class="btn" aria-pressed="false">⏺ Grabar</button>
+            <button id="recordBtn" class="btn" aria-pressed="false" data-i18n="btnGrabar">⏺ Grabar</button>
           </div>
 
-          <p class="help">Consejo: toca cualquier parte de la página una vez para activar el audio y el micrófono.</p>
+          <p class="help" data-i18n="tipActivarAudio">Consejo: toca cualquier parte de la página una vez para activar el audio y el micrófono.</p>
         </aside>
 
         <div class="panel library">
-          <h2>Biblioteca de ejercicios</h2>
-          <input id="exerciseSearch" type="search" placeholder="Buscar ejercicio…" class="searchInput" aria-label="Buscar ejercicio"/>
+          <h2 data-i18n="bibliotecaTitle">Biblioteca de ejercicios</h2>
+          <input id="exerciseSearch" type="search" data-i18n-placeholder="buscarEjercicioPlaceholder" placeholder="Buscar ejercicio…" class="searchInput" aria-label="Buscar ejercicio"/>
           <div class="chipRow" id="categoryChips" role="group" aria-label="Filtrar por categoría"></div>
           <ul id="exerciseList" class="exerciseList" aria-label="Lista de ejercicios"></ul>
 
-          <h3 class="subhead">Progresiones guiadas</h3>
+          <h3 class="subhead" data-i18n="progresionesTitle">Progresiones guiadas</h3>
           <ul id="progressionList" class="progressionList"></ul>
         </div>
 
@@ -157,9 +159,9 @@
             </svg>
             <div class="solfege" id="solfege" aria-hidden="true">—</div>
             <div class="noteInfo" role="status" aria-live="polite">
-              <div><span>Nota</span><strong id="detectedNote">--</strong></div>
-              <div><span>Frecuencia</span><strong id="detectedFreq">--</strong> Hz</div>
-              <div><span>Desviación</span><strong id="detectedCents">--</strong> cents</div>
+              <div><span data-i18n="notaLabel">Nota</span><strong id="detectedNote">--</strong></div>
+              <div><span data-i18n="frecuenciaLabel">Frecuencia</span><strong id="detectedFreq">--</strong> Hz</div>
+              <div><span data-i18n="desviacionLabel">Desviación</span><strong id="detectedCents">--</strong> cents</div>
             </div>
           </div>
           <div class="vizCard panel">
@@ -173,31 +175,31 @@
     <div id="panel-afinador" class="tabpanel" role="tabpanel" aria-labelledby="tab-afinador" hidden>
       <div class="layout2">
         <aside class="panel controls">
-          <h2>Afinador vocal</h2>
+          <h2 data-i18n="afinadorVocalTitle">Afinador vocal</h2>
           <div class="segmented" role="radiogroup" aria-label="Modo del afinador">
-            <button class="segBtn active" id="tunerModeSelectBtn" role="radio" aria-checked="true">Seleccionar nota</button>
-            <button class="segBtn" id="tunerModeAutoBtn" role="radio" aria-checked="false">Detectar automático</button>
+            <button class="segBtn active" id="tunerModeSelectBtn" role="radio" aria-checked="true" data-i18n="seleccionarNota">Seleccionar nota</button>
+            <button class="segBtn" id="tunerModeAutoBtn" role="radio" aria-checked="false" data-i18n="detectarAutomatico">Detectar automático</button>
           </div>
 
           <div id="tunerNoteControls">
-            <label class="field">Nota objetivo
+            <label class="field"><span data-i18n="notaObjetivoLabel">Nota objetivo</span>
               <select id="tunerNoteSelect" aria-label="Nota objetivo"></select>
             </label>
-            <label class="field">Octava
+            <label class="field"><span data-i18n="octavaLabel">Octava</span>
               <input id="tunerOctave" type="number" min="2" max="6" value="4"/>
             </label>
-            <button id="tunerPlayNoteBtn" class="btn primary" aria-pressed="false">🔊 Reproducir tono guía</button>
+            <button id="tunerPlayNoteBtn" class="btn primary" aria-pressed="false" data-i18n="btnReproducirTono">🔊 Reproducir tono guía</button>
           </div>
 
           <div id="tunerAutoControls" hidden>
-            <p class="help">Canta cualquier nota. El indicador reacciona en vivo.</p>
-            <button id="tunerFollowBtn" class="btn primary" aria-pressed="false">🔊 Tono guía sigue mi voz</button>
+            <p class="help" data-i18n="cantaCualquierNota">Canta cualquier nota. El indicador reacciona en vivo.</p>
+            <button id="tunerFollowBtn" class="btn primary" aria-pressed="false" data-i18n="btnTonoSigueVoz">🔊 Tono guía sigue mi voz</button>
           </div>
 
           <div class="statGrid">
-            <div class="statCard"><span>Ataque</span><strong id="statAttack">--</strong></div>
-            <div class="statCard"><span>Sostenido</span><strong id="statSustain">--</strong></div>
-            <div class="statCard"><span>Intonación</span><strong id="statIntonation">--</strong></div>
+            <div class="statCard"><span data-i18n="ataqueLabel">Ataque</span><strong id="statAttack">--</strong></div>
+            <div class="statCard"><span data-i18n="sostenidoLabel">Sostenido</span><strong id="statSustain">--</strong></div>
+            <div class="statCard"><span data-i18n="intonacionLabel">Intonación</span><strong id="statIntonation">--</strong></div>
           </div>
         </aside>
 
@@ -210,9 +212,9 @@
               <circle cx="120" cy="120" r="7" fill="var(--accent-coral)"/>
             </svg>
             <div class="noteInfo" role="status" aria-live="polite">
-              <div><span>Nota</span><strong id="detectedNote2">--</strong></div>
-              <div><span>Frecuencia</span><strong id="detectedFreq2">--</strong> Hz</div>
-              <div><span>Desviación</span><strong id="detectedCents2">--</strong> cents</div>
+              <div><span data-i18n="notaLabel">Nota</span><strong id="detectedNote2">--</strong></div>
+              <div><span data-i18n="frecuenciaLabel">Frecuencia</span><strong id="detectedFreq2">--</strong> Hz</div>
+              <div><span data-i18n="desviacionLabel">Desviación</span><strong id="detectedCents2">--</strong> cents</div>
             </div>
           </div>
         </div>
@@ -223,35 +225,35 @@
     <div id="panel-evaluar" class="tabpanel" role="tabpanel" aria-labelledby="tab-evaluar" hidden>
       <div class="layout2">
         <aside class="panel controls">
-          <h2>Evaluar grabación</h2>
-          <label class="field">Ejercicio de referencia
+          <h2 data-i18n="evaluarGrabacionTitle">Evaluar grabación</h2>
+          <label class="field"><span data-i18n="ejercicioReferenciaLabel">Ejercicio de referencia</span>
             <select id="evalExerciseSelect" aria-label="Ejercicio de referencia"></select>
           </label>
-          <label class="fieldCheck"><input type="checkbox" id="evalFollowExercise" checked/> Seguir el ejercicio al grabar</label>
+          <label class="fieldCheck"><input type="checkbox" id="evalFollowExercise" checked/> <span data-i18n="seguirEjercicioLabel">Seguir el ejercicio al grabar</span></label>
 
           <div class="buttons">
-            <button id="evalRecordBtn" class="btn primary" aria-pressed="false">⏺ Grabar</button>
+            <button id="evalRecordBtn" class="btn primary" aria-pressed="false" data-i18n="btnGrabar">⏺ Grabar</button>
           </div>
           <p id="evalStatus" class="help" aria-live="polite"></p>
-          <label class="field importField">Importar audio
+          <label class="field importField"><span data-i18n="importarAudioLabel">Importar audio</span>
             <input id="importAudioInput" type="file" accept="audio/*"/>
           </label>
-          <p class="help">Al presionar «Grabar» primero escucharás el ejemplo del ejercicio y luego un contador (3, 2, 1) antes de que empiece la grabación. Se analiza tu afinación nota por nota comparándola con el ejercicio elegido.</p>
+          <p class="help" data-i18n="evalHelpText">Al presionar «Grabar» primero escucharás el ejemplo del ejercicio y luego un contador (3, 2, 1) antes de que empiece la grabación. Se analiza tu afinación nota por nota comparándola con el ejercicio elegido.</p>
         </aside>
 
         <div class="panel mainpanel">
-          <div id="evalEmpty" class="empty">Graba tu voz o importa un audio para ver el análisis aquí.</div>
+          <div id="evalEmpty" class="empty" data-i18n="evalEmptyText">Graba tu voz o importa un audio para ver el análisis aquí.</div>
           <div id="evalResults" hidden>
             <div class="scoreRow">
-              <div class="scoreBig"><strong id="evalScore">--</strong><span>% afinado</span></div>
+              <div class="scoreBig"><strong id="evalScore">--</strong><span data-i18n="afinadoLabel">% afinado</span></div>
               <audio id="evalAudio" controls></audio>
-              <button id="evalPlaySelectionBtn" class="btn" disabled>🔁 Reproducir selección en bucle</button>
+              <button id="evalPlaySelectionBtn" class="btn" disabled data-i18n="btnReproducirSeleccion">🔁 Reproducir selección en bucle</button>
             </div>
             <div class="vizCard panel">
               <canvas id="evalCanvas" aria-label="Curva de afinación de la grabación" role="img"></canvas>
-              <p class="help">Arrastra sobre la línea de tiempo para seleccionar y repetir una sección.</p>
+              <p class="help" data-i18n="arrastraSeleccionar">Arrastra sobre la línea de tiempo para seleccionar y repetir una sección.</p>
             </div>
-            <h3 class="subhead">Desglose nota por nota</h3>
+            <h3 class="subhead" data-i18n="desgloseTitle">Desglose nota por nota</h3>
             <ul id="evalBreakdown" class="breakdownList"></ul>
           </div>
         </div>
@@ -262,22 +264,22 @@
     <div id="panel-vibrato" class="tabpanel" role="tabpanel" aria-labelledby="tab-vibrato" hidden>
       <div class="layout2">
         <aside class="panel controls">
-          <h2>Entrenamiento de vibrato</h2>
-          <label class="field">Sostén la nota durante
+          <h2 data-i18n="vibratoTrainingTitle">Entrenamiento de vibrato</h2>
+          <label class="field"><span data-i18n="sostenNotaLabel">Sostén la nota durante</span>
             <select id="vibratoDuration">
-              <option value="4">4 segundos</option>
-              <option value="6" selected>6 segundos</option>
-              <option value="8">8 segundos</option>
+              <option value="4" data-i18n="opt4seg">4 segundos</option>
+              <option value="6" selected data-i18n="opt6seg">6 segundos</option>
+              <option value="8" data-i18n="opt8seg">8 segundos</option>
             </select>
           </label>
           <div class="buttons">
-            <button id="vibratoRecordBtn" class="btn primary" aria-pressed="false">⏺ Grabar sostenido</button>
+            <button id="vibratoRecordBtn" class="btn primary" aria-pressed="false" data-i18n="btnGrabarSostenido">⏺ Grabar sostenido</button>
           </div>
-          <p class="help">Canta y sostén una nota cómoda con vibrato natural durante toda la grabación.</p>
+          <p class="help" data-i18n="vibratoHelpText">Canta y sostén una nota cómoda con vibrato natural durante toda la grabación.</p>
           <div class="statGrid">
-            <div class="statCard"><span>Velocidad</span><strong id="vibRate">--</strong></div>
-            <div class="statCard"><span>Extensión</span><strong id="vibExtent">--</strong></div>
-            <div class="statCard"><span>Consistencia</span><strong id="vibConsistency">--</strong></div>
+            <div class="statCard"><span data-i18n="velocidadVibLabel">Velocidad</span><strong id="vibRate">--</strong></div>
+            <div class="statCard"><span data-i18n="extensionLabel">Extensión</span><strong id="vibExtent">--</strong></div>
+            <div class="statCard"><span data-i18n="consistenciaLabel">Consistencia</span><strong id="vibConsistency">--</strong></div>
           </div>
         </aside>
         <div class="panel mainpanel">
@@ -285,7 +287,7 @@
             <canvas id="vibratoCurveCanvas" aria-label="Curva de vibrato de la última grabación" role="img"></canvas>
           </div>
           <div class="vizCard panel">
-            <h3 class="subhead">Progreso en el tiempo</h3>
+            <h3 class="subhead" data-i18n="progresoTiempoTitle">Progreso en el tiempo</h3>
             <canvas id="vibratoHistoryCanvas" aria-label="Historial de velocidad de vibrato" role="img"></canvas>
           </div>
         </div>
@@ -296,12 +298,12 @@
     <div id="panel-grabaciones" class="tabpanel" role="tabpanel" aria-labelledby="tab-grabaciones" hidden>
       <div class="panel recordings">
         <div class="recHeader">
-          <h2>Tus grabaciones</h2>
-          <button id="clearRecordingsBtn" class="btn danger">Borrar todas</button>
+          <h2 data-i18n="tusGrabacionesTitle">Tus grabaciones</h2>
+          <button id="clearRecordingsBtn" class="btn danger" data-i18n="btnBorrarTodas">Borrar todas</button>
         </div>
-        <p class="help">Se guardan en este dispositivo (IndexedDB), no se suben a ningún servidor.</p>
+        <p class="help" data-i18n="grabacionesHelpText">Se guardan en este dispositivo (IndexedDB), no se suben a ningún servidor.</p>
         <ul id="recordingsList" class="recList" aria-live="polite"></ul>
-        <p id="emptyRecordings" class="empty">Aún no tienes grabaciones. Ve a «Practicar» y pulsa «Grabar».</p>
+        <p id="emptyRecordings" class="empty" data-i18n="emptyRecordingsText">Aún no tienes grabaciones. Ve a «Practicar» y pulsa «Grabar».</p>
       </div>
     </div>
 
@@ -309,21 +311,21 @@
     <div id="panel-rutinas" class="tabpanel" role="tabpanel" aria-labelledby="tab-rutinas" hidden>
       <div class="layout2">
         <aside class="panel controls">
-          <h2>Crear rutina</h2>
-          <label class="field">Nombre de la rutina
-            <input id="routineName" type="text" placeholder="Mi calentamiento"/>
+          <h2 data-i18n="crearRutinaTitle">Crear rutina</h2>
+          <label class="field"><span data-i18n="nombreRutinaLabel">Nombre de la rutina</span>
+            <input id="routineName" type="text" data-i18n-placeholder="miCalentamientoPlaceholder" placeholder="Mi calentamiento"/>
           </label>
-          <label class="field">Agregar ejercicio
+          <label class="field"><span data-i18n="agregarEjercicioLabel">Agregar ejercicio</span>
             <select id="routineAddSelect"></select>
           </label>
-          <button id="routineAddBtn" class="btn">+ Agregar a la rutina</button>
+          <button id="routineAddBtn" class="btn" data-i18n="btnAgregarRutina">+ Agregar a la rutina</button>
           <ol id="routineSteps" class="routineSteps"></ol>
-          <button id="routineSaveBtn" class="btn primary">Guardar rutina</button>
+          <button id="routineSaveBtn" class="btn primary" data-i18n="btnGuardarRutina">Guardar rutina</button>
         </aside>
         <div class="panel mainpanel">
-          <h2>Mis rutinas</h2>
+          <h2 data-i18n="misRutinasTitle">Mis rutinas</h2>
           <ul id="savedRoutinesList" class="recList"></ul>
-          <p id="emptyRoutines" class="empty">Aún no has guardado rutinas.</p>
+          <p id="emptyRoutines" class="empty" data-i18n="emptyRoutinesText">Aún no has guardado rutinas.</p>
         </div>
       </div>
     </div>
@@ -331,81 +333,81 @@
     <!-- ============ AJUSTES ============ -->
     <div id="panel-ajustes" class="tabpanel" role="tabpanel" aria-labelledby="tab-ajustes" hidden>
       <div class="panel">
-        <h2>Ajustes</h2>
-        <label class="field">Micrófono
+        <h2 data-i18n="ajustesTitle">Ajustes</h2>
+        <label class="field"><span data-i18n="microfonoLabel">Micrófono</span>
           <select id="micDeviceSelect" aria-label="Elegir micrófono">
-            <option value="">Predeterminado del sistema</option>
+            <option value="" data-i18n="optMicPredeterminado">Predeterminado del sistema</option>
           </select>
         </label>
-        <label class="field">Sensibilidad del micrófono
+        <label class="field"><span data-i18n="sensibilidadMicLabel">Sensibilidad del micrófono</span>
           <div class="rangeRow">
             <input id="micGainSlider" type="range" min="0.2" max="3" step="0.1" value="1"/>
             <span id="micGainVal" class="rangeVal">1.0×</span>
           </div>
         </label>
         <div class="buttons">
-          <button id="micTestBtn" class="btn" type="button" aria-pressed="false">🎙 Probar micrófono</button>
+          <button id="micTestBtn" class="btn" type="button" aria-pressed="false" data-i18n="btnProbarMic">🎙 Probar micrófono</button>
         </div>
         <div class="micMeter" aria-hidden="true"><div id="micMeterFill" class="micMeterFill"></div></div>
-        <p class="help">Elige qué micrófono debe usar la app y ajusta su sensibilidad; se aplica tanto al afinador en vivo como a todas las grabaciones (Practicar, Evaluar, Vibrato, Encontrar mi rango).</p>
-        <label class="field">Notación de las sílabas
+        <p class="help" data-i18n="micHelpText">Elige qué micrófono debe usar la app y ajusta su sensibilidad; se aplica tanto al afinador en vivo como a todas las grabaciones (Practicar, Evaluar, Vibrato, Encontrar mi rango).</p>
+        <label class="field"><span data-i18n="notacionSilabasLabel">Notación de las sílabas</span>
           <select id="notationSelect">
-            <option value="solfege">Solfeo (Do Re Mi…)</option>
-            <option value="letters">Cifrado (C D E…)</option>
+            <option value="solfege" data-i18n="optSolfeo">Solfeo (Do Re Mi…)</option>
+            <option value="letters" data-i18n="optCifrado">Cifrado (C D E…)</option>
           </select>
         </label>
-        <label class="field">Diapasón (La4)
+        <label class="field"><span data-i18n="diapasonLabel">Diapasón (La4)</span>
           <div class="rangeRow">
             <input id="a4Tuning" type="range" min="415" max="466" value="440"/>
             <span id="a4Val" class="rangeVal">440 <small>Hz</small></span>
           </div>
         </label>
-        <label class="field">Tolerancia de afinación
+        <label class="field"><span data-i18n="toleranciaLabel">Tolerancia de afinación</span>
           <div class="rangeRow">
             <input id="toleranceSlider" type="range" min="5" max="40" value="15"/>
             <span id="toleranceVal" class="rangeVal">15 <small>cents</small></span>
           </div>
         </label>
-        <label class="field">Compensación de latencia
+        <label class="field"><span data-i18n="latenciaLabel">Compensación de latencia</span>
           <div class="rangeRow">
             <input id="latencySlider" type="range" min="0" max="600" value="0" step="10"/>
             <span id="latencyVal" class="rangeVal">0 <small>ms</small></span>
           </div>
         </label>
         <label class="fieldCheck">
-          <input type="checkbox" id="reduceMotion"/> Reducir animaciones
+          <input type="checkbox" id="reduceMotion"/> <span data-i18n="reducirAnimacionesLabel">Reducir animaciones</span>
         </label>
         <label class="fieldCheck">
-          <input type="checkbox" id="skipOnboarding"/> Omitir el asistente de bienvenida al iniciar
+          <input type="checkbox" id="skipOnboarding"/> <span data-i18n="omitirAsistenteLabel">Omitir el asistente de bienvenida al iniciar</span>
         </label>
-        <button id="repeatOnboardingBtn" class="btn">Repetir asistente de bienvenida</button>
-        <p class="help">Vocalizer 2026 es una app web instalable (PWA): funciona sin conexión y puedes «Añadir a pantalla de inicio» desde el menú de tu navegador.</p>
+        <button id="repeatOnboardingBtn" class="btn" data-i18n="btnRepetirAsistente">Repetir asistente de bienvenida</button>
+        <p class="help" data-i18n="pwaHelpText">Ejercicios Vocales es una app web instalable (PWA): funciona sin conexión y puedes «Añadir a pantalla de inicio» desde el menú de tu navegador.</p>
       </div>
     </div>
 
   </section>
 
   <footer class="foot">
-    <small>Vocalizer 2026 · Proyecto offline, todo local · Compatible con Chrome, Edge, Firefox y Safari · Autora original: Matilde Pizarro Toro</small>
+    <small data-i18n="footerText">Ejercicios Vocales · Proyecto offline, todo local · Compatible con Chrome, Edge, Firefox y Safari · Autora original: Matilde Pizarro Toro</small>
   </footer>
 </main>
 
 <!-- Asistente de bienvenida / buscador de rango -->
 <dialog id="onboardingDialog" class="dialog wide">
   <form method="dialog" class="dialogForm">
-    <h3 id="onbTitle">Bienvenida a Vocalizer</h3>
-    <p id="onbText">Para adaptar los ejercicios a tu voz, dinos tu tipo de voz o descúbrelo cantando.</p>
+    <h3 id="onbTitle" data-i18n="onbTitle">Bienvenida a Ejercicios Vocales</h3>
+    <p id="onbText" data-i18n="onbText">Para adaptar los ejercicios a tu voz, dinos tu tipo de voz o descúbrelo cantando.</p>
 
     <div id="onbStepType">
-      <label class="field">Tipo de voz
+      <label class="field"><span data-i18n="tipoVozLabel">Tipo de voz</span>
         <select id="onbTypeSelect">
-          <option value="soprano">Soprano</option>
-          <option value="mezzo">Mezzosoprano</option>
-          <option value="alto">Contralto</option>
-          <option value="tenor">Tenor</option>
-          <option value="baritone">Barítono</option>
-          <option value="bass">Bajo</option>
-          <option value="custom">Personalizada (descubrir cantando)</option>
+          <option value="soprano" data-i18n="optSoprano">Soprano</option>
+          <option value="mezzo" data-i18n="optMezzo">Mezzosoprano</option>
+          <option value="alto" data-i18n="optAlto">Contralto</option>
+          <option value="tenor" data-i18n="optTenor">Tenor</option>
+          <option value="baritone" data-i18n="optBaritone">Barítono</option>
+          <option value="bass" data-i18n="optBass">Bajo</option>
+          <option value="custom" data-i18n="optCustomOnb">Personalizada (descubrir cantando)</option>
         </select>
       </label>
     </div>
@@ -417,21 +419,21 @@
     <div id="onbResult" class="rangeResult" hidden></div>
 
     <div class="dialogButtons">
-      <button id="onbSkipBtn" value="cancel" class="btn" formnovalidate>Omitir</button>
-      <button id="onbContinueBtn" value="continue" class="btn primary">Continuar</button>
+      <button id="onbSkipBtn" value="cancel" class="btn" formnovalidate data-i18n="btnOmitir">Omitir</button>
+      <button id="onbContinueBtn" value="continue" class="btn primary" data-i18n="btnContinuar">Continuar</button>
     </div>
   </form>
 </dialog>
 
 <dialog id="rangeDialog" class="dialog">
   <form method="dialog" class="dialogForm">
-    <h3>Detectar tu rango vocal</h3>
-    <p id="rangeDialogText">Vamos a grabar 5 segundos. Canta desde tu nota más grave hasta tu nota más aguda, con volumen medio.</p>
+    <h3 data-i18n="rangeDialogTitle">Detectar tu rango vocal</h3>
+    <p id="rangeDialogText" data-i18n="rangeDialogText">Vamos a grabar 5 segundos. Canta desde tu nota más grave hasta tu nota más aguda, con volumen medio.</p>
     <div class="dialogProgress"><div id="rangeProgressBar" class="dialogProgressBar"></div></div>
     <div id="rangeResult" class="rangeResult" hidden></div>
     <div class="dialogButtons">
-      <button id="rangeStartBtn" value="start" class="btn primary">Empezar grabación</button>
-      <button value="cancel" class="btn">Cerrar</button>
+      <button id="rangeStartBtn" value="start" class="btn primary" data-i18n="btnEmpezarGrabacion">Empezar grabación</button>
+      <button value="cancel" class="btn" data-i18n="btnCerrar">Cerrar</button>
     </div>
   </form>
 </dialog>

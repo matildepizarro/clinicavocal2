@@ -3,10 +3,12 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Sesión diaria — Acompañamiento Vocal Afirmativo</title>
-<meta name="description" content="Sesión diaria de acompañamiento vocal afirmativo: registro de práctica, grabaciones y seguimiento centrado en la persona." />
+<title data-i18n-content="pageTitle">Sesión diaria — Acompañamiento Vocal Afirmativo</title>
+<meta name="description" data-i18n-content="pageDesc" content="Sesión diaria de acompañamiento vocal afirmativo: registro de práctica, grabaciones y seguimiento centrado en la persona." />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='7' fill='%23e0559e'/%3E%3Cpath d='M8 17c-2.5-2.3-4-4.2-4-6.3A3.2 3.2 0 0 1 7.3 7.4C8.6 7.4 9.6 8 10 9c.4-1 1.4-1.6 2.7-1.6a3.2 3.2 0 0 1 3.3 3.3c0 2.1-1.5 4-4 6.3l-2 1.8Z' fill='white'/%3E%3C/svg%3E">
 <script>document.documentElement.setAttribute('data-pastel-theme', (function(){try{return localStorage.getItem('cv-pastel-theme')||'rosa';}catch(e){return 'rosa';}})());</script>
+<script src="i18n-dict.js"></script>
+<script src="../assets/i18n-engine.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/shared.css">
@@ -224,18 +226,18 @@
 </style>
 </head>
 <body>
-<a href="../index.html" class="cv-back-link"><span class="cv-back-arrow" aria-hidden="true">←</span><span class="cv-back-text">Volver al portal</span></a>
+<a href="../index.html" class="cv-back-link"><span class="cv-back-arrow" aria-hidden="true">←</span><span class="cv-back-text" data-i18n="volverPortal">Volver al portal</span></a>
   <div class="wrap">
 
     <header>
       <div class="titleBar">
         <div>
-          <h1>💗 Sesión diaria — Acompañamiento Vocal Afirmativo</h1>
-          <p>Registro de práctica, autopercepción y datos acústicos de apoyo — centrado en la congruencia vocal e identitaria de la persona.</p>
+          <h1 data-i18n="h1Titulo">💗 Sesión diaria — Acompañamiento Vocal Afirmativo</h1>
+          <p data-i18n="subTitulo">Registro de práctica, autopercepción y datos acústicos de apoyo — centrado en la congruencia vocal e identitaria de la persona.</p>
         </div>
         <div class="titleActions">
-          <button class="infoBtn" id="infoBtn" title="Sobre este enfoque" aria-label="Información sobre este enfoque">i</button>
-          <button id="togglePitchVisibilityBtn" class="ghost" title="Mostrar / Ocultar gráfico F0">Ocultar gráfico F0</button>
+          <button class="infoBtn" id="infoBtn" title="Sobre este enfoque" data-i18n-title="titleSobreEnfoque" aria-label="Información sobre este enfoque" data-i18n-aria="titleSobreEnfoque">i</button>
+          <button id="togglePitchVisibilityBtn" class="ghost" title="Mostrar / Ocultar gráfico F0" data-i18n-title="titleTogglePitch">Ocultar gráfico F0</button>
         </div>
       </div>
 
@@ -246,44 +248,44 @@
 
       <div class="metaGrid">
         <div class="card">
-          <div class="cardTitle"><span class="dot"></span>Datos de la sesión</div>
+          <div class="cardTitle"><span class="dot"></span><span data-i18n="ctDatosSesion">Datos de la sesión</span></div>
           <div class="row">
             <div style="flex:1;min-width:180px">
-              <label class="fieldLabel" for="patientNameInput">Nombre de la persona</label>
-              <input id="patientNameInput" type="text" placeholder="Nombre de la persona" style="width:100%">
+              <label class="fieldLabel" for="patientNameInput" data-i18n="lblNombrePersona">Nombre de la persona</label>
+              <input id="patientNameInput" type="text" placeholder="Nombre de la persona" data-i18n-placeholder="lblNombrePersona" style="width:100%">
             </div>
             <div style="min-width:160px">
-              <label class="fieldLabel" for="sessionDateInput">Fecha de sesión</label>
+              <label class="fieldLabel" for="sessionDateInput" data-i18n="lblFechaSesion">Fecha de sesión</label>
               <input id="sessionDateInput" type="date" style="width:100%">
             </div>
           </div>
           <div class="row" style="margin-top:10px">
-            <button class="primary" id="saveDateBtn">Guardar datos</button>
-            <span id="savedDateBadge" class="small" style="align-self:center">Sin guardar aún</span>
+            <button class="primary" id="saveDateBtn" data-i18n="btnGuardarDatos">Guardar datos</button>
+            <span id="savedDateBadge" class="small" style="align-self:center" data-i18n="badgeSinGuardar">Sin guardar aún</span>
           </div>
-          <div class="subtle" style="margin-top:12px">Marca las casillas conforme se completa cada repetición. El micrófono es opcional y sirve solo como apoyo — nunca como criterio único de progreso.</div>
+          <div class="subtle" style="margin-top:12px" data-i18n="subtleMarcaCasillas">Marca las casillas conforme se completa cada repetición. El micrófono es opcional y sirve solo como apoyo — nunca como criterio único de progreso.</div>
         </div>
 
         <div class="card">
-          <div class="cardTitle"><span class="dot"></span>Objetivo vocal de esta persona</div>
-          <label class="fieldLabel" for="goalTypeSelect">Orientación del trabajo (definida junto a la persona)</label>
+          <div class="cardTitle"><span class="dot"></span><span data-i18n="ctObjetivoVocal">Objetivo vocal de esta persona</span></div>
+          <label class="fieldLabel" for="goalTypeSelect" data-i18n="lblOrientacionTrabajo">Orientación del trabajo (definida junto a la persona)</label>
           <select id="goalTypeSelect" style="width:100%">
-            <option value="feminizacion">Feminización vocal</option>
-            <option value="masculinizacion">Masculinización vocal</option>
-            <option value="personalizado">Rango personalizado / no binario</option>
-            <option value="ninguno">Sin meta de tono — foco en resonancia, calidad y confort</option>
+            <option value="feminizacion" data-i18n="optFeminizacion">Feminización vocal</option>
+            <option value="masculinizacion" data-i18n="optMasculinizacion">Masculinización vocal</option>
+            <option value="personalizado" data-i18n="optPersonalizado">Rango personalizado / no binario</option>
+            <option value="ninguno" data-i18n="optNinguno">Sin meta de tono — foco en resonancia, calidad y confort</option>
           </select>
           <div class="row" style="margin-top:10px">
             <div style="flex:1">
-              <label class="fieldLabel" for="goalMinInput">F0 referencia mín. (Hz)</label>
+              <label class="fieldLabel" for="goalMinInput" data-i18n="lblF0Min">F0 referencia mín. (Hz)</label>
               <input id="goalMinInput" type="number" style="width:100%">
             </div>
             <div style="flex:1">
-              <label class="fieldLabel" for="goalMaxInput">F0 referencia máx. (Hz)</label>
+              <label class="fieldLabel" for="goalMaxInput" data-i18n="lblF0Max">F0 referencia máx. (Hz)</label>
               <input id="goalMaxInput" type="number" style="width:100%">
             </div>
           </div>
-          <div class="subtle" style="margin-top:8px">Este rango es solo una <strong>referencia orientativa y editable</strong>, no un umbral clínico fijo. La evidencia disponible muestra que la satisfacción vocal no se correlaciona necesariamente con alcanzar un valor acústico exacto: lo central es la congruencia percibida por la persona (ver botón "i").</div>
+          <div class="subtle" style="margin-top:8px" data-i18n-html="subtleRangoRef">Este rango es solo una <strong>referencia orientativa y editable</strong>, no un umbral clínico fijo. La evidencia disponible muestra que la satisfacción vocal no se correlaciona necesariamente con alcanzar un valor acústico exacto: lo central es la congruencia percibida por la persona (ver botón "i").</div>
         </div>
       </div>
     </header>
@@ -292,27 +294,27 @@
       <!-- Columna izquierda -->
       <div>
         <div class="card">
-          <div class="sectionTitle"><span class="dot"></span>Bloques de práctica</div>
+          <div class="sectionTitle"><span class="dot"></span><span data-i18n="stBloquesPractica">Bloques de práctica</span></div>
 
           <!-- BLOQUE 1 -->
           <div id="b1" class="activity">
             <div class="activityHeader">
               <div>
-                <div class="blockName">Bloque 1 — Resonancia y calentamiento con /M/</div>
-                <div class="activityNote">Ejercicios de "humming" y fonación nasal para favorecer una resonancia anterior cómoda, sin forzar la laringe. Marca cada repetición realizada.</div>
+                <div class="blockName" data-i18n="b1Nombre">Bloque 1 — Resonancia y calentamiento con /M/</div>
+                <div class="activityNote" data-i18n="b1Nota">Ejercicios de "humming" y fonación nasal para favorecer una resonancia anterior cómoda, sin forzar la laringe. Marca cada repetición realizada.</div>
               </div>
               <div class="small row">
-                <button class="ghost borg-toggle" data-act="b1">Registrar esfuerzo (Borg)</button>
-                <button class="ghost" onclick="resetActivity('b1')">Reiniciar</button>
+                <button class="ghost borg-toggle" data-act="b1" data-i18n="btnRegistrarBorg">Registrar esfuerzo (Borg)</button>
+                <button class="ghost" onclick="resetActivity('b1')" data-i18n="btnReiniciar">Reiniciar</button>
               </div>
             </div>
 
             <div style="margin-top:6px">
-              <div class="rep-line"><span class="rep-label">M sostenida</span><span class="goalTag">Meta: 5</span><div class="checkboxes" data-activity="b1_m_sostenida"></div></div>
-              <div class="rep-line"><span class="rep-label">M glissando (ascendente/descendente)</span><span class="goalTag">Meta: 5</span><div class="checkboxes" data-activity="b1_m_gliss"></div></div>
-              <div class="rep-line"><span class="rep-label">M en tono de sirena</span><span class="goalTag">Meta: 5</span><div class="checkboxes" data-activity="b1_m_siren"></div></div>
-              <div class="rep-line"><span class="rep-label">Melodía libre ("cumpleaños") con /M/</span><span class="goalTag">Meta: 3</span><div class="checkboxes" data-activity="b1_m_cumple"></div></div>
-              <div class="rep-line"><span class="rep-label">Humming libre con /M/</span><span class="goalTag">Meta: 3</span><div class="checkboxes" data-activity="b1_m_humming"></div></div>
+              <div class="rep-line"><span class="rep-label" data-i18n="repMSostenida">M sostenida</span><span class="goalTag" data-i18n="metaCinco">Meta: 5</span><div class="checkboxes" data-activity="b1_m_sostenida"></div></div>
+              <div class="rep-line"><span class="rep-label" data-i18n="repMGliss">M glissando (ascendente/descendente)</span><span class="goalTag" data-i18n="metaCinco">Meta: 5</span><div class="checkboxes" data-activity="b1_m_gliss"></div></div>
+              <div class="rep-line"><span class="rep-label" data-i18n="repMSiren">M en tono de sirena</span><span class="goalTag" data-i18n="metaCinco">Meta: 5</span><div class="checkboxes" data-activity="b1_m_siren"></div></div>
+              <div class="rep-line"><span class="rep-label" data-i18n="repMCumple">Melodía libre ("cumpleaños") con /M/</span><span class="goalTag" data-i18n="metaTres">Meta: 3</span><div class="checkboxes" data-activity="b1_m_cumple"></div></div>
+              <div class="rep-line"><span class="rep-label" data-i18n="repMHumming">Humming libre con /M/</span><span class="goalTag" data-i18n="metaTres">Meta: 3</span><div class="checkboxes" data-activity="b1_m_humming"></div></div>
             </div>
           </div>
 
@@ -320,22 +322,22 @@
           <div id="b2" class="activity">
             <div class="activityHeader">
               <div>
-                <div class="blockName">Bloque 2 — Fonación en tracto semiocluido con /U/</div>
-                <div class="activityNote">Ejercicios de fonación en tubo/vocal /U/ para favorecer eficiencia glótica y flujo de aire equilibrado antes de pasar al habla funcional.</div>
+                <div class="blockName" data-i18n="b2Nombre">Bloque 2 — Fonación en tracto semiocluido con /U/</div>
+                <div class="activityNote" data-i18n="b2Nota">Ejercicios de fonación en tubo/vocal /U/ para favorecer eficiencia glótica y flujo de aire equilibrado antes de pasar al habla funcional.</div>
               </div>
               <div class="small row">
-                <button class="ghost borg-toggle" data-act="b2">Registrar esfuerzo (Borg)</button>
-                <button class="ghost" onclick="resetActivity('b2')">Reiniciar</button>
+                <button class="ghost borg-toggle" data-act="b2" data-i18n="btnRegistrarBorg">Registrar esfuerzo (Borg)</button>
+                <button class="ghost" onclick="resetActivity('b2')" data-i18n="btnReiniciar">Reiniciar</button>
               </div>
             </div>
 
             <div style="margin-top:6px">
-              <div class="rep-line"><span class="rep-label">U sostenida</span><span class="goalTag">Meta: 5</span><div class="checkboxes" data-activity="b2_u_sost"></div></div>
-              <div class="rep-line"><span class="rep-label">U glissando</span><span class="goalTag">Meta: 5</span><div class="checkboxes" data-activity="b2_u_gliss"></div></div>
-              <div class="rep-line"><span class="rep-label">U tono de sirena</span><span class="goalTag">Meta: 5</span><div class="checkboxes" data-activity="b2_u_siren"></div></div>
-              <div class="rep-line"><span class="rep-label">U tono en espiral</span><span class="goalTag">Meta: 5</span><div class="checkboxes" data-activity="b2_u_espiral"></div></div>
-              <div class="rep-line"><span class="rep-label">U con acento rítmico (UuUuUu)</span><span class="goalTag">Meta: 5</span><div class="checkboxes" data-activity="b2_u_accent"></div></div>
-              <div class="rep-line"><span class="rep-label">Melodía libre ("cumpleaños") con /U/</span><span class="goalTag">Meta: 3</span><div class="checkboxes" data-activity="b2_u_cumple"></div></div>
+              <div class="rep-line"><span class="rep-label" data-i18n="repUSost">U sostenida</span><span class="goalTag" data-i18n="metaCinco">Meta: 5</span><div class="checkboxes" data-activity="b2_u_sost"></div></div>
+              <div class="rep-line"><span class="rep-label" data-i18n="repUGliss">U glissando</span><span class="goalTag" data-i18n="metaCinco">Meta: 5</span><div class="checkboxes" data-activity="b2_u_gliss"></div></div>
+              <div class="rep-line"><span class="rep-label" data-i18n="repUSiren">U tono de sirena</span><span class="goalTag" data-i18n="metaCinco">Meta: 5</span><div class="checkboxes" data-activity="b2_u_siren"></div></div>
+              <div class="rep-line"><span class="rep-label" data-i18n="repUEspiral">U tono en espiral</span><span class="goalTag" data-i18n="metaCinco">Meta: 5</span><div class="checkboxes" data-activity="b2_u_espiral"></div></div>
+              <div class="rep-line"><span class="rep-label" data-i18n="repUAccent">U con acento rítmico (UuUuUu)</span><span class="goalTag" data-i18n="metaCinco">Meta: 5</span><div class="checkboxes" data-activity="b2_u_accent"></div></div>
+              <div class="rep-line"><span class="rep-label" data-i18n="repUCumple">Melodía libre ("cumpleaños") con /U/</span><span class="goalTag" data-i18n="metaTres">Meta: 3</span><div class="checkboxes" data-activity="b2_u_cumple"></div></div>
             </div>
           </div>
 
@@ -343,67 +345,67 @@
           <div id="b3" class="activity">
             <div class="activityHeader">
               <div>
-                <div class="blockName">Bloque 3 — Lectura y comunicación funcional</div>
-                <div class="activityNote">Traspaso de los ajustes trabajados al habla espontánea y a la lectura, con énfasis prosódico e intencional. Las mediciones acústicas son un dato de apoyo, no la meta.</div>
+                <div class="blockName" data-i18n="b3Nombre">Bloque 3 — Lectura y comunicación funcional</div>
+                <div class="activityNote" data-i18n="b3Nota">Traspaso de los ajustes trabajados al habla espontánea y a la lectura, con énfasis prosódico e intencional. Las mediciones acústicas son un dato de apoyo, no la meta.</div>
               </div>
               <div class="small row">
-                <button class="ghost borg-toggle" data-act="b3">Registrar esfuerzo (Borg)</button>
-                <button class="ghost" onclick="resetActivity('b3')">Reiniciar</button>
+                <button class="ghost borg-toggle" data-act="b3" data-i18n="btnRegistrarBorg">Registrar esfuerzo (Borg)</button>
+                <button class="ghost" onclick="resetActivity('b3')" data-i18n="btnReiniciar">Reiniciar</button>
               </div>
             </div>
 
             <div style="margin-top:6px">
-              <div class="rep-line"><span class="rep-label">Lectura de frases con énfasis</span><span class="goalTag">Mediciones por frase</span><div class="checkboxes" data-activity="b3_frases"></div></div>
+              <div class="rep-line"><span class="rep-label" data-i18n="repLecturaFrases">Lectura de frases con énfasis</span><span class="goalTag" data-i18n="metaMedicionesFrase">Mediciones por frase</span><div class="checkboxes" data-activity="b3_frases"></div></div>
 
               <div style="margin-top:14px">
-                <div style="font-weight:700;margin-bottom:6px;font-size:13px">Frases con variantes de énfasis</div>
-                <div class="subtle" style="margin-bottom:6px">Pulsa <strong>Medir</strong> y lee la frase en voz alta durante la medición (requiere micrófono activo).</div>
+                <div style="font-weight:700;margin-bottom:6px;font-size:13px" data-i18n="tituloFrasesVariantes">Frases con variantes de énfasis</div>
+                <div class="subtle" style="margin-bottom:6px" data-i18n-html="subtlePulsaMedir">Pulsa <strong>Medir</strong> y lee la frase en voz alta durante la medición (requiere micrófono activo).</div>
                 <div id="phrasesContainer"></div>
               </div>
 
               <div style="margin-top:12px" class="rep-line">
-                <span class="rep-label">Lectura de texto en voz alta</span>
-                <span class="goalTag">Veces</span>
+                <span class="rep-label" data-i18n="repLecturaTexto">Lectura de texto en voz alta</span>
+                <span class="goalTag" data-i18n="metaVeces">Veces</span>
                 <div class="checkboxes" data-activity="b3_texto" style="display:inline-flex;margin-left:8px"></div>
                 <div style="margin-top:8px" class="row">
-                  <button class="ghost" id="measure_texto_btn">Medir y grabar (12 s)</button>
-                  <span id="texto_result" class="analysisBadge">Sin medir</span>
+                  <button class="ghost" id="measure_texto_btn" data-i18n="btnMedirGrabar12">Medir y grabar (12 s)</button>
+                  <span id="texto_result" class="analysisBadge" data-i18n="badgeSinMedir">Sin medir</span>
                 </div>
               </div>
 
               <div style="margin-top:12px" class="rep-line">
-                <span class="rep-label">Lectura de cuento a otra persona</span>
-                <span class="goalTag">Veces</span>
+                <span class="rep-label" data-i18n="repLecturaCuento">Lectura de cuento a otra persona</span>
+                <span class="goalTag" data-i18n="metaVeces">Veces</span>
                 <div class="checkboxes" data-activity="b3_cuento" style="display:inline-flex;margin-left:8px"></div>
                 <div style="margin-top:8px" class="row">
-                  <button class="ghost" id="measure_cuento_btn">Medir y grabar (25 s)</button>
-                  <span id="cuento_result" class="analysisBadge">Sin medir</span>
+                  <button class="ghost" id="measure_cuento_btn" data-i18n="btnMedirGrabar25">Medir y grabar (25 s)</button>
+                  <span id="cuento_result" class="analysisBadge" data-i18n="badgeSinMedir">Sin medir</span>
                 </div>
               </div>
 
               <div style="margin-top:14px;padding:12px;border-radius:10px;background:var(--bg-2);border:1px solid var(--border)">
-                <div style="font-weight:700;margin-bottom:6px;font-size:13px">Texto — "Lectura de texto en voz alta"</div>
-                <div class="subtle">"El shoegaze es un estilo musical que nació en el Reino Unido a finales de los años ochenta. Se caracteriza por el uso de guitarras con muchos efectos, voces etéreas y un sonido envolvente, casi hipnótico. El nombre proviene de la costumbre de los músicos de mirar sus pedales de efectos durante los conciertos, como si miraran sus propios zapatos. Bandas como My Bloody Valentine y Slowdive son referentes del género. Hoy, el shoegaze sigue inspirando a artistas de todo el mundo por su atmósfera soñadora y profunda."</div>
+                <div style="font-weight:700;margin-bottom:6px;font-size:13px" data-i18n="tituloTextoLecturaVoz">Texto — "Lectura de texto en voz alta"</div>
+                <div class="subtle" data-i18n="textoShoegaze">"El shoegaze es un estilo musical que nació en el Reino Unido a finales de los años ochenta. Se caracteriza por el uso de guitarras con muchos efectos, voces etéreas y un sonido envolvente, casi hipnótico. El nombre proviene de la costumbre de los músicos de mirar sus pedales de efectos durante los conciertos, como si miraran sus propios zapatos. Bandas como My Bloody Valentine y Slowdive son referentes del género. Hoy, el shoegaze sigue inspirando a artistas de todo el mundo por su atmósfera soñadora y profunda."</div>
               </div>
 
               <div style="margin-top:10px;padding:12px;border-radius:10px;background:var(--bg-2);border:1px solid var(--border)">
-                <div style="font-weight:700;margin-bottom:6px;font-size:13px">Texto — "Lectura de cuento a alguien más"</div>
-                <div class="subtle">El faro y la mariposa<br><br>Había una vez un faro solitario, que cada noche encendía su luz para guiar a los barcos en la oscuridad. Un día, mientras brillaba, una pequeña mariposa se posó sobre su cristal. El faro, sorprendido, le preguntó: —¿No te asusta tanta claridad? La mariposa respondió: —Al contrario, me recuerda que incluso en la noche más oscura, siempre hay un punto de luz.<br><br>Desde entonces, el faro ya no se sintió solo, porque comprendió que su luz no solo servía para los barcos, sino también para iluminar corazones pequeños, como el de aquella mariposa.</div>
+                <div style="font-weight:700;margin-bottom:6px;font-size:13px" data-i18n="tituloTextoCuento">Texto — "Lectura de cuento a alguien más"</div>
+                <div class="subtle" data-i18n-html="cuentoFaro">El faro y la mariposa<br><br>Había una vez un faro solitario, que cada noche encendía su luz para guiar a los barcos en la oscuridad. Un día, mientras brillaba, una pequeña mariposa se posó sobre su cristal. El faro, sorprendido, le preguntó: —¿No te asusta tanta claridad? La mariposa respondió: —Al contrario, me recuerda que incluso en la noche más oscura, siempre hay un punto de luz.<br><br>Desde entonces, el faro ya no se sintió solo, porque comprendió que su luz no solo servía para los barcos, sino también para iluminar corazones pequeños, como el de aquella mariposa.</div>
               </div>
 
               <div style="margin-top:14px">
-                <div style="font-weight:700;margin-bottom:6px;font-size:13px">Lectura visual — apoyo de proyección vocal</div>
-                <div class="subtle">Si el nivel supera el umbral de referencia, se contabiliza un "cruce" y se guarda su marca de tiempo. Esto mide volumen/proyección, no género.</div>
+                <div style="font-weight:700;margin-bottom:6px;font-size:13px" data-i18n="tituloLecturaVisual">Lectura visual — apoyo de proyección vocal</div>
+                <div class="subtle" data-i18n="subtleCruce">Si el nivel supera el umbral de referencia, se contabiliza un "cruce" y se guarda su marca de tiempo. Esto mide volumen/proyección, no género.</div>
                 <div style="margin-top:10px;padding:10px;border-radius:10px;background:var(--bg-2);border:1px solid var(--border)">
                   <div style="display:flex;justify-content:space-between;align-items:center">
-                    <div style="font-weight:700;font-size:13px">Lectura de texto (visual)</div>
-                    <span class="goalTag">Meta: <span id="a_lectura_texto_target_label">65 dB</span></span>
+                    <div style="font-weight:700;font-size:13px" data-i18n="lblLecturaTextoVisual">Lectura de texto (visual)</div>
+                    <span class="goalTag" data-i18n="lblMetaPrefix">Meta: <span id="a_lectura_texto_target_label">65 dB</span></span>
                   </div>
                   <div style="margin-top:8px">
                     <div class="meter" id="a_lectura_texto_visual_meter"><div id="a_lectura_texto_visual_meter_bar" class="meterBar"></div></div>
                     <div style="display:flex;justify-content:space-between;margin-top:6px">
-                      <div class="subtle">Nivel: <strong id="a_lectura_texto_visual_meter_db">-- dB</strong></div>
-                      <div style="font-weight:700;font-size:13px">Cruces: <span id="a_lectura_texto_counter">0</span></div>
+                      <div class="subtle" data-i18n="lblNivelPrefix">Nivel: <strong id="a_lectura_texto_visual_meter_db">-- dB</strong></div>
+                      <div style="font-weight:700;font-size:13px" data-i18n="lblCrucesPrefix">Cruces: <span id="a_lectura_texto_counter">0</span></div>
                     </div>
                   </div>
                 </div>
@@ -413,29 +415,29 @@
         </div>
 
         <div class="card" style="margin-top:14px">
-          <div class="cardTitle"><span class="dot"></span>Autoevaluación de la persona (medida central)</div>
-          <div class="subtle" style="margin-bottom:10px">La evidencia disponible indica que la satisfacción autopercibida —no los valores acústicos— es el mejor indicador de éxito del acompañamiento vocal. Esta escala se guarda en el informe junto con el resto de los datos.</div>
+          <div class="cardTitle"><span class="dot"></span><span data-i18n="ctAutoevaluacion">Autoevaluación de la persona (medida central)</span></div>
+          <div class="subtle" style="margin-bottom:10px" data-i18n="subtleAutoeval">La evidencia disponible indica que la satisfacción autopercibida —no los valores acústicos— es el mejor indicador de éxito del acompañamiento vocal. Esta escala se guarda en el informe junto con el resto de los datos.</div>
           <div class="satisfWrap">
-            <label class="fieldLabel" for="satisfSlider">¿Qué tan congruente y cómoda sintió su voz hoy? (0 = nada — 10 = totalmente)</label>
+            <label class="fieldLabel" for="satisfSlider" data-i18n="lblSatisfSlider">¿Qué tan congruente y cómoda sintió su voz hoy? (0 = nada — 10 = totalmente)</label>
             <input type="range" id="satisfSlider" min="0" max="10" step="1" value="5">
-            <div class="small">Valor actual: <strong id="satisfValue">5</strong> / 10</div>
+            <div class="small" data-i18n="lblValorActual">Valor actual: <strong id="satisfValue">5</strong> / 10</div>
           </div>
           <div style="margin-top:10px">
-            <label class="fieldLabel" for="satisfNotes">Comentarios de la persona (opcional)</label>
-            <textarea id="satisfNotes" rows="2" style="width:100%" placeholder="Ej.: hoy me sentí más cómoda leyendo en voz alta..."></textarea>
+            <label class="fieldLabel" for="satisfNotes" data-i18n="lblComentariosPersona">Comentarios de la persona (opcional)</label>
+            <textarea id="satisfNotes" rows="2" style="width:100%" placeholder="Ej.: hoy me sentí más cómoda leyendo en voz alta..." data-i18n-placeholder="placeholderComentarios"></textarea>
           </div>
         </div>
 
         <div class="card" style="margin-top:14px;display:flex;flex-direction:column;gap:12px">
-          <div class="cardTitle"><span class="dot"></span>Acciones</div>
+          <div class="cardTitle"><span class="dot"></span><span data-i18n="ctAcciones">Acciones</span></div>
           <div class="controls">
-            <button class="primary" onclick="exportZipSession()">Exportar ZIP (PDF + audios)</button>
-            <button class="ghost" onclick="exportInformeSesionCompleto()">Exportar PDF</button>
-            <button class="ghost" onclick="generateSessionCSV()">Exportar CSV</button>
-            <button class="ghost" onclick="showLog()">Mostrar registro</button>
-            <button class="warn" onclick="resetAll()">Reiniciar todo</button>
+            <button class="primary" onclick="exportZipSession()" data-i18n="btnExportarZip">Exportar ZIP (PDF + audios)</button>
+            <button class="ghost" onclick="exportInformeSesionCompleto()" data-i18n="btnExportarPdf">Exportar PDF</button>
+            <button class="ghost" onclick="generateSessionCSV()" data-i18n="btnExportarCsv">Exportar CSV</button>
+            <button class="ghost" onclick="showLog()" data-i18n="btnMostrarRegistro">Mostrar registro</button>
+            <button class="warn" onclick="resetAll()" data-i18n="btnReiniciarTodo">Reiniciar todo</button>
           </div>
-          <div class="subtle">El ZIP incluye el informe en PDF y todas las grabaciones de la sesión. El PDF y el CSV incluyen repeticiones, autoevaluación, Borg, datos acústicos de apoyo (F0 media/min/max/rango, % de muestras dentro del rango de referencia) y el registro de eventos.</div>
+          <div class="subtle" data-i18n="subtleAcciones">El ZIP incluye el informe en PDF y todas las grabaciones de la sesión. El PDF y el CSV incluyen repeticiones, autoevaluación, Borg, datos acústicos de apoyo (F0 media/min/max/rango, % de muestras dentro del rango de referencia) y el registro de eventos.</div>
         </div>
       </div>
 
@@ -443,50 +445,50 @@
       <aside>
         <div id="floatingPanel">
           <div class="dragHandle" id="dragHandle">
-            <div class="dragTitle">Herramientas · Sonómetro y grabaciones</div>
+            <div class="dragTitle" data-i18n="dragTitlePanel">Herramientas · Sonómetro y grabaciones</div>
             <div class="panelActions">
-              <button class="iconBtn" id="toggleDockBtn" title="Anclar / Flotar" aria-label="Anclar o flotar el panel">Flotar</button>
-              <button class="iconBtn" id="shrinkBtn" title="Compactar / Expandir" aria-label="Compactar o expandir el panel">Compactar</button>
-              <button class="iconBtn" id="minimizeBtn" title="Minimizar" aria-label="Minimizar el panel">—</button>
+              <button class="iconBtn" id="toggleDockBtn" title="Anclar / Flotar" data-i18n-title="titleAnclarFlotar" aria-label="Anclar o flotar el panel" data-i18n-aria="ariaAnclarFlotar">Flotar</button>
+              <button class="iconBtn" id="shrinkBtn" title="Compactar / Expandir" data-i18n-title="titleCompactarExpandir" aria-label="Compactar o expandir el panel" data-i18n-aria="ariaCompactarExpandir">Compactar</button>
+              <button class="iconBtn" id="minimizeBtn" title="Minimizar" data-i18n-title="titleMinimizarPanel" aria-label="Minimizar el panel" data-i18n-aria="titleMinimizarPanel">—</button>
             </div>
           </div>
 
           <div class="rightContent">
             <div class="card">
-              <div class="cardTitle"><span class="dot"></span>Sonómetro — control</div>
+              <div class="cardTitle"><span class="dot"></span><span data-i18n="ctSonometro">Sonómetro — control</span></div>
               <div class="controls" style="margin-bottom:10px">
-                <button class="primary" id="startAudio">Iniciar micrófono</button>
-                <button class="ghost" id="stopAudio" disabled>Detener</button>
+                <button class="primary" id="startAudio" data-i18n="btnIniciarMic">Iniciar micrófono</button>
+                <button class="ghost" id="stopAudio" disabled data-i18n="btnDetener">Detener</button>
               </div>
               <div class="row">
-                <button class="ghost" id="setCalib">Calibrar</button>
-                <input id="calibKnown" type="number" placeholder="Valor dB de referencia (ej: 70)" style="flex:1">
+                <button class="ghost" id="setCalib" data-i18n="btnCalibrar">Calibrar</button>
+                <input id="calibKnown" type="number" placeholder="Valor dB de referencia (ej: 70)" data-i18n-placeholder="placeholderCalib" style="flex:1">
               </div>
 
               <div class="meterWrap">
                 <div class="meter"><div id="meterFill" class="meterBar"></div></div>
                 <div class="meterValue" id="splDisplay">-- dB</div>
               </div>
-              <div class="subtle" style="margin-top:8px">Medición aproximada de volumen (no calibrada como sonómetro profesional). Útil como apoyo visual de proyección de voz.</div>
+              <div class="subtle" style="margin-top:8px" data-i18n="subtleSonometro">Medición aproximada de volumen (no calibrada como sonómetro profesional). Útil como apoyo visual de proyección de voz.</div>
             </div>
 
             <div class="card pitchCard">
-              <div class="cardTitle"><span class="dot"></span>Grabaciones — registrar avances</div>
+              <div class="cardTitle"><span class="dot"></span><span data-i18n="ctGrabaciones">Grabaciones — registrar avances</span></div>
               <div class="row">
-                <button class="primary" id="startRecBtn">Grabar</button>
-                <button class="ghost" id="stopRecBtn" disabled>Detener</button>
+                <button class="primary" id="startRecBtn" data-i18n="btnGrabar">Grabar</button>
+                <button class="ghost" id="stopRecBtn" disabled data-i18n="btnDetener">Detener</button>
               </div>
               <div style="margin-top:8px">
-                <label class="fieldLabel" for="uploadAudio">Subir audio existente</label>
+                <label class="fieldLabel" for="uploadAudio" data-i18n="lblSubirAudio">Subir audio existente</label>
                 <input type="file" id="uploadAudio" accept="audio/*" multiple style="width:100%">
               </div>
               <div id="recordingsList" style="margin-top:8px"></div>
-              <div class="subtle" style="margin-top:8px">Las mediciones de frases/lecturas generan grabaciones automáticas con nombre descriptivo.</div>
+              <div class="subtle" style="margin-top:8px" data-i18n="subtleGrabAuto">Las mediciones de frases/lecturas generan grabaciones automáticas con nombre descriptivo.</div>
             </div>
 
             <div class="card">
-              <div class="cardTitle"><span class="dot"></span>Registro de sesión</div>
-              <div id="logArea" class="logArea">Interfaz lista. El micrófono es opcional; actívalo para apoyo visual de volumen y F0. Pulsa "Medir" en cada frase/lectura para obtener un análisis acústico de apoyo.</div>
+              <div class="cardTitle"><span class="dot"></span><span data-i18n="ctRegistroSesion">Registro de sesión</span></div>
+              <div id="logArea" class="logArea" data-i18n="logInicial">Interfaz lista. El micrófono es opcional; actívalo para apoyo visual de volumen y F0. Pulsa "Medir" en cada frase/lectura para obtener un análisis acústico de apoyo.</div>
             </div>
           </div>
         </div>
@@ -494,9 +496,9 @@
     </div>
 
     <footer>
-      Acompañamiento Vocal Afirmativo — registro de sesión centrado en la persona, no en umbrales acústicos binarios.
+      <span data-i18n="footerPrincipal">Acompañamiento Vocal Afirmativo — registro de sesión centrado en la persona, no en umbrales acústicos binarios.</span>
       <details style="margin-top:14px;text-align:left;max-width:900px;margin-left:auto;margin-right:auto">
-        <summary style="cursor:pointer;text-align:center;color:var(--muted);font-size:12.5px;font-weight:600;list-style:none">Referencias bibliográficas (APA 7) ▾</summary>
+        <summary style="cursor:pointer;text-align:center;color:var(--muted);font-size:12.5px;font-weight:600;list-style:none" data-i18n="summaryReferencias">Referencias bibliográficas (APA 7) ▾</summary>
         <ol style="margin-top:10px;padding-left:22px;color:var(--muted);font-size:11.5px;line-height:1.55">
           <li>Azul, D., &amp; Hancock, A. B. (2020). Who or what has the capacity to influence voice production? Development of a transdisciplinary theoretical approach to clinical practice addressing voice and the communication of speaker socio-cultural positioning. <em>International Journal of Speech-Language Pathology, 22</em>(5), 559–570. <a href="https://doi.org/10.1080/17549507.2019.1709544" target="_blank" rel="noopener">https://doi.org/10.1080/17549507.2019.1709544</a></li>
           <li>Buckley, D. P., Dahl, K. L., Cler, G. J., &amp; Stepp, C. E. (2020). Transmasculine voice modification: A case study. <em>Journal of Voice, 34</em>(6), 903–910. <a href="https://doi.org/10.1016/j.jvoice.2019.05.003" target="_blank" rel="noopener">https://doi.org/10.1016/j.jvoice.2019.05.003</a></li>
@@ -548,36 +550,36 @@
   </div>
 
   <!-- Ventana flotante de F0 -->
-  <div id="pitchWindow" aria-label="Gráfico de tono F0">
+  <div id="pitchWindow" aria-label="Gráfico de tono F0" data-i18n-aria="ariaGraficoF0">
     <div class="pHandle" id="pHandle">
-      <span>Gráfico de tono (F0) — tiempo real</span>
+      <span data-i18n="tituloGraficoF0">Gráfico de tono (F0) — tiempo real</span>
       <div style="display:flex;gap:6px;align-items:center">
         <span id="f0Estimate" class="small" style="color:#3a1c2b;font-weight:700">F0: —</span>
-        <button class="iconBtn" id="togglePitchMin" title="Minimizar" aria-label="Minimizar gráfico F0">—</button>
-        <button class="iconBtn" id="closePitch" title="Cerrar" aria-label="Cerrar gráfico F0">✕</button>
+        <button class="iconBtn" id="togglePitchMin" title="Minimizar" data-i18n-title="titleMinimizarPanel" aria-label="Minimizar gráfico F0" data-i18n-aria="ariaMinimizarF0">—</button>
+        <button class="iconBtn" id="closePitch" title="Cerrar" data-i18n-title="titleCerrar" aria-label="Cerrar gráfico F0" data-i18n-aria="ariaCerrarF0">✕</button>
       </div>
     </div>
     <div class="pContent" id="pContent">
       <canvas id="pitchCanvas" width="420" height="200"></canvas>
-      <div class="subtle" style="margin-top:8px">La franja coloreada muestra el rango de referencia personalizado definido arriba (editable en cualquier momento). No representa una norma de género fija.</div>
+      <div class="subtle" style="margin-top:8px" data-i18n="subtleFranjaColor">La franja coloreada muestra el rango de referencia personalizado definido arriba (editable en cualquier momento). No representa una norma de género fija.</div>
     </div>
-    <div class="resizer" id="pitchResizer" title="Redimensionar"></div>
+    <div class="resizer" id="pitchResizer" title="Redimensionar" data-i18n-title="titleRedimensionar"></div>
   </div>
 
   <!-- Modal informativo -->
   <div class="modalOverlay" id="infoModal">
     <div class="modalBox">
-      <button class="ghost modalClose" id="infoCloseBtn">Cerrar ✕</button>
-      <h2>Sobre este enfoque</h2>
-      <p>Este acompañamiento se apoya en evidencia actual sobre voz, género e identidad en personas trans y de género diverso (estándares WPATH v8, literatura en fonoaudiología y estudios de resultados centrados en la persona).</p>
+      <button class="ghost modalClose" id="infoCloseBtn" data-i18n="btnCerrarModal">Cerrar ✕</button>
+      <h2 data-i18n="modalH2">Sobre este enfoque</h2>
+      <p data-i18n="modalIntro">Este acompañamiento se apoya en evidencia actual sobre voz, género e identidad en personas trans y de género diverso (estándares WPATH v8, literatura en fonoaudiología y estudios de resultados centrados en la persona).</p>
       <ul>
-        <li>La voz es un fenómeno biopsicosocial: no depende solo de la anatomía, sino también de cómo se usa y de cómo la interpretan quienes escuchan.</li>
-        <li>La satisfacción con la propia voz no se correlaciona de forma directa con alcanzar un valor acústico específico (como una frecuencia fundamental determinada). Lo que más se asocia a bienestar es la <strong>congruencia identitaria percibida</strong>, el confort y la sensación de agencia sobre la propia comunicación.</li>
-        <li>Por eso, los datos acústicos (F0, decibeles) que ofrece esta herramienta son un <strong>apoyo complementario y opcional</strong>, nunca la meta final ni un criterio de "corrección".</li>
-        <li>Los rangos de referencia de esta app son totalmente editables y deben ajustarse junto con la persona, según sus propios objetivos — que pueden incluir opciones no binarias o centradas solo en resonancia/calidad vocal, sin meta de tono.</li>
-        <li>Se recomienda un trabajo interdisciplinario (fonoaudiología y salud mental) cuando sea posible, dado el vínculo entre incongruencia vocal y bienestar psicológico descrito en la literatura.</li>
+        <li data-i18n="modalLi1">La voz es un fenómeno biopsicosocial: no depende solo de la anatomía, sino también de cómo se usa y de cómo la interpretan quienes escuchan.</li>
+        <li data-i18n-html="modalLi2">La satisfacción con la propia voz no se correlaciona de forma directa con alcanzar un valor acústico específico (como una frecuencia fundamental determinada). Lo que más se asocia a bienestar es la <strong>congruencia identitaria percibida</strong>, el confort y la sensación de agencia sobre la propia comunicación.</li>
+        <li data-i18n-html="modalLi3">Por eso, los datos acústicos (F0, decibeles) que ofrece esta herramienta son un <strong>apoyo complementario y opcional</strong>, nunca la meta final ni un criterio de "corrección".</li>
+        <li data-i18n="modalLi4">Los rangos de referencia de esta app son totalmente editables y deben ajustarse junto con la persona, según sus propios objetivos — que pueden incluir opciones no binarias o centradas solo en resonancia/calidad vocal, sin meta de tono.</li>
+        <li data-i18n="modalLi5">Se recomienda un trabajo interdisciplinario (fonoaudiología y salud mental) cuando sea posible, dado el vínculo entre incongruencia vocal y bienestar psicológico descrito en la literatura.</li>
       </ul>
-      <p class="small">Esta herramienta es un registro de práctica y no reemplaza la evaluación ni el criterio clínico profesional.</p>
+      <p class="small" data-i18n="modalDisclaimer">Esta herramienta es un registro de práctica y no reemplaza la evaluación ni el criterio clínico profesional.</p>
     </div>
   </div>
 
@@ -594,6 +596,9 @@
    género fijas, autoevaluación como medida central, y
    correcciones de errores del cálculo de calibración/estadísticas.
    ========================================================= */
+
+/* ---------- i18n helper ---------- */
+const tt = (key, fallback) => (window.CV_I18N ? window.CV_I18N.t(key) : (fallback ?? key));
 
 /* ---------- Modal info ---------- */
 document.getElementById('infoBtn').addEventListener('click', ()=> document.getElementById('infoModal').classList.add('open'));
@@ -636,9 +641,10 @@ function updateSavedBadge(){
   const badge = document.getElementById('savedDateBadge');
   if(!badge) return;
   if(profile.name || profile.date){
-    badge.textContent = 'Guardado: ' + (profile.name || 'Sin nombre') + (profile.date ? ' · ' + profile.date : '');
+    const fn = window.CV_I18N ? window.CV_I18N.t('stGuardadoBadge') : null;
+    badge.textContent = fn ? fn(profile.name || tt('stSinNombre','Sin nombre'), profile.date || '') : 'Guardado: ' + (profile.name || 'Sin nombre') + (profile.date ? ' · ' + profile.date : '');
   } else {
-    badge.textContent = 'Sin guardar aún';
+    badge.textContent = tt('badgeSinGuardar','Sin guardar aún');
   }
 }
 document.getElementById('goalTypeSelect').addEventListener('change', function(){
@@ -658,7 +664,7 @@ document.getElementById('saveDateBtn').addEventListener('click', function(){
   profile.max = isNaN(maxV) ? null : maxV;
   localStorage.setItem('vaa_profile', JSON.stringify(profile));
   updateSavedBadge();
-  log('Datos de sesión guardados: ' + (profile.name || '(sin nombre)') + (profile.date ? (' — ' + profile.date) : ''));
+  log(tt('logDatosGuardados', function(n,d){return 'Datos de sesión guardados: '+n+d;})(profile.name || tt('logSinNombreParen','(sin nombre)'), profile.date ? (' — ' + profile.date) : ''));
 });
 document.getElementById('satisfSlider').addEventListener('input', function(){
   document.getElementById('satisfValue').textContent = this.value;
@@ -702,7 +708,7 @@ function onCheckboxChange(e){
   const cb = e.target;
   const activity = cb.dataset.activity;
   const count = document.querySelectorAll('input[name="'+activity+'_cb"]:checked').length;
-  log(`[${labels[activity]||activity}] casillas marcadas: ${count}`);
+  log((window.CV_I18N ? window.CV_I18N.t('logCasillasMarcadas') : function(l,c){return '['+l+'] casillas marcadas: '+c;})(labels[activity]||activity, count));
 }
 
 /* ---------- Sonómetro / lectura visual / F0 ---------- */
@@ -728,9 +734,9 @@ async function startAudio(){
     document.getElementById('stopAudio').disabled = false;
     loopAudio();
     if(!pitchProcessor.initialized){ pitchProcessor.init(stream); }
-    log('Micrófono: activo');
+    log(tt('logMicActivo','Micrófono: activo'));
   }catch(e){
-    alert('No se pudo acceder al micrófono: ' + (e.message||e));
+    alert(tt('errNoMic','No se pudo acceder al micrófono: ') + (e.message||e));
   }
 }
 function stopAudio(){
@@ -745,7 +751,7 @@ function stopAudio(){
   if(splDisplay) splDisplay.textContent='-- dB';
   window._lastSpl = null;
   pitchProcessor.stop();
-  log('Micrófono: detenido');
+  log(tt('logMicDetenido','Micrófono: detenido'));
 }
 function computeDB(buffer){
   let sum=0;
@@ -775,20 +781,20 @@ document.getElementById('startAudio').addEventListener('click', startAudio);
 document.getElementById('stopAudio').addEventListener('click', stopAudio);
 document.getElementById('setCalib').addEventListener('click', async ()=>{
   const v = parseFloat(document.getElementById('calibKnown').value);
-  if(!running){ alert('Inicia el micrófono antes de calibrar.'); return; }
-  if(isNaN(v)){ alert('Ingresa un valor numérico de referencia en dB.'); return; }
+  if(!running){ alert(tt('errIniciaMicCalibrar','Inicia el micrófono antes de calibrar.')); return; }
+  if(isNaN(v)){ alert(tt('errValorNumericoDb','Ingresa un valor numérico de referencia en dB.')); return; }
   const samples = [];
   for(let i=0;i<8;i++){
     await new Promise(r=>setTimeout(r,120));
     if(window._lastSpl !== null && !isNaN(window._lastSpl)) samples.push(window._lastSpl);
   }
-  if(samples.length === 0){ alert('No se detectó señal de audio suficiente para calibrar. Habla frente al micrófono e inténtalo de nuevo.'); return; }
+  if(samples.length === 0){ alert(tt('errSenalInsuficiente','No se detectó señal de audio suficiente para calibrar. Habla frente al micrófono e inténtalo de nuevo.')); return; }
   const measured = samples.reduce((a,b)=>a+b,0) / samples.length;
   const offset = v - measured;
   calibrationOffset += offset;
   window._calibrationInfo = 'Offset aplicado: ' + (Math.round(calibrationOffset*10)/10) + ' dB — referencia ' + v + ' dB (' + samples.length + ' muestras válidas)';
-  alert('Calibración aplicada. ' + window._calibrationInfo);
-  log('Calibración: ' + window._calibrationInfo);
+  alert(tt('okCalibracionAplicada','Calibración aplicada. ') + window._calibrationInfo);
+  log(tt('logCalibracion','Calibración: ') + window._calibrationInfo);
 });
 
 /* lectura visual (volumen/proyección) */
@@ -817,7 +823,7 @@ function updateReadingVisualFromGlobal(){
     if(elCounter) elCounter.textContent = window.__a_lectura_texto_counter;
     window.__a_lectura_texto_timestamps.push({ ts: new Date().toISOString(), spl: String(spl), count: window.__a_lectura_texto_counter });
     if(elBar) elBar.animate([{ boxShadow: '0 0 0px rgba(0,0,0,0)' }, { boxShadow: '0 0 18px rgba(231,131,173,0.35)' }, { boxShadow: '0 0 0px rgba(0,0,0,0)' }], { duration: 420, easing: 'ease-out' });
-    log('Lectura visual: cruces → ' + window.__a_lectura_texto_counter + ' (' + spl + ' dB)');
+    log(tt('logLecturaVisual','Lectura visual: cruces → ') + window.__a_lectura_texto_counter + ' (' + spl + ' dB)');
   }
   window.__a_lectura_texto_prevBelow = !crossed;
 }
@@ -874,11 +880,11 @@ const pitchProcessor = {
     if(f && !isNaN(f) && f > 0){
       pitchData.push({ t: Date.now(), f: Math.round(f*10)/10 });
       if(pitchData.length > maxPoints) pitchData.shift();
-      f0LabelEl.textContent = 'F0: ' + classifyF0(f);
+      f0LabelEl.textContent = tt('stF0Prefix','F0: ') + classifyF0(f);
     } else {
       pitchData.push({ t: Date.now(), f: null });
       if(pitchData.length > maxPoints) pitchData.shift();
-      f0LabelEl.textContent = 'F0: —';
+      f0LabelEl.textContent = tt('stF0Prefix','F0: ') + '—';
     }
     drawPitchCanvas();
     requestAnimationFrame(()=>this.processLoop());
@@ -976,15 +982,15 @@ async function startRecording(){
       const name = 'grabacion_' + new Date().toISOString().replace(/[:.]/g,'-') + '.webm';
       recordings.push({ name, blob, date: new Date().toISOString(), url });
       renderRecordings();
-      log('Grabación guardada: ' + name);
+      log(tt('logGrabacionGuardada','Grabación guardada: ') + name);
       try{ stream.getTracks().forEach(t=>t.stop()); }catch(e){}
     };
     mediaRecorder.start();
     document.getElementById('startRecBtn').disabled=true;
     document.getElementById('stopRecBtn').disabled=false;
-    log('Grabación: iniciada');
+    log(tt('logGrabacionIniciada','Grabación: iniciada'));
   }catch(e){
-    alert('No se pudo iniciar la grabación: ' + (e.message||e));
+    alert(tt('errNoGrabacion','No se pudo iniciar la grabación: ') + (e.message||e));
   }
 }
 function stopRecording(){
@@ -992,7 +998,7 @@ function stopRecording(){
     mediaRecorder.stop();
     document.getElementById('startRecBtn').disabled=false;
     document.getElementById('stopRecBtn').disabled=true;
-    log('Grabación: detenida');
+    log(tt('logGrabacionDetenida','Grabación: detenida'));
   }
 }
 function handleUploadFiles(e){
@@ -1000,7 +1006,7 @@ function handleUploadFiles(e){
   files.forEach(file=>{
     const url = URL.createObjectURL(file);
     recordings.push({ name: file.name, blob: file, date: new Date().toISOString(), url, uploaded: true });
-    log('Archivo subido: ' + file.name);
+    log(tt('logArchivoSubido','Archivo subido: ') + file.name);
   });
   renderRecordings();
   e.target.value = '';
@@ -1013,7 +1019,7 @@ function renderRecordings(){
     const info = document.createElement('div'); info.style.flex='1';
     info.innerHTML = '<div style="font-weight:700;font-size:13px">'+ escapeHtml(r.name) +'</div><div class="subtle">' + escapeHtml(r.date) + (r.phraseText ? ' · ' + escapeHtml(r.phraseText.length>40? r.phraseText.slice(0,40)+'...': r.phraseText) : '') + '</div>';
     const controls = document.createElement('div'); controls.style.display='flex'; controls.style.gap='6px';
-    const play = document.createElement('button'); play.className='ghost'; play.textContent='▶'; play.setAttribute('aria-label','Reproducir grabación'); play.addEventListener('click', ()=>{ const audio = new Audio(r.url); audio.play(); });
+    const play = document.createElement('button'); play.className='ghost'; play.textContent='▶'; play.setAttribute('aria-label', tt('ariaReproducirGrabacion','Reproducir grabación')); play.addEventListener('click', ()=>{ const audio = new Audio(r.url); audio.play(); });
     const dl = document.createElement('a'); dl.className='ghost'; dl.style.textDecoration='none'; dl.style.display='inline-flex'; dl.style.alignItems='center'; dl.textContent='⬇'; dl.href = r.url; dl.download = r.name;
     controls.appendChild(play); controls.appendChild(dl);
     div.appendChild(info); div.appendChild(controls);
@@ -1022,7 +1028,7 @@ function renderRecordings(){
 }
 
 /* ---------- Frases / mediciones ---------- */
-const phraseGroups = [
+const PHRASE_GROUPS_ES = [
   { id:'p1', base:'Yo no dije que ella lo hizo.', variants:[
     'Yo no dije que ella lo hizo. (fui otra persona).',
     'Yo no dije que ella lo hizo. (lo negué).',
@@ -1058,32 +1064,48 @@ const phraseGroups = [
     'Tú sabes lo que quiero decir. (no otra cosa).'
   ]}
 ];
+function getPhraseGroups(){
+  try{
+    if(window.CV_I18N){
+      const data = window.CV_I18N.t('phraseGroupsData');
+      if(Array.isArray(data)) return data;
+    }
+  }catch(e){}
+  return PHRASE_GROUPS_ES;
+}
+let phraseGroups = getPhraseGroups();
 
 const phraseResults = {};
 
 const phrasesContainer = document.getElementById('phrasesContainer');
-phraseGroups.forEach(group=>{
-  const gDiv = document.createElement('div');
-  gDiv.style.borderTop = '1px dashed var(--border)';
-  gDiv.style.paddingTop = '10px';
-  gDiv.style.marginTop = '8px';
-  const title = document.createElement('div'); title.style.fontWeight='700'; title.style.fontSize='13px'; title.textContent = group.base;
-  gDiv.appendChild(title);
-  group.variants.forEach((v, idx)=>{
-    const key = group.id + '_v' + (idx+1);
-    const row = document.createElement('div'); row.style.display='flex'; row.style.justifyContent='space-between'; row.style.alignItems='center'; row.style.gap='8px'; row.style.marginTop='6px'; row.style.fontSize='12.5px';
-    const left = document.createElement('div'); left.style.flex='1'; left.textContent = (idx+1) + '. ' + v;
-    const controls = document.createElement('div'); controls.style.display='flex'; controls.style.gap='6px'; controls.style.alignItems='center';
-    const measureBtn = document.createElement('button'); measureBtn.className='ghost'; measureBtn.textContent='Medir (3 s)'; measureBtn.dataset.key=key;
-    measureBtn.addEventListener('click', ()=>measurePhrase(key, v, 3000));
-    const resultSpan = document.createElement('span'); resultSpan.id = key + '_result'; resultSpan.className='analysisBadge'; resultSpan.textContent = 'Sin medir';
-    controls.appendChild(measureBtn); controls.appendChild(resultSpan);
-    row.appendChild(left); row.appendChild(controls);
-    gDiv.appendChild(row);
-    phraseResults[key] = null;
+function buildPhrasesUI(){
+  phrasesContainer.innerHTML = '';
+  phraseGroups.forEach(group=>{
+    const gDiv = document.createElement('div');
+    gDiv.style.borderTop = '1px dashed var(--border)';
+    gDiv.style.paddingTop = '10px';
+    gDiv.style.marginTop = '8px';
+    const title = document.createElement('div'); title.style.fontWeight='700'; title.style.fontSize='13px'; title.textContent = group.base;
+    gDiv.appendChild(title);
+    group.variants.forEach((v, idx)=>{
+      const key = group.id + '_v' + (idx+1);
+      const row = document.createElement('div'); row.style.display='flex'; row.style.justifyContent='space-between'; row.style.alignItems='center'; row.style.gap='8px'; row.style.marginTop='6px'; row.style.fontSize='12.5px';
+      const left = document.createElement('div'); left.style.flex='1'; left.textContent = (idx+1) + '. ' + v;
+      const controls = document.createElement('div'); controls.style.display='flex'; controls.style.gap='6px'; controls.style.alignItems='center';
+      const measureBtn = document.createElement('button'); measureBtn.className='ghost'; measureBtn.textContent = tt('btnMedir3s','Medir (3 s)'); measureBtn.dataset.key=key;
+      measureBtn.addEventListener('click', ()=>measurePhrase(key, v, 3000));
+      const resultSpan = document.createElement('span'); resultSpan.id = key + '_result'; resultSpan.className='analysisBadge';
+      const existing = phraseResults[key];
+      resultSpan.textContent = existing ? existing.summaryText : tt('badgeSinMedir','Sin medir');
+      controls.appendChild(measureBtn); controls.appendChild(resultSpan);
+      row.appendChild(left); row.appendChild(controls);
+      gDiv.appendChild(row);
+      if(!(key in phraseResults)) phraseResults[key] = null;
+    });
+    phrasesContainer.appendChild(gDiv);
   });
-  phrasesContainer.appendChild(gDiv);
-});
+}
+buildPhrasesUI();
 
 function statsFromArray(arr){
   const vals = arr.filter(v=>v && !isNaN(v));
@@ -1098,12 +1120,12 @@ function statsFromArray(arr){
 
 async function measurePhrase(key, text, durationMs){
   if(!globalStream){
-    alert('Activa el micrófono primero (Iniciar micrófono) en el panel de Sonómetro.');
+    alert(tt('errActivaMicPrimero','Activa el micrófono primero (Iniciar micrófono) en el panel de Sonómetro.'));
     return;
   }
   const resultEl = document.getElementById(key + '_result') || null;
-  if(resultEl) resultEl.textContent = 'Midiendo…';
-  log('Medición iniciada: ' + text);
+  if(resultEl) resultEl.textContent = tt('stMidiendo','Midiendo…');
+  log(tt('logMedicionIniciada','Medición iniciada: ') + text);
 
   const mr = new MediaRecorder(globalStream);
   const chunks = [];
@@ -1164,14 +1186,15 @@ async function measurePhrase(key, text, durationMs){
 
   let summary = '';
   if(result.meanF0 === null){
-    summary = 'Sin detección';
+    summary = tt('stSinDeteccion','Sin detección');
   } else if(r.min === null || r.max === null){
-    summary = `media ${result.meanF0} Hz · mín ${result.minF0} · máx ${result.maxF0}`;
+    summary = tt('stResumenSinRango', (m,mn,mx)=>`media ${m} Hz · mín ${mn} · máx ${mx}`)(result.meanF0, result.minF0, result.maxF0);
   } else {
-    summary = `media ${result.meanF0} Hz · mín ${result.minF0} · máx ${result.maxF0} · ${result.pctInRange}% dentro de ${r.min}-${r.max} Hz`;
+    summary = tt('stResumenConRango', (m,mn,mx,p,rmin,rmax)=>`media ${m} Hz · mín ${mn} · máx ${mx} · ${p}% dentro de ${rmin}-${rmax} Hz`)(result.meanF0, result.minF0, result.maxF0, result.pctInRange, r.min, r.max);
   }
   if(resultEl) resultEl.textContent = summary;
-  log('Medición finalizada: ' + key + ' → ' + summary);
+  result.summaryText = summary;
+  log(tt('logMedicionFinalizada','Medición finalizada: ') + key + ' → ' + summary);
 
   if(key === 'texto') { const el = document.getElementById('texto_result'); if(el) el.textContent = summary; }
   if(key === 'cuento') { const el = document.getElementById('cuento_result'); if(el) el.textContent = summary; }
@@ -1207,18 +1230,18 @@ function createBorgWrap(actId, title){
   let borgHtml = '<div style="margin-top:10px;font-size:12.5px"><strong>Escala Borg CR-10 (esfuerzo/fatiga vocal percibida):</strong><div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">';
   borgNumbers.forEach(function(opt){ var label = opt === 8.5 ? '8-9' : String(opt); borgHtml += '<label style="display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:8px;background:#fff;border:1px solid var(--border);cursor:pointer;font-size:12px"><input type="radio" name="borg_num_'+actId+'" value="'+opt+'"> '+label+'</label>'; });
   borgHtml += '</div></div>';
-  const saveBtn = '<div style="margin-top:10px" class="row"><button class="primary" id="'+actId+'_borg_save">Guardar</button> <button class="ghost" id="'+actId+'_borg_close">Cerrar</button> <span id="'+actId+'_borg_value" class="analysisBadge"></span></div>';
-  wrap.innerHTML = '<div style="font-weight:700;font-size:13px">Registro de esfuerzo — ' + escapeHtml(title) + '</div><div class="subtle" style="margin-top:4px">Registra cómo se sintió la persona después de esta actividad. No busca un valor "correcto".</div>' + descHtml + borgHtml + saveBtn;
+  const saveBtn = '<div style="margin-top:10px" class="row"><button class="primary" id="'+actId+'_borg_save">'+escapeHtml(tt('btnGuardar','Guardar'))+'</button> <button class="ghost" id="'+actId+'_borg_close">'+escapeHtml(tt('btnCerrar','Cerrar'))+'</button> <span id="'+actId+'_borg_value" class="analysisBadge"></span></div>';
+  wrap.innerHTML = '<div style="font-weight:700;font-size:13px">' + escapeHtml(tt('borgTitulo','Registro de esfuerzo — ')) + escapeHtml(title) + '</div><div class="subtle" style="margin-top:4px">' + escapeHtml(tt('borgNota','Registra cómo se sintió la persona después de esta actividad. No busca un valor "correcto".')) + '</div>' + descHtml + borgHtml + saveBtn;
   parent.appendChild(wrap);
   document.getElementById(actId + '_borg_save').addEventListener('click', function(){
     const checks = Array.from(document.querySelectorAll('input[name="borg_desc_' + actId + '"]:checked')).map(n=>n.value);
     const sel = document.querySelector('input[name="borg_num_' + actId + '"]:checked');
-    if(!sel){ alert('Selecciona un valor de la escala Borg antes de guardar.'); return; }
+    if(!sel){ alert(tt('errSeleccionaBorg','Selecciona un valor de la escala Borg antes de guardar.')); return; }
     const v = sel.value;
     wrap.dataset.borgValue = v;
     wrap.dataset.borgDescs = checks.join('; ');
-    document.getElementById(actId + '_borg_value').textContent = 'Guardado: ' + v + (checks.length ? ' · ' + checks.join(', ') : '');
-    log('Borg guardado — ' + title + ': ' + v + (checks.length? (' — ' + checks.join('; ')) : ''));
+    document.getElementById(actId + '_borg_value').textContent = tt('logGuardadoDosPuntos','Guardado: ') + v + (checks.length ? ' · ' + checks.join(', ') : '');
+    log(tt('logBorgGuardado','Borg guardado — ') + title + ': ' + v + (checks.length? (' — ' + checks.join('; ')) : ''));
   });
   document.getElementById(actId + '_borg_close').addEventListener('click', function(){ wrap.style.display='none'; });
 }
@@ -1290,35 +1313,35 @@ function buildAnalysisSummary(){
 
   const r = currentRange();
   let obs = [];
-  obs.push('Autoevaluación de congruencia/comodidad vocal (medida central, 0-10): ' + (profile.satisf ?? '—') + '.');
+  obs.push(tt('anlAutoeval','Autoevaluación de congruencia/comodidad vocal (medida central, 0-10): ') + (profile.satisf ?? '—') + '.');
   if(avgMeanF0 !== null){
     if(r.min !== null && r.max !== null){
-      obs.push('F0 media global de apoyo: ' + avgMeanF0 + ' Hz, frente a un rango de referencia personalizado de ' + r.min + '-' + r.max + ' Hz.');
+      obs.push(tt('anlF0MediaConRango','F0 media global de apoyo: ') + avgMeanF0 + tt('anlF0MediaConRango2',' Hz, frente a un rango de referencia personalizado de ') + r.min + '-' + r.max + ' Hz.');
     } else {
-      obs.push('F0 media global de apoyo: ' + avgMeanF0 + ' Hz (sin rango de referencia definido para esta sesión).');
+      obs.push(tt('anlF0MediaSinRango','F0 media global de apoyo: ') + avgMeanF0 + tt('anlF0MediaSinRango2',' Hz (sin rango de referencia definido para esta sesión).'));
     }
   } else {
-    obs.push('No hay mediciones de F0 suficientes en esta sesión.');
+    obs.push(tt('anlNoHayF0','No hay mediciones de F0 suficientes en esta sesión.'));
   }
-  if(r.min !== null && r.max !== null) obs.push('Porcentaje de muestras dentro del rango de referencia: ' + pctInRangeOverall + '%. Este dato es solo de apoyo: la evidencia disponible indica que no se correlaciona necesariamente con la satisfacción autopercibida.');
-  if(borgAvg !== null) obs.push('Esfuerzo/fatiga vocal (Borg) promedio: ' + borgAvg + '.');
-  if(splAvg !== null) obs.push('Nivel sonoro promedio en cruces de lectura: ' + splAvg + ' dB (' + tsArr.length + ' eventos).');
+  if(r.min !== null && r.max !== null) obs.push(tt('anlPctDentroRango','Porcentaje de muestras dentro del rango de referencia: ') + pctInRangeOverall + tt('anlPctDentroRango2','%. Este dato es solo de apoyo: la evidencia disponible indica que no se correlaciona necesariamente con la satisfacción autopercibida.'));
+  if(borgAvg !== null) obs.push(tt('anlBorgPromedio','Esfuerzo/fatiga vocal (Borg) promedio: ') + borgAvg + '.');
+  if(splAvg !== null) obs.push(tt('anlSplPromedio','Nivel sonoro promedio en cruces de lectura: ') + splAvg + tt('anlSplPromedio2',' dB (') + tsArr.length + tt('anlSplPromedio3',' eventos).'));
 
   const summaryObj = { avgMeanF0, pctInRangeOverall, totalMeasuredItems: totalMeanCount, totalSamples, repsDone: done, repsGoal: goal, repsPct, borgAvg, splAvg, splEvents: tsArr.length, observations: obs, satisf: profile.satisf };
 
-  let text = 'Resumen — Sesión\n';
-  text += 'Persona: ' + (profile.name || 'Sin nombre registrado') + '\n';
-  text += 'Fecha de sesión: ' + (profile.date || 'No guardada') + '\n';
-  text += 'Orientación del trabajo: ' + goalTypeLabel(profile.goalType) + (r.min!==null&&r.max!==null? (' (' + r.min + '-' + r.max + ' Hz de referencia)') : '') + '\n\n';
-  text += '- Autoevaluación de congruencia/comodidad (0-10): ' + (profile.satisf ?? '—') + '\n';
-  if(profile.satisfNotes) text += '- Comentario de la persona: ' + profile.satisfNotes + '\n';
-  text += '- Mediciones F0 (ítems medidos): ' + totalMeanCount + '\n';
-  if(avgMeanF0 !== null) text += '- F0 media global de apoyo: ' + avgMeanF0 + ' Hz\n';
-  if(r.min !== null && r.max !== null) text += '- % de muestras dentro del rango de referencia (' + r.min + '-' + r.max + ' Hz): ' + pctInRangeOverall + '%\n';
-  text += '- Repeticiones completadas: ' + done + ' / ' + goal + ' (' + repsPct + '%)\n';
-  if(borgAvg !== null) text += '- Esfuerzo/fatiga vocal (Borg) promedio: ' + borgAvg + '\n';
-  if(splAvg !== null) text += '- Nivel sonoro promedio en cruces: ' + splAvg + ' dB (' + tsArr.length + ' eventos)\n';
-  text += '\nObservaciones:\n';
+  let text = tt('anlResumenTitulo','Resumen — Sesión') + '\n';
+  text += tt('pdfPersona','Persona: ') + (profile.name || tt('pdfSinNombreRegistrado','Sin nombre registrado')) + '\n';
+  text += tt('pdfFechaSesion','Fecha de sesión: ') + (profile.date || tt('stNoGuardada','No guardada')) + '\n';
+  text += tt('anlOrientacion','Orientación del trabajo: ') + goalTypeLabel(profile.goalType) + (r.min!==null&&r.max!==null? (' (' + r.min + '-' + r.max + tt('anlHzReferencia',' Hz de referencia)')) : '') + '\n\n';
+  text += tt('anlAutoevalLinea','- Autoevaluación de congruencia/comodidad (0-10): ') + (profile.satisf ?? '—') + '\n';
+  if(profile.satisfNotes) text += tt('anlComentario','- Comentario de la persona: ') + profile.satisfNotes + '\n';
+  text += tt('anlMedicionesF0','- Mediciones F0 (ítems medidos): ') + totalMeanCount + '\n';
+  if(avgMeanF0 !== null) text += tt('anlF0MediaLinea','- F0 media global de apoyo: ') + avgMeanF0 + ' Hz\n';
+  if(r.min !== null && r.max !== null) text += tt('anlPctLinea','- % de muestras dentro del rango de referencia (') + r.min + '-' + r.max + tt('anlPctLinea2',' Hz): ') + pctInRangeOverall + '%\n';
+  text += tt('anlRepsLinea','- Repeticiones completadas: ') + done + ' / ' + goal + ' (' + repsPct + '%)\n';
+  if(borgAvg !== null) text += tt('anlBorgLinea','- Esfuerzo/fatiga vocal (Borg) promedio: ') + borgAvg + '\n';
+  if(splAvg !== null) text += tt('anlSplLinea','- Nivel sonoro promedio en cruces: ') + splAvg + tt('anlSplLinea2',' dB (') + tsArr.length + tt('anlSplLinea3',' eventos)') + '\n';
+  text += tt('anlObservaciones','\nObservaciones:\n');
   obs.forEach(o=> text += '- ' + o + '\n');
 
   return { text, obj: summaryObj, csvLines: [
@@ -1339,7 +1362,13 @@ function buildAnalysisSummary(){
   ]};
 }
 function goalTypeLabel(t){
-  return { feminizacion:'Feminización vocal', masculinizacion:'Masculinización vocal', personalizado:'Rango personalizado / no binario', ninguno:'Sin meta de tono (foco en resonancia/calidad/confort)' }[t] || t || '—';
+  const map = {
+    feminizacion: tt('goalFeminizacion','Feminización vocal'),
+    masculinizacion: tt('goalMasculinizacion','Masculinización vocal'),
+    personalizado: tt('goalPersonalizado','Rango personalizado / no binario'),
+    ninguno: tt('goalNinguno','Sin meta de tono (foco en resonancia/calidad/confort)')
+  };
+  return map[t] || t || '—';
 }
 
 /* ---------- CSV / PDF / ZIP ---------- */
@@ -1352,34 +1381,34 @@ function generateSessionCSV(){
   try{
     const analysis = buildAnalysisSummary();
     const lines = [];
-    lines.push('Persona;' + (profile.name || 'Sin nombre'));
-    lines.push('Fecha de sesión;' + (profile.date || 'No guardada'));
-    lines.push('Orientación del trabajo;' + goalTypeLabel(profile.goalType));
-    lines.push('Export Fecha;' + new Date().toLocaleString());
+    lines.push(tt('csvPersona','Persona') + ';' + (profile.name || tt('stSinNombre','Sin nombre')));
+    lines.push(tt('csvFechaSesion','Fecha de sesión') + ';' + (profile.date || tt('stNoGuardada','No guardada')));
+    lines.push(tt('csvOrientacion','Orientación del trabajo') + ';' + goalTypeLabel(profile.goalType));
+    lines.push(tt('csvExportFecha','Export Fecha') + ';' + new Date().toLocaleString());
     lines.push('');
     lines.push(...analysis.csvLines);
     lines.push('');
-    lines.push('Repeticiones');
-    lines.push('Actividad;Repeticiones');
+    lines.push(tt('csvRepeticiones','Repeticiones'));
+    lines.push(tt('csvActividadRepeticiones','Actividad;Repeticiones'));
     collectReps().forEach(function(r){ lines.push('"' + r.label + '";' + r.count); });
 
     lines.push('');
-    lines.push('Lectura de frases - análisis por variante');
-    lines.push('Frase;Media_F0(Hz);Mediana_F0;Min_F0;Max_F0;Rango_F0;N_samples;Pct_dentro_de_rango;Grabacion');
+    lines.push(tt('csvLecturaFrasesTitulo','Lectura de frases - análisis por variante'));
+    lines.push(tt('csvLecturaFrasesHeader','Frase;Media_F0(Hz);Mediana_F0;Min_F0;Max_F0;Rango_F0;N_samples;Pct_dentro_de_rango;Grabacion'));
     for(const key in phraseResults){
       const res = phraseResults[key];
-      if(!res){ lines.push('"' + key + '";No medido;;;;;;;'); continue; }
+      if(!res){ lines.push('"' + key + '";' + tt('csvNoMedido','No medido') + ';;;;;;;'); continue; }
       lines.push('"' + (res.text||key).replace(/"/g,'""') + '";' + (res.meanF0||'') + ';' + (res.medianF0||'') + ';' + (res.minF0||'') + ';' + (res.maxF0||'') + ';' + (res.rangeF0||'') + ';' + (res.nSamples||0) + ';' + (res.pctInRange||0) + ';' + (res.recordingName||''));
     }
 
     lines.push('');
-    lines.push('Lectura visual - Timestamps (index;timestamp_iso;SPL_dB;contador)');
+    lines.push(tt('csvLecturaVisualHeader','Lectura visual - Timestamps (index;timestamp_iso;SPL_dB;contador)'));
     const tsArr = window.__a_lectura_texto_timestamps || [];
-    if(tsArr.length === 0) lines.push('No hay timestamps registrados');
+    if(tsArr.length === 0) lines.push(tt('csvNoTimestamps','No hay timestamps registrados'));
     tsArr.forEach(function(t,i){ lines.push((i+1) + ';' + (t.ts||'') + ';' + (t.spl||'') + ';' + (t.count||'')); });
 
     lines.push('');
-    lines.push('Grabaciones (nombre;fecha)');
+    lines.push(tt('csvGrabacionesHeader','Grabaciones (nombre;fecha)'));
     recordings.forEach(function(r){ lines.push('"' + r.name.replace(/"/g,'""') + '";' + r.date); });
 
     const csv = lines.join('\n');
@@ -1387,9 +1416,9 @@ function generateSessionCSV(){
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a'); a.href = url; a.download = 'informe_sesion_' + fileSafeName() + '_' + (new Date()).toISOString().slice(0,10) + '.csv'; document.body.appendChild(a); a.click(); a.remove();
     setTimeout(()=>URL.revokeObjectURL(url),5000);
-    log('CSV generado y descargado.');
+    log(tt('logCsvGenerado','CSV generado y descargado.'));
   }catch(e){
-    alert('Error generando CSV: ' + e.message);
+    alert(tt('errGenerandoCsv','Error generando CSV: ') + e.message);
   }
 }
 
@@ -1405,14 +1434,14 @@ async function buildPdfBlob(){
   const doc = new jsPDF({unit:'pt',format:'a4',orientation:'portrait'});
   const marginLeft = 40; let y = 40;
   doc.setFont('helvetica','bold'); doc.setFontSize(14);
-  doc.text('Informe de sesión — Acompañamiento Vocal Afirmativo', marginLeft, y); y += 18;
+  doc.text(tt('pdfTitulo','Informe de sesión — Acompañamiento Vocal Afirmativo'), marginLeft, y); y += 18;
   doc.setFont('helvetica','normal'); doc.setFontSize(10);
-  doc.text('Persona: ' + (profile.name || 'Sin nombre registrado'), marginLeft, y); y += 12;
-  doc.text('Fecha de sesión: ' + (profile.date || 'No guardada'), marginLeft, y); y += 12;
-  doc.text('Orientación del trabajo: ' + goalTypeLabel(profile.goalType), marginLeft, y); y += 12;
-  doc.text('Fecha de exportación: ' + new Date().toLocaleString(), marginLeft, y); y += 18;
+  doc.text(tt('pdfPersona','Persona: ') + (profile.name || tt('pdfSinNombreRegistrado','Sin nombre registrado')), marginLeft, y); y += 12;
+  doc.text(tt('pdfFechaSesion','Fecha de sesión: ') + (profile.date || tt('stNoGuardada','No guardada')), marginLeft, y); y += 12;
+  doc.text(tt('pdfOrientacion','Orientación del trabajo: ') + goalTypeLabel(profile.goalType), marginLeft, y); y += 12;
+  doc.text(tt('pdfFechaExportacion','Fecha de exportación: ') + new Date().toLocaleString(), marginLeft, y); y += 18;
 
-  doc.setFont('helvetica','bold'); doc.setFontSize(12); doc.text('A) Resumen (autoevaluación y datos de apoyo)', marginLeft, y); y += 14;
+  doc.setFont('helvetica','bold'); doc.setFontSize(12); doc.text(tt('pdfSeccionA','A) Resumen (autoevaluación y datos de apoyo)'), marginLeft, y); y += 14;
   doc.setFont('helvetica','normal'); doc.setFontSize(10);
   analysis.text.split('\n').forEach(function(line){
     if(y > 740){ doc.addPage(); y = 40; }
@@ -1422,7 +1451,7 @@ async function buildPdfBlob(){
   y += 8;
 
   if(y > 720){ doc.addPage(); y = 40; }
-  doc.setFont('helvetica','bold'); doc.setFontSize(12); doc.text('B) Repeticiones por actividad', marginLeft, y); y += 14;
+  doc.setFont('helvetica','bold'); doc.setFontSize(12); doc.text(tt('pdfSeccionB','B) Repeticiones por actividad'), marginLeft, y); y += 14;
   doc.setFont('helvetica','normal'); doc.setFontSize(10);
   reps.forEach(function(r){
     if(y > 740){ doc.addPage(); y = 40; }
@@ -1432,17 +1461,17 @@ async function buildPdfBlob(){
   y += 8;
 
   if(y > 720){ doc.addPage(); y = 40; }
-  doc.setFont('helvetica','bold'); doc.setFontSize(12); doc.text('C) Lectura de frases y lecturas — análisis de apoyo', marginLeft, y); y += 14;
+  doc.setFont('helvetica','bold'); doc.setFontSize(12); doc.text(tt('pdfSeccionC','C) Lectura de frases y lecturas — análisis de apoyo'), marginLeft, y); y += 14;
   doc.setFont('helvetica','normal'); doc.setFontSize(10);
   const r = currentRange();
   for(const key in phraseResults){
     if(y > 740){ doc.addPage(); y = 40; }
     const res = phraseResults[key];
     if(!res){
-      doc.text('- ' + key + ': No medido', marginLeft + 8, y); y += 12;
+      doc.text('- ' + key + ': ' + tt('pdfNoMedido','No medido'), marginLeft + 8, y); y += 12;
     } else {
-      const extra = (r.min!==null && r.max!==null) ? (res.pctInRange||0) + '% dentro de ' + r.min + '-' + r.max + ' Hz' : 'sin rango de referencia definido';
-      const line = '- ' + (res.text || key) + ' → media ' + (res.meanF0||'') + ' Hz; mín ' + (res.minF0||'') + '; máx ' + (res.maxF0||'') + '; ' + extra + '; audio: ' + (res.recordingName||'');
+      const extra = (r.min!==null && r.max!==null) ? (res.pctInRange||0) + tt('pdfDentroDe','% dentro de ') + r.min + '-' + r.max + ' Hz' : tt('pdfSinRangoDefinido','sin rango de referencia definido');
+      const line = '- ' + (res.text || key) + tt('pdfMedia',' → media ') + (res.meanF0||'') + ' Hz; ' + tt('pdfMin','mín ') + (res.minF0||'') + '; ' + tt('pdfMax','máx ') + (res.maxF0||'') + '; ' + extra + '; ' + tt('pdfAudio','audio: ') + (res.recordingName||'');
       const wrapped = doc.splitTextToSize(line, 500);
       wrapped.forEach(function(l){ if(y > 740){ doc.addPage(); y = 40; } doc.text(l, marginLeft + 8, y); y += 12; });
     }
@@ -1450,35 +1479,35 @@ async function buildPdfBlob(){
   y += 8;
 
   if(y > 720){ doc.addPage(); y = 40; }
-  doc.setFont('helvetica','bold'); doc.setFontSize(12); doc.text('D) Registro de esfuerzo/fatiga vocal (Borg CR-10)', marginLeft, y); y += 14;
+  doc.setFont('helvetica','bold'); doc.setFontSize(12); doc.text(tt('pdfSeccionD','D) Registro de esfuerzo/fatiga vocal (Borg CR-10)'), marginLeft, y); y += 14;
   doc.setFont('helvetica','normal'); doc.setFontSize(10);
   borgs.forEach(function(b){
     if(y > 740){ doc.addPage(); y = 40; }
-    const line = '- ' + b.title + ': Borg = ' + (b.borg !== null && typeof b.borg !== 'undefined' ? b.borg : 'No registrado') + (b.descs ? ('; ' + b.descs) : '');
+    const line = '- ' + b.title + tt('pdfBorgIgual',': Borg = ') + (b.borg !== null && typeof b.borg !== 'undefined' ? b.borg : tt('pdfNoRegistrado','No registrado')) + (b.descs ? ('; ' + b.descs) : '');
     const wrapped = doc.splitTextToSize(line, 500);
     wrapped.forEach(function(l){ if(y > 740){ doc.addPage(); y = 40; } doc.text(l, marginLeft + 8, y); y += 12; });
   });
   y += 8;
 
   if(y > 720){ doc.addPage(); y = 40; }
-  doc.setFont('helvetica','bold'); doc.setFontSize(12); doc.text('E) Lectura visual — marcas de proyección vocal', marginLeft, y); y += 14;
+  doc.setFont('helvetica','bold'); doc.setFontSize(12); doc.text(tt('pdfSeccionE','E) Lectura visual — marcas de proyección vocal'), marginLeft, y); y += 14;
   doc.setFont('helvetica','normal'); doc.setFontSize(10);
   if(tsArr.length === 0){
-    doc.text('No hay marcas registradas.', marginLeft + 8, y); y += 12;
+    doc.text(tt('pdfNoHayMarcas','No hay marcas registradas.'), marginLeft + 8, y); y += 12;
   } else {
     tsArr.forEach(function(t,i){
       if(y > 740){ doc.addPage(); y = 40; }
-      doc.text((i+1) + '. ' + (t.ts || '') + ' — ' + (t.spl || '') + ' dB — cruce nº ' + (t.count||''), marginLeft + 8, y);
+      doc.text((i+1) + '. ' + (t.ts || '') + ' — ' + (t.spl || '') + tt('pdfDbCruceNo',' dB — cruce nº ') + (t.count||''), marginLeft + 8, y);
       y += 12;
     });
   }
   y += 12;
 
   if(y > 700){ doc.addPage(); y = 40; }
-  doc.setFont('helvetica','bold'); doc.setFontSize(12); doc.text('F) Grabaciones', marginLeft, y); y += 14;
+  doc.setFont('helvetica','bold'); doc.setFontSize(12); doc.text(tt('pdfSeccionF','F) Grabaciones'), marginLeft, y); y += 14;
   doc.setFont('helvetica','normal'); doc.setFontSize(10);
   if(recordings.length === 0){
-    doc.text('No hay grabaciones registradas.', marginLeft + 8, y); y += 12;
+    doc.text(tt('pdfNoHayGrabaciones','No hay grabaciones registradas.'), marginLeft + 8, y); y += 12;
   } else {
     recordings.forEach(function(r,i){
       if(y > 740){ doc.addPage(); y = 40; }
@@ -1489,9 +1518,9 @@ async function buildPdfBlob(){
 
   y += 12;
   if(y > 700){ doc.addPage(); y = 40; }
-  doc.setFont('helvetica','bold'); doc.setFontSize(12); doc.text('G) Registro de eventos de la sesión', marginLeft, y); y += 12;
+  doc.setFont('helvetica','bold'); doc.setFontSize(12); doc.text(tt('pdfSeccionG','G) Registro de eventos de la sesión'), marginLeft, y); y += 12;
   doc.setFont('helvetica','normal'); doc.setFontSize(9);
-  const wrapped = doc.splitTextToSize(logText || 'Sin registro', 520);
+  const wrapped = doc.splitTextToSize(logText || tt('pdfSinRegistro','Sin registro'), 520);
   wrapped.forEach(function(line){
     if(y > 760){ doc.addPage(); y = 40; }
     doc.text(line, marginLeft, y);
@@ -1507,15 +1536,15 @@ async function exportInformeSesionCompleto(){
     const url = URL.createObjectURL(pdfBlob);
     const a = document.createElement('a'); a.href = url; a.download = 'informe_sesion_' + fileSafeName() + '.pdf'; document.body.appendChild(a); a.click(); a.remove();
     setTimeout(()=>URL.revokeObjectURL(url),5000);
-    log('PDF generado y descargado.');
+    log(tt('logPdfGenerado','PDF generado y descargado.'));
   }catch(err){
-    alert('Error generando PDF: ' + err.message);
+    alert(tt('errGenerandoPdf','Error generando PDF: ') + err.message);
   }
 }
 
 async function exportZipSession(){
   try{
-    log('Generando PDF y empaquetando en ZIP...');
+    log(tt('logGenerandoZip','Generando PDF y empaquetando en ZIP...'));
     const pdfBlob = await buildPdfBlob();
     const zip = new JSZip();
     const base = fileSafeName();
@@ -1535,31 +1564,31 @@ async function exportZipSession(){
     const analysis = buildAnalysisSummary();
     const csvText = (function(){
       const lines = [];
-      lines.push('Persona;' + (profile.name || 'Sin nombre'));
-      lines.push('Fecha de sesión;' + (profile.date || 'No guardada'));
-      lines.push('Orientación del trabajo;' + goalTypeLabel(profile.goalType));
-      lines.push('Export Fecha;' + new Date().toLocaleString());
+      lines.push(tt('csvPersona','Persona') + ';' + (profile.name || tt('stSinNombre','Sin nombre')));
+      lines.push(tt('csvFechaSesion','Fecha de sesión') + ';' + (profile.date || tt('stNoGuardada','No guardada')));
+      lines.push(tt('csvOrientacion','Orientación del trabajo') + ';' + goalTypeLabel(profile.goalType));
+      lines.push(tt('csvExportFecha','Export Fecha') + ';' + new Date().toLocaleString());
       lines.push('');
       lines.push(...analysis.csvLines);
       lines.push('');
-      lines.push('Repeticiones');
-      lines.push('Actividad;Repeticiones');
+      lines.push(tt('csvRepeticiones','Repeticiones'));
+      lines.push(tt('csvActividadRepeticiones','Actividad;Repeticiones'));
       collectReps().forEach(function(r){ lines.push('"' + r.label + '";' + r.count); });
       lines.push('');
-      lines.push('Lectura de frases - análisis por variante');
-      lines.push('Frase;Media_F0(Hz);Mediana_F0;Min_F0;Max_F0;Rango_F0;N_samples;Pct_dentro_de_rango;Grabacion');
+      lines.push(tt('csvLecturaFrasesTitulo','Lectura de frases - análisis por variante'));
+      lines.push(tt('csvLecturaFrasesHeader','Frase;Media_F0(Hz);Mediana_F0;Min_F0;Max_F0;Rango_F0;N_samples;Pct_dentro_de_rango;Grabacion'));
       for(const key in phraseResults){
         const res = phraseResults[key];
-        if(!res){ lines.push('"' + key + '";No medido;;;;;;;'); continue; }
+        if(!res){ lines.push('"' + key + '";' + tt('csvNoMedido','No medido') + ';;;;;;;'); continue; }
         lines.push('"' + (res.text||key).replace(/"/g,'""') + '";' + (res.meanF0||'') + ';' + (res.medianF0||'') + ';' + (res.minF0||'') + ';' + (res.maxF0||'') + ';' + (res.rangeF0||'') + ';' + (res.nSamples||0) + ';' + (res.pctInRange||0) + ';' + (res.recordingName||''));
       }
       lines.push('');
-      lines.push('Lectura visual - Timestamps (index;timestamp_iso;SPL_dB;contador)');
+      lines.push(tt('csvLecturaVisualHeader','Lectura visual - Timestamps (index;timestamp_iso;SPL_dB;contador)'));
       const tsArr = window.__a_lectura_texto_timestamps || [];
-      if(tsArr.length === 0) lines.push('No hay timestamps registrados');
+      if(tsArr.length === 0) lines.push(tt('csvNoTimestamps','No hay timestamps registrados'));
       tsArr.forEach(function(t,i){ lines.push((i+1) + ';' + (t.ts||'') + ';' + (t.spl||'') + ';' + (t.count||'')); });
       lines.push('');
-      lines.push('Grabaciones (nombre;fecha)');
+      lines.push(tt('csvGrabacionesHeader','Grabaciones (nombre;fecha)'));
       recordings.forEach(function(r){ lines.push('"' + r.name.replace(/"/g,'""') + '";' + r.date); });
       return lines.join('\n');
     })();
@@ -1570,9 +1599,9 @@ async function exportZipSession(){
     const a = document.createElement('a'); a.href = url; a.download = 'sesion_' + base + '_export_' + (new Date()).toISOString().slice(0,10) + '.zip';
     document.body.appendChild(a); a.click(); a.remove();
     setTimeout(()=>URL.revokeObjectURL(url),5000);
-    log('ZIP generado y descargado (incluye PDF y grabaciones).');
+    log(tt('logZipGenerado','ZIP generado y descargado (incluye PDF y grabaciones).'));
   }catch(e){
-    alert('Error generando ZIP: ' + (e.message || e));
+    alert(tt('errGenerandoZip','Error generando ZIP: ') + (e.message || e));
   }
 }
 
@@ -1581,15 +1610,15 @@ function showLog(){
   const reps = collectReps();
   const borgs = collectBorgSummary();
   const analysis = buildAnalysisSummary();
-  let txt = 'Registro actual — Persona: ' + (profile.name || 'Sin nombre') + '\n\nFecha de sesión: ' + (profile.date || 'No guardada') + '\n\n' + analysis.text + '\n\nRepeticiones:\n';
+  let txt = tt('showLogRegistroActual','Registro actual — Persona: ') + (profile.name || tt('stSinNombre','Sin nombre')) + tt('showLogFechaSesion','\n\nFecha de sesión: ') + (profile.date || tt('stNoGuardada','No guardada')) + '\n\n' + analysis.text + tt('showLogRepeticiones','\n\nRepeticiones:\n');
   reps.forEach(function(r){ txt += '- ' + r.label + ': ' + r.count + '\n'; });
   txt += '\nLectura de frases:\n';
   for(const k in phraseResults){
     const r = phraseResults[k];
-    txt += '- ' + k + ': ' + (r ? ('media ' + (r.meanF0||'') + ' Hz') : 'No medido') + '\n';
+    txt += '- ' + k + ': ' + (r ? (tt('pdfMedia2','media ') + (r.meanF0||'') + ' Hz') : tt('pdfNoMedido','No medido')) + '\n';
   }
   txt += '\nBorg:\n';
-  borgs.forEach(function(b){ txt += '- ' + b.title + ': ' + (b.borg!==null?b.borg:'No registrado') + (b.descs?(' · ' + b.descs):'') + '\n'; });
+  borgs.forEach(function(b){ txt += '- ' + b.title + ': ' + (b.borg!==null?b.borg:tt('pdfNoRegistrado','No registrado')) + (b.descs?(' · ' + b.descs):'') + '\n'; });
   txt += '\nLectura visual: ' + ((window.__a_lectura_texto_timestamps||[]).length) + ' eventos registrados\n\nGrabaciones:\n';
   recordings.forEach(function(r){ txt += '- ' + r.name + ' (' + (r.date||'') + ')\n'; });
   txt += '\n(Últimos eventos arriba)';
@@ -1602,7 +1631,7 @@ function resetActivity(blockId){
   const block = document.getElementById(blockId);
   if(!block) return;
   block.querySelectorAll('input[type="checkbox"]').forEach(cb => { cb.checked = false; });
-  log(`Reiniciado: ${blockId}`);
+  log(tt('logReiniciadoBloque','Reiniciado: ') + blockId);
 }
 function resetAll(){
   document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
@@ -1610,14 +1639,15 @@ function resetAll(){
   const elC = document.getElementById('a_lectura_texto_counter'); if(elC) elC.textContent = '0';
   ['b1','b2','b3'].forEach(function(id){ const wrap=document.getElementById(id + '_borg_wrap'); if(wrap){ delete wrap.dataset.borgValue; delete wrap.dataset.borgDescs; const valEl=document.getElementById(id + '_borg_value'); if(valEl) valEl.textContent=''; }});
   for(const k in phraseResults) phraseResults[k] = null;
-  if(document.getElementById('texto_result')) document.getElementById('texto_result').textContent = 'Sin medir';
-  if(document.getElementById('cuento_result')) document.getElementById('cuento_result').textContent = 'Sin medir';
+  document.querySelectorAll('#phrasesContainer .analysisBadge').forEach(function(s){ s.textContent = tt('badgeSinMedir','Sin medir'); });
+  if(document.getElementById('texto_result')) document.getElementById('texto_result').textContent = tt('badgeSinMedir','Sin medir');
+  if(document.getElementById('cuento_result')) document.getElementById('cuento_result').textContent = tt('badgeSinMedir','Sin medir');
   document.getElementById('satisfSlider').value = 5;
   document.getElementById('satisfValue').textContent = 5;
   document.getElementById('satisfNotes').value = '';
   profile.satisf = 5; profile.satisfNotes = '';
   const la = document.getElementById('logArea'); if(la) la.textContent = 'Contadores reiniciados.';
-  log('Reiniciado: todos los contadores y registros de esta sesión.');
+  log(tt('logReiniciadoTodo','Reiniciado: todos los contadores y registros de esta sesión.'));
   updateSmallSummaryLabel();
 }
 
@@ -1657,12 +1687,12 @@ window.showLog = showLog;
 
   toggleBtn.addEventListener('click', function(){
     if(panel.classList.contains('floating')){
-      panel.classList.remove('floating'); panel.style.left=''; panel.style.top=''; toggleBtn.textContent = 'Flotar';
+      panel.classList.remove('floating'); panel.style.left=''; panel.style.top=''; toggleBtn.textContent = tt('stFlotar','Flotar');
     } else {
       panel.classList.add('floating');
       panel.style.left = (window.innerWidth - 500) + 'px';
       panel.style.top = '80px';
-      toggleBtn.textContent = 'Anclar';
+      toggleBtn.textContent = tt('stAnclar','Anclar');
     }
     persist();
   });
@@ -1725,11 +1755,11 @@ window.showLog = showLog;
       if(obj.pos){ win.style.left = obj.pos.left + 'px'; win.style.top = obj.pos.top + 'px'; }
       if(obj.size){ win.style.width = obj.size.w + 'px'; win.style.height = obj.size.h + 'px'; }
       if(obj.minimized) win.classList.add('minimized');
-      if(obj.visible === false){ win.classList.add('hidden'); toggleVisibilityBtn.textContent = 'Mostrar gráfico F0'; pitchVisibilityLabel.textContent = 'Gráfico F0: oculto'; }
-      else { toggleVisibilityBtn.textContent = 'Ocultar gráfico F0'; pitchVisibilityLabel.textContent = 'Gráfico F0: visible (ventana flotante)'; }
+      if(obj.visible === false){ win.classList.add('hidden'); toggleVisibilityBtn.textContent = tt('btnMostrarF0','Mostrar gráfico F0'); pitchVisibilityLabel.textContent = tt('lblF0Oculto','Gráfico F0: oculto'); }
+      else { toggleVisibilityBtn.textContent = tt('btnOcultarF0','Ocultar gráfico F0'); pitchVisibilityLabel.textContent = tt('lblF0Visible','Gráfico F0: visible (ventana flotante)'); }
     } else {
       toggleVisibilityBtn.textContent = 'Ocultar gráfico F0';
-      pitchVisibilityLabel.textContent = 'Gráfico F0: visible (ventana flotante)';
+      pitchVisibilityLabel.textContent = tt('lblF0Visible','Gráfico F0: visible (ventana flotante)');
     }
   }catch(e){}
 
@@ -1783,19 +1813,19 @@ window.showLog = showLog;
   minBtn.addEventListener('click', function(){ win.classList.toggle('minimized'); persist(); });
   closeBtn.addEventListener('click', function(){
     win.classList.add('hidden');
-    toggleVisibilityBtn.textContent = 'Mostrar gráfico F0';
-    pitchVisibilityLabel.textContent = 'Gráfico F0: oculto';
+    toggleVisibilityBtn.textContent = tt('btnMostrarF0','Mostrar gráfico F0');
+    pitchVisibilityLabel.textContent = tt('lblF0Oculto','Gráfico F0: oculto');
     persist();
   });
   toggleVisibilityBtn.addEventListener('click', function(){
     if(win.classList.contains('hidden')){
       win.classList.remove('hidden');
-      toggleVisibilityBtn.textContent = 'Ocultar gráfico F0';
-      pitchVisibilityLabel.textContent = 'Gráfico F0: visible (ventana flotante)';
+      toggleVisibilityBtn.textContent = tt('btnOcultarF0','Ocultar gráfico F0');
+      pitchVisibilityLabel.textContent = tt('lblF0Visible','Gráfico F0: visible (ventana flotante)');
     } else {
       win.classList.add('hidden');
-      toggleVisibilityBtn.textContent = 'Mostrar gráfico F0';
-      pitchVisibilityLabel.textContent = 'Gráfico F0: oculto';
+      toggleVisibilityBtn.textContent = tt('btnMostrarF0','Mostrar gráfico F0');
+      pitchVisibilityLabel.textContent = tt('lblF0Oculto','Gráfico F0: oculto');
     }
     persist();
   });
@@ -1817,9 +1847,35 @@ function updateSmallSummaryLabel(){
 (function init(){
   loadProfile();
   const tb = document.getElementById('toggleDockBtn');
-  if(tb) tb.textContent = (document.getElementById('floatingPanel').classList.contains('floating')) ? 'Anclar' : 'Flotar';
+  if(tb) tb.textContent = (document.getElementById('floatingPanel').classList.contains('floating')) ? tt('stAnclar','Anclar') : tt('stFlotar','Flotar');
   updateSmallSummaryLabel();
 })();
+</script>
+<script>
+window.addEventListener('cv-lang-changed', function(){
+  try{ phraseGroups = getPhraseGroups(); buildPhrasesUI(); }catch(e){}
+  try{ updateSavedBadge(); }catch(e){}
+  try{ renderRecordings(); }catch(e){}
+  try{
+    const tb = document.getElementById('toggleDockBtn');
+    if(tb) tb.textContent = (document.getElementById('floatingPanel').classList.contains('floating')) ? tt('stAnclar','Anclar') : tt('stFlotar','Flotar');
+  }catch(e){}
+  try{
+    const win = document.getElementById('pitchWindow');
+    const toggleVisibilityBtn = document.getElementById('togglePitchVisibilityBtn');
+    const pitchVisibilityLabel = document.getElementById('pitchVisibilityLabel');
+    if(win && toggleVisibilityBtn && pitchVisibilityLabel){
+      if(win.classList.contains('hidden')){ toggleVisibilityBtn.textContent = tt('btnMostrarF0','Mostrar gráfico F0'); pitchVisibilityLabel.textContent = tt('lblF0Oculto','Gráfico F0: oculto'); }
+      else { toggleVisibilityBtn.textContent = tt('btnOcultarF0','Ocultar gráfico F0'); pitchVisibilityLabel.textContent = tt('lblF0Visible','Gráfico F0: visible (ventana flotante)'); }
+    }
+  }catch(e){}
+  try{
+    document.querySelectorAll('#phrasesContainer button.ghost').forEach(function(b){
+      if(b.dataset.key) b.textContent = tt('btnMedir3s','Medir (3 s)');
+    });
+  }catch(e){}
+  try{ if(typeof updateSmallSummaryLabel === 'function') updateSmallSummaryLabel(); }catch(e){}
+});
 </script>
 <script src="../assets/theme-switcher.js" defer></script>
 </body>

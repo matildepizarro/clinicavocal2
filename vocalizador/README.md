@@ -1,4 +1,4 @@
-# Vocalizer 2026
+# Ejercicios Vocales
 
 Entrenador vocal 100% local: asistente de rango con clasificación de voz, más de 30
 ejercicios (mayores, menores, pentatónicas, cromáticas, intervalos, arpegios y técnica
@@ -6,7 +6,7 @@ vocal), afinador con modo nota fija/auto-detección, evaluación de grabaciones 
 puntaje y curva de pitch, entrenamiento de vibrato, rutinas personalizadas, grabadora
 con biblioteca persistente y metrónomo. Sin cuentas, sin nube, sin conexión requerida.
 
-Autora original de Vocalizer: **Matilde Pizarro Toro**. Esta versión (2026) es una
+Autora original de Ejercicios Vocales: **Matilde Pizarro Toro**. Esta versión (2026) es una
 reconstrucción completa del proyecto original, manteniendo su espíritu y su autoría.
 
 ## Versión 2 — funciones añadidas a pedido

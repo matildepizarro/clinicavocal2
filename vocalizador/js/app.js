@@ -1,5 +1,5 @@
-// app.js — orquesta toda la interfaz de Vocalizer 2026.
-import { EXERCISES, CATEGORIES, PROGRESSIONS, findExercise, exerciseDuration } from './exercises.js';
+// app.js — orquesta toda la interfaz de Ejercicios Vocales.
+import { EXERCISES, CATEGORIES, PROGRESSIONS, findExercise, exerciseDuration, translateExercise, translateCategoryName, translateProgressionName } from './exercises.js';
 import { yinDetect, freqToNote, rms, freqToMidiExact, midiToFreq, SOLFEGE_NAMES, LETTER_NAMES } from './pitch.js';
 import { AudioEngine } from './audio.js';
 import { MicManager } from './mic.js';
@@ -141,6 +141,8 @@ const VOICE_RANGES = [
   { id:'mezzo', label:'Mezzosoprano', lo:220, hi:880 },
   { id:'soprano', label:'Soprano', lo:262, hi:1047 }
 ];
+const RANGE_LABEL_KEYS = { bass:'optBass', baritone:'optBaritone', tenor:'optTenor', alto:'optAlto', mezzo:'optMezzo', soprano:'optSoprano' };
+function translateRangeLabel(cls){ const key = RANGE_LABEL_KEYS[cls.id]; return key ? tt(key, cls.label) : cls.label; }
 function classifyVoiceRange(minF, maxF){
   let best = null, bestScore = Infinity;
   for(const r of VOICE_RANGES){
@@ -243,10 +245,13 @@ updateTransposeDisplay();
 let activeCategory = 'all';
 let currentExerciseId = EXERCISES[0].id;
 const exerciseSearch = $('exerciseSearch');
+function curLang(){ return (window.CV_I18N && window.CV_I18N.lang) || 'es'; }
+function tt(key, fallback){ return window.CV_I18N ? window.CV_I18N.t(key) : fallback; }
 
 function renderCategoryChips(){
   const wrap = $('categoryChips'); wrap.innerHTML = '';
-  const all = [{ id:'all', nombre:'Todas' }, { id:'favoritos', nombre:'★ Favoritos' }, ...CATEGORIES];
+  const lang = curLang();
+  const all = [{ id:'all', nombre: tt('chipAll','Todas') }, { id:'favoritos', nombre: tt('chipFavoritos','★ Favoritos') }, ...CATEGORIES.map(c=> ({ id:c.id, nombre: translateCategoryName(c.id, c.nombre, lang) }))];
   all.forEach(c=>{
     const b = document.createElement('button');
     b.type = 'button'; b.className = 'chip' + (activeCategory === c.id ? ' active' : ''); b.textContent = c.nombre;
@@ -261,6 +266,7 @@ function toggleFavorite(id){
 }
 function renderExerciseList(){
   const q = exerciseSearch.value.trim().toLowerCase();
+  const lang = curLang();
   const list = $('exerciseList'); list.innerHTML = '';
   const filtered = EXERCISES.filter(ex=>{
     if(activeCategory === 'favoritos' && !settings.favorites.includes(ex.id)) return false;
@@ -269,18 +275,19 @@ function renderExerciseList(){
     return true;
   });
   if(filtered.length === 0){
-    const li = document.createElement('li'); li.className = 'empty'; li.textContent = 'Sin resultados.'; list.appendChild(li); return;
+    const li = document.createElement('li'); li.className = 'empty'; li.textContent = tt('sinResultados','Sin resultados.'); list.appendChild(li); return;
   }
-  filtered.forEach(ex=>{
+  filtered.forEach(ex0=>{
+    const ex = translateExercise(ex0, lang);
     const li = document.createElement('li');
     li.className = 'exerciseItem' + (ex.id === currentExerciseId ? ' selected' : '');
     li.title = ex.descripcion;
     const fav = document.createElement('button');
     fav.type = 'button'; fav.className = 'favBtn' + (settings.favorites.includes(ex.id) ? ' active' : ''); fav.textContent = '★';
-    fav.setAttribute('aria-label', 'Marcar como favorito');
+    fav.setAttribute('aria-label', tt('marcarFavorito','Marcar como favorito'));
     fav.addEventListener('click', (ev)=>{ ev.stopPropagation(); toggleFavorite(ex.id); });
     const nameWrap = document.createElement('div'); nameWrap.className = 'exName';
-    const catName = (CATEGORIES.find(c=> c.id === ex.categoria) || {}).nombre || ex.categoria;
+    const catName = translateCategoryName(ex.categoria, (CATEGORIES.find(c=> c.id === ex.categoria) || {}).nombre || ex.categoria, lang);
     nameWrap.innerHTML = `<strong>${escapeHtml(ex.nombre)}</strong><small>${escapeHtml(catName)} · ${escapeHtml(ex.nivel)}</small>`;
     li.append(fav, nameWrap);
     li.addEventListener('click', ()=>{ currentExerciseId = ex.id; renderExerciseList(); });
@@ -291,9 +298,10 @@ exerciseSearch.addEventListener('input', renderExerciseList);
 
 function renderProgressions(){
   const list = $('progressionList'); list.innerHTML = '';
+  const lang = curLang();
   PROGRESSIONS.forEach(p=>{
     const li = document.createElement('li');
-    const span = document.createElement('span'); span.textContent = p.nombre;
+    const span = document.createElement('span'); span.textContent = translateProgressionName(p.id, p.nombre, lang);
     const btn = document.createElement('button'); btn.className = 'btn'; btn.textContent = '▶';
     btn.addEventListener('click', ()=> startPlayback(p.steps.slice(), { loop:loopEnabled }));
     li.append(span, btn); list.appendChild(li);
@@ -302,9 +310,11 @@ function renderProgressions(){
 
 function populatePlainExerciseSelect(selectEl){
   selectEl.innerHTML = '';
+  const lang = curLang();
   CATEGORIES.forEach(cat=>{
-    const group = document.createElement('optgroup'); group.label = cat.nombre;
-    EXERCISES.filter(ex=> ex.categoria === cat.id).forEach(ex=>{
+    const group = document.createElement('optgroup'); group.label = translateCategoryName(cat.id, cat.nombre, lang);
+    EXERCISES.filter(ex=> ex.categoria === cat.id).forEach(ex0=>{
+      const ex = translateExercise(ex0, lang);
       const o = document.createElement('option'); o.value = ex.id; o.textContent = ex.nombre;
       group.appendChild(o);
     });
@@ -336,7 +346,7 @@ function playQueueRun(queue){
         const dir = settings.autoTransposeDir === 'down' ? -1 : 1;
         const next = (settings.transpose||0) + dir;
         if(next > TRANSPOSE_MAX || next < TRANSPOSE_MIN){
-          showToast('Llegaste al límite de transposición para este ejercicio.');
+          showToast(tt('toastLimiteTransposicion','Llegaste al límite de transposición para este ejercicio.'));
           stopPlayback();
           return;
         }
@@ -367,7 +377,7 @@ function stopPlayback(){
 
 playBtn.addEventListener('click', async ()=>{
   await engine.resume();
-  try{ await ensureMic(); if(!vizRaf) drawViz(); }catch{ showToast('No se pudo activar el micrófono: revisa los permisos.', 'error'); }
+  try{ await ensureMic(); if(!vizRaf) drawViz(); }catch{ showToast(tt('toastMicNoActivadoPermisos','No se pudo activar el micrófono: revisa los permisos.'), 'error'); }
   startPlayback([currentExerciseId], { loop: loopEnabled });
 });
 stopBtn.addEventListener('click', stopPlayback);
@@ -458,7 +468,7 @@ tunerPlayNoteBtn.addEventListener('click', async ()=>{
 });
 tunerFollowBtn.addEventListener('click', async ()=>{
   await engine.resume();
-  try{ await ensureMic(); if(!vizRaf) drawViz(); }catch{ showToast('No se pudo activar el micrófono.', 'error'); return; }
+  try{ await ensureMic(); if(!vizRaf) drawViz(); }catch{ showToast(tt('toastMicNoActivado','No se pudo activar el micrófono.'), 'error'); return; }
   tunerFollowActive = !tunerFollowActive;
   tunerFollowBtn.setAttribute('aria-pressed', String(tunerFollowActive));
   if(tunerFollowActive) engine.startFollowTone(220); else engine.stopFollowTone();
@@ -552,7 +562,7 @@ document.addEventListener('click', async ()=>{
 let mediaRecorder = null, recordedChunks = [];
 recordBtn.addEventListener('click', async ()=>{
   if(recordBtn.dataset.recording === 'true'){ mediaRecorder.stop(); return; }
-  try{ await ensureMic(); }catch{ showToast('No se pudo acceder al micrófono.', 'error'); return; }
+  try{ await ensureMic(); }catch{ showToast(tt('toastMicAcceso','No se pudo acceder al micrófono.'), 'error'); return; }
   recordedChunks = [];
   mediaRecorder = new MediaRecorder(mic.getRecordingStream());
   mediaRecorder.ondataavailable = e=>{ if(e.data && e.data.size) recordedChunks.push(e.data); };
@@ -562,7 +572,7 @@ recordBtn.addEventListener('click', async ()=>{
     const blob = new Blob(recordedChunks, { type:'audio/webm' });
     const ex = findExercise(currentExerciseId);
     await saveRecording({ blob, mimeType:'audio/webm', durationSec:(Date.now()-startedAt)/1000, exerciseName: ex ? ex.nombre : null });
-    showToast('Grabación guardada.');
+    showToast(tt('toastGrabacionGuardada','Grabación guardada.'));
     if(!$('panel-grabaciones').hidden) renderRecordings();
   };
   mediaRecorder.start();
@@ -582,55 +592,56 @@ async function renderRecordings(){
     const audio = document.createElement('audio'); audio.controls = true; audio.src = url;
     const meta = document.createElement('div'); meta.className = 'recMeta';
     meta.innerHTML = `${rec.exerciseName ? escapeHtml(rec.exerciseName) + ' · ' : ''}${fmtDate(rec.createdAt)}`;
-    const dlWebm = document.createElement('button'); dlWebm.className = 'btn'; dlWebm.textContent = 'Descargar';
-    dlWebm.addEventListener('click', ()=>{ const a = document.createElement('a'); a.href = url; a.download = `vocalizer_${rec.id}.webm`; a.click(); });
-    const dlWav = document.createElement('button'); dlWav.className = 'btn'; dlWav.textContent = 'Como WAV';
+    const dlWebm = document.createElement('button'); dlWebm.className = 'btn'; dlWebm.textContent = tt('btnDescargar','Descargar');
+    dlWebm.addEventListener('click', ()=>{ const a = document.createElement('a'); a.href = url; a.download = `ejercicio-vocal_${rec.id}.webm`; a.click(); });
+    const dlWav = document.createElement('button'); dlWav.className = 'btn'; dlWav.textContent = tt('btnComoWav','Como WAV');
     dlWav.addEventListener('click', async ()=>{
-      dlWav.disabled = true; dlWav.textContent = 'Convirtiendo…';
+      dlWav.disabled = true; dlWav.textContent = tt('btnConvirtiendo','Convirtiendo…');
       try{
         const wavBlob = await blobToWav(rec.blob);
         const wavUrl = URL.createObjectURL(wavBlob);
-        const a = document.createElement('a'); a.href = wavUrl; a.download = `vocalizer_${rec.id}.wav`; a.click();
+        const a = document.createElement('a'); a.href = wavUrl; a.download = `ejercicio-vocal_${rec.id}.wav`; a.click();
         URL.revokeObjectURL(wavUrl);
-      }catch{ showToast('No se pudo convertir a WAV en este navegador.', 'error'); }
-      dlWav.disabled = false; dlWav.textContent = 'Como WAV';
+      }catch{ showToast(tt('toastNoConvertirWav','No se pudo convertir a WAV en este navegador.'), 'error'); }
+      dlWav.disabled = false; dlWav.textContent = tt('btnComoWav','Como WAV');
     });
-    const del = document.createElement('button'); del.className = 'btn danger'; del.textContent = 'Eliminar';
+    const del = document.createElement('button'); del.className = 'btn danger'; del.textContent = tt('btnEliminar','Eliminar');
     del.addEventListener('click', async ()=>{ await deleteRecording(rec.id); renderRecordings(); });
     li.append(audio, meta, dlWebm, dlWav, del);
     recordingsList.appendChild(li);
   });
 }
 clearRecordingsBtn.addEventListener('click', async ()=>{
-  if(!confirm('¿Borrar todas las grabaciones guardadas en este dispositivo?')) return;
-  await clearRecordings(); renderRecordings(); showToast('Grabaciones eliminadas.');
+  if(!confirm(tt('confirmBorrarGrabaciones','¿Borrar todas las grabaciones guardadas en este dispositivo?'))) return;
+  await clearRecordings(); renderRecordings(); showToast(tt('toastGrabacionesEliminadas','Grabaciones eliminadas.'));
 });
 
 /* ================= Encontrar mi rango (diálogo) ================= */
 const findRangeDialog = $('rangeDialog'), rangeDialogText = $('rangeDialogText'), rangeProgressBar = $('rangeProgressBar'), rangeResult = $('rangeResult'), rangeStartBtn = $('rangeStartBtn');
 findRangeBtn.addEventListener('click', ()=>{
   rangeResult.hidden = true; rangeProgressBar.style.width = '0%'; rangeStartBtn.hidden = false; rangeStartBtn.disabled = false;
-  rangeDialogText.textContent = 'Primero escucharás un ejemplo de glissando (deslizar la voz de grave a agudo y de vuelta) y luego un contador antes de grabar 10 segundos.';
+  rangeDialogText.textContent = tt('rangeDialogIntro','Primero escucharás un ejemplo de glissando (deslizar la voz de grave a agudo y de vuelta) y luego un contador antes de grabar 10 segundos.');
   findRangeDialog.showModal();
 });
 rangeStartBtn.addEventListener('click', async (ev)=>{
   ev.preventDefault();
   rangeStartBtn.hidden = true;
-  try{ await ensureMic(); }catch{ showToast('No se pudo acceder al micrófono.', 'error'); findRangeDialog.close(); return; }
+  try{ await ensureMic(); }catch{ showToast(tt('toastMicAcceso','No se pudo acceder al micrófono.'), 'error'); findRangeDialog.close(); return; }
   await engine.resume();
-  rangeDialogText.textContent = '🔊 Ejemplo: así es un glissando, deslizando la voz de grave a agudo y de vuelta.';
+  rangeDialogText.textContent = tt('rangeDialogEjemploGlissando','🔊 Ejemplo: así es un glissando, deslizando la voz de grave a agudo y de vuelta.');
   await engine.playGlissandoDemo();
-  await runCountdown(n=>{ rangeDialogText.textContent = `Prepárate para cantar tu glissando… ${n}`; }, 3);
-  rangeDialogText.textContent = 'Grabando 10 segundos… canta desde tu nota más grave a la más aguda.';
+  await runCountdown(n=>{ rangeDialogText.textContent = tt('rangeDialogCuenta','Prepárate para cantar tu glissando… {n}').replace('{n}', n); }, 3);
+  rangeDialogText.textContent = tt('rangeDialogGrabando','Grabando 10 segundos… canta desde tu nota más grave a la más aguda.');
   const { minF, maxF } = await recordRangeSample(rangeProgressBar, 10000);
   rangeResult.hidden = false;
   if(minF === Infinity){
-    rangeDialogText.textContent = 'No se detectó una voz clara.';
-    rangeResult.textContent = 'Intenta de nuevo cantando más cerca del micrófono y con volumen medio.';
+    rangeDialogText.textContent = tt('rangeDialogNoVoz','No se detectó una voz clara.');
+    rangeResult.textContent = tt('rangeResultReintenta','Intenta de nuevo cantando más cerca del micrófono y con volumen medio.');
   } else {
     const cls = classifyVoiceRange(minF, maxF);
-    rangeDialogText.textContent = 'Rango detectado';
-    rangeResult.innerHTML = `Nota más grave: <strong>${fmtNote(minF)}</strong><br>Nota más aguda: <strong>${fmtNote(maxF)}</strong><br>Clasificación estimada: <strong>${escapeHtml(cls.label)}</strong>`;
+    rangeDialogText.textContent = tt('rangeDetectado','Rango detectado');
+    rangeResult.innerHTML = tt('rangeResultTemplate','Nota más grave: <strong>{min}</strong><br>Nota más aguda: <strong>{max}</strong><br>Clasificación estimada: <strong>{cls}</strong>')
+      .replace('{min}', escapeHtml(fmtNote(minF))).replace('{max}', escapeHtml(fmtNote(maxF))).replace('{cls}', escapeHtml(translateRangeLabel(cls)));
   }
 });
 
@@ -643,7 +654,7 @@ let onbMode = 'type', onbFinalizeValue = 'soprano';
 function finalizeOnboarding(rangeId){
   settings.range = rangeId; settings.onboarded = true; saveSettings(settings);
   rangeSelect.value = rangeId; customRangeLabel.hidden = rangeId !== 'custom';
-  onboardingDialog.close(); showToast('¡Listo! Ajustamos los ejercicios a tu voz.');
+  onboardingDialog.close(); showToast(tt('toastOnboardingListo','¡Listo! Ajustamos los ejercicios a tu voz.'));
 }
 onbContinueBtn.addEventListener('click', async (ev)=>{
   ev.preventDefault();
@@ -653,32 +664,33 @@ onbContinueBtn.addEventListener('click', async (ev)=>{
   onbMode = 'recording';
   onbStepType.hidden = true; onbStepRecord.hidden = false; onbContinueBtn.hidden = true; onbSkipBtn.hidden = true;
   onbProgressBar.style.width = '0%';
-  try{ await ensureMic(); }catch{ showToast('No se pudo acceder al micrófono.', 'error'); onboardingDialog.close(); return; }
+  try{ await ensureMic(); }catch{ showToast(tt('toastMicAcceso','No se pudo acceder al micrófono.'), 'error'); onboardingDialog.close(); return; }
   await engine.resume();
-  onbText.textContent = '🔊 Ejemplo: así es un glissando, deslizando la voz de grave a agudo y de vuelta.';
+  onbText.textContent = tt('rangeDialogEjemploGlissando','🔊 Ejemplo: así es un glissando, deslizando la voz de grave a agudo y de vuelta.');
   await engine.playGlissandoDemo();
-  await runCountdown(n=>{ onbText.textContent = `Prepárate para cantar tu glissando… ${n}`; }, 3);
-  onbText.textContent = 'Grabando 10 segundos… canta desde tu nota más grave a la más aguda.';
+  await runCountdown(n=>{ onbText.textContent = tt('rangeDialogCuenta','Prepárate para cantar tu glissando… {n}').replace('{n}', n); }, 3);
+  onbText.textContent = tt('rangeDialogGrabando','Grabando 10 segundos… canta desde tu nota más grave a la más aguda.');
   const { minF, maxF } = await recordRangeSample(onbProgressBar, 10000);
   onbStepRecord.hidden = true; onbContinueBtn.hidden = false; onbSkipBtn.hidden = false;
   onbMode = 'result';
   if(minF === Infinity){
-    onbText.textContent = 'No se detectó una voz clara.';
-    onbResult.hidden = false; onbResult.textContent = 'Puedes reintentar desde Ajustes → «Repetir asistente de bienvenida».';
-    onbFinalizeValue = 'soprano'; onbContinueBtn.textContent = 'Cerrar';
+    onbText.textContent = tt('rangeDialogNoVoz','No se detectó una voz clara.');
+    onbResult.hidden = false; onbResult.textContent = tt('onbReintentar','Puedes reintentar desde Ajustes → «Repetir asistente de bienvenida».');
+    onbFinalizeValue = 'soprano'; onbContinueBtn.textContent = tt('btnCerrar','Cerrar');
   } else {
     const cls = classifyVoiceRange(minF, maxF);
-    onbText.textContent = 'Rango detectado';
+    onbText.textContent = tt('rangeDetectado','Rango detectado');
     onbResult.hidden = false;
-    onbResult.innerHTML = `Nota más grave: <strong>${fmtNote(minF)}</strong><br>Nota más aguda: <strong>${fmtNote(maxF)}</strong><br>Clasificación estimada: <strong>${escapeHtml(cls.label)}</strong>`;
-    onbFinalizeValue = cls.id; onbContinueBtn.textContent = `Usar ${cls.label}`;
+    onbResult.innerHTML = tt('rangeResultTemplate','Nota más grave: <strong>{min}</strong><br>Nota más aguda: <strong>{max}</strong><br>Clasificación estimada: <strong>{cls}</strong>')
+      .replace('{min}', escapeHtml(fmtNote(minF))).replace('{max}', escapeHtml(fmtNote(maxF))).replace('{cls}', escapeHtml(translateRangeLabel(cls)));
+    onbFinalizeValue = cls.id; onbContinueBtn.textContent = tt('onbUsarLabel','Usar {label}').replace('{label}', translateRangeLabel(cls));
   }
 });
 onboardingDialog.addEventListener('close', ()=>{
   if(!settings.onboarded){ settings.onboarded = true; saveSettings(settings); }
   onbMode = 'type'; onbStepType.hidden = false; onbStepRecord.hidden = true; onbResult.hidden = true;
-  onbContinueBtn.hidden = false; onbContinueBtn.textContent = 'Continuar'; onbSkipBtn.hidden = false;
-  onbText.textContent = 'Para adaptar los ejercicios a tu voz, dinos tu tipo de voz o descúbrelo cantando.';
+  onbContinueBtn.hidden = false; onbContinueBtn.textContent = tt('btnContinuar','Continuar'); onbSkipBtn.hidden = false;
+  onbText.textContent = tt('onbIntro','Para adaptar los ejercicios a tu voz, dinos tu tipo de voz o descúbrelo cantando.');
 });
 
 /* ================= Afinador tab: ya conectado arriba (setTunerMode, etc.) ================= */
@@ -724,12 +736,12 @@ async function processEvaluationBlob(blob, ex){
   try{
     const ab = await blob.arrayBuffer();
     audioBuffer = await decodeCtx.decodeAudioData(ab.slice(0));
-  }catch{ showToast('No se pudo decodificar el audio.', 'error'); decodeCtx.close(); return; }
+  }catch{ showToast(tt('toastNoDecodificarAudio','No se pudo decodificar el audio.'), 'error'); decodeCtx.close(); return; }
   decodeCtx.close();
 
   currentEvalBuffer = audioBuffer;
   evalAudio.src = URL.createObjectURL(blob);
-  evalSelection = null; evalPlaySelectionBtn.disabled = true; evalPlaySelectionBtn.textContent = '🔁 Reproducir selección en bucle';
+  evalSelection = null; evalPlaySelectionBtn.disabled = true; evalPlaySelectionBtn.textContent = tt('evalBtnReproducirSeleccion','🔁 Reproducir selección en bucle');
 
   const latencySec = (settings.latencyMs || 0) / 1000;
   let track = buildPitchTrack(audioBuffer, { threshold: (settings.yinThreshold || 10) / 100 });
@@ -755,7 +767,7 @@ function setEvalControlsDisabled(disabled){
 evalRecordBtn.addEventListener('click', async ()=>{
   if(evalRecordBtn.dataset.recording === 'true'){ manualStopRequested = true; evalMediaRecorder.stop(); return; }
   if(evalRecordBtn.dataset.busy === 'true') return; // ya está reproduciendo el ejemplo o contando
-  try{ await ensureMic(); }catch{ showToast('No se pudo acceder al micrófono.', 'error'); return; }
+  try{ await ensureMic(); }catch{ showToast(tt('toastMicAcceso','No se pudo acceder al micrófono.'), 'error'); return; }
   await engine.resume();
 
   const ex = findExercise(evalExerciseSelect.value);
@@ -765,32 +777,32 @@ evalRecordBtn.addEventListener('click', async ()=>{
   if(evalStatus) evalStatus.textContent = '';
 
   if(ex){
-    evalRecordBtn.textContent = '🔊 Escucha el ejemplo…';
-    if(evalStatus) evalStatus.textContent = `Ejemplo: ${ex.nombre}`;
+    evalRecordBtn.textContent = tt('evalBtnEscuchaEjemplo','🔊 Escucha el ejemplo…');
+    if(evalStatus) evalStatus.textContent = tt('evalStatusEjemplo','Ejemplo: {nombre}').replace('{nombre}', ex.nombre);
     await new Promise(resolve=>{
       engine.playExercise(ex, getRootMidi(), getSpeed(), { onStep: showSolfege, onDone: ()=>{ clearSolfege(); resolve(); } });
     });
   } else if(evalStatus){
-    evalStatus.textContent = 'Prepárate para grabar tu voz.';
+    evalStatus.textContent = tt('evalStatusPreparate','Prepárate para grabar tu voz.');
   }
 
-  await runCountdown(n=>{ evalRecordBtn.textContent = `${n}…`; if(evalStatus) evalStatus.textContent = `Grabando en ${n}…`; }, 3);
+  await runCountdown(n=>{ evalRecordBtn.textContent = `${n}…`; if(evalStatus) evalStatus.textContent = tt('evalStatusGrabandoEn','Grabando en {n}…').replace('{n}', n); }, 3);
 
   evalRecordBtn.disabled = false; evalRecordBtn.dataset.busy = 'false'; setEvalControlsDisabled(false);
-  if(evalStatus) evalStatus.textContent = follow ? 'Grabando… sigue el ejercicio.' : 'Grabando…';
+  if(evalStatus) evalStatus.textContent = follow ? tt('evalStatusGrabandoSigue','Grabando… sigue el ejercicio.') : tt('evalStatusGrabando','Grabando…');
 
   const chunks = [];
   evalMediaRecorder = new MediaRecorder(mic.getRecordingStream());
   evalMediaRecorder.ondataavailable = e=>{ if(e.data && e.data.size) chunks.push(e.data); };
   manualStopRequested = false;
   evalMediaRecorder.onstop = async ()=>{
-    evalRecordBtn.dataset.recording = 'false'; evalRecordBtn.textContent = '⏺ Grabar'; evalRecordBtn.setAttribute('aria-pressed','false');
+    evalRecordBtn.dataset.recording = 'false'; evalRecordBtn.textContent = tt('btnGrabar','⏺ Grabar'); evalRecordBtn.setAttribute('aria-pressed','false');
     if(evalStatus) evalStatus.textContent = '';
     const blob = new Blob(chunks, { type:'audio/webm' });
     await processEvaluationBlob(blob, follow ? ex : null);
   };
   evalMediaRecorder.start();
-  evalRecordBtn.dataset.recording = 'true'; evalRecordBtn.textContent = '■ Detener'; evalRecordBtn.setAttribute('aria-pressed','true');
+  evalRecordBtn.dataset.recording = 'true'; evalRecordBtn.textContent = tt('btnDetener','■ Detener'); evalRecordBtn.setAttribute('aria-pressed','true');
   if(follow){
     engine.playExercise(ex, getRootMidi(), getSpeed(), { onStep: showSolfege, onDone: ()=>{ clearSolfege(); if(!manualStopRequested) evalMediaRecorder.stop(); } });
   }
@@ -869,16 +881,16 @@ window.addEventListener('pointerup', ()=>{
 });
 
 evalPlaySelectionBtn.addEventListener('click', ()=>{
-  if(evalSourceNode){ try{ evalSourceNode.stop(); }catch{} evalSourceNode = null; evalPlaySelectionBtn.textContent = '🔁 Reproducir selección en bucle'; return; }
+  if(evalSourceNode){ try{ evalSourceNode.stop(); }catch{} evalSourceNode = null; evalPlaySelectionBtn.textContent = tt('evalBtnReproducirSeleccion','🔁 Reproducir selección en bucle'); return; }
   if(!evalSelection || !currentEvalBuffer) return;
   const src = engine.ctx.createBufferSource();
   src.buffer = currentEvalBuffer; src.loop = true;
   src.loopStart = evalSelection.startSec; src.loopEnd = Math.max(evalSelection.startSec + 0.05, evalSelection.endSec);
   src.connect(engine.master);
   src.start(0, evalSelection.startSec);
-  src.onended = ()=>{ evalSourceNode = null; evalPlaySelectionBtn.textContent = '🔁 Reproducir selección en bucle'; };
+  src.onended = ()=>{ evalSourceNode = null; evalPlaySelectionBtn.textContent = tt('evalBtnReproducirSeleccion','🔁 Reproducir selección en bucle'); };
   evalSourceNode = src;
-  evalPlaySelectionBtn.textContent = '■ Detener bucle';
+  evalPlaySelectionBtn.textContent = tt('evalBtnDetenerBucle','■ Detener bucle');
 });
 
 function playBufferSegment(startSec, endSec){
@@ -899,11 +911,11 @@ function renderEvalBreakdown(notes){
     const dot = document.createElement('span'); dot.className = 'dot ' + n.status;
     const lbl = document.createElement('span'); lbl.className = 'bLabel'; lbl.textContent = `${n.label} · ${n.start.toFixed(1)}–${n.end.toFixed(1)}s`;
     const cents = document.createElement('span'); cents.className = 'bCents'; cents.textContent = n.avgCents !== null ? `${Math.round(n.avgCents)}¢` : '—';
-    const repeatAll = document.createElement('button'); repeatAll.className = 'btn'; repeatAll.style.padding = '2px 8px'; repeatAll.style.fontSize = '.7rem'; repeatAll.textContent = '🔁 todas';
-    repeatAll.title = 'Repetir todas las apariciones de esta nota';
+    const repeatAll = document.createElement('button'); repeatAll.className = 'btn'; repeatAll.style.padding = '2px 8px'; repeatAll.style.fontSize = '.7rem'; repeatAll.textContent = tt('evalBtnRepetirTodas','🔁 todas');
+    repeatAll.title = tt('evalTitleRepetirTodas','Repetir todas las apariciones de esta nota');
     repeatAll.addEventListener('click', (ev)=>{ ev.stopPropagation(); playSequenceSegments(notes.filter(m=> m.label === n.label && m.status !== 'sin_datos')); });
     li.append(dot, lbl, cents, repeatAll);
-    li.title = 'Toca para escuchar este fragmento';
+    li.title = tt('evalTitleTocarFragmento','Toca para escuchar este fragmento');
     li.addEventListener('click', ()=> playBufferSegment(n.start, n.end));
     evalBreakdown.appendChild(li);
   });
@@ -916,13 +928,13 @@ const vibratoCurveCanvas = $('vibratoCurveCanvas'), vibratoHistoryCanvas = $('vi
 
 vibratoRecordBtn.addEventListener('click', async ()=>{
   if(vibratoRecordBtn.dataset.recording === 'true') return;
-  try{ await ensureMic(); }catch{ showToast('No se pudo acceder al micrófono.', 'error'); return; }
+  try{ await ensureMic(); }catch{ showToast(tt('toastMicAcceso','No se pudo acceder al micrófono.'), 'error'); return; }
   const durationSec = Number(vibratoDuration.value);
   const chunks = [];
   const recorder = new MediaRecorder(mic.getRecordingStream());
   recorder.ondataavailable = e=>{ if(e.data && e.data.size) chunks.push(e.data); };
   recorder.onstop = async ()=>{
-    vibratoRecordBtn.dataset.recording = 'false'; vibratoRecordBtn.textContent = '⏺ Grabar sostenido'; vibratoRecordBtn.setAttribute('aria-pressed','false');
+    vibratoRecordBtn.dataset.recording = 'false'; vibratoRecordBtn.textContent = tt('btnGrabarSostenido','⏺ Grabar sostenido'); vibratoRecordBtn.setAttribute('aria-pressed','false');
     const blob = new Blob(chunks, { type:'audio/webm' });
     const decodeCtx = new (window.AudioContext || window.webkitAudioContext)();
     try{
@@ -931,14 +943,14 @@ vibratoRecordBtn.addEventListener('click', async ()=>{
       decodeCtx.close();
       const track = buildPitchTrack(audioBuffer, { frameSize:2048, hop:512 });
       const result = analyzeVibrato(track, { a4: settings.a4 });
-      if(!result){ showToast('No se detectó suficiente señal de voz sostenida.', 'error'); return; }
+      if(!result){ showToast(tt('toastVibratoNoSenal','No se detectó suficiente señal de voz sostenida.'), 'error'); return; }
       vibRate.textContent = result.rateHz.toFixed(2) + ' Hz';
       vibExtent.textContent = '±' + result.extentCents.toFixed(0) + ' cents';
       vibConsistency.textContent = Math.round(result.consistency*100) + '%';
       drawVibratoCurve(result.curve);
       await saveVibratoResult({ rateHz: result.rateHz, extentCents: result.extentCents, consistency: result.consistency });
       renderVibratoHistory();
-    }catch{ decodeCtx.close(); showToast('No se pudo analizar la grabación.', 'error'); }
+    }catch{ decodeCtx.close(); showToast(tt('toastNoAnalizarGrabacion','No se pudo analizar la grabación.'), 'error'); }
   };
   recorder.start();
   vibratoRecordBtn.dataset.recording = 'true'; vibratoRecordBtn.textContent = `■ Grabando… (${durationSec}s)`; vibratoRecordBtn.setAttribute('aria-pressed','true');
@@ -997,11 +1009,14 @@ let routineBuilder = [];
 
 function renderRoutineBuilder(){
   routineStepsEl.innerHTML = '';
+  const lang = curLang();
   routineBuilder.forEach((id, idx)=>{
-    const ex = findExercise(id);
+    const ex0 = findExercise(id);
+    const ex = ex0 ? translateExercise(ex0, lang) : null;
     const li = document.createElement('li');
     const span = document.createElement('span'); span.textContent = ex ? ex.nombre : id;
     const rm = document.createElement('button'); rm.textContent = '✕';
+    rm.setAttribute('aria-label', tt('quitarPaso','Quitar este paso'));
     rm.addEventListener('click', ()=>{ routineBuilder.splice(idx,1); renderRoutineBuilder(); });
     li.append(span, rm); routineStepsEl.appendChild(li);
   });
@@ -1009,26 +1024,26 @@ function renderRoutineBuilder(){
 routineAddBtn.addEventListener('click', ()=>{ routineBuilder.push(routineAddSelect.value); renderRoutineBuilder(); });
 routineSaveBtn.addEventListener('click', ()=>{
   const name = routineName.value.trim();
-  if(!name){ showToast('Ponle un nombre a tu rutina.', 'error'); return; }
-  if(routineBuilder.length === 0){ showToast('Agrega al menos un ejercicio.', 'error'); return; }
+  if(!name){ showToast(tt('toastNombreRutina','Ponle un nombre a tu rutina.'), 'error'); return; }
+  if(routineBuilder.length === 0){ showToast(tt('toastAgregaEjercicio','Agrega al menos un ejercicio.'), 'error'); return; }
   settings.routines.push({ id:(crypto.randomUUID ? crypto.randomUUID() : String(Date.now())), name, steps: routineBuilder.slice() });
   saveSettings(settings);
   routineBuilder = []; routineName.value = ''; renderRoutineBuilder(); renderSavedRoutines();
-  showToast('Rutina guardada.');
+  showToast(tt('toastRutinaGuardada','Rutina guardada.'));
 });
 function renderSavedRoutines(){
   savedRoutinesList.innerHTML = '';
   emptyRoutines.hidden = settings.routines.length > 0;
   settings.routines.forEach(r=>{
     const li = document.createElement('li');
-    const meta = document.createElement('div'); meta.className = 'recMeta'; meta.textContent = `${r.name} · ${r.steps.length} ejercicios`;
-    const play = document.createElement('button'); play.className = 'btn primary'; play.textContent = '▶ Reproducir';
+    const meta = document.createElement('div'); meta.className = 'recMeta'; meta.textContent = `${r.name} · ${r.steps.length} ${tt('ejerciciosLabel','ejercicios')}`;
+    const play = document.createElement('button'); play.className = 'btn primary'; play.textContent = tt('btnReproducirCorto','▶ Reproducir');
     play.addEventListener('click', async ()=>{
       await engine.resume(); try{ await ensureMic(); if(!vizRaf) drawViz(); }catch{}
       tabs.find(t=> t.id === 'tab-practicar').click();
       startPlayback(r.steps.slice(), { loop:false });
     });
-    const del = document.createElement('button'); del.className = 'btn danger'; del.textContent = 'Eliminar';
+    const del = document.createElement('button'); del.className = 'btn danger'; del.textContent = tt('btnEliminar','Eliminar');
     del.addEventListener('click', ()=>{
       settings.routines = settings.routines.filter(x=> x.id !== r.id);
       saveSettings(settings); renderSavedRoutines();
@@ -1048,11 +1063,11 @@ async function refreshMicDeviceList(){
   let devices = [];
   try{ devices = await mic.listInputDevices(); }catch{ devices = []; }
   const current = settings.micDeviceId || '';
-  micDeviceSelect.innerHTML = '<option value="">Predeterminado del sistema</option>';
+  micDeviceSelect.innerHTML = `<option value="">${tt('micOpcionPredeterminado','Predeterminado del sistema')}</option>`;
   devices.forEach((d, i)=>{
     const o = document.createElement('option');
     o.value = d.deviceId;
-    o.textContent = d.label || `Micrófono ${i+1}`;
+    o.textContent = d.label || tt('micNumerado','Micrófono {n}').replace('{n}', i+1);
     micDeviceSelect.appendChild(o);
   });
   micDeviceSelect.value = [...micDeviceSelect.options].some(o=> o.value === current) ? current : '';
@@ -1068,9 +1083,9 @@ micDeviceSelect.addEventListener('change', async ()=>{
   try{
     await mic.switchDevice(settings.micDeviceId || undefined);
     mic.setSensitivity(settings.micGain || 1);
-    showToast('Micrófono cambiado.');
+    showToast(tt('toastMicCambiado','Micrófono cambiado.'));
     await refreshMicDeviceList();
-  }catch{ showToast('No se pudo cambiar de micrófono.', 'error'); }
+  }catch{ showToast(tt('toastNoCambiarMic','No se pudo cambiar de micrófono.'), 'error'); }
 });
 
 micGainSlider.addEventListener('input', ()=>{
@@ -1100,7 +1115,7 @@ function startMicMeter(){
 }
 micTestBtn.addEventListener('click', async ()=>{
   if(micMeterRaf){ stopMicMeter(); return; }
-  try{ await ensureMic(); }catch{ showToast('No se pudo acceder al micrófono.', 'error'); return; }
+  try{ await ensureMic(); }catch{ showToast(tt('toastMicAcceso','No se pudo acceder al micrófono.'), 'error'); return; }
   await refreshMicDeviceList();
   micTestBtn.textContent = '■ Detener prueba'; micTestBtn.setAttribute('aria-pressed','true');
   startMicMeter();
@@ -1134,6 +1149,20 @@ renderCategoryChips();
 renderExerciseList();
 renderProgressions();
 renderRoutineBuilder();
+renderSavedRoutines();
+
+window.addEventListener('cv-lang-changed', ()=>{
+  renderCategoryChips();
+  renderExerciseList();
+  renderProgressions();
+  renderRoutineBuilder();
+  renderSavedRoutines();
+  const prevEval = evalExerciseSelect.value, prevRoutine = routineAddSelect.value;
+  populatePlainExerciseSelect(evalExerciseSelect);
+  populatePlainExerciseSelect(routineAddSelect);
+  if(prevEval) evalExerciseSelect.value = prevEval;
+  if(prevRoutine) routineAddSelect.value = prevRoutine;
+});
 
 if(!settings.onboarded && !settings.skipOnboarding){
   onboardingDialog.showModal();

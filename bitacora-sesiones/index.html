@@ -4,8 +4,8 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <meta name="theme-color" content="#c94a8c" />
-<title>Matilde Pizarro Toro · Fonoaudióloga | Bitácora de Sesiones</title>
-<meta name="description" content="Bitácora clínica de voz: registro sesión a sesión, cronómetros de ejercicios y piano en vivo con detector de nota." />
+<title data-i18n="pageTitle">Matilde Pizarro Toro · Fonoaudióloga | Bitácora de Sesiones</title>
+<meta name="description" data-i18n-content="metaDescription" content="Bitácora clínica de voz: registro sesión a sesión, cronómetros de ejercicios y piano en vivo con detector de nota." />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='7' fill='%23c94a8c'/%3E%3Cpath d='M8 17c-2.5-2.3-4-4.2-4-6.3A3.2 3.2 0 0 1 7.3 7.4C8.6 7.4 9.6 8 10 9c.4-1 1.4-1.6 2.7-1.6a3.2 3.2 0 0 1 3.3 3.3c0 2.1-1.5 4-4 6.3l-2 1.8Z' fill='white'/%3E%3C/svg%3E">
 
 <!-- jsPDF -->
@@ -15,6 +15,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <script>document.documentElement.setAttribute('data-pastel-theme', (function(){try{return localStorage.getItem('cv-pastel-theme')||'rosa';}catch(e){return 'rosa';}})());</script>
 <link rel="stylesheet" href="../assets/shared.css">
+<script src="i18n-dict.js"></script>
+<script src="../assets/i18n-engine.js"></script>
 
 <style>
 :root{
@@ -521,7 +523,7 @@ tbody tr:hover{background:var(--surface-sunken)}
 </head>
 <body>
 <a href="../index.html" class="cv-back-link"><span class="cv-back-arrow" aria-hidden="true">←</span><span class="cv-back-text">Volver al portal</span></a>
-<a href="#main" class="skip-link">Saltar al contenido</a>
+<a href="#main" class="skip-link" data-i18n="skipLink">Saltar al contenido</a>
 
 <div class="container">
   <header class="topbar">
@@ -529,107 +531,107 @@ tbody tr:hover{background:var(--surface-sunken)}
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v10.55"/><circle cx="8.5" cy="17" r="2.5"/><circle cx="15.5" cy="19" r="2.5"/><path d="M12 3c3 0 5 2 5 4.5V15"/></svg>
     </div>
     <div class="brand-text">
-      <h1>Matilde Pizarro Toro — Fonoaudióloga</h1>
-      <p>Bitácora de sesiones, cronómetros de ejercicios y piano en vivo con detector de nota</p>
+      <h1 data-i18n="headerTitle">Matilde Pizarro Toro — Fonoaudióloga</h1>
+      <p data-i18n="headerSub">Bitácora de sesiones, cronómetros de ejercicios y piano en vivo con detector de nota</p>
     </div>
-    <span class="brand-badge">💗 100% local, sin servidores</span>
+    <span class="brand-badge" data-i18n="headerBadge">💗 100% local, sin servidores</span>
   </header>
 
   <nav class="quicknav" id="quicknav">
-    <button data-target="sec-resumen">📋 Resumen</button>
-    <button data-target="sec-sesion">📝 Nueva sesión</button>
-    <button data-target="sec-piano">🎹 Piano en vivo</button>
-    <button data-target="sec-sonido">🔊 Sonido</button>
-    <button data-target="sec-ejercicios">⏱️ Ejercicios</button>
-    <button data-target="sec-historial">📚 Historial</button>
-    <button data-target="sec-respaldo">💾 Respaldo</button>
+    <button data-target="sec-resumen" data-i18n="navResumen">📋 Resumen</button>
+    <button data-target="sec-sesion" data-i18n="navSesion">📝 Nueva sesión</button>
+    <button data-target="sec-piano" data-i18n="navPiano">🎹 Piano en vivo</button>
+    <button data-target="sec-sonido" data-i18n="navSonido">🔊 Sonido</button>
+    <button data-target="sec-ejercicios" data-i18n="navEjercicios">⏱️ Ejercicios</button>
+    <button data-target="sec-historial" data-i18n="navHistorial">📚 Historial</button>
+    <button data-target="sec-respaldo" data-i18n="navRespaldo">💾 Respaldo</button>
   </nav>
 
   <main id="main">
 
     <!-- ===================== RESUMEN ===================== -->
     <section class="card" id="sec-resumen">
-      <div class="card-head"><h2><span class="emoji">📋</span>Resumen</h2></div>
+      <div class="card-head"><h2><span class="emoji">📋</span><span data-i18n="secResumenTitle">Resumen</span></h2></div>
       <div class="kpi-grid">
-        <div class="kpi-card"><div class="num" id="kpiTotal">0</div><div class="lbl">Sesiones registradas</div></div>
-        <div class="kpi-card"><div class="num" id="kpiPatients">0</div><div class="lbl">Pacientes distintos</div></div>
-        <div class="kpi-card"><div class="num" id="kpiWeek">0</div><div class="lbl">Sesiones esta semana</div></div>
-        <div class="kpi-card"><div class="num" id="kpiActiveEx">0</div><div class="lbl">Ejercicios en curso</div></div>
+        <div class="kpi-card"><div class="num" id="kpiTotal">0</div><div class="lbl" data-i18n="kpiTotal">Sesiones registradas</div></div>
+        <div class="kpi-card"><div class="num" id="kpiPatients">0</div><div class="lbl" data-i18n="kpiPatients">Pacientes distintos</div></div>
+        <div class="kpi-card"><div class="num" id="kpiWeek">0</div><div class="lbl" data-i18n="kpiWeek">Sesiones esta semana</div></div>
+        <div class="kpi-card"><div class="num" id="kpiActiveEx">0</div><div class="lbl" data-i18n="kpiActiveEx">Ejercicios en curso</div></div>
       </div>
     </section>
 
     <!-- ===================== NUEVA SESIÓN ===================== -->
     <section class="card" id="sec-sesion">
       <div class="card-head">
-        <h2><span class="emoji">📝</span>Registrar sesión</h2>
+        <h2><span class="emoji">📝</span><span data-i18n="secSesionTitle">Registrar sesión</span></h2>
       </div>
 
       <div class="field-row">
         <div>
-          <label for="participantId">Paciente</label>
-          <input id="participantId" type="text" placeholder="Nombre o ID" list="participantList">
+          <label for="participantId" data-i18n="labelPaciente">Paciente</label>
+          <input id="participantId" type="text" data-i18n-placeholder="placeholderNombreId" placeholder="Nombre o ID" list="participantList">
           <datalist id="participantList"></datalist>
         </div>
         <div>
-          <label for="sessionDate">Fecha y hora</label>
-          <input id="sessionDate" type="text" placeholder="Se completa solo al guardar">
+          <label for="sessionDate" data-i18n="labelFechaHora">Fecha y hora</label>
+          <input id="sessionDate" type="text" data-i18n-placeholder="placeholderFechaAuto" placeholder="Se completa solo al guardar">
         </div>
         <div style="flex:2">
-          <label for="focusText">Foco de la sesión <span class="sm">(opcional, escríbelo a tu manera)</span></label>
-          <input id="focusText" type="text" placeholder="Ej: resonancia oral + calentamiento con tubo">
+          <label for="focusText"><span data-i18n="labelFoco">Foco de la sesión</span> <span class="sm" data-i18n="labelFocoOpcional">(opcional, escríbelo a tu manera)</span></label>
+          <input id="focusText" type="text" data-i18n-placeholder="placeholderFoco" placeholder="Ej: resonancia oral + calentamiento con tubo">
         </div>
       </div>
 
       <div style="margin-top:16px">
         <div class="card-head" style="margin-bottom:8px">
-          <label style="margin:0">⏱️ Ejercicios de esta sesión <span class="sm">(se arman en la sección "⏱️ Ejercicios", aquí verás el resumen)</span></label>
+          <label style="margin:0"><span data-i18n="labelEjerciciosSesion">⏱️ Ejercicios de esta sesión</span> <span class="sm" data-i18n="labelEjerciciosSesionHint">(se arman en la sección "⏱️ Ejercicios", aquí verás el resumen)</span></label>
         </div>
         <div id="sessionExSummary"></div>
-        <button class="btn btn-ghost btn-sm" style="margin-top:10px" onclick="scrollToSection('sec-ejercicios')">⏱️ Ir a armar los ejercicios</button>
+        <button class="btn btn-ghost btn-sm" style="margin-top:10px" onclick="scrollToSection('sec-ejercicios')" data-i18n="btnIrEjercicios">⏱️ Ir a armar los ejercicios</button>
       </div>
 
       <div style="margin-top:16px">
-        <label>Sensaciones observadas (opcional) <button class="btn btn-ghost btn-sm" onclick="toggleSensBox()" id="sensToggle" style="margin-left:6px">Agregar sensaciones</button></label>
+        <label><span data-i18n="labelSensaciones">Sensaciones observadas (opcional)</span> <button class="btn btn-ghost btn-sm" onclick="toggleSensBox()" id="sensToggle" style="margin-left:6px" data-i18n="btnAgregarSensaciones">Agregar sensaciones</button></label>
         <div id="sensBox" class="chip-row" style="display:none">
-          <label class="chip"><input type="checkbox" value="Cortes/quiebres en la voz">Cortes/quiebres</label>
-          <label class="chip"><input type="checkbox" value="Ronquera">Ronquera</label>
-          <label class="chip"><input type="checkbox" value="Falta de aire al hablar">Falta de aire</label>
-          <label class="chip"><input type="checkbox" value="Ardor al hablar">Ardor</label>
-          <label class="chip"><input type="checkbox" value="Picazón">Picazón</label>
-          <label class="chip"><input type="checkbox" value="Dolor al hablar">Dolor</label>
-          <label class="chip"><input type="checkbox" value="Fatiga al hablar">Fatiga</label>
-          <label class="chip"><input type="checkbox" value="Esfuerzo o tensión">Esfuerzo/tensión</label>
-          <label class="chip"><input type="checkbox" value="Tos">Tos</label>
-          <label class="chip"><input type="checkbox" value="Cuerpo extraño">Cuerpo extraño</label>
-          <label class="chip"><input type="checkbox" value="Necesidad de carraspear">Carraspear</label>
+          <label class="chip"><input type="checkbox" value="Cortes/quiebres en la voz"><span data-i18n="sensCortes">Cortes/quiebres</span></label>
+          <label class="chip"><input type="checkbox" value="Ronquera"><span data-i18n="sensRonquera">Ronquera</span></label>
+          <label class="chip"><input type="checkbox" value="Falta de aire al hablar"><span data-i18n="sensFaltaAire">Falta de aire</span></label>
+          <label class="chip"><input type="checkbox" value="Ardor al hablar"><span data-i18n="sensArdor">Ardor</span></label>
+          <label class="chip"><input type="checkbox" value="Picazón"><span data-i18n="sensPicazon">Picazón</span></label>
+          <label class="chip"><input type="checkbox" value="Dolor al hablar"><span data-i18n="sensDolor">Dolor</span></label>
+          <label class="chip"><input type="checkbox" value="Fatiga al hablar"><span data-i18n="sensFatiga">Fatiga</span></label>
+          <label class="chip"><input type="checkbox" value="Esfuerzo o tensión"><span data-i18n="sensEsfuerzo">Esfuerzo/tensión</span></label>
+          <label class="chip"><input type="checkbox" value="Tos"><span data-i18n="sensTos">Tos</span></label>
+          <label class="chip"><input type="checkbox" value="Cuerpo extraño"><span data-i18n="sensCuerpoExtrano">Cuerpo extraño</span></label>
+          <label class="chip"><input type="checkbox" value="Necesidad de carraspear"><span data-i18n="sensCarraspear">Carraspear</span></label>
         </div>
       </div>
 
       <div style="margin-top:16px">
-        <label for="observaciones">Notas clínicas</label>
-        <textarea id="observaciones" placeholder="Qué se trabajó, respuesta del paciente, próximos pasos…"></textarea>
+        <label for="observaciones" data-i18n="labelNotasClinicas">Notas clínicas</label>
+        <textarea id="observaciones" data-i18n-placeholder="placeholderNotas" placeholder="Qué se trabajó, respuesta del paciente, próximos pasos…"></textarea>
       </div>
 
       <div class="field-row" style="margin-top:16px">
         <div>
-          <label for="evidence">Imagen de evidencia (opcional)</label>
+          <label for="evidence" data-i18n="labelEvidencia">Imagen de evidencia (opcional)</label>
           <input id="evidence" type="file" accept="image/*">
         </div>
         <div>
-          <label>Voz capturada en vivo</label>
+          <label data-i18n="labelVozCapturada">Voz capturada en vivo</label>
           <div class="stat-grid">
-            <div class="stat-box"><div class="num" id="lastDb">--</div><div class="lbl">dB</div></div>
-            <div class="stat-box"><div class="num" id="lastNote">--</div><div class="lbl">Nota</div></div>
+            <div class="stat-box"><div class="num" id="lastDb">--</div><div class="lbl" data-i18n="lblDb">dB</div></div>
+            <div class="stat-box"><div class="num" id="lastNote">--</div><div class="lbl" data-i18n="lblNota">Nota</div></div>
           </div>
         </div>
       </div>
-      <p class="sm" style="margin-top:8px">Los valores de voz se capturan desde <a href="#sec-piano" onclick="scrollToSection('sec-piano');return false;">🎹 Piano en vivo</a> y se adjuntan automáticamente al guardar.</p>
+      <p class="sm" style="margin-top:8px" data-i18n-html="hintVozCapturada">Los valores de voz se capturan desde <a href="#sec-piano" onclick="scrollToSection('sec-piano');return false;">🎹 Piano en vivo</a> y se adjuntan automáticamente al guardar.</p>
 
       <div class="controls">
-        <button class="btn btn-outline" onclick="resetSessionForm()">Limpiar</button>
+        <button class="btn btn-outline" onclick="resetSessionForm()" data-i18n="btnLimpiar">Limpiar</button>
         <button class="btn btn-primary" onclick="saveSession()">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>
-          Guardar sesión
+          <span data-i18n="btnGuardarSesion">Guardar sesión</span>
         </button>
       </div>
     </section>
@@ -637,19 +639,19 @@ tbody tr:hover{background:var(--surface-sunken)}
     <!-- ===================== PIANO EN VIVO ===================== -->
     <section class="card" id="sec-piano">
       <div class="card-head">
-        <h2><span class="emoji">🎹</span>Piano en vivo y sonómetro</h2>
-        <span class="status-label"><span class="status-dot" id="statusDot"></span> <span id="statusText">Micrófono inactivo</span></span>
+        <h2><span class="emoji">🎹</span><span data-i18n="secPianoTitle">Piano en vivo y sonómetro</span></h2>
+        <span class="status-label"><span class="status-dot" id="statusDot"></span> <span id="statusText" data-i18n="micInactivo">Micrófono inactivo</span></span>
       </div>
 
       <div class="mic-controls">
         <button id="micBtn" class="btn btn-primary" onclick="toggleMic()">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4"/></svg>
-          Iniciar micrófono
+          <span data-i18n="btnIniciarMic">Iniciar micrófono</span>
         </button>
-        <button id="stopMicBtn" class="btn btn-outline" onclick="stopMic()">Detener</button>
+        <button id="stopMicBtn" class="btn btn-outline" onclick="stopMic()" data-i18n="btnDetenerMic">Detener</button>
         <button id="recBtn" class="btn btn-ghost" onclick="toggleRecord()">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="6"/></svg>
-          Grabar
+          <span data-i18n="btnGrabar">Grabar</span>
         </button>
       </div>
 
@@ -669,7 +671,7 @@ tbody tr:hover{background:var(--surface-sunken)}
             </svg>
             <div class="gauge-center">
               <div class="db-value" id="dbDisplay">--</div>
-              <div class="db-unit">dB estimados</div>
+              <div class="db-unit" data-i18n="lblDbEstimados">dB estimados</div>
             </div>
           </div>
           <div class="range-legend"><span>30 dB</span><span>110 dB</span></div>
@@ -679,19 +681,19 @@ tbody tr:hover{background:var(--surface-sunken)}
           </div>
           <div class="playback-block">
             <audio id="playbackAudio" controls style="display:none"></audio>
-            <a id="downloadAudio" class="btn btn-ghost btn-sm" style="display:none;margin-top:8px;width:100%;justify-content:center">Descargar WAV</a>
+            <a id="downloadAudio" class="btn btn-ghost btn-sm" style="display:none;margin-top:8px;width:100%;justify-content:center" data-i18n="btnDescargarWav">Descargar WAV</a>
           </div>
         </div>
 
-        <div class="piano-wrap" id="pianoWrap" title="Toca una tecla para oír la nota de referencia.">
-          <span class="piano-hint">Haz clic (o Tab + Enter) en una tecla para escuchar la nota · desliza para ver más octavas</span>
+        <div class="piano-wrap" id="pianoWrap" data-i18n-title="pianoTitleAttr" title="Toca una tecla para oír la nota de referencia.">
+          <span class="piano-hint" data-i18n="pianoHint">Haz clic (o Tab + Enter) en una tecla para escuchar la nota · desliza para ver más octavas</span>
           <div class="kbd-hint">
-            <span>A S D F G H J K L Ñ = teclas blancas</span>
-            <span>W E T Y U O P = teclas negras</span>
-            <span>Z / X = cambia de octava</span>
+            <span data-i18n="kbdHint1">A S D F G H J K L Ñ = teclas blancas</span>
+            <span data-i18n="kbdHint2">W E T Y U O P = teclas negras</span>
+            <span data-i18n="kbdHint3">Z / X = cambia de octava</span>
           </div>
           <div class="octave-row">
-            <span class="oct-label">Octava del teclado:</span>
+            <span class="oct-label" data-i18n="labelOctava">Octava del teclado:</span>
             <button class="btn btn-outline btn-sm" onclick="shiftOctave(-1)" aria-label="Bajar una octava">−</button>
             <span class="oct-label" id="octaveIndicator">central</span>
             <button class="btn btn-outline btn-sm" onclick="shiftOctave(1)" aria-label="Subir una octava">+</button>
@@ -704,31 +706,31 @@ tbody tr:hover{background:var(--surface-sunken)}
     <!-- ===================== SONIDO Y METRÓNOMO ===================== -->
     <section class="card" id="sec-sonido">
       <div class="card-head">
-        <h2><span class="emoji">🔊</span>Sonido, alertas y metrónomo</h2>
-        <span class="sm">Ajusta el volumen de cada sonido de la app o silencia todo, y usa el metrónomo durante los ejercicios</span>
+        <h2><span class="emoji">🔊</span><span data-i18n="secSonidoTitle">Sonido, alertas y metrónomo</span></h2>
+        <span class="sm" data-i18n="secSonidoSub">Ajusta el volumen de cada sonido de la app o silencia todo, y usa el metrónomo durante los ejercicios</span>
       </div>
       <div class="sound-grid">
         <div class="sound-panel">
           <div class="sound-panel-head">
-            <h3>🔈 Volúmenes</h3>
-            <label class="switch" title="Silenciar toda la app">
+            <h3 data-i18n="fgVolumenes">🔈 Volúmenes</h3>
+            <label class="switch" data-i18n-title="mutearTodo" title="Silenciar toda la app">
               <input type="checkbox" id="muteAll" onchange="onMuteToggle(this.checked)">
               <span class="slider"></span>
             </label>
           </div>
-          <div class="vol-row"><span>General</span><input type="range" id="volMaster" min="0" max="100" value="80" oninput="onVolChange('master',this.value)"><span class="vol-val" id="volMasterVal">80%</span></div>
-          <div class="vol-row"><span>🎹 Piano</span><input type="range" id="volPiano" min="0" max="100" value="90" oninput="onVolChange('piano',this.value)"><span class="vol-val" id="volPianoVal">90%</span></div>
-          <div class="vol-row"><span>⏱️ Ejercicios</span><input type="range" id="volExercises" min="0" max="100" value="80" oninput="onVolChange('exercises',this.value)"><span class="vol-val" id="volExercisesVal">80%</span></div>
-          <div class="vol-row"><span>🥁 Metrónomo</span><input type="range" id="volMetronome" min="0" max="100" value="70" oninput="onVolChange('metronome',this.value)"><span class="vol-val" id="volMetronomeVal">70%</span></div>
+          <div class="vol-row"><span data-i18n="volGeneral">General</span><input type="range" id="volMaster" min="0" max="100" value="80" oninput="onVolChange('master',this.value)"><span class="vol-val" id="volMasterVal">80%</span></div>
+          <div class="vol-row"><span data-i18n="volPiano">🎹 Piano</span><input type="range" id="volPiano" min="0" max="100" value="90" oninput="onVolChange('piano',this.value)"><span class="vol-val" id="volPianoVal">90%</span></div>
+          <div class="vol-row"><span data-i18n="volEjercicios">⏱️ Ejercicios</span><input type="range" id="volExercises" min="0" max="100" value="80" oninput="onVolChange('exercises',this.value)"><span class="vol-val" id="volExercisesVal">80%</span></div>
+          <div class="vol-row"><span data-i18n="volMetronomo">🥁 Metrónomo</span><input type="range" id="volMetronome" min="0" max="100" value="70" oninput="onVolChange('metronome',this.value)"><span class="vol-val" id="volMetronomeVal">70%</span></div>
           <label class="chain-toggle" style="margin-top:6px">
             <span class="switch"><input type="checkbox" id="tickEnabled" checked onchange="onTickToggle(this.checked)"><span class="slider"></span></span>
-            Sonido de "tic" cada segundo mientras corre un cronómetro
+            <span data-i18n="tickToggle">Sonido de "tic" cada segundo mientras corre un cronómetro</span>
           </label>
-          <p class="sm" style="margin-top:10px">Al iniciar un ejercicio suena un aviso corto, y al terminar suena un carillón. Todo respeta estos volúmenes.</p>
+          <p class="sm" style="margin-top:10px" data-i18n="sonidoHint">Al iniciar un ejercicio suena un aviso corto, y al terminar suena un carillón. Todo respeta estos volúmenes.</p>
         </div>
 
         <div class="sound-panel">
-          <div class="sound-panel-head"><h3>🥁 Metrónomo</h3></div>
+          <div class="sound-panel-head"><h3 data-i18n="fgMetronomo">🥁 Metrónomo</h3></div>
           <div class="metronome-display">
             <div class="metro-dot" id="metroDot"></div>
             <div class="metro-bpm"><span id="metroBpmVal">100</span><span class="metro-bpm-lbl">BPM</span></div>
@@ -736,15 +738,15 @@ tbody tr:hover{background:var(--surface-sunken)}
           <input type="range" id="metroSlider" min="30" max="240" value="100" oninput="setMetroBpm(this.value)">
           <div class="field-row" style="margin-top:10px">
             <div style="flex:1">
-              <label for="metroBpmInput">BPM exacto</label>
+              <label for="metroBpmInput" data-i18n="labelBpmExacto">BPM exacto</label>
               <input type="number" id="metroBpmInput" min="30" max="240" value="100" oninput="setMetroBpm(this.value)">
             </div>
             <div style="align-self:flex-end">
-              <button class="btn btn-outline" onclick="tapTempo()">👆 Tap tempo</button>
+              <button class="btn btn-outline" onclick="tapTempo()" data-i18n="btnTapTempo">👆 Tap tempo</button>
             </div>
           </div>
           <div class="controls" style="justify-content:flex-start;margin-top:14px">
-            <button class="btn btn-primary" id="metroToggleBtn" onclick="toggleMetronome()">▶️ Iniciar metrónomo</button>
+            <button class="btn btn-primary" id="metroToggleBtn" onclick="toggleMetronome()" data-i18n="btnIniciarMetronomo">▶️ Iniciar metrónomo</button>
           </div>
         </div>
       </div>
@@ -753,43 +755,43 @@ tbody tr:hover{background:var(--surface-sunken)}
     <!-- ===================== EJERCICIOS ===================== -->
     <section class="card" id="sec-ejercicios">
       <div class="card-head">
-        <h2><span class="emoji">⏱️</span>Ejercicios y cronómetros</h2>
-        <span class="sm">Arma la sesión de hoy: agrega ejercicios del catálogo y controla sus cronómetros en un solo lugar</span>
+        <h2><span class="emoji">⏱️</span><span data-i18n="secEjerciciosTitle">Ejercicios y cronómetros</span></h2>
+        <span class="sm" data-i18n="secEjerciciosSub">Arma la sesión de hoy: agrega ejercicios del catálogo y controla sus cronómetros en un solo lugar</span>
       </div>
 
       <div class="ex-layout">
         <!-- ---------- Columna izquierda: catálogo ---------- -->
         <div>
           <div class="ex-col-head">
-            <h3>📚 Catálogo de ejercicios <span class="n" id="catalogCount">(0)</span></h3>
+            <h3><span data-i18n="catalogoTitle">📚 Catálogo de ejercicios</span> <span class="n" id="catalogCount">(0)</span></h3>
           </div>
-          <input id="exSearch" type="text" placeholder="Buscar ejercicio por nombre…" oninput="renderExercises()">
+          <input id="exSearch" type="text" data-i18n-placeholder="placeholderBuscarEj" placeholder="Buscar ejercicio por nombre…" oninput="renderExercises()">
           <div id="exList" class="ex-list" style="margin-top:12px"></div>
 
           <details class="catalog-admin">
-            <summary>Agregar o editar ejercicios del catálogo</summary>
+            <summary data-i18n="detalleAgregarEditar">Agregar o editar ejercicios del catálogo</summary>
             <div class="catalog-admin-body">
               <div class="field-row">
                 <div style="flex:2">
-                  <label for="newExName">Nombre del ejercicio</label>
-                  <input id="newExName" type="text" placeholder="Ej: Vibración labial">
+                  <label for="newExName" data-i18n="labelNombreEj">Nombre del ejercicio</label>
+                  <input id="newExName" type="text" data-i18n-placeholder="placeholderNombreEj" placeholder="Ej: Vibración labial">
                 </div>
                 <div>
-                  <label for="newExDur">Duración (s)</label>
+                  <label for="newExDur" data-i18n="labelDuracionS">Duración (s)</label>
                   <input id="newExDur" type="number" placeholder="60">
                 </div>
                 <div style="flex:1.4">
-                  <label for="newExCat">Categoría</label>
+                  <label for="newExCat" data-i18n="labelCategoria">Categoría</label>
                   <select id="newExCat"></select>
                 </div>
                 <div style="flex:0 0 auto;align-self:flex-end">
                   <button class="btn btn-primary" onclick="addExercise()">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
-                    Agregar
+                    <span data-i18n="btnAgregar">Agregar</span>
                   </button>
                 </div>
               </div>
-              <p class="sm" style="margin-top:10px">Edita nombre/duración directo sobre cada tarjeta del catálogo, o elimínalos con el ícono 🗑️ que aparece aquí una vez que expandes esta sección.</p>
+              <p class="sm" style="margin-top:10px" data-i18n="hintCatalogAdmin">Edita nombre/duración directo sobre cada tarjeta del catálogo, o elimínalos con el ícono 🗑️ que aparece aquí una vez que expandes esta sección.</p>
               <div id="catalogAdminList" style="margin-top:10px"></div>
             </div>
           </details>
@@ -798,7 +800,7 @@ tbody tr:hover{background:var(--surface-sunken)}
         <!-- ---------- Columna derecha: sesión en curso ---------- -->
         <div class="session-panel">
           <div class="session-panel-head">
-            <h3>🔥 Sesión de hoy</h3>
+            <h3 data-i18n="sesionHoyTitle">🔥 Sesión de hoy</h3>
             <span class="sm" id="queueCountLbl">0 ejercicios</span>
           </div>
 
@@ -811,7 +813,7 @@ tbody tr:hover{background:var(--surface-sunken)}
             </div>
             <div class="session-total-txt">
               <div class="big" id="totalTimeLeft">00:00</div>
-              <div class="lbl">tiempo restante · <span id="totalTimeAll">00:00</span> en total</div>
+              <div class="lbl"><span data-i18n="lblTiempoRestante">tiempo restante ·</span> <span id="totalTimeAll">00:00</span> <span data-i18n="lblEnTotal">en total</span></div>
             </div>
           </div>
 
@@ -822,36 +824,36 @@ tbody tr:hover{background:var(--surface-sunken)}
               <input type="checkbox" id="chainMode" onchange="localStorage.setItem('chain_mode_v1', this.checked ? '1' : '')">
               <span class="slider"></span>
             </span>
-            Encadenar: al terminar uno, iniciar el siguiente automáticamente
+            <span data-i18n="chainToggle">Encadenar: al terminar uno, iniciar el siguiente automáticamente</span>
           </label>
 
           <div class="session-panel-controls">
-            <button class="btn btn-primary btn-sm" onclick="startAllQueue()">▶️ Iniciar todo</button>
-            <button class="btn btn-outline btn-sm" onclick="pauseAllQueue()">⏸️ Pausar todo</button>
-            <button class="btn btn-ghost btn-sm" onclick="resetAllQueue()">↺ Reiniciar</button>
-            <button class="btn btn-danger btn-sm" onclick="clearQueue()">Vaciar sesión</button>
+            <button class="btn btn-primary btn-sm" onclick="startAllQueue()" data-i18n="btnIniciarTodo">▶️ Iniciar todo</button>
+            <button class="btn btn-outline btn-sm" onclick="pauseAllQueue()" data-i18n="btnPausarTodo">⏸️ Pausar todo</button>
+            <button class="btn btn-ghost btn-sm" onclick="resetAllQueue()" data-i18n="btnReiniciar">↺ Reiniciar</button>
+            <button class="btn btn-danger btn-sm" onclick="clearQueue()" data-i18n="btnVaciarSesion">Vaciar sesión</button>
           </div>
         </div>
       </div>
-      <p class="sm" style="margin-top:16px">Cada ejercicio suena un aviso al llegar a 0. El resumen de esta sesión se adjunta automáticamente al guardar en "📝 Registrar sesión".</p>
+      <p class="sm" style="margin-top:16px" data-i18n="hintEjercicios">Cada ejercicio suena un aviso al llegar a 0. El resumen de esta sesión se adjunta automáticamente al guardar en "📝 Registrar sesión".</p>
     </section>
 
     <!-- ===================== HISTORIAL ===================== -->
     <section class="card" id="sec-historial">
       <div class="card-head">
-        <h2><span class="emoji">📚</span>Historial de sesiones</h2>
+        <h2><span class="emoji">📚</span><span data-i18n="secHistorialTitle">Historial de sesiones</span></h2>
       </div>
 
       <div id="patientTable" style="margin-bottom:16px"></div>
 
       <div class="table-toolbar">
-        <input id="searchReg" type="text" placeholder="Buscar por paciente, foco o nota…" oninput="renderRegContainer()">
+        <input id="searchReg" type="text" data-i18n-placeholder="placeholderBuscarReg" placeholder="Buscar por paciente, foco o nota…" oninput="renderRegContainer()">
         <span class="sm" id="regCount" style="margin-left:auto"></span>
       </div>
 
       <div id="selectionBar" class="selection-bar" style="display:none">
-        <span><strong id="selectionCount">0</strong> sesión(es) seleccionadas</span>
-        <button class="btn btn-ghost btn-sm" onclick="clearSelection()">Limpiar selección</button>
+        <span><strong id="selectionCount">0</strong> <span id="selectionCountLbl"></span></span>
+        <button class="btn btn-ghost btn-sm" onclick="clearSelection()" data-i18n="btnLimpiarSeleccion">Limpiar selección</button>
       </div>
 
       <div id="regContainer"></div>
@@ -860,51 +862,51 @@ tbody tr:hover{background:var(--surface-sunken)}
       <div class="controls">
         <button class="btn btn-outline" onclick="exportCSV()">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-          Exportar CSV
+          <span data-i18n="btnExportarCsv">Exportar CSV</span>
         </button>
         <button class="btn btn-ghost" onclick="exportJSON()">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-          Exportar JSON
+          <span data-i18n="btnExportarJson">Exportar JSON</span>
         </button>
         <button id="pdfBtn" class="btn btn-primary" onclick="generatePDF()">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/></svg>
-          Generar informe PDF
+          <span data-i18n="btnGenerarPdf">Generar informe PDF</span>
         </button>
-        <button class="btn btn-danger" onclick="clearAll()">Borrar todas</button>
+        <button class="btn btn-danger" onclick="clearAll()" data-i18n="btnBorrarTodas">Borrar todas</button>
       </div>
     </section>
 
     <!-- ===================== RESPALDO ===================== -->
     <section class="card" id="sec-respaldo">
       <div class="card-head">
-        <h2><span class="emoji">💾</span>Respaldo y restauración</h2>
+        <h2><span class="emoji">💾</span><span data-i18n="secRespaldoTitle">Respaldo y restauración</span></h2>
       </div>
-      <p class="sm">Todos los datos viven únicamente en este navegador. Se recomienda exportar un respaldo periódicamente para no perder información si se borra el historial del navegador o se cambia de equipo.</p>
+      <p class="sm" data-i18n="respaldoText">Todos los datos viven únicamente en este navegador. Se recomienda exportar un respaldo periódicamente para no perder información si se borra el historial del navegador o se cambia de equipo.</p>
       <div class="controls" style="justify-content:flex-start;margin-top:12px">
         <button class="btn btn-outline" onclick="exportBackup()">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-          Exportar respaldo completo
+          <span data-i18n="btnExportarRespaldo">Exportar respaldo completo</span>
         </button>
         <button class="btn btn-ghost" onclick="triggerImportBackup()">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 9V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v4M7 14l5-5 5 5M12 9v12"/></svg>
-          Importar respaldo
+          <span data-i18n="btnImportarRespaldo">Importar respaldo</span>
         </button>
         <input type="file" id="importBackupInput" accept="application/json" style="display:none" onchange="handleImportBackup(event)">
       </div>
     </section>
 
-    <p class="footer-note">Procesado 100% local en su equipo — audio, imágenes e informes nunca salen del navegador.<br>
+    <p class="footer-note" data-i18n-html="footerNote">Procesado 100% local en su equipo — audio, imágenes e informes nunca salen del navegador.<br>
       <strong>Autora de la plataforma:</strong> Matilde Pizarro Toro, fonoaudióloga 💗</p>
   </main>
 </div>
 
 <div id="modalOverlay" class="modal-overlay" hidden>
   <div class="modal-box" role="alertdialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalMessage">
-    <h3 id="modalTitle">¿Confirmar acción?</h3>
+    <h3 id="modalTitle" data-i18n="modalConfirmarTitulo">¿Confirmar acción?</h3>
     <p id="modalMessage" class="sm"></p>
     <div class="modal-actions">
-      <button id="modalCancelBtn" class="btn btn-outline">Cancelar</button>
-      <button id="modalConfirmBtn" class="btn btn-danger">Confirmar</button>
+      <button id="modalCancelBtn" class="btn btn-outline" data-i18n="modalCancelar">Cancelar</button>
+      <button id="modalConfirmBtn" class="btn btn-danger" data-i18n="modalConfirmar">Confirmar</button>
     </div>
   </div>
 </div>
@@ -913,6 +915,7 @@ tbody tr:hover{background:var(--surface-sunken)}
 
 <script src="../assets/shared.js"></script>
 <script>
+const tt = (key, fallback) => (window.CV_I18N ? window.CV_I18N.t(key) : (fallback !== undefined ? fallback : key));
 /* ================= Toast system ================= */
 function toast(msg, type='info'){
   const host = document.getElementById('toastHost');
@@ -923,7 +926,7 @@ function toast(msg, type='info'){
     : type==='err'
     ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v5M12 16h.01"/></svg>'
     : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>';
-  el.innerHTML = icon + '<span>' + msg + '</span>';
+  el.innerHTML = icon + '<span>' + escapeHtml(msg) + '</span>';
   host.appendChild(el);
   setTimeout(()=>{ el.classList.add('hide'); setTimeout(()=>el.remove(), 220); }, 3400);
 }
@@ -1124,7 +1127,7 @@ function updateParticipantList(){
 /* ---------- KPIs ---------- */
 function renderKpis(){
   const total = sessions.length;
-  const uniqueParticipants = new Set(sessions.map(r=>r.participantId||'Sin nombre')).size;
+  const uniqueParticipants = new Set(sessions.map(r=>r.participantId||tt('sinNombre','Sin nombre'))).size;
   const now = new Date();
   const weekAgo = new Date(now.getTime() - 7*24*60*60*1000);
   const thisWeek = sessions.filter(r=> new Date(r.date) >= weekAgo).length;
@@ -1135,25 +1138,30 @@ function renderKpis(){
   document.getElementById('kpiActiveEx').textContent = activeExercises;
 }
 
+window.addEventListener('cv-lang-changed', ()=>{
+  renderExercises(); renderQueue(); renderRegContainer(); renderKpis(); renderPatientTable();
+});
+
 function renderPatientTable(){
   const el = document.getElementById('patientTable');
   if(!el) return;
   if(!sessions.length){ el.innerHTML = ''; return; }
+  const sinNombre = tt('sinNombre','Sin nombre');
   const map = {};
   sessions.forEach(r=>{
-    const pid = r.participantId || 'Sin nombre';
+    const pid = r.participantId || sinNombre;
     if(!map[pid]) map[pid] = { count:0, last:r.date };
     map[pid].count++;
     if(new Date(r.date) > new Date(map[pid].last)) map[pid].last = r.date;
   });
   const rows = Object.entries(map).sort((a,b)=> new Date(b[1].last) - new Date(a[1].last));
-  let html = '<div class="table-scroll"><table><thead><tr><th>Paciente</th><th>Sesiones</th><th>Última sesión</th><th></th></tr></thead><tbody>';
+  let html = `<div class="table-scroll"><table><thead><tr><th>${tt('thPaciente','Paciente')}</th><th>${tt('thSesiones','Sesiones')}</th><th>${tt('thUltimaSesion','Última sesión')}</th><th></th></tr></thead><tbody>`;
   rows.forEach(([pid, d])=>{
     html += `<tr>
       <td><strong>${escapeHtml(pid)}</strong></td>
       <td>${d.count}</td>
       <td>${new Date(d.last).toLocaleDateString('es-CL')}</td>
-      <td><button class="btn btn-outline btn-sm" onclick="filterByPatient('${pid.replace(/'/g,"\\'")}')">Ver historial</button></td>
+      <td><button class="btn btn-outline btn-sm" onclick="filterByPatient('${pid.replace(/'/g,"\\'")}')">${tt('btnVerHistorial','Ver historial')}</button></td>
     </tr>`;
   });
   html += '</tbody></table></div>';
@@ -1162,7 +1170,7 @@ function renderPatientTable(){
 
 function filterByPatient(pid){
   const search = document.getElementById('searchReg');
-  search.value = pid === 'Sin nombre' ? '' : pid;
+  search.value = pid === tt('sinNombre','Sin nombre') ? '' : pid;
   renderRegContainer();
   scrollToSection('sec-historial');
   search.focus();
@@ -1182,7 +1190,7 @@ function addExercise(){
   const ex = { id: Date.now()+Math.random(), name, duration: dur, remaining: dur, running:false, intervalId:null, category };
   exercises.push(ex); persistExercises();
   nameInput.value=''; document.getElementById('newExDur').value='';
-  toast('Ejercicio agregado', 'ok');
+  toast(tt('toastEjercicioAgregado','Ejercicio agregado'), 'ok');
 }
 
 let openExCategories = new Set(); // categorías expandidas por la usuaria (persiste entre renders)
@@ -1299,11 +1307,11 @@ function formatMMSS(totalSeconds){
 
 function addToQueue(exId){
   const ex = findExercise(exId); if(!ex) return;
-  if(isInQueue(exId)){ toast('Ese ejercicio ya está en la sesión de hoy', 'info'); return; }
+  if(isInQueue(exId)){ toast(tt('toastYaEnSesion','Ese ejercicio ya está en la sesión de hoy'), 'info'); return; }
   sessionQueue.push({ qid: Date.now()+Math.random(), exId: ex.id, name: ex.name, duration: ex.duration, remaining: ex.duration, running:false, done:false, detail:'' });
   persistQueue();
   renderExercises();
-  toast(`"${ex.name}" añadido a la sesión de hoy`, 'ok');
+  toast(window.CV_I18N ? window.CV_I18N.t('toastAnadidoASesion')(ex.name) : `"${ex.name}" añadido a la sesión de hoy`, 'ok');
 }
 function removeFromQueue(qid){
   const idx = sessionQueue.findIndex(q=>String(q.qid)===String(qid));
@@ -1311,7 +1319,7 @@ function removeFromQueue(qid){
 }
 function clearQueue(){
   if(!sessionQueue.length) return;
-  confirmModal({title:'Vaciar sesión de hoy', message:'Se quitarán todos los ejercicios de la sesión en curso (el catálogo no se ve afectado). ¿Continuar?', confirmText:'Vaciar'}).then(ok=>{
+  confirmModal({title:tt('modalVaciarTitulo','Vaciar sesión de hoy'), message:tt('modalVaciarMsg','Se quitarán todos los ejercicios de la sesión en curso (el catálogo no se ve afectado). ¿Continuar?'), confirmText:tt('modalVaciarBtn','Vaciar')}).then(ok=>{
     if(!ok) return;
     sessionQueue = [];
     persistQueue();
@@ -1474,13 +1482,13 @@ function tapTempo(){
 function renderSessionExSummary(){
   const wrap = document.getElementById('sessionExSummary');
   if(!wrap) return;
-  if(!sessionQueue.length){ wrap.innerHTML = '<div class="ex-empty-inline">Aún no has agregado ejercicios a la sesión de hoy.</div>'; return; }
+  if(!sessionQueue.length){ wrap.innerHTML = `<div class="ex-empty-inline">${tt('sessionExSummaryVacio','Aún no has agregado ejercicios a la sesión de hoy.')}</div>`; return; }
   const totalDur = sessionQueue.reduce((a,q)=>a+q.duration,0);
-  let html = `<div class="sm" style="margin-bottom:6px">${sessionQueue.length} ejercicio(s) · ${formatMMSS(totalDur)} en total</div><div class="checklist">`;
+  let html = `<div class="sm" style="margin-bottom:6px">${window.CV_I18N ? window.CV_I18N.t('exNumEjercicios')(sessionQueue.length) : sessionQueue.length+' ejercicio(s)'} · ${formatMMSS(totalDur)} ${tt('qCardTotal','total')}</div><div class="checklist">`;
   sessionQueue.forEach(q=>{
     html += `<div class="check-item ${q.done?'checked':''}">
       <span class="name">${escapeHtml(q.name)}</span>
-      <span class="dur">${formatMMSS(q.duration)}${q.done?' · ✓ hecho':''}</span>
+      <span class="dur">${formatMMSS(q.duration)}${q.done?' '+tt('qCardHecho','· ✓ hecho'):''}</span>
     </div>`;
   });
   html += '</div>';
@@ -1490,11 +1498,11 @@ function renderSessionExSummary(){
 function renderQueue(){
   const wrap = document.getElementById('sessionQueue');
   const countLbl = document.getElementById('queueCountLbl');
-  if(countLbl) countLbl.textContent = `${sessionQueue.length} ejercicio${sessionQueue.length===1?'':'s'}`;
+  if(countLbl) countLbl.textContent = window.CV_I18N ? window.CV_I18N.t('exNumEjercicios')(sessionQueue.length) : `${sessionQueue.length} ejercicio${sessionQueue.length===1?'':'s'}`;
   if(!wrap) return;
 
   if(!sessionQueue.length){
-    wrap.innerHTML = '<div class="q-empty">Agrega ejercicios del catálogo con el botón ➕ para armar la sesión de hoy 💗</div>';
+    wrap.innerHTML = `<div class="q-empty">${tt('queueVacio','Agrega ejercicios del catálogo con el botón ➕ para armar la sesión de hoy 💗')}</div>`;
   } else {
     const focusValues = {};
     wrap.querySelectorAll('.q-detail').forEach(inp=>{ focusValues[inp.dataset.qid] = { value: inp.value, focused: document.activeElement===inp, selStart: inp.selectionStart }; });
@@ -1514,19 +1522,19 @@ function renderQueue(){
         </div>
         <div class="q-info">
           <div class="q-name">${escapeHtml(q.name)}</div>
-          <div class="q-meta">${formatMMSS(q.duration)} total ${q.running?'· ⏳ en curso':q.done?'· completado':''}</div>
-          <input class="q-detail" data-qid="${q.qid}" type="text" placeholder="Nota rápida: series, dificultad…" value="${escapeHtml(q.detail||'')}">
+          <div class="q-meta">${formatMMSS(q.duration)} ${tt('qCardTotal','total')} ${q.running?tt('qCardEnCurso','· ⏳ en curso'):q.done?tt('qCardCompletado','· completado'):''}</div>
+          <input class="q-detail" data-qid="${q.qid}" type="text" placeholder="${tt('qDetailPlaceholder','Nota rápida: series, dificultad…')}" value="${escapeHtml(q.detail||'')}">
         </div>
         <div class="q-actions">
-          <button class="q-icon-btn ${q.running?'pause':'play'}" title="${q.running?'Pausar':'Iniciar'}" onclick="toggleQueueItem('${q.qid}')">
+          <button class="q-icon-btn ${q.running?'pause':'play'}" title="${q.running?tt('qBtnPausar','Pausar'):tt('qBtnIniciar','Iniciar')}" onclick="toggleQueueItem('${q.qid}')">
             ${q.running
               ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>'
               : '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7Z"/></svg>'}
           </button>
-          <button class="q-icon-btn" title="Reiniciar" onclick="resetQueueItem('${q.qid}')">
+          <button class="q-icon-btn" title="${tt('qBtnReiniciar','Reiniciar')}" onclick="resetQueueItem('${q.qid}')">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
           </button>
-          <button class="q-icon-btn" title="Quitar de la sesión" onclick="removeFromQueue('${q.qid}')" style="color:var(--danger)">
+          <button class="q-icon-btn" title="${tt('qBtnQuitar','Quitar de la sesión')}" onclick="removeFromQueue('${q.qid}')" style="color:var(--danger)">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
           </button>
         </div>
@@ -1574,7 +1582,7 @@ setInterval(()=>{
     if(q.remaining <= 0){
       q.running = false; q.done = true;
       playChime('end');
-      toast(`Ejercicio "${q.name}" completado`, 'ok');
+      toast(window.CV_I18N ? window.CV_I18N.t('toastEjercicioCompletado')(q.name) : `Ejercicio "${q.name}" completado`, 'ok');
       const card = document.querySelector(`.q-card[data-qid="${q.qid}"]`);
       if(card){ card.classList.add('just-done'); setTimeout(()=>card.classList.remove('just-done'), 460); }
       if(chain){
@@ -1687,7 +1695,7 @@ async function startMic(){
     document.getElementById('statusText').textContent = 'Escuchando…';
   }catch(err){
     console.error('Mic error', err);
-    toast('No se pudo acceder al micrófono: ' + (err.message || err), 'err');
+    toast((window.CV_I18N ? window.CV_I18N.t('toastErrorMic')(err.message || err) : 'No se pudo acceder al micrófono: ' + (err.message || err)), 'err');
   }
 }
 
@@ -1780,7 +1788,7 @@ async function toggleRecord(){ if(!recorder.recording) await startRecording(); e
 async function startRecording(){
   if(recorder.recording) return;
   if(!mediaStream){
-    try{ mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false }); }catch(e){ toast('Debe permitir el micrófono para grabar.', 'err'); return; }
+    try{ mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false }); }catch(e){ toast(tt('toastDebePermitirMic','Debe permitir el micrófono para grabar.'), 'err'); return; }
   }
   if(!window.audioContext) await ensureAudioContext();
   recorder.buffer = []; recorder.lastDataUrl = null; recorder.lastObjectUrl = null; recorder.lastFilename = null;
@@ -1831,7 +1839,7 @@ function stopRecording(){
 
   document.getElementById('recBtn').innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="6"/></svg> Grabar';
   document.getElementById('recBtn').classList.remove('btn-danger');
-  toast('Grabación lista para descargar', 'ok');
+  toast(tt('toastGrabacionLista','Grabación lista para descargar'), 'ok');
 }
 
 function encodeWAV(samples, sampleRate){
@@ -1980,7 +1988,7 @@ function encodeWAV(samples, sampleRate){
     btn.title = 'Reproducir la nota detectada como referencia';
     btn.addEventListener('click', ()=>{
       const text = (noteEl.textContent || '').trim();
-      if(!text || text === '--'){ toast('No hay nota detectada para reproducir.', 'err'); return; }
+      if(!text || text === '--'){ toast(tt('toastSinNotaDetectada','No hay nota detectada para reproducir.'), 'err'); return; }
       const m = text.match(/^([A-Za-z#♯]+\-?\d+)/);
       let nameOct = m ? m[1] : null;
       if(!nameOct && window.lastNoteDetected){
@@ -2010,7 +2018,7 @@ function encodeWAV(samples, sampleRate){
           return;
         }
       }
-      toast('No se pudo identificar la nota detectada.', 'err');
+      toast(tt('toastNoIdentificoNota','No se pudo identificar la nota detectada.'), 'err');
     });
     noteEl.insertAdjacentElement('afterend', btn);
   };
@@ -2036,9 +2044,9 @@ function resetSessionForm(){
 }
 
 function saveSession(){
-  if(recorder.recording){ toast('Detenga la grabación antes de guardar la sesión.', 'err'); return; }
+  if(recorder.recording){ toast(tt('toastDetengaGrabacion','Detenga la grabación antes de guardar la sesión.'), 'err'); return; }
   const pid = document.getElementById('participantId').value.trim();
-  if(!pid){ toast('Ingrese el nombre o ID del paciente.', 'err'); return; }
+  if(!pid){ toast(tt('toastIngreseNombrePaciente','Ingrese el nombre o ID del paciente.'), 'err'); return; }
   const focus = document.getElementById('focusText').value.trim();
   const sens = Array.from(document.querySelectorAll('#sensBox input[type="checkbox"]')).filter(i=>i.checked).map(i=>i.value);
   const observations = document.getElementById('observaciones').value.trim();
@@ -2067,12 +2075,12 @@ function saveSession(){
   const push = ()=>{
     sessions.push(session); persistSessions(); resetSessionForm();
     sessionQueue = []; persistQueue();
-    toast('Sesión guardada correctamente 💗', 'ok');
+    toast(tt('toastSesionGuardada','Sesión guardada correctamente 💗'), 'ok');
   };
   if(file){
     const reader = new FileReader();
     reader.onload = e=>{ session.evidence = e.target.result; push(); };
-    reader.onerror = ()=>{ toast('Error leyendo imagen', 'err'); push(); };
+    reader.onerror = ()=>{ toast(tt('toastErrorImagen','Error leyendo imagen'), 'err'); push(); };
     reader.readAsDataURL(file);
   } else push();
 }
@@ -2096,12 +2104,12 @@ function updateExportScopeHint(){
   const hint = document.getElementById('exportScopeHint');
   if(!hint) return;
   if(selectedSessionIds.size){
-    hint.textContent = `Las exportaciones incluirán las ${selectedSessionIds.size} sesión(es) seleccionadas.`;
+    hint.textContent = window.CV_I18N ? window.CV_I18N.t('scopeSeleccionadas')(selectedSessionIds.size) : `Las exportaciones incluirán las ${selectedSessionIds.size} sesión(es) seleccionadas.`;
   } else {
     const filteredCount = getFilteredSessions().length;
     hint.textContent = filteredCount === sessions.length
-      ? `Las exportaciones incluirán las ${sessions.length} sesión(es) del historial.`
-      : `Las exportaciones incluirán las ${filteredCount} sesión(es) que coinciden con el filtro actual.`;
+      ? (window.CV_I18N ? window.CV_I18N.t('scopeTodas')(sessions.length) : `Las exportaciones incluirán las ${sessions.length} sesión(es) del historial.`)
+      : (window.CV_I18N ? window.CV_I18N.t('scopeFiltro')(filteredCount) : `Las exportaciones incluirán las ${filteredCount} sesión(es) que coinciden con el filtro actual.`);
   }
 }
 
@@ -2119,6 +2127,8 @@ function updateSelectionUI(){
   const bar = document.getElementById('selectionBar');
   bar.style.display = count > 0 ? 'flex' : 'none';
   document.getElementById('selectionCount').textContent = count;
+  const lbl = document.getElementById('selectionCountLbl');
+  if(lbl) lbl.textContent = window.CV_I18N ? window.CV_I18N.t('selEtiqueta')(count) : (count===1?'sesión seleccionada':'sesiones seleccionadas');
 }
 function clearSelection(){ selectedSessionIds.clear(); renderRegContainer(); }
 
@@ -2127,21 +2137,21 @@ function renderRegContainer(){
   const countEl = document.getElementById('regCount');
   renderPatientTable();
   const filtered = getFilteredSessions();
-  if(countEl) countEl.textContent = `${filtered.length} de ${sessions.length} sesión(es)`;
+  if(countEl) countEl.textContent = window.CV_I18N ? window.CV_I18N.t('conteoFiltrado')(filtered.length, sessions.length) : `${filtered.length} de ${sessions.length} sesión(es)`;
   updateSelectionUI();
   updateExportScopeHint();
-  if(!sessions.length){ cont.innerHTML = '<div class="reg-empty">Aún no hay sesiones registradas. Complétalas desde "📝 Registrar sesión".</div>'; return; }
-  if(!filtered.length){ cont.innerHTML = '<div class="reg-empty">No hay sesiones que coincidan con la búsqueda.</div>'; return; }
+  if(!sessions.length){ cont.innerHTML = `<div class="reg-empty">${tt('regVacioSinSesiones','Aún no hay sesiones registradas. Complétalas desde "📝 Registrar sesión".')}</div>`; return; }
+  if(!filtered.length){ cont.innerHTML = `<div class="reg-empty">${tt('regVacioSinCoincidencias','No hay sesiones que coincidan con la búsqueda.')}</div>`; return; }
 
   const allVisibleSelected = filtered.every(({r})=>selectedSessionIds.has(r.id));
   let html = `<div class="table-scroll"><table><thead><tr>
-    <th><input type="checkbox" ${allVisibleSelected?'checked':''} onclick="toggleSelectAllVisible(this)" aria-label="Seleccionar todas las visibles"></th>
-    <th>Paciente</th><th>Fecha</th><th>Foco</th><th>Ejercicios</th><th>Evidencia</th><th>Audio</th><th></th></tr></thead><tbody>`;
+    <th><input type="checkbox" ${allVisibleSelected?'checked':''} onclick="toggleSelectAllVisible(this)" aria-label="${tt('ariaSeleccionarTodas','Seleccionar todas las visibles')}"></th>
+    <th>${tt('thPaciente','Paciente')}</th><th>${tt('thFecha','Fecha')}</th><th>${tt('thFoco','Foco')}</th><th>${tt('thEjercicios','Ejercicios')}</th><th>${tt('thEvidencia','Evidencia')}</th><th>${tt('thAudio','Audio')}</th><th></th></tr></thead><tbody>`;
   filtered.forEach(({r, idx})=>{
-    const audioCell = r.audioWav ? `<a href="${r.audioWav}" download="${r.audioFilename || 'sesion_'+(idx+1)+'.wav'}">Descargar</a>` : '<span class="sm">—</span>';
-    const exCell = (r.exercisesDone && r.exercisesDone.length) ? `<span class="badge-pill">${r.exercisesDone.length} ejercicio(s)</span>` : '<span class="sm">—</span>';
+    const audioCell = r.audioWav ? `<a href="${r.audioWav}" download="${r.audioFilename || 'sesion_'+(idx+1)+'.wav'}">${tt('btnDescargar','Descargar')}</a>` : '<span class="sm">—</span>';
+    const exCell = (r.exercisesDone && r.exercisesDone.length) ? `<span class="badge-pill">${window.CV_I18N ? window.CV_I18N.t('exNumEjercicios')(r.exercisesDone.length) : r.exercisesDone.length+' ejercicio(s)'}</span>` : '<span class="sm">—</span>';
     html += `<tr>
-      <td><input type="checkbox" ${selectedSessionIds.has(r.id)?'checked':''} onchange="toggleSelectReg(${r.id}, this.checked)" aria-label="Seleccionar sesión"></td>
+      <td><input type="checkbox" ${selectedSessionIds.has(r.id)?'checked':''} onchange="toggleSelectReg(${r.id}, this.checked)" aria-label="${tt('ariaSeleccionarSesion','Seleccionar sesión')}"></td>
       <td><strong>${escapeHtml(r.participantId)||'—'}</strong></td>
       <td>${new Date(r.date).toLocaleString('es-CL')}</td>
       <td>${escapeHtml(friendlyFocus(r.focus))}</td>
@@ -2149,8 +2159,8 @@ function renderRegContainer(){
       <td>${r.evidence ? '<img class="thumb" src="'+r.evidence+'">' : '<span class="sm">—</span>'}</td>
       <td>${audioCell}</td>
       <td><div class="row-actions">
-        <button class="icon-btn" title="Exportar" aria-label="Exportar este registro" onclick="exportRegistro(${idx})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></button>
-        <button class="icon-btn danger" title="Eliminar" aria-label="Eliminar este registro" onclick="deleteRegistro(${idx})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6"/></svg></button>
+        <button class="icon-btn" title="${tt('titleExportarRegistro','Exportar')}" aria-label="${tt('ariaExportarRegistro','Exportar este registro')}" onclick="exportRegistro(${idx})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></button>
+        <button class="icon-btn danger" title="${tt('titleEliminarRegistro','Eliminar')}" aria-label="${tt('ariaEliminarRegistro','Eliminar este registro')}" onclick="deleteRegistro(${idx})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6"/></svg></button>
       </div></td>
     </tr>`;
   });
@@ -2159,25 +2169,25 @@ function renderRegContainer(){
 }
 
 async function deleteRegistro(i){
-  const ok = await confirmModal({ title:'Eliminar sesión', message:'¿Eliminar esta sesión? Esta acción no se puede deshacer.', confirmText:'Eliminar', danger:true });
+  const ok = await confirmModal({ title:tt('modalEliminarSesionTitulo','Eliminar sesión'), message:tt('modalEliminarSesionMsg','¿Eliminar esta sesión? Esta acción no se puede deshacer.'), confirmText:tt('modalEliminarBtn','Eliminar'), danger:true });
   if(!ok) return;
   const [removed] = sessions.splice(i,1);
   if(removed) selectedSessionIds.delete(removed.id);
   persistSessions();
-  toast('Sesión eliminada', 'ok');
+  toast(tt('toastSesionEliminada','Sesión eliminada'), 'ok');
 }
 function exportRegistro(i){ const blob = new Blob([JSON.stringify(sessions[i], null, 2)], { type:'application/json' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `sesion_${i+1}.json`; a.click(); URL.revokeObjectURL(url); }
 
 function exportJSON(){
   const targets = getExportTargets();
-  if(!targets.length){ toast('No hay sesiones para exportar.', 'err'); return; }
+  if(!targets.length){ toast(tt('toastNoHaySesionesExportar','No hay sesiones para exportar.'), 'err'); return; }
   const blob = new Blob([JSON.stringify(targets,null,2)], { type:'application/json' });
   const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `sesiones_${new Date().toISOString().slice(0,10)}.json`; a.click(); URL.revokeObjectURL(url);
-  toast(`JSON exportado (${targets.length} sesión(es))`, 'ok');
+  toast(window.CV_I18N ? window.CV_I18N.t('toastJsonExportado')(targets.length) : `JSON exportado (${targets.length} sesión(es))`, 'ok');
 }
 function exportCSV(){
   const targets = getExportTargets();
-  if(!targets.length){ toast('No hay sesiones para exportar.', 'err'); return; }
+  if(!targets.length){ toast(tt('toastNoHaySesionesExportar','No hay sesiones para exportar.'), 'err'); return; }
   const headers = ['Paciente','Fecha','Foco','Ejercicios realizados','Sensaciones','Observaciones','dB registrado','Nota registrada'];
   const csvEscape = v => `"${String(v??'').replace(/"/g,'""')}"`;
   const rows = targets.map(r=>[
@@ -2188,13 +2198,13 @@ function exportCSV(){
   const csv = [headers.map(csvEscape).join(','), ...rows].join('\n');
   const blob = new Blob(['\uFEFF'+csv], { type:'text/csv;charset=utf-8' });
   const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `sesiones_${new Date().toISOString().slice(0,10)}.csv`; a.click(); URL.revokeObjectURL(url);
-  toast(`CSV exportado (${targets.length} sesión(es))`, 'ok');
+  toast(window.CV_I18N ? window.CV_I18N.t('toastCsvExportado')(targets.length) : `CSV exportado (${targets.length} sesión(es))`, 'ok');
 }
 async function clearAll(){
-  const ok = await confirmModal({ title:'Borrar todas las sesiones', message:'¿Borrar todas las sesiones? Esta acción no se puede deshacer.', confirmText:'Borrar todo', danger:true });
+  const ok = await confirmModal({ title:tt('modalBorrarTodasTitulo','Borrar todas las sesiones'), message:tt('modalBorrarTodasMsg','¿Borrar todas las sesiones? Esta acción no se puede deshacer.'), confirmText:tt('modalBorrarTodoBtn','Borrar todo'), danger:true });
   if(!ok) return;
   sessions = []; selectedSessionIds.clear(); persistSessions();
-  toast('Historial borrado', 'ok');
+  toast(tt('toastHistorialBorrado','Historial borrado'), 'ok');
 }
 
 /* ---------- Respaldo completo (import/export) ---------- */
@@ -2202,7 +2212,7 @@ function exportBackup(){
   const payload = { version:2, exportedAt: new Date().toISOString(), exercises, sessions };
   const blob = new Blob([JSON.stringify(payload,null,2)], { type:'application/json' });
   const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `respaldo_bitacora_${new Date().toISOString().slice(0,10)}.json`; a.click(); URL.revokeObjectURL(url);
-  toast('Respaldo completo exportado', 'ok');
+  toast(tt('toastRespaldoExportado','Respaldo completo exportado'), 'ok');
 }
 function triggerImportBackup(){ document.getElementById('importBackupInput').click(); }
 async function handleImportBackup(evt){
@@ -2214,9 +2224,9 @@ async function handleImportBackup(evt){
     const sessionsIn = data.sessions || data.registros; // acepta respaldos antiguos también
     if(!data || (!Array.isArray(sessionsIn) && !Array.isArray(data.exercises))) throw new Error('Formato no reconocido');
     const ok = await confirmModal({
-      title: 'Importar respaldo',
-      message: `Se combinarán ${sessionsIn?.length||0} sesión(es) y ${data.exercises?.length||0} ejercicio(s) con los datos actuales, evitando duplicados. ¿Continuar?`,
-      confirmText: 'Importar',
+      title: tt('modalImportarTitulo','Importar respaldo'),
+      message: window.CV_I18N ? window.CV_I18N.t('modalImportarMsg')(sessionsIn?.length||0, data.exercises?.length||0) : `Se combinarán ${sessionsIn?.length||0} sesión(es) y ${data.exercises?.length||0} ejercicio(s) con los datos actuales, evitando duplicados. ¿Continuar?`,
+      confirmText: tt('modalImportarBtn','Importar'),
       danger: false
     });
     if(!ok){ evt.target.value=''; return; }
@@ -2230,10 +2240,10 @@ async function handleImportBackup(evt){
       data.exercises.forEach(e=>{ if(e && !existingIds.has(e.id)){ exercises.push({...e, running:false, intervalId:null}); existingIds.add(e.id); addedEx++; } });
     }
     persistSessions(); persistExercises();
-    toast(`Importado: ${addedRegs} sesión(es) y ${addedEx} ejercicio(s) nuevos`, 'ok');
+    toast(window.CV_I18N ? window.CV_I18N.t('toastImportado')(addedRegs, addedEx) : `Importado: ${addedRegs} sesión(es) y ${addedEx} ejercicio(s) nuevos`, 'ok');
   }catch(err){
     console.error(err);
-    toast('No se pudo importar el archivo: formato inválido', 'err');
+    toast(tt('toastFormatoInvalido','No se pudo importar el archivo: formato inválido'), 'err');
   } finally {
     evt.target.value = '';
   }
@@ -2242,10 +2252,10 @@ async function handleImportBackup(evt){
 /* ---------- PDF generation (jsPDF) ---------- */
 async function generatePDF(){
   const targets = getExportTargets();
-  if(!targets.length){ toast('No hay sesiones para generar informe.', 'err'); return; }
+  if(!targets.length){ toast(tt('toastNoHaySesionesInforme','No hay sesiones para generar informe.'), 'err'); return; }
   const btn = document.getElementById('pdfBtn');
   const originalHtml = btn.innerHTML;
-  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Generando…';
+  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> ' + escapeHtml(tt('toastGenerando','Generando…'));
 
   try{
     const { jsPDF } = window.jspdf;
@@ -2255,35 +2265,36 @@ async function generatePDF(){
     const margin = 14;
     const lineHeight = 7;
     const maxWidth = pageWidth - margin*2;
-    const authorLine = 'Autora: Matilde Pizarro Toro';
+    const authorLine = tt('pdfAutorLinea','Autora: Matilde Pizarro Toro');
+    const locale = tt('localeCode','es-CL');
 
     /* ---- Cover page ---- */
     pdf.setFillColor(201,74,140);
     pdf.rect(0,0,pageWidth,58,'F');
     pdf.setTextColor(255,255,255);
     pdf.setFontSize(19); pdf.setFont(undefined,'bold');
-    pdf.text('Informe de Sesiones Fonoaudiológicas', margin, 27);
+    pdf.text(tt('pdfPortadaTitulo','Informe de Sesiones Fonoaudiológicas'), margin, 27);
     pdf.setFontSize(11); pdf.setFont(undefined,'normal');
-    pdf.text('Bitácora clínica de voz — Matilde Pizarro Toro, Fonoaudióloga', margin, 37);
+    pdf.text(tt('pdfPortadaSub','Bitácora clínica de voz — Matilde Pizarro Toro, Fonoaudióloga'), margin, 37);
     pdf.setFontSize(9);
-    pdf.text(`Generado el ${new Date().toLocaleString('es-CL')}`, margin, 46);
+    pdf.text((window.CV_I18N ? window.CV_I18N.t('pdfGeneradoEl')(new Date().toLocaleString(locale)) : `Generado el ${new Date().toLocaleString(locale)}`), margin, 46);
 
     pdf.setTextColor(20,20,20);
     let coverY = 74;
-    pdf.setFontSize(12); pdf.setFont(undefined,'bold'); pdf.text('Resumen del informe', margin, coverY); coverY += 9;
+    pdf.setFontSize(12); pdf.setFont(undefined,'bold'); pdf.text(tt('pdfResumenInforme','Resumen del informe'), margin, coverY); coverY += 9;
     pdf.setFont(undefined,'normal'); pdf.setFontSize(10.5);
-    const uniqueP = new Set(targets.map(r=>r.participantId||'Sin nombre')).size;
+    const uniqueP = new Set(targets.map(r=>r.participantId||tt('sinNombre','Sin nombre'))).size;
     const sortedDates = targets.map(r=>new Date(r.date)).sort((a,b)=>a-b);
-    const rangeStr = sortedDates.length ? `${sortedDates[0].toLocaleDateString('es-CL')} — ${sortedDates[sortedDates.length-1].toLocaleDateString('es-CL')}` : '-';
+    const rangeStr = sortedDates.length ? `${sortedDates[0].toLocaleDateString(locale)} — ${sortedDates[sortedDates.length-1].toLocaleDateString(locale)}` : '-';
     [
-      `Total de sesiones incluidas: ${targets.length}`,
-      `Pacientes distintos: ${uniqueP}`,
-      `Rango de fechas cubierto: ${rangeStr}`
+      (window.CV_I18N ? window.CV_I18N.t('pdfTotalSesiones')(targets.length) : `Total de sesiones incluidas: ${targets.length}`),
+      (window.CV_I18N ? window.CV_I18N.t('pdfPacientesDistintos')(uniqueP) : `Pacientes distintos: ${uniqueP}`),
+      (window.CV_I18N ? window.CV_I18N.t('pdfRangoFechas')(rangeStr) : `Rango de fechas cubierto: ${rangeStr}`)
     ].forEach(line=>{ pdf.text(line, margin, coverY); coverY += 7.5; });
 
     pdf.setDrawColor(220); pdf.line(margin, coverY+2, pageWidth-margin, coverY+2);
     pdf.setFontSize(8.5); pdf.setTextColor(120,120,120);
-    pdf.text('Este documento fue generado automáticamente y procesado en su totalidad en el navegador del profesional; ningún dato fue enviado a servidores externos.', margin, coverY+10, { maxWidth });
+    pdf.text(tt('pdfDisclaimer','Este documento fue generado automáticamente y procesado en su totalidad en el navegador del profesional; ningún dato fue enviado a servidores externos.'), margin, coverY+10, { maxWidth });
 
     /* ---- Detail pages ---- */
     pdf.addPage();
@@ -2291,18 +2302,20 @@ async function generatePDF(){
     function addHeader(title){
       pdf.setTextColor(20,20,20);
       pdf.setFontSize(13); pdf.setFont(undefined,'bold'); pdf.text(title, margin, cursorY);
-      pdf.setFontSize(9); pdf.setFont(undefined,'normal'); pdf.text(`Generado: ${new Date().toLocaleString('es-CL')}`, pageWidth - margin, cursorY, {align:'right'});
+      pdf.setFontSize(9); pdf.setFont(undefined,'normal');
+      pdf.text((window.CV_I18N ? window.CV_I18N.t('pdfGenerado')(new Date().toLocaleString(locale)) : `Generado: ${new Date().toLocaleString(locale)}`), pageWidth - margin, cursorY, {align:'right'});
       cursorY += 8; pdf.setDrawColor(230); pdf.line(margin, cursorY, pageWidth - margin, cursorY); cursorY += 8;
     }
-    function newPage(){ pdf.addPage(); cursorY = margin; addHeader('Sesiones fonoaudiológicas — Detalle'); }
+    const detalleTitulo = tt('pdfDetalleTitulo','Sesiones fonoaudiológicas — Detalle');
+    function newPage(){ pdf.addPage(); cursorY = margin; addHeader(detalleTitulo); }
 
-    addHeader('Sesiones fonoaudiológicas — Detalle');
+    addHeader(detalleTitulo);
 
     for(let i=0;i<targets.length;i++){
       const r = targets[i];
       if(cursorY + 60 > pageHeight - margin) newPage();
       pdf.setFontSize(11); pdf.setFont(undefined,'bold');
-      const headerLine = `Sesión ${i+1} — Paciente: ${r.participantId || '-'}   Fecha: ${new Date(r.date).toLocaleString('es-CL')}`;
+      const headerLine = window.CV_I18N ? window.CV_I18N.t('pdfSesionHeader')(i+1, r.participantId || '-', new Date(r.date).toLocaleString(locale)) : `Sesión ${i+1} — Paciente: ${r.participantId || '-'}   Fecha: ${new Date(r.date).toLocaleString(locale)}`;
       const headLines = pdf.splitTextToSize(headerLine, maxWidth);
       headLines.forEach(hl=>{ if(cursorY + lineHeight > pageHeight - margin) newPage(); pdf.text(hl, margin, cursorY); cursorY += lineHeight; });
       cursorY += 2;
@@ -2315,12 +2328,12 @@ async function generatePDF(){
         cursorY += 4;
       }
 
-      write('Foco de la sesión:', friendlyFocus(r.focus) || '-');
-      write('Ejercicios realizados:', (r.exercisesDone && r.exercisesDone.length) ? r.exercisesDone.map(e=>`${e.name} (${e.duration}s)${e.detail?' — '+e.detail:''}`).join('; ') : '-');
-      write('Sensaciones:', (r.sensaciones && r.sensaciones.length) ? r.sensaciones.join(', ') : '-');
-      write('Notas clínicas:', r.observaciones || '-');
-      write('Último nivel estimado (dB):', r.lastDb !== null && r.lastDb !== undefined ? String(r.lastDb) + ' dB' : '-');
-      write('Última nota detectada (si aplica):', r.lastNote || '-');
+      write(tt('pdfFocoSesion','Foco de la sesión:'), friendlyFocus(r.focus) || '-');
+      write(tt('pdfEjerciciosRealizados','Ejercicios realizados:'), (r.exercisesDone && r.exercisesDone.length) ? r.exercisesDone.map(e=>`${e.name} (${e.duration}s)${e.detail?' — '+e.detail:''}`).join('; ') : '-');
+      write(tt('pdfSensaciones','Sensaciones:'), (r.sensaciones && r.sensaciones.length) ? r.sensaciones.join(', ') : '-');
+      write(tt('pdfNotasClinicas','Notas clínicas:'), r.observaciones || '-');
+      write(tt('pdfUltimoNivel','Último nivel estimado (dB):'), r.lastDb !== null && r.lastDb !== undefined ? String(r.lastDb) + ' dB' : '-');
+      write(tt('pdfUltimaNota','Última nota detectada (si aplica):'), r.lastNote || '-');
 
       if(r.evidence){
         try{
@@ -2337,7 +2350,7 @@ async function generatePDF(){
         }catch(e){ console.warn('Imagen no añadida', e); }
       }
 
-      if(r.audioWav) write('Audio adjunto:', `Archivo WAV disponible en la interfaz con nombre: ${r.audioFilename || 'sesion.wav'}`);
+      if(r.audioWav) write(tt('pdfAudioAdjunto','Audio adjunto:'), (window.CV_I18N ? window.CV_I18N.t('pdfAudioDisponible')(r.audioFilename || 'sesion.wav') : `Archivo WAV disponible en la interfaz con nombre: ${r.audioFilename || 'sesion.wav'}`));
 
       pdf.setDrawColor(230); pdf.line(margin, cursorY, pageWidth - margin, cursorY); cursorY += 8;
     }
@@ -2347,19 +2360,20 @@ async function generatePDF(){
 
     /* ---- Footer with page numbers (skip cover page) ---- */
     const totalPages = pdf.internal.getNumberOfPages();
+    const footerAuthor = tt('pdfAutorFooter','Matilde Pizarro Toro · Fonoaudióloga');
     for(let p=2;p<=totalPages;p++){
       pdf.setPage(p);
       pdf.setFontSize(8.5); pdf.setTextColor(130,130,130);
-      pdf.text(`Página ${p-1} de ${totalPages-1}`, pageWidth/2, pageHeight-8, { align:'center' });
-      pdf.text('Matilde Pizarro Toro · Fonoaudióloga', margin, pageHeight-8);
+      pdf.text((window.CV_I18N ? window.CV_I18N.t('pdfPaginaDe')(p-1, totalPages-1) : `Página ${p-1} de ${totalPages-1}`), pageWidth/2, pageHeight-8, { align:'center' });
+      pdf.text(footerAuthor, margin, pageHeight-8);
     }
 
     const fileName = `Informe_Sesiones_${new Date().toISOString().slice(0,19).replace(/[:T]/g,'_')}.pdf`;
     pdf.save(fileName);
-    toast(`Informe PDF generado (${targets.length} sesión(es))`, 'ok');
+    toast(window.CV_I18N ? window.CV_I18N.t('toastInformePdfGenerado')(targets.length) : `Informe PDF generado (${targets.length} sesión(es))`, 'ok');
   }catch(err){
     console.error(err);
-    toast('Ocurrió un error generando el PDF', 'err');
+    toast(tt('toastErrorPdf','Ocurrió un error generando el PDF'), 'err');
   } finally {
     btn.disabled = false; btn.innerHTML = originalHtml;
   }

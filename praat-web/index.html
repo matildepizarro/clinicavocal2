@@ -3,14 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PRAAT.WEB — Analizador acústico</title>
-<meta name="description" content="Analizador acústico en el navegador: F0, formantes, intensidad, espectrograma y anotaciones, con registro en vivo desde el micrófono.">
+<title data-i18n="pageTitle">Plataforma de Análisis Acústico de la Voz</title>
+<meta name="description" data-i18n-content="metaDescription" content="Analizador acústico en el navegador: F0, formantes, intensidad, espectrograma y anotaciones, con registro en vivo desde el micrófono.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='7' fill='%23e0559e'/%3E%3Cpath d='M5 15h2.4l1.6-6 2.4 12 2-9.5 1.4 3.5H19' stroke='white' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/shared.css">
 <script>document.documentElement.setAttribute('data-pastel-theme', (function(){try{return localStorage.getItem('cv-pastel-theme')||'rosa';}catch(e){return 'rosa';}})());</script>
+<script src="i18n-dict.js"></script>
+<script src="../assets/i18n-engine.js"></script>
 <style>
   :root{
     --bg:#fff5fa;
@@ -128,53 +130,53 @@
 
   <div class="topbar">
     <div class="brand">
-      <div class="mark">PRAAT<span>.</span>WEB</div>
-      <div class="sub">prototipo — análisis acústico en el navegador</div>
+      <div class="mark">Plataforma de Análisis Acústico de la Voz</div>
+      <div class="sub" data-i18n="brandSub">prototipo — análisis acústico en el navegador</div>
     </div>
     <div class="tabs" role="tablist" aria-label="Modo de análisis">
-      <div class="tab active" id="tabFile" role="tab" aria-selected="true" tabindex="0">Archivo</div>
-      <div class="tab" id="tabLive" role="tab" aria-selected="false" tabindex="0">En vivo</div>
+      <div class="tab active" id="tabFile" role="tab" aria-selected="true" tabindex="0" data-i18n="tabArchivo">Archivo</div>
+      <div class="tab" id="tabLive" role="tab" aria-selected="false" tabindex="0" data-i18n="tabEnVivo">En vivo</div>
     </div>
   </div>
 
-  <div class="status" id="status">Carga un archivo de audio, graba un clip, o pasa a «En vivo» para medir en tiempo real.</div>
+  <div class="status" id="status" data-i18n="statusInicial">Carga un archivo de audio, graba un clip, o pasa a «En vivo» para medir en tiempo real.</div>
 
   <!-- ===================== VISTA ARCHIVO ===================== -->
   <div class="view active" id="viewFile">
     <div class="toolbar" style="margin-bottom:12px;">
-      <button class="btn primary" id="btnOpen">Abrir audio</button>
+      <button class="btn primary" id="btnOpen" data-i18n="btnAbrirAudio">Abrir audio</button>
       <input type="file" id="fileInput" accept="audio/*">
-      <button class="btn" id="btnRec"><span class="dot"></span>Grabar clip</button>
-      <button class="btn" id="btnPlay" disabled>▶ Reproducir</button>
-      <button class="btn" id="btnStop" disabled>■ Detener</button>
-      <button class="btn" id="btnExportImg" disabled>Exportar PNG</button>
-      <button class="btn" id="btnExportAnn" disabled>Exportar anotaciones</button>
-      <button class="btn primary" id="btnReport" disabled>Generar informe</button>
+      <button class="btn" id="btnRec"><span class="dot"></span><span data-i18n="btnGrabarClip">Grabar clip</span></button>
+      <button class="btn" id="btnPlay" disabled data-i18n="btnReproducir">▶ Reproducir</button>
+      <button class="btn" id="btnStop" disabled data-i18n="btnDetener">■ Detener</button>
+      <button class="btn" id="btnExportImg" disabled data-i18n="btnExportarPng">Exportar PNG</button>
+      <button class="btn" id="btnExportAnn" disabled data-i18n="btnExportarAnotaciones">Exportar anotaciones</button>
+      <button class="btn primary" id="btnReport" disabled data-i18n="btnGenerarInforme">Generar informe</button>
     </div>
 
     <div class="canvas-wrap" id="reportWrap" style="display:none;margin-bottom:14px;">
-      <div class="panel-label" style="border:none;">Informe acústico (estilo Praat)</div>
+      <div class="panel-label" style="border:none;" data-i18n="informeTitulo">Informe acústico (estilo Praat)</div>
       <pre id="reportText" style="margin:0;padding:12px;font-family:var(--mono);font-size:12px;line-height:1.6;color:var(--text);white-space:pre-wrap;max-height:340px;overflow:auto;"></pre>
       <div style="display:flex;gap:8px;flex-wrap:wrap;padding:0 12px 12px;">
-        <button class="btn" id="btnDownloadReport">Descargar informe (.txt)</button>
-        <button class="btn" id="btnCsvPitch">Listado F0 (.csv)</button>
-        <button class="btn" id="btnCsvFormants">Listado formantes (.csv)</button>
-        <button class="btn" id="btnCsvIntensity">Listado intensidad (.csv)</button>
+        <button class="btn" id="btnDownloadReport" data-i18n="btnDescargarInforme">Descargar informe (.txt)</button>
+        <button class="btn" id="btnCsvPitch" data-i18n="btnCsvF0">Listado F0 (.csv)</button>
+        <button class="btn" id="btnCsvFormants" data-i18n="btnCsvFormantes">Listado formantes (.csv)</button>
+        <button class="btn" id="btnCsvIntensity" data-i18n="btnCsvIntensidad">Listado intensidad (.csv)</button>
       </div>
     </div>
 
     <div class="layout">
       <div class="stack">
-        <div class="panel-label">Forma de onda</div>
+        <div class="panel-label" data-i18n="labelFormaOnda">Forma de onda</div>
         <div class="canvas-wrap" id="waveWrap">
           <canvas id="waveCanvas"></canvas>
-          <div class="empty-hint" id="emptyHint">sin señal cargada</div>
+          <div class="empty-hint" id="emptyHint" data-i18n="sinSenalCargada">sin señal cargada</div>
         </div>
 
-        <div class="panel-label" style="margin-top:6px;">Espectrograma · F0 (cian) · formantes (puntos claros)</div>
+        <div class="panel-label" style="margin-top:6px;" data-i18n="labelEspectrograma">Espectrograma · F0 (cian) · formantes (puntos claros)</div>
         <div class="canvas-wrap"><canvas id="specCanvas"></canvas></div>
 
-        <div class="panel-label" style="margin-top:6px;">Anotaciones</div>
+        <div class="panel-label" style="margin-top:6px;" data-i18n="labelAnotaciones">Anotaciones</div>
         <div class="canvas-wrap"><canvas id="annCanvas"></canvas></div>
 
         <div class="readout" id="readout">
@@ -184,40 +186,40 @@
           <span>F2=<b class="rv" id="rF2">–</b></span>
           <span>F3=<b class="rv" id="rF3">–</b></span>
           <span>F4=<b class="rv" id="rF4">–</b></span>
-          <span>Int=<b class="rv" id="rI">–</b> dB</span>
+          <span><span data-i18n="labelIntensidadDb">Int=</span><b class="rv" id="rI">–</b> dB</span>
         </div>
 
         <div class="legend" style="margin-top:8px;">
-          <span><i style="background:var(--accent-2)"></i>curva de F0</span>
-          <span><i style="background:#f4f0d8"></i>formantes estimados</span>
-          <span><i style="background:var(--accent)"></i>cursor / selección</span>
+          <span><i style="background:var(--accent-2)"></i><span data-i18n="legendCurvaF0">curva de F0</span></span>
+          <span><i style="background:#f4f0d8"></i><span data-i18n="legendFormantes">formantes estimados</span></span>
+          <span><i style="background:var(--accent)"></i><span data-i18n="legendCursor">cursor / selección</span></span>
         </div>
       </div>
 
       <div class="side">
         <div class="field-group">
-          <h4>Anotaciones</h4>
-          <button class="btn" id="btnAddAnn" style="width:100%;margin-bottom:8px;" disabled>+ Marca en cursor</button>
-          <div class="ann-list" id="annList"><div class="ann-empty">sin marcas</div></div>
+          <h4 data-i18n="fgAnotaciones">Anotaciones</h4>
+          <button class="btn" id="btnAddAnn" style="width:100%;margin-bottom:8px;" disabled data-i18n="btnMarcaCursor">+ Marca en cursor</button>
+          <div class="ann-list" id="annList"><div class="ann-empty" data-i18n="sinMarcas">sin marcas</div></div>
         </div>
 
         <div class="field-group">
-          <h4>Análisis de tono (F0)</h4>
-          <div class="field"><label>Piso <span class="val" id="vPitchFloor">75</span> Hz</label><input type="range" id="pitchFloor" min="40" max="200" step="1" value="75"></div>
-          <div class="field"><label>Techo <span class="val" id="vPitchCeil">500</span> Hz</label><input type="range" id="pitchCeil" min="200" max="900" step="5" value="500"></div>
+          <h4 data-i18n="fgAnalisisTono">Análisis de tono (F0)</h4>
+          <div class="field"><label><span data-i18n="labelPiso">Piso</span> <span class="val" id="vPitchFloor">75</span> Hz</label><input type="range" id="pitchFloor" min="40" max="200" step="1" value="75"></div>
+          <div class="field"><label><span data-i18n="labelTecho">Techo</span> <span class="val" id="vPitchCeil">500</span> Hz</label><input type="range" id="pitchCeil" min="200" max="900" step="5" value="500"></div>
         </div>
 
         <div class="field-group">
-          <h4>Formantes (LPC)</h4>
-          <div class="field"><label>Cantidad <span class="val" id="vNumForm">4</span></label><input type="range" id="numForm" min="3" max="5" step="1" value="4"></div>
-          <div class="field"><label>Techo <span class="val" id="vFormCeil">5500</span> Hz</label><input type="range" id="formCeil" min="3500" max="7500" step="100" value="5500"></div>
+          <h4 data-i18n="fgFormantesLpc">Formantes (LPC)</h4>
+          <div class="field"><label><span data-i18n="labelCantidad">Cantidad</span> <span class="val" id="vNumForm">4</span></label><input type="range" id="numForm" min="3" max="5" step="1" value="4"></div>
+          <div class="field"><label><span data-i18n="labelTecho">Techo</span> <span class="val" id="vFormCeil">5500</span> Hz</label><input type="range" id="formCeil" min="3500" max="7500" step="100" value="5500"></div>
         </div>
 
         <div class="field-group">
-          <h4>Espectrograma</h4>
-          <div class="field"><label>Ventana <span class="val" id="vWinLen">30</span> ms</label><input type="range" id="winLen" min="10" max="60" step="1" value="30"></div>
-          <div class="field"><label>Rango dinámico <span class="val" id="vDynRange">60</span> dB</label><input type="range" id="dynRange" min="30" max="90" step="1" value="60"></div>
-          <div class="field"><label>Frec. máxima <span class="val" id="vMaxFreq">5000</span> Hz</label><input type="range" id="maxFreq" min="2000" max="8000" step="100" value="5000"></div>
+          <h4 data-i18n="fgEspectrograma">Espectrograma</h4>
+          <div class="field"><label><span data-i18n="labelVentana">Ventana</span> <span class="val" id="vWinLen">30</span> ms</label><input type="range" id="winLen" min="10" max="60" step="1" value="30"></div>
+          <div class="field"><label><span data-i18n="labelRangoDinamico">Rango dinámico</span> <span class="val" id="vDynRange">60</span> dB</label><input type="range" id="dynRange" min="30" max="90" step="1" value="60"></div>
+          <div class="field"><label><span data-i18n="labelFrecMax">Frec. máxima</span> <span class="val" id="vMaxFreq">5000</span> Hz</label><input type="range" id="maxFreq" min="2000" max="8000" step="100" value="5000"></div>
         </div>
       </div>
     </div>
@@ -226,16 +228,16 @@
   <!-- ===================== VISTA EN VIVO ===================== -->
   <div class="view" id="viewLive">
     <div class="toolbar" style="margin-bottom:10px;">
-      <button class="btn primary" id="btnLiveStart">● Iniciar micrófono</button>
-      <button class="btn" id="btnLiveFreeze" disabled>❚❚ Congelar</button>
-      <button class="btn" id="btnLiveRec" disabled><span class="dot"></span>Grabar este clip</button>
-      <button class="btn" id="btnLiveLog" disabled>+ Anotar lectura</button>
-      <button class="btn" id="btnLiveLogExport" disabled>Exportar bitácora (.csv)</button>
+      <button class="btn primary" id="btnLiveStart" data-i18n="btnIniciarMic">● Iniciar micrófono</button>
+      <button class="btn" id="btnLiveFreeze" disabled data-i18n="btnCongelar">❚❚ Congelar</button>
+      <button class="btn" id="btnLiveRec" disabled><span class="dot"></span><span data-i18n="btnGrabarEsteClip">Grabar este clip</span></button>
+      <button class="btn" id="btnLiveLog" disabled data-i18n="btnAnotarLectura">+ Anotar lectura</button>
+      <button class="btn" id="btnLiveLogExport" disabled data-i18n="btnExportarBitacora">Exportar bitácora (.csv)</button>
     </div>
 
     <div class="live-top">
-      <div class="led-wrap"><span class="led" id="ledVoiced"></span>voz detectada</div>
-      <div class="led-wrap">nivel de entrada
+      <div class="led-wrap"><span class="led" id="ledVoiced"></span><span data-i18n="vozDetectada">voz detectada</span></div>
+      <div class="led-wrap"><span data-i18n="nivelEntrada">nivel de entrada</span>
         <div class="meter"><div class="meter-fill" id="meterFill"></div></div>
       </div>
     </div>
@@ -246,37 +248,37 @@
       <div class="hud-card"><div class="lbl">F2</div><div class="valnum" id="lF2">–</div></div>
       <div class="hud-card"><div class="lbl">F3</div><div class="valnum" id="lF3">–</div></div>
       <div class="hud-card"><div class="lbl">F4</div><div class="valnum" id="lF4">–</div></div>
-      <div class="hud-card"><div class="lbl">Nivel</div><div class="valnum" id="lInt">– dB</div></div>
+      <div class="hud-card"><div class="lbl" data-i18n="hudNivel">Nivel</div><div class="valnum" id="lInt">– dB</div></div>
     </div>
 
-    <div class="panel-label">Oscilograma en vivo</div>
+    <div class="panel-label" data-i18n="labelOscilogramaVivo">Oscilograma en vivo</div>
     <div class="canvas-wrap"><canvas id="liveWaveCanvas"></canvas></div>
 
-    <div class="panel-label" style="margin-top:6px;">Espectrograma en vivo (waterfall) · F0 (cian) · formantes (puntos claros)</div>
+    <div class="panel-label" style="margin-top:6px;" data-i18n="labelEspectrogramaVivo">Espectrograma en vivo (waterfall) · F0 (cian) · formantes (puntos claros)</div>
     <div class="canvas-wrap">
       <canvas id="liveSpecCanvas"></canvas>
-      <div class="empty-hint" id="liveEmptyHint">micrófono detenido</div>
+      <div class="empty-hint" id="liveEmptyHint" data-i18n="micDetenido">micrófono detenido</div>
     </div>
 
     <div class="legend" style="margin-top:8px;">
-      <span><i style="background:var(--accent-2)"></i>F0 instantáneo</span>
-      <span><i style="background:#f4f0d8"></i>formantes instantáneos</span>
-      <span>el audio no se reproduce en vivo (se evita retroalimentación)</span>
+      <span><i style="background:var(--accent-2)"></i><span data-i18n="legendF0Instantaneo">F0 instantáneo</span></span>
+      <span><i style="background:#f4f0d8"></i><span data-i18n="legendFormantesInstantaneos">formantes instantáneos</span></span>
+      <span data-i18n="legendSinRetroalimentacion">el audio no se reproduce en vivo (se evita retroalimentación)</span>
     </div>
 
-    <div class="panel-label" style="margin-top:14px;">Bitácora de lecturas</div>
+    <div class="panel-label" style="margin-top:14px;" data-i18n="labelBitacoraLecturas">Bitácora de lecturas</div>
     <div class="canvas-wrap" style="max-height:180px;overflow:auto;">
       <table style="width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12px;" id="liveLogTable">
         <thead><tr style="color:var(--text-dim);text-align:left;">
-          <th style="padding:6px 10px;">t (s)</th><th>F0</th><th>F1</th><th>F2</th><th>F3</th><th>F4</th><th>Nivel</th>
+          <th style="padding:6px 10px;" data-i18n="thTiempo">t (s)</th><th>F0</th><th>F1</th><th>F2</th><th>F3</th><th>F4</th><th data-i18n="thNivel">Nivel</th>
         </tr></thead>
         <tbody id="liveLogBody"></tbody>
       </table>
-      <div class="ann-empty" id="liveLogEmpty" style="padding:10px;">sin lecturas anotadas</div>
+      <div class="ann-empty" id="liveLogEmpty" style="padding:10px;" data-i18n="sinLecturasAnotadas">sin lecturas anotadas</div>
     </div>
   </div>
 
-  <footer>
+  <footer data-i18n="footerText">
     Prototipo escrito en JavaScript puro (FFT propia, autocorrelación para F0, LPC + búsqueda de raíces para formantes).
     No es una compilación del código fuente de Praat: reimplementa los algoritmos DSP equivalentes para funcionar
     íntegramente en el navegador, incluida la medición en vivo desde el micrófono. Las estimaciones de formantes
@@ -312,6 +314,7 @@
   };
 
   const $ = id => document.getElementById(id);
+  const tt = (key, fallback) => (window.CV_I18N ? window.CV_I18N.t(key) : (fallback !== undefined ? fallback : key));
   const statusEl = $('status');
   const setStatus = (msg, warn=false) => { statusEl.textContent = msg; statusEl.className = 'status' + (warn?' warn':''); };
 
@@ -525,7 +528,7 @@
   // ==================================================================
   function runAnalysis(){
     if (!S.audioBuffer) return;
-    setStatus('Analizando…');
+    setStatus(tt('stAnalizando','Analizando…'));
     requestAnimationFrame(()=> setTimeout(doAnalysis, 10));
   }
 
@@ -606,7 +609,7 @@
     S.spec = { frames: specDb, nBins, fftN, sr: workSR };
     S.times = times;
 
-    setStatus(`Listo · ${S.duration.toFixed(2)} s · ${nFrames} cuadros de análisis`);
+    setStatus(window.CV_I18N ? window.CV_I18N.t('stListo')(S.duration.toFixed(2), nFrames) : `Listo · ${S.duration.toFixed(2)} s · ${nFrames} cuadros de análisis`);
     buildSpectrogramImage();
     draw();
   }
@@ -819,7 +822,7 @@
     const endAt = S.selection ? S.selection.end : S.duration;
     src.start(0, startAt);
     S.playSrc = src; S.playCtxStart = ctx.currentTime; S.playOffset = startAt; S.playing = true;
-    $('btnPlay').textContent = '⏸ Pausar';
+    $('btnPlay').textContent = tt('btnPausar','⏸ Pausar');
     const dur = endAt-startAt;
     src.stop(ctx.currentTime + Math.max(0.01, dur));
     src.onended = () => { if (S.playing){ S.playing=false; $('btnPlay').textContent='▶ Reproducir'; } };
@@ -839,7 +842,7 @@
   function stopPlayback(){
     if (S.playSrc){ try{ S.playSrc.stop(); }catch(e){} S.playSrc=null; }
     S.playing = false;
-    $('btnPlay').textContent = '▶ Reproducir';
+    $('btnPlay').textContent = tt('btnReproducir','▶ Reproducir');
   }
 
   $('btnPlay').addEventListener('click', ()=>{ if (S.playing) stopPlayback(); else play(); });
@@ -854,7 +857,7 @@
 
   async function loadFromArrayBuffer(arrayBuffer){
     try{
-      setStatus('Decodificando audio…');
+      setStatus(tt('stDecodificando','Decodificando audio…'));
       const ctx = ensureCtx();
       const buf = await ctx.decodeAudioData(arrayBuffer.slice(0));
       S.audioBuffer = buf;
@@ -864,7 +867,7 @@
       $('reportWrap').style.display = 'none';
       runAnalysis();
     }catch(err){
-      setStatus('No se pudo decodificar el audio: ' + err.message, true);
+      setStatus((window.CV_I18N ? window.CV_I18N.t('stErrorDecodificar')(err.message) : 'No se pudo decodificar el audio: ' + err.message), true);
     }
   }
 
@@ -872,7 +875,7 @@
     const btn = $('btnRec');
     if (!S.recorder || S.recorder.state !== 'recording'){
       try{
-        setStatus('Solicitando permiso de micrófono…');
+        setStatus(tt('stSolicitandoMic','Solicitando permiso de micrófono…'));
         S.recStream = await navigator.mediaDevices.getUserMedia({audio:true});
         S.recChunks = [];
         S.recorder = new MediaRecorder(S.recStream);
@@ -885,19 +888,19 @@
         };
         S.recorder.start();
         btn.classList.add('on');
-        setStatus('Grabando… presiona nuevamente para detener.');
+        setStatus(tt('stGrabando','Grabando… presiona nuevamente para detener.'));
       }catch(err){
-        setStatus('No se pudo acceder al micrófono: ' + err.message, true);
+        setStatus((window.CV_I18N ? window.CV_I18N.t('stErrorMic')(err.message) : 'No se pudo acceder al micrófono: ' + err.message), true);
       }
     } else {
       S.recorder.stop();
-      setStatus('Procesando grabación…');
+      setStatus(tt('stProcesandoGrabacion','Procesando grabación…'));
     }
   });
 
   $('btnAddAnn').addEventListener('click', ()=>{
     if (!S.duration) return;
-    S.annotations.push({ t: S.cursor, label: 'marca' + (S.annotations.length+1) });
+    S.annotations.push({ t: S.cursor, label: tt('marcaPrefix','marca') + (S.annotations.length+1) });
     S.annotations.sort((a,b)=>a.t-b.t);
     renderAnnList(); draw();
   });
@@ -905,15 +908,15 @@
   function renderAnnList(){
     const list = $('annList');
     list.innerHTML = '';
-    if (!S.annotations.length){ list.innerHTML = '<div class="ann-empty">sin marcas</div>'; return; }
+    if (!S.annotations.length){ list.innerHTML = '<div class="ann-empty">' + escapeHtml(tt('sinMarcas','sin marcas')) + '</div>'; return; }
     S.annotations.forEach((a, i)=>{
       const chip = document.createElement('div'); chip.className='ann-chip';
       const t = document.createElement('span'); t.className='t'; t.textContent = a.t.toFixed(2)+'s';
       const label = document.createElement('span'); label.contentEditable='true'; label.textContent = a.label;
-      label.setAttribute('role','textbox'); label.setAttribute('aria-label','Etiqueta de la marca');
+      label.setAttribute('role','textbox'); label.setAttribute('aria-label', tt('etiquetaMarca','Etiqueta de la marca'));
       label.addEventListener('input', ()=>{ a.label = label.textContent; draw(); });
       const del = document.createElement('button'); del.type='button'; del.className='del'; del.textContent='✕';
-      del.setAttribute('aria-label','Eliminar marca');
+      del.setAttribute('aria-label', tt('eliminarMarca','Eliminar marca'));
       del.addEventListener('click', ()=>{ S.annotations.splice(i,1); renderAnnList(); draw(); });
       chip.append(t,label,del);
       list.appendChild(chip);
@@ -922,7 +925,7 @@
 
   $('btnExportImg').addEventListener('click', ()=>{
     const link = document.createElement('a');
-    link.download = 'espectrograma.png';
+    link.download = tt('fileEspectrograma','espectrograma.png');
     link.href = specCanvas.toDataURL('image/png');
     link.click();
   });
@@ -930,7 +933,7 @@
     const data = JSON.stringify(S.annotations, null, 2);
     const blob = new Blob([data], {type:'application/json'});
     const link = document.createElement('a');
-    link.download = 'anotaciones.json';
+    link.download = tt('fileAnotaciones','anotaciones.json');
     link.href = URL.createObjectURL(blob);
     link.click();
   });
@@ -1001,32 +1004,31 @@
 
   function formatReport(r){
     const f = (v,d=1)=> isFinite(v) ? v.toFixed(d) : '—';
+    const T = (k,fb) => tt(k,fb);
     const L = [];
-    L.push('INFORME ACÚSTICO — PRAAT.WEB');
+    L.push(T('repTitulo','INFORME ACÚSTICO — Plataforma de Análisis Acústico de la Voz'));
     L.push('='.repeat(42));
-    L.push(`Duración total:              ${f(r.duration,3)} s`);
-    L.push(`Cuadros de análisis:         ${r.nFrames}`);
-    L.push(`Fracción sonora (F0 válido): ${f(r.voicedFrac*100,1)} %`);
+    L.push(`${T('repDuracion','Duración total:')}              ${f(r.duration,3)} s`);
+    L.push(`${T('repCuadros','Cuadros de análisis:')}         ${r.nFrames}`);
+    L.push(`${T('repFraccionSonora','Fracción sonora (F0 válido):')} ${f(r.voicedFrac*100,1)} %`);
     L.push('');
-    L.push('— Tono (F0) —');
-    L.push(`  Media:                ${f(r.f0Mean,1)} Hz`);
-    L.push(`  Mínimo:               ${f(r.f0Min,1)} Hz`);
-    L.push(`  Máximo:               ${f(r.f0Max,1)} Hz`);
-    L.push(`  Desviación estándar:  ${f(r.f0Sd,2)} Hz`);
-    L.push(`  Jitter local (aprox): ${f(r.jitterLocal,2)} %`);
+    L.push(T('repTono','— Tono (F0) —'));
+    L.push(`  ${T('repMedia','Media:')}                ${f(r.f0Mean,1)} Hz`);
+    L.push(`  ${T('repMinimo','Mínimo:')}               ${f(r.f0Min,1)} Hz`);
+    L.push(`  ${T('repMaximo','Máximo:')}               ${f(r.f0Max,1)} Hz`);
+    L.push(`  ${T('repDesvEstandar','Desviación estándar:')}  ${f(r.f0Sd,2)} Hz`);
+    L.push(`  ${T('repJitter','Jitter local (aprox):')} ${f(r.jitterLocal,2)} %`);
     L.push('');
-    L.push('— Intensidad —');
-    L.push(`  Media:                 ${f(r.intMean,1)} dB`);
-    L.push(`  Mínima:                ${f(r.intMin,1)} dB`);
-    L.push(`  Máxima:                ${f(r.intMax,1)} dB`);
-    L.push(`  Shimmer local (aprox): ${f(r.shimmerLocal,2)} %`);
+    L.push(T('repIntensidad','— Intensidad —'));
+    L.push(`  ${T('repMediaF','Media:')}                 ${f(r.intMean,1)} dB`);
+    L.push(`  ${T('repMinimaF','Mínima:')}                ${f(r.intMin,1)} dB`);
+    L.push(`  ${T('repMaximaF','Máxima:')}                ${f(r.intMax,1)} dB`);
+    L.push(`  ${T('repShimmer','Shimmer local (aprox):')} ${f(r.shimmerLocal,2)} %`);
     L.push('');
-    L.push('— Formantes (media ± desv. estándar sobre todos los cuadros) —');
+    L.push(T('repFormantes','— Formantes (media ± desv. estándar sobre todos los cuadros) —'));
     for (let i=0;i<r.numForm;i++) L.push(`  F${i+1}: ${f(r.formMeans[i],0)} Hz  (±${f(r.formSd[i],0)})`);
     L.push('');
-    L.push('Nota: jitter/shimmer son aproximaciones cuadro a cuadro sobre la envolvente de F0');
-    L.push('e intensidad, no el cálculo período-a-período exacto que usa Praat; formantes vía');
-    L.push('LPC + búsqueda de raíces (Durand-Kerner), también aproximado.');
+    L.push(T('repNota','Nota: jitter/shimmer son aproximaciones cuadro a cuadro sobre la envolvente de F0\ne intensidad, no el cálculo período-a-período exacto que usa Praat; formantes vía\nLPC + búsqueda de raíces (Durand-Kerner), también aproximado.'));
     return L.join('\n');
   }
 
@@ -1044,7 +1046,7 @@
     $('reportWrap').scrollIntoView({behavior:'smooth', block:'nearest'});
   });
   $('btnDownloadReport').addEventListener('click', ()=>{
-    downloadText($('reportText').textContent || formatReport(computeReport()), 'informe_acustico.txt');
+    downloadText($('reportText').textContent || formatReport(computeReport()), tt('fileInforme','informe_acustico.txt'));
   });
   $('btnCsvPitch').addEventListener('click', ()=>{
     const rows = ['tiempo_s,F0_Hz'];
@@ -1052,7 +1054,7 @@
       const p = S.pitch[i];
       rows.push(`${S.times[i].toFixed(4)},${(p && !isNaN(p.freq)) ? p.freq.toFixed(2) : ''}`);
     }
-    downloadText(rows.join('\n'), 'listado_f0.csv', 'text/csv');
+    downloadText(rows.join('\n'), tt('fileListadoF0','listado_f0.csv'), 'text/csv');
   });
   $('btnCsvFormants').addEventListener('click', ()=>{
     const rows = ['tiempo_s,F1_Hz,F2_Hz,F3_Hz,F4_Hz,F5_Hz'];
@@ -1060,12 +1062,12 @@
       const arr = S.formants[i] || [];
       rows.push([S.times[i].toFixed(4), arr[0]?.toFixed(0)||'', arr[1]?.toFixed(0)||'', arr[2]?.toFixed(0)||'', arr[3]?.toFixed(0)||'', arr[4]?.toFixed(0)||''].join(','));
     }
-    downloadText(rows.join('\n'), 'listado_formantes.csv', 'text/csv');
+    downloadText(rows.join('\n'), tt('fileListadoFormantes','listado_formantes.csv'), 'text/csv');
   });
   $('btnCsvIntensity').addEventListener('click', ()=>{
     const rows = ['tiempo_s,intensidad_dB'];
     for (let i=0;i<S.times.length;i++) rows.push(`${S.times[i].toFixed(4)},${S.intensity[i]!==undefined ? S.intensity[i].toFixed(2) : ''}`);
-    downloadText(rows.join('\n'), 'listado_intensidad.csv', 'text/csv');
+    downloadText(rows.join('\n'), tt('fileListadoIntensidad','listado_intensidad.csv'), 'text/csv');
   });
 
   // ==================================================================
@@ -1088,7 +1090,7 @@
   $('btnLiveStart').addEventListener('click', async ()=>{
     if (S.live.active){ stopLive(); return; }
     try{
-      setStatus('Solicitando permiso de micrófono para el modo en vivo…');
+      setStatus(tt('stSolicitandoMicVivo','Solicitando permiso de micrófono para el modo en vivo…'));
       const ctx = ensureCtx();
       if (ctx.state === 'suspended') await ctx.resume();
       const stream = await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true, noiseSuppression:false, autoGainControl:false}});
@@ -1109,22 +1111,22 @@
 
       S.live.startTime = performance.now();
 
-      $('btnLiveStart').textContent = '■ Detener micrófono';
+      $('btnLiveStart').textContent = tt('btnDetenerMic','■ Detener micrófono');
       $('btnLiveStart').classList.add('on');
       $('btnLiveFreeze').disabled = false;
       $('btnLiveRec').disabled = false;
       $('btnLiveLog').disabled = false;
       $('btnLiveLogExport').disabled = S.live.log.length === 0;
-      setStatus('Micrófono en vivo activo.');
+      setStatus(tt('stMicVivoActivo','Micrófono en vivo activo.'));
       requestAnimationFrame(liveTick);
     }catch(err){
-      setStatus('No se pudo acceder al micrófono: ' + err.message, true);
+      setStatus((window.CV_I18N ? window.CV_I18N.t('stErrorMic')(err.message) : 'No se pudo acceder al micrófono: ' + err.message), true);
     }
   });
 
   $('btnLiveFreeze').addEventListener('click', ()=>{
     S.live.frozen = !S.live.frozen;
-    $('btnLiveFreeze').textContent = S.live.frozen ? '▶ Reanudar' : '❚❚ Congelar';
+    $('btnLiveFreeze').textContent = S.live.frozen ? tt('btnReanudar','▶ Reanudar') : tt('btnCongelar','❚❚ Congelar');
     if (!S.live.frozen) requestAnimationFrame(liveTick);
   });
 
@@ -1138,13 +1140,13 @@
       S.live.recorder.onstop = async ()=>{
         btn.classList.remove('on');
         const blob = new Blob(S.live.recChunks, {type: S.live.recorder.mimeType || 'audio/webm'});
-        setStatus('Clip capturado. Cargando en la vista Archivo para análisis detallado…');
+        setStatus(tt('stClipCapturado','Clip capturado. Cargando en la vista Archivo para análisis detallado…'));
         await loadFromArrayBuffer(await blob.arrayBuffer());
         $('tabFile').click();
       };
       S.live.recorder.start();
       btn.classList.add('on');
-      setStatus('Grabando clip desde el flujo en vivo…');
+      setStatus(tt('stGrabandoClipVivo','Grabando clip desde el flujo en vivo…'));
     } else {
       S.live.recorder.stop();
     }
@@ -1181,7 +1183,7 @@
   }
 
   $('btnLiveLogExport').addEventListener('click', ()=>{
-    const rows = ['tiempo_s,F0_Hz,F1_Hz,F2_Hz,F3_Hz,F4_Hz,nivel_dB'];
+    const rows = [tt('csvHeaderVivo','tiempo_s,F0_Hz,F1_Hz,F2_Hz,F3_Hz,F4_Hz,nivel_dB')];
     for (const e of S.live.log){
       rows.push([
         e.t.toFixed(3), isNaN(e.f0)?'':e.f0.toFixed(1),
@@ -1189,22 +1191,22 @@
         isFinite(e.db)?e.db.toFixed(1):''
       ].join(','));
     }
-    downloadText(rows.join('\n'), 'bitacora_en_vivo.csv', 'text/csv');
+    downloadText(rows.join('\n'), tt('fileBitacoraVivo','bitacora_en_vivo.csv'), 'text/csv');
   });
 
   function stopLive(){
     S.live.active = false;
     if (S.live.stream) S.live.stream.getTracks().forEach(t=>t.stop());
     S.live.source = null; S.live.analyser = null; S.live.stream = null;
-    $('btnLiveStart').textContent = '● Iniciar micrófono';
+    $('btnLiveStart').textContent = tt('btnIniciarMic','● Iniciar micrófono');
     $('btnLiveStart').classList.remove('on');
-    $('btnLiveFreeze').disabled = true; $('btnLiveFreeze').textContent = '❚❚ Congelar'; S.live.frozen = false;
+    $('btnLiveFreeze').disabled = true; $('btnLiveFreeze').textContent = tt('btnCongelar','❚❚ Congelar'); S.live.frozen = false;
     $('btnLiveRec').disabled = true;
     $('btnLiveLog').disabled = true;
     $('ledVoiced').classList.remove('on');
     $('meterFill').style.width = '0%';
     liveEmptyHint.style.display = 'flex';
-    setStatus('Micrófono en vivo detenido.');
+    setStatus(tt('stMicVivoDetenido','Micrófono en vivo detenido.'));
   }
 
   function drawLiveOscilloscope(dpr){
@@ -1319,6 +1321,12 @@
   // dibujo inicial
   fitLiveCanvases();
   draw();
+
+  window.addEventListener('cv-lang-changed', ()=>{
+    if ($('reportWrap').style.display !== 'none' && S.workBuffer){
+      $('reportText').textContent = formatReport(computeReport());
+    }
+  });
 })();
 </script>
 <script src="../assets/theme-switcher.js" defer></script>

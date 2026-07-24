@@ -3,14 +3,16 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Respira Cuadrada — Temporizador de respiración</title>
-<meta name="description" content="Temporizador profesional para respiración cuadrada (box breathing): biblioteca de ejercicios, editor, animación de trazo cuadrado y metrónomo sonoro." />
+<title data-i18n="pageTitle">Respira Cuadrada — Temporizador de respiración</title>
+<meta name="description" data-i18n-content="metaDescription" content="Temporizador profesional para respiración cuadrada (box breathing): biblioteca de ejercicios, editor, animación de trazo cuadrado y metrónomo sonoro." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='7' fill='%23d9633a'/%3E%3Cpath d='M12 5a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7Zm0 3.2A3.8 3.8 0 0 0 8.2 12 3.8 3.8 0 0 0 12 15.8 3.8 3.8 0 0 0 15.8 12 3.8 3.8 0 0 0 12 8.2Z' fill='white'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="../assets/shared.css">
 <script>document.documentElement.setAttribute('data-pastel-theme', (function(){try{return localStorage.getItem('cv-pastel-theme')||'rosa';}catch(e){return 'rosa';}})());</script>
+<script src="i18n-dict.js"></script>
+<script src="../assets/i18n-engine.js"></script>
 <style>
   :root{
     --bg:#faf5ee;
@@ -256,40 +258,40 @@
       <div class="brand">
         <div class="mark"></div>
         <div>
-          <h1>Respira Cuadrada</h1>
-          <span>Box breathing</span>
+          <h1 data-i18n="brandTitle">Respira Cuadrada</h1>
+          <span data-i18n="brandSub">Box breathing</span>
         </div>
       </div>
 
       <div class="top-actions">
-        <button id="themeBtn" class="icon-btn" title="Cambiar tema" aria-label="Cambiar tema">
+        <button id="themeBtn" class="icon-btn" title="Cambiar tema" aria-label="Cambiar tema" data-i18n-title="btnThemeTitle" data-i18n-aria="btnThemeTitle">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
         </button>
-        <button id="soundBtn" class="icon-btn active" title="Silenciar sonido" aria-label="Silenciar sonido">
+        <button id="soundBtn" class="icon-btn active" title="Silenciar sonido" aria-label="Silenciar sonido" data-i18n-title="btnSoundTitle" data-i18n-aria="btnSoundTitle">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18 6a9 9 0 0 1 0 12"/></svg>
         </button>
-        <button id="interactiveToggle" class="icon-btn" title="Modo interactivo" aria-label="Modo interactivo">
+        <button id="interactiveToggle" class="icon-btn" title="Modo interactivo" aria-label="Modo interactivo" data-i18n-title="btnInteractiveTitle" data-i18n-aria="btnInteractiveTitle">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>
         </button>
       </div>
 
-      <div class="panel-title">Biblioteca</div>
-      <div class="list" id="presetList" aria-label="Lista de ejercicios"></div>
+      <div class="panel-title" data-i18n="libraryTitle">Biblioteca</div>
+      <div class="list" id="presetList" aria-label="Lista de ejercicios" data-i18n-aria="presetListAria"></div>
 
       <div class="row-btns">
-        <button id="newBtn" class="btn ghost sm block">Nuevo</button>
-        <button id="importBtn" class="btn ghost sm block">Importar</button>
+        <button id="newBtn" class="btn ghost sm block" data-i18n="btnNuevo">Nuevo</button>
+        <button id="importBtn" class="btn ghost sm block" data-i18n="btnImportar">Importar</button>
         <input id="importFile" style="display:none" type="file" accept="application/json">
-        <button id="exportBtn" class="btn sm block">Exportar</button>
+        <button id="exportBtn" class="btn sm block" data-i18n="btnExportar">Exportar</button>
       </div>
 
-      <div class="author">Desarrollado por <strong>Matilde Pizarro Toro</strong></div>
+      <div class="author"><span data-i18n="authorLabel">Desarrollado por</span> <strong>Matilde Pizarro Toro</strong></div>
     </div>
 
     <div class="card stage-area">
       <div class="stage-header">
-        <div class="stage-name" id="stageName">Selecciona un ejercicio</div>
-        <div class="stage-sub" id="stageSub">o crea uno nuevo para comenzar</div>
+        <div class="stage-name" id="stageName" data-i18n="stageDefaultName">Selecciona un ejercicio</div>
+        <div class="stage-sub" id="stageSub" data-i18n="stageDefaultSub">o crea uno nuevo para comenzar</div>
       </div>
 
       <div class="visual">
@@ -301,7 +303,7 @@
         <div class="orb-wrap">
           <div class="orb" id="orb">
             <div class="orb-inner">
-              <div class="phase-label" id="stageLabel">Listo</div>
+              <div class="phase-label" id="stageLabel" data-i18n="phaseListo">Listo</div>
               <div class="phase-time" id="timeLabel">00:00</div>
               <div class="cycles-left" id="cyclesLabel"></div>
             </div>
@@ -310,61 +312,61 @@
       </div>
 
       <div class="controls-center">
-        <button id="playBtn" class="btn">Iniciar</button>
-        <button id="pauseBtn" class="btn ghost">Pausar</button>
+        <button id="playBtn" class="btn" data-i18n="btnIniciar">Iniciar</button>
+        <button id="pauseBtn" class="btn ghost" data-i18n="btnPausar">Pausar</button>
       </div>
 
       <div class="step-row" id="stepRow"></div>
-      <div class="hint">Mantén presionado el círculo en modo interactivo para controlar la inhalación; desliza horizontalmente para ajustar el BPM.</div>
+      <div class="hint" data-i18n="hintInteractivo">Mantén presionado el círculo en modo interactivo para controlar la inhalación; desliza horizontalmente para ajustar el BPM.</div>
     </div>
 
     <div class="card">
-      <div class="panel-title">Editor de ejercicio</div>
+      <div class="panel-title" data-i18n="editorTitle">Editor de ejercicio</div>
       <form id="editor">
         <div class="field">
-          <label for="name">Nombre</label>
-          <input type="text" id="name" placeholder="Ej: Respiración 4-4-4-4" required />
+          <label for="name" data-i18n="labelNombre">Nombre</label>
+          <input type="text" id="name" placeholder="Ej: Respiración 4-4-4-4" data-i18n-placeholder="placeholderNombre" required />
         </div>
         <div class="grid2">
-          <div class="field"><label for="inhale">Inhalar (s)</label><input type="number" id="inhale" min="0" step="0.1" value="4" /></div>
-          <div class="field"><label for="hold">Retener (s)</label><input type="number" id="hold" min="0" step="0.1" value="4" /></div>
-          <div class="field"><label for="exhale">Exhalar (s)</label><input type="number" id="exhale" min="0" step="0.1" value="4" /></div>
-          <div class="field"><label for="wait">Pausa (s)</label><input type="number" id="wait" min="0" step="0.1" value="4" /></div>
+          <div class="field"><label for="inhale" data-i18n="labelInhalar">Inhalar (s)</label><input type="number" id="inhale" min="0" step="0.1" value="4" /></div>
+          <div class="field"><label for="hold" data-i18n="labelRetener">Retener (s)</label><input type="number" id="hold" min="0" step="0.1" value="4" /></div>
+          <div class="field"><label for="exhale" data-i18n="labelExhalar">Exhalar (s)</label><input type="number" id="exhale" min="0" step="0.1" value="4" /></div>
+          <div class="field"><label for="wait" data-i18n="labelPausa">Pausa (s)</label><input type="number" id="wait" min="0" step="0.1" value="4" /></div>
         </div>
         <div class="field">
-          <label for="cycles">Repeticiones (0 = sin fin)</label>
+          <label for="cycles" data-i18n="labelRepeticiones">Repeticiones (0 = sin fin)</label>
           <input type="number" id="cycles" min="0" value="6" />
         </div>
         <div class="field">
-          <label for="desc">Nota (opcional)</label>
-          <input type="text" id="desc" placeholder="ej: antes de dormir" />
+          <label for="desc" data-i18n="labelNota">Nota (opcional)</label>
+          <input type="text" id="desc" placeholder="ej: antes de dormir" data-i18n-placeholder="placeholderNota" />
         </div>
 
         <div class="row-btns">
-          <button id="saveBtn" class="btn block" type="button">Guardar</button>
-          <button id="startFromEditor" class="btn ghost block" type="button">Iniciar</button>
+          <button id="saveBtn" class="btn block" type="button" data-i18n="btnGuardar">Guardar</button>
+          <button id="startFromEditor" class="btn ghost block" type="button" data-i18n="btnIniciar">Iniciar</button>
         </div>
-        <button id="deleteBtn" class="btn ghost block" type="button">Borrar ejercicio</button>
+        <button id="deleteBtn" class="btn ghost block" type="button" data-i18n="btnBorrarEjercicio">Borrar ejercicio</button>
 
         <hr />
 
         <div class="field">
-          <label>Volumen del metrónomo</label>
+          <label data-i18n="labelVolumenMetronomo">Volumen del metrónomo</label>
           <div class="slider-row">
             <input id="volume" type="range" min="0" max="1" step="0.01" value="0.55">
             <div class="value-chip" id="volLabel">55%</div>
           </div>
         </div>
         <div class="field">
-          <label>BPM (metrónomo)</label>
+          <label data-i18n="labelBpmMetronomo">BPM (metrónomo)</label>
           <div class="slider-row">
             <input id="bpmRange" type="range" min="30" max="180" value="60" style="flex:1">
             <div class="value-chip" id="bpmLabel">60</div>
           </div>
-          <div class="small" style="margin-top:8px;line-height:1.5">Las duraciones del ejercicio se ajustan según el BPM: a mayor BPM, respiración más rápida.</div>
+          <div class="small" style="margin-top:8px;line-height:1.5" data-i18n="hintBpm">Las duraciones del ejercicio se ajustan según el BPM: a mayor BPM, respiración más rápida.</div>
         </div>
 
-        <footer class="author">Desarrollado por <strong>Matilde Pizarro Toro</strong></footer>
+        <footer class="author"><span data-i18n="authorLabel">Desarrollado por</span> <strong>Matilde Pizarro Toro</strong></footer>
       </form>
     </div>
   </div>
@@ -373,6 +375,8 @@
 <script>
 (function(){
   "use strict";
+
+  const tt = (key, fallback) => (window.CV_I18N ? window.CV_I18N.t(key) : (fallback ?? key));
 
   const basePresets = [];
   let presets = [];
@@ -465,7 +469,7 @@
     if(presets.length===0){
       const el=document.createElement('div');
       el.className='empty-state fade-in';
-      el.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M8 12h8M12 8v8"/></svg><div>No hay ejercicios guardados.<br>Pulsa "Nuevo" para crear el primero.</div>`;
+      el.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M8 12h8M12 8v8"/></svg><div>${tt('emptyStateLine1','No hay ejercicios guardados.')}<br>${tt('emptyStateLine2','Pulsa "Nuevo" para crear el primero.')}</div>`;
       presetList.appendChild(el);
       return;
     }
@@ -474,7 +478,7 @@
       el.className='preset fade-in';
       el.tabIndex=0;
       el.innerHTML = `<div class="pname">${escapeHtml(p.name)}</div>
-        <div class="pmeta">${p.inhale}·${p.hold}·${p.exhale}·${p.wait}s — ${p.cycles===0?'∞':p.cycles+' rep'}</div>
+        <div class="pmeta">${p.inhale}·${p.hold}·${p.exhale}·${p.wait}s — ${p.cycles===0?'∞':p.cycles+' '+tt('presetRepAbbr','rep')}</div>
         ${p.desc? `<div class="pdesc">${escapeHtml(p.desc)}</div>`:''}`;
       el.addEventListener('click', ()=>selectPreset(idx));
       el.addEventListener('keydown',(e)=>{ if(e.key==='Enter') selectPreset(idx); });
@@ -489,24 +493,24 @@
     nameIn.value=current.name; inhaleIn.value=current.inhale; holdIn.value=current.hold;
     exhaleIn.value=current.exhale; waitIn.value=current.wait; cyclesIn.value=current.cycles; descIn.value=current.desc||'';
     stageName.textContent = current.name;
-    stageSub.textContent = current.desc || 'Listo para comenzar';
+    stageSub.textContent = current.desc || tt('stageListoComenzar','Listo para comenzar');
     renderPresetList();
     resetVisual();
   }
 
-  const steps = ['Inhalar','Retener','Exhalar','Pausa'];
+  function getSteps(){ return [tt('stepInhalar','Inhalar'), tt('stepRetener','Retener'), tt('stepExhalar','Exhalar'), tt('stepPausa','Pausa')]; }
   function computeStepDur(si,obj){
     if(!obj) return 0;
     switch(si){ case 0: return obj.inhale||0; case 1: return obj.hold||0; case 2: return obj.exhale||0; case 3: return obj.wait||0; }
   }
 
   function startSession(obj){
-    if(!obj){ toast('Selecciona o crea un ejercicio.'); return; }
+    if(!obj){ toast(tt('toastSeleccionaCrea','Selecciona o crea un ejercicio.')); return; }
     stopAll();
     isPlaying=true; stepIndex=0; cyclesLeft=obj.cycles||0;
     let dur = computeStepDur(stepIndex,obj)*scaleFactor(); let safety=0;
     while(dur<=0 && safety<10){ stepIndex=(stepIndex+1)%4; dur=computeStepDur(stepIndex,obj)*scaleFactor(); safety++; }
-    if(dur<=0){ toast('Ajusta los tiempos: todos los pasos están en 0s.'); isPlaying=false; return; }
+    if(dur<=0){ toast(tt('toastAjustaTiempos','Ajusta los tiempos: todos los pasos están en 0s.')); isPlaying=false; return; }
     remaining=dur;
     startLoop(); startMetronome(); phaseChime(stepIndex); updateUI();
   }
@@ -515,7 +519,7 @@
   function stopAll(){ stopLoop(); stopMetronome(); isPlaying=false; }
   function pauseSession(){ stopLoop(); stopMetronome(); isPlaying=false; updateUI(); }
   function resumeSession(){
-    if(!current){ toast('No hay ejercicio seleccionado.'); return; }
+    if(!current){ toast(tt('toastNoHaySeleccionado','No hay ejercicio seleccionado.')); return; }
     if(remaining<=0){ startSession(current); return; }
     if(intervalId) clearInterval(intervalId);
     isPlaying=true; intervalId=setInterval(loop,100); startMetronome(); updateUI();
@@ -536,7 +540,7 @@
         stopAll();
         gentleBeep({freq:392, dur:0.4, vol:(Number(volumeRange.value)||0.5)*0.7, type:'triangle'});
         setTimeout(()=>gentleBeep({freq:523.25, dur:0.5, vol:(Number(volumeRange.value)||0.5)*0.6, type:'triangle'}),200);
-        toast('Sesión completada. Buen trabajo.');
+        toast(tt('toastSesionCompletada','Sesión completada. Buen trabajo.'));
         remaining=0;
         updateUI();
         return;
@@ -544,7 +548,7 @@
     }
     let dur = computeStepDur(stepIndex,current)*scaleFactor(); let safety=0;
     while(dur<=0 && safety<10){ stepIndex=(stepIndex+1)%4; dur=computeStepDur(stepIndex,current)*scaleFactor(); safety++; }
-    if(dur<=0){ stopAll(); toast('El ejercicio no tiene pasos válidos.'); return; }
+    if(dur<=0){ stopAll(); toast(tt('toastEjercicioInvalido','El ejercicio no tiene pasos válidos.')); return; }
     remaining=dur;
     phaseChime(stepIndex);
     updateUI();
@@ -574,11 +578,11 @@
     stepIndex=0; remaining=0;
     tracePath.setAttribute('d','');
     traceDot.setAttribute('cx',70); traceDot.setAttribute('cy',70);
-    stageLabel.textContent='Listo'; timeLabel.textContent='00:00'; cyclesLabel.textContent='';
+    stageLabel.textContent=tt('phaseListo','Listo'); timeLabel.textContent='00:00'; cyclesLabel.textContent='';
     orb.style.transform='scale(1)';
     stepRow.innerHTML='';
     if(current){
-      ['Inhalar','Retener','Exhalar','Pausa'].forEach((s,i)=>{
+      getSteps().forEach((s,i)=>{
         const d=computeStepDur(i,current)||0;
         const el=document.createElement('div'); el.className='step'; el.textContent=`${s} ${d}s`;
         stepRow.appendChild(el);
@@ -587,14 +591,18 @@
   }
 
   function updateUI(){
-    stageLabel.textContent = isPlaying||remaining>0 ? (steps[stepIndex]||'—') : 'Listo';
+    const steps = getSteps();
+    stageLabel.textContent = isPlaying||remaining>0 ? (steps[stepIndex]||'—') : tt('phaseListo','Listo');
     timeLabel.textContent = formatTime(remaining);
-    if(current && current.cycles>0) cyclesLabel.textContent = `${Math.max(cyclesLeft,0)} de ${current.cycles} repeticiones`;
-    else if(current) cyclesLabel.textContent = 'Repetición continua';
+    if(current && current.cycles>0){
+      const fn = window.CV_I18N ? window.CV_I18N.t('cyclesLeftLabel') : null;
+      cyclesLabel.textContent = (typeof fn === 'function') ? fn(Math.max(cyclesLeft,0), current.cycles) : `${Math.max(cyclesLeft,0)} de ${current.cycles} repeticiones`;
+    }
+    else if(current) cyclesLabel.textContent = tt('cyclesContinuas','Repetición continua');
     else cyclesLabel.textContent='';
 
     stepRow.innerHTML='';
-    ['Inhalar','Retener','Exhalar','Pausa'].forEach((s,i)=>{
+    steps.forEach((s,i)=>{
       const d = computeStepDur(i,current)||0;
       const el=document.createElement('div'); el.className='step'+(i===stepIndex && isPlaying ? ' now':'');
       el.textContent = `${s} ${d}s`;
@@ -620,7 +628,7 @@
 
   function collectEditor(){
     return {
-      name: nameIn.value || 'Ejercicio',
+      name: nameIn.value || tt('defaultEjercicioName','Ejercicio'),
       inhale: Number(inhaleIn.value)||0,
       hold: Number(holdIn.value)||0,
       exhale: Number(exhaleIn.value)||0,
@@ -632,38 +640,38 @@
 
   saveBtn.addEventListener('click', ()=>{
     const obj=collectEditor();
-    if(!obj.name.trim()){ toast('Ponle un nombre al ejercicio.'); return; }
+    if(!obj.name.trim()){ toast(tt('toastPonleNombre','Ponle un nombre al ejercicio.')); return; }
     const idx = presets.findIndex(p=>p.name===obj.name);
     if(idx>=0) presets[idx]=obj; else presets.unshift(obj);
     saveToStorage();
     const newIdx = presets.findIndex(p=>p.name===obj.name);
     selectPreset(newIdx);
-    toast('Ejercicio guardado.');
+    toast(tt('toastEjercicioGuardado','Ejercicio guardado.'));
   });
 
   deleteBtn.addEventListener('click', ()=>{
     if(!current) return;
     const idx = presets.findIndex(p=>p.name===current.name);
     if(idx>=0){
-      if(confirm('¿Borrar este ejercicio? Esta acción no se puede deshacer.')){
+      if(confirm(tt('confirmBorrarEjercicio','¿Borrar este ejercicio? Esta acción no se puede deshacer.'))){
         presets.splice(idx,1); saveToStorage(); current=null;
-        stageName.textContent='Selecciona un ejercicio'; stageSub.textContent='o crea uno nuevo para comenzar';
+        stageName.textContent=tt('stageDefaultName','Selecciona un ejercicio'); stageSub.textContent=tt('stageDefaultSub','o crea uno nuevo para comenzar');
         stopAll(); resetVisual(); renderPresetList();
-        toast('Ejercicio eliminado.');
+        toast(tt('toastEjercicioEliminado','Ejercicio eliminado.'));
       }
     }
   });
 
   startFromEditor.addEventListener('click', ()=>{
     const obj = collectEditor();
-    if(!obj.name.trim()){ toast('Ponle un nombre al ejercicio antes de iniciar.'); return; }
+    if(!obj.name.trim()){ toast(tt('toastPonleNombreAntes','Ponle un nombre al ejercicio antes de iniciar.')); return; }
     current = obj;
-    stageName.textContent = current.name; stageSub.textContent = current.desc || 'En curso';
+    stageName.textContent = current.name; stageSub.textContent = current.desc || tt('stageEnCurso','En curso');
     startSession(current);
   });
 
   playBtn.addEventListener('click', ()=>{
-    if(!current){ toast('Selecciona o crea un ejercicio.'); return; }
+    if(!current){ toast(tt('toastSeleccionaCrea','Selecciona o crea un ejercicio.')); return; }
     if(!isPlaying) resumeSession();
   });
   pauseBtn.addEventListener('click', pauseSession);
@@ -674,7 +682,7 @@
     const url=URL.createObjectURL(blob);
     const a=document.createElement('a'); a.href=url; a.download='ejercicios-respiracion.json';
     document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
-    toast('Biblioteca exportada.');
+    toast(tt('toastBibliotecaExportada','Biblioteca exportada.'));
   });
 
   importBtn.addEventListener('click', ()=>importFile.click());
@@ -684,9 +692,9 @@
     reader.onload=()=>{
       try{
         const parsed=JSON.parse(reader.result);
-        if(Array.isArray(parsed)){ presets = parsed.concat(presets); saveToStorage(); renderPresetList(); toast('Ejercicios importados.'); }
-        else toast('Formato de archivo inválido.');
-      }catch(err){ toast('No se pudo leer el archivo.'); }
+        if(Array.isArray(parsed)){ presets = parsed.concat(presets); saveToStorage(); renderPresetList(); toast(tt('toastEjerciciosImportados','Ejercicios importados.')); }
+        else toast(tt('toastFormatoInvalido','Formato de archivo inválido.'));
+      }catch(err){ toast(tt('toastNoSePudoLeer','No se pudo leer el archivo.')); }
     };
     reader.readAsText(f);
     importFile.value='';
@@ -694,10 +702,10 @@
 
   newBtn.addEventListener('click', ()=>{
     stopAll();
-    current = {name:'Mi ejercicio', inhale:4, hold:4, exhale:4, wait:4, cycles:6, desc:''};
+    current = {name:tt('defaultMiEjercicio','Mi ejercicio'), inhale:4, hold:4, exhale:4, wait:4, cycles:6, desc:''};
     nameIn.value=current.name; inhaleIn.value=current.inhale; holdIn.value=current.hold;
     exhaleIn.value=current.exhale; waitIn.value=current.wait; cyclesIn.value=current.cycles; descIn.value='';
-    stageName.textContent=current.name; stageSub.textContent='Ajusta y guarda para conservarlo';
+    stageName.textContent=current.name; stageSub.textContent=tt('stageAjustaGuarda','Ajusta y guarda para conservarlo');
     resetVisual(); renderPresetList();
     nameIn.focus(); nameIn.select();
   });
@@ -715,7 +723,7 @@
   interactiveToggle.addEventListener('click', ()=>{
     interactive=!interactive;
     interactiveToggle.classList.toggle('active', interactive);
-    toast(interactive? 'Modo interactivo activado.' : 'Modo interactivo desactivado.');
+    toast(interactive? tt('toastInteractivoOn','Modo interactivo activado.') : tt('toastInteractivoOff','Modo interactivo desactivado.'));
   });
 
   bpmRange.addEventListener('input', (e)=>{
@@ -771,6 +779,15 @@
       const idx = presets.findIndex(p=>p.name===(current?current.name:null));
       selectPreset((idx-1+presets.length)%presets.length);
     }
+  });
+
+  window.addEventListener('cv-lang-changed', ()=>{
+    renderPresetList();
+    if(!current){
+      stageName.textContent = tt('stageDefaultName','Selecciona un ejercicio');
+      stageSub.textContent = tt('stageDefaultSub','o crea uno nuevo para comenzar');
+    }
+    updateUI();
   });
 
   function init(){

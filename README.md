@@ -11,8 +11,8 @@ que ninguna función se perdió.
 ```
 /
 ├── index.html                 ← portal principal (elige herramienta)
-├── vocalizador/                ← Vocalizer 2026 (entrenador vocal, PWA offline)
-├── praat-web/                  ← PRAAT.WEB (analizador acústico)
+├── vocalizador/                ← Ejercicios Vocales (entrenador vocal, PWA offline)
+├── praat-web/                  ← Plataforma de Análisis Acústico de la Voz
 ├── bitacora-sesiones/          ← Bitácora de sesiones clínicas
 ├── sesion-diaria/               ← Sesión diaria / acompañamiento vocal
 ├── esfuerzo-vocal/              ← Medición del esfuerzo vocal
@@ -40,7 +40,7 @@ No hace falta build, backend ni configuración adicional: todo es HTML/CSS/JS es
 
 - **Sin colisión de datos entre apps**: todas usan `localStorage` con claves con
   prefijo propio (`chain_mode_v1`, `afimart_panel_state`, `rf_presets`, etc.) y
-  Vocalizer 2026 usa su propia base IndexedDB (`vocalizer2026`). Al vivir todas bajo
+  Ejercicios Vocales usa su propia base IndexedDB (`vocalizer2026`). Al vivir todas bajo
   el mismo dominio de GitHub Pages comparten origen, pero no comparten claves, así
   que no hay riesgo de que una herramienta sobrescriba los datos de otra.
 - **Rutas relativas**: se verificó que ningún archivo use rutas absolutas (`/algo`)
@@ -48,14 +48,14 @@ No hace falta build, backend ni configuración adicional: todo es HTML/CSS/JS es
   (`usuario.github.io/repo/...` en vez de la raíz del dominio). Todas las rutas son
   relativas (`./`, `js/...`, `assets/...`), por lo que el sitio funciona igual en
   local, en una subcarpeta o en un dominio propio.
-- **Service Worker de Vocalizer 2026**: su `scope` es `./`, o sea que solo controla
+- **Service Worker de Ejercicios Vocales**: su `scope` es `./`, o sea que solo controla
   su propia carpeta `vocalizador/` y no interfiere con el resto del portal ni con las
   demás herramientas.
 - **Sintaxis JS**: todos los módulos de `vocalizador/js/*.js` y el JavaScript interno
   de cada herramienta de una sola página pasaron validación de sintaxis sin errores.
 - **Archivo eliminado por ser residuo**: `vocalizador/app.js` (raíz) correspondía a una
   versión monolítica anterior ya reemplazada por los módulos en `vocalizador/js/`; el
-  `index.html` de Vocalizer solo carga `js/app.js`, así que el archivo viejo se quitó
+  `index.html` de Ejercicios Vocales solo carga `js/app.js`, así que el archivo viejo se quitó
   para no generar confusión ni peso extra.
 - **Dependencias externas**: algunas herramientas cargan Google Fonts y, para exportar
   PDF/ZIP, las librerías `jspdf` y `jszip` desde cdnjs. Esto requiere conexión a

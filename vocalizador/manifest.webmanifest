@@ -1,6 +1,6 @@
 {
-  "name": "Vocalizer 2026 — Entrenador vocal",
-  "short_name": "Vocalizer",
+  "name": "Ejercicios Vocales — Entrenador vocal",
+  "short_name": "Ejercicios Vocales",
   "description": "Entrenador vocal offline con ejercicios de solfeo, afinador en tiempo real, grabadora y detector de rango vocal.",
   "start_url": "./index.html",
   "scope": "./",
