@@ -70,10 +70,14 @@ window.CV_I18N_DICT = {
     tourStep3Text: 'Ejercicios Vocales, Plataforma de Análisis Acústico de la Voz y Respira Cuadrada: para practicar, analizar la voz y trabajar la respiración.',
     tourStep4Title: 'Uso clínico diario',
     tourStep4Text: 'Bitácora de sesiones, Sesión diaria y Esfuerzo vocal: para registrar y acompañar el trabajo con cada paciente.',
-    tourStep5Title: 'Personaliza los colores',
-    tourStep5Text: 'Con este botón puedes cambiar entre 5 temas pastel: Rosa, Lavanda, Menta, Durazno y Cielo. Tu elección se aplica en toda la plataforma.',
-    tourStep6Title: 'Música de fondo',
-    tourStep6Text: 'Aquí puedes activar o pausar una música suave de fondo mientras trabajas.'
+    tourStep5Title: 'Elige tu idioma',
+    tourStep5Text: 'Toda la plataforma está disponible en español, português e inglés. Cambia de idioma con un clic y la interfaz completa —incluidos los mensajes dinámicos— se actualiza al instante.',
+    tourStep6Title: 'Personaliza los colores',
+    tourStep6Text: 'Con este botón puedes cambiar entre 5 temas pastel: Rosa, Lavanda, Menta, Durazno y Cielo. Tu elección se aplica en toda la plataforma.',
+    tourStep7Title: 'Lector de accesibilidad',
+    tourStep7Text: 'Actívalo y la plataforma lee en voz alta cualquier botón, campo o texto al pasar el mouse o moverte con Tab. Ideal para pacientes y colegas con baja visión o dificultades de lectura.',
+    tourStep8Title: 'Música de fondo',
+    tourStep8Text: 'Aquí puedes activar o pausar una música suave de fondo mientras trabajas.'
   },
 
   pt: {
@@ -146,10 +150,14 @@ window.CV_I18N_DICT = {
     tourStep3Text: 'Ejercicios Vocales, Plataforma de Análisis Acústico de la Voz e Respiração Quadrada: para praticar, analisar a voz e trabalhar a respiração.',
     tourStep4Title: 'Uso clínico diário',
     tourStep4Text: 'Diário de sessões, Sessão diária e Esforço vocal: para registrar e acompanhar o trabalho com cada paciente.',
-    tourStep5Title: 'Personalize as cores',
-    tourStep5Text: 'Com este botão você pode alternar entre 5 temas pastel: Rosa, Lavanda, Menta, Pêssego e Céu. Sua escolha se aplica a toda a plataforma.',
-    tourStep6Title: 'Música de fundo',
-    tourStep6Text: 'Aqui você pode ativar ou pausar uma música suave de fundo enquanto trabalha.'
+    tourStep5Title: 'Escolha seu idioma',
+    tourStep5Text: 'Toda a plataforma está disponível em espanhol, português e inglês. Troque de idioma com um clique e a interface completa —incluindo as mensagens dinâmicas— se atualiza na hora.',
+    tourStep6Title: 'Personalize as cores',
+    tourStep6Text: 'Com este botão você pode alternar entre 5 temas pastel: Rosa, Lavanda, Menta, Pêssego e Céu. Sua escolha se aplica a toda a plataforma.',
+    tourStep7Title: 'Leitor de acessibilidade',
+    tourStep7Text: 'Ative e a plataforma lê em voz alta qualquer botão, campo ou texto ao passar o mouse ou navegar com Tab. Ideal para pacientes e colegas com baixa visão ou dificuldades de leitura.',
+    tourStep8Title: 'Música de fundo',
+    tourStep8Text: 'Aqui você pode ativar ou pausar uma música suave de fundo enquanto trabalha.'
   },
 
   en: {
@@ -222,9 +230,13 @@ window.CV_I18N_DICT = {
     tourStep3Text: 'Ejercicios Vocales, Plataforma de Análisis Acústico de la Voz and Square Breathing: to practice, analyze the voice and work on breathing.',
     tourStep4Title: 'Daily clinical use',
     tourStep4Text: 'Session log, Daily session and Vocal effort: to record and support the work with each patient.',
-    tourStep5Title: 'Customize the colors',
-    tourStep5Text: 'This button lets you switch between 5 pastel themes: Pink, Lavender, Mint, Peach and Sky. Your choice applies across the whole platform.',
-    tourStep6Title: 'Background music',
-    tourStep6Text: 'Here you can turn on or pause some soft background music while you work.'
+    tourStep5Title: 'Choose your language',
+    tourStep5Text: 'The whole platform is available in Spanish, Portuguese and English. Switch languages with one click and the entire interface —including dynamic messages— updates instantly.',
+    tourStep6Title: 'Customize the colors',
+    tourStep6Text: 'This button lets you switch between 5 pastel themes: Pink, Lavender, Mint, Peach and Sky. Your choice applies across the whole platform.',
+    tourStep7Title: 'Accessibility reader',
+    tourStep7Text: 'Turn it on and the platform reads any button, field or text out loud as you hover the mouse or tab through with your keyboard. Great for patients and colleagues with low vision or reading difficulties.',
+    tourStep8Title: 'Background music',
+    tourStep8Text: 'Here you can turn on or pause some soft background music while you work.'
   }
 };

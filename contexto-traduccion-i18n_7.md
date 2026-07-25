@@ -345,3 +345,125 @@ Se agregó `assets/a11y-reader.js`, un widget flotante 🔊 compartido por las
   justo después de `theme-switcher.js` en las 7 páginas (portal + 6
   herramientas). `node --check` sin errores en los 7 bloques `<script>`
   inline tras la inserción.
+
+## 🐛 Corrección de 3 bugs reportados en Bitácora de Sesiones (reproducidos con Playwright antes y después del fix)
+
+1. **Ejercicios que se superponían/dejaban de leerse al agregar varios a
+   "Sesión de hoy"**: `renderQueue()` reconstruía el HTML completo de la
+   cola cada 1 segundo vía `setInterval` mientras había un ejercicio
+   corriendo, reseteando el scroll y generando flicker/tearing visual.
+   Se agregó `updateQueueTicks()`, que actualiza solo los nodos que cambian
+   por segundo (aro de progreso, número, texto de estado, botón
+   pausar/iniciar) sin destruir el DOM. `renderQueue()` (reconstrucción
+   completa) ahora solo se dispara ante cambios estructurales reales
+   (agregar/quitar ejercicio, modo cadena activando el siguiente).
+   Verificado: 8 tarjetas se mantienen íntegras, el input de nota no pierde
+   foco/texto mientras el cronómetro corre en paralelo.
+
+2. **No exportaba informes ni dejaba guardar lo hecho con el paciente**:
+   el script de jsPDF se cargaba en el `<head>` sin `defer`, bloqueando el
+   parseo de toda la página (incluido el botón Guardar) si la red es lenta,
+   está restringida en la clínica, o el equipo está offline. Se agregó
+   `defer` al script y una verificación explícita en `generatePDF()`
+   (`if(!window.jspdf...)`) que muestra un mensaje claro y accionable en
+   vez de fallar en silencio. `saveSession()` en sí nunca dependió de
+   jsPDF y siempre funcionó — verificado que sigue guardando en
+   localStorage incluso con la librería de PDF sin cargar.
+
+3. **Piano que detecta la nota pero luego "se bugea y desaparece"**: en
+   `spawnHeartPulse()` (animación del corazón 💗 al detectar una nota) había
+   una línea que le ponía `position:absolute` inline **a la tecla del
+   piano**, sacándola para siempre del `flex` del teclado. Se corrigió para
+   que solo las teclas blancas (que no tenían position) reciban
+   `position:relative` — nunca `absolute` — y se dejó intactas las teclas
+   negras (ya `absolute` vía CSS con un `left` calculado). Verificado con
+   Playwright: 0 de 21 teclas cambia de posición tras detectar 21 notas
+   seguidas.
+
+Se agregó la clave `toastPdfLibNoCargada` × 3 idiomas (159 claves totales
+en `bitacora-sesiones/i18n-dict.js`, paridad ES/PT/EN confirmada).
+
+## 🐛 Bug del interruptor del lector de accesibilidad (difícil de activar/desactivar)
+
+Causa: el interruptor visual (la píldora verde/gris del panel 🔊) era un
+`<span>` normal, sin conexión real al checkbox que controla el modo. Solo
+funcionaba al hacer clic exactamente sobre el texto de la etiqueta (un área
+angosta) — clicar sobre la píldora en sí, que es lo que cualquier persona
+intenta tocar, no hacía absolutamente nada. De ahí que costara tanto
+activarlo y, sobre todo, desactivarlo.
+
+Fix en `assets/a11y-reader.js`: el contenedor de la píldora pasó de ser un
+`<span>` a un `<label>` real que envuelve el checkbox — el patrón estándar
+de un toggle switch accesible — de forma que un clic en cualquier punto
+visible de la píldora (no solo en el texto) activa/desactiva el modo.
+También se agregó `cursor:pointer` a todo el interruptor para reforzar que
+es clickeable en toda su superficie.
+
+Verificado con Playwright: 6 clics consecutivos sobre el centro de la
+píldora alternan correctamente entre activado/desactivado, en las 7 piezas
+de la plataforma (portal + 6 herramientas), ya que todas comparten el mismo
+`assets/a11y-reader.js`.
+
+## 🧭 Tour de bienvenida actualizado a la versión actual de la plataforma
+
+El tour guiado (`index.html`) se había quedado desactualizado: solo tenía
+6 pasos y no mencionaba el selector de idioma ni el lector de accesibilidad,
+ambos agregados en rondas posteriores. Se actualizó a **8 pasos** en los
+3 idiomas:
+
+1. La plataforma en un vistazo (hero)
+2. Navegación rápida (rail-links)
+3. Entrenamiento & análisis (Ejercicios Vocales, Análisis Acústico, Respira Cuadrada)
+4. Uso clínico diario (Bitácora, Sesión diaria, Esfuerzo vocal)
+5. **NUEVO** — Elige tu idioma (🌐, menciona ES/PT/EN y actualización instantánea)
+6. Personaliza los colores (🎨, 5 temas — sin cambios)
+7. **NUEVO** — Lector de accesibilidad (🔊, explica que lee en voz alta al pasar el mouse o con Tab)
+8. Música de fondo (🎵 — sin cambios, renumerado de paso 6 a 8)
+
+Se agregaron las claves `tourStep5Title/Text` (idioma) y `tourStep7Title/Text`
+(accesibilidad) × 3 idiomas en `i18n-dict.js` (raíz del portal), y se
+renumeraron las claves de colores (5→6) y música (6→8) para mantener el
+orden correcto. Paridad ES/PT/EN confirmada (66 claves en los 3 idiomas).
+
+Verificado con Playwright: los 8 pasos apuntan al elemento correcto
+(`#cv-tour-hero`, `.rail-links`, `#entrenamiento`, `#clinico`,
+`#cv-lang-fab`, `#cv-theme-fab`, `#cv-a11y-fab`, `#cv-music-fab`) y el
+contenido se traduce correctamente al cambiar de idioma (ES/PT/EN), sin
+errores de consola.
+
+## 🔍 Auditoría general de bugs y accesibilidad (rol: dev + fonoaudióloga)
+
+Barrido completo de las 7 piezas con pruebas automatizadas (Playwright):
+consola sin errores en ninguna, botones-ícono con nombre accesible al 100%,
+imágenes con `alt`, y PWA de Ejercicios Vocales con manifest/service
+worker/íconos íntegros.
+
+**Bug de accesibilidad real encontrado y corregido — mismo patrón que el
+del interruptor de accesibilidad (turno anterior):** varios `<label>` se
+cerraban ANTES del `<input>` que describían, en vez de envolverlo o
+apuntarle con `for=`. Visualmente se veían pegados en la misma fila, pero
+para un lector de pantalla (o nuestro propio lector 🔊) el control quedaba
+sin nombre — el usuario solo escuchaba "control deslizante, 75" sin saber
+qué mide. Se corrigió agregando `for="id"` en:
+- `praat-web/index.html`: Piso, Techo (pitch), Cantidad de formantes,
+  Techo de formantes, Ventana, Rango dinámico, Frec. máxima (7 controles).
+- `respiracion-cuadrada/index.html`: Volumen del metrónomo, BPM (2 controles).
+
+**Además**, en `bitacora-sesiones/index.html` se conectaron los 4
+deslizadores de volumen (General/Piano/Ejercicios/Metrónomo) a sus
+etiquetas visibles vía `aria-labelledby`, el control de tempo del
+metrónomo recibió `aria-label`, y los ~90 campos de nombre/duración del
+catálogo administrable de ejercicios (uno por fila) recibieron
+`aria-label` indexado (`Nombre del ejercicio N` / `Duración en segundos
+del ejercicio N`) para que cada fila sea identificable al navegar con
+teclado o lector de pantalla. Claves nuevas `ariaNombreEjercicio` /
+`ariaDuracionEjercicio` × 3 idiomas (161 claves totales, paridad
+confirmada).
+
+**Revisión clínica (rol fonoaudióloga):** la escala de esfuerzo vocal en
+`esfuerzo-vocal` usa Borg CR-10 adaptada, correctamente citada (Fuentes-
+Aracena & Correa-Forno, 2025, Revista Chilena de Fonoaudiología) — sin
+cambios necesarios, ya está bien fundamentada. `praat-web` ya aclaraba
+que jitter/shimmer son aproximaciones cuadro-a-cuadro, no el cálculo
+período-a-período exacto de Praat — buena práctica de transparencia
+clínica, sin lenguaje diagnóstico riesgoso en ninguna herramienta.

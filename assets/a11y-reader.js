@@ -263,7 +263,7 @@
       '#cv-a11y-panel h4{margin:0 0 10px;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:#2f6b56;font-weight:700;}',
       '.cv-a11y-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;}',
       '.cv-a11y-row label{font-size:.86rem;color:#2c4a40;cursor:pointer;}',
-      '.cv-a11y-switch{position:relative;width:40px;height:22px;flex:0 0 auto;}',
+      '.cv-a11y-switch{position:relative;width:40px;height:22px;flex:0 0 auto;cursor:pointer;}',
       '.cv-a11y-switch input{opacity:0;width:0;height:0;position:absolute;}',
       '.cv-a11y-slider{position:absolute;inset:0;background:#d8e6e0;border-radius:22px;cursor:pointer;transition:.18s;}',
       '.cv-a11y-slider:before{content:"";position:absolute;width:16px;height:16px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.18s;box-shadow:0 1px 3px rgba(0,0,0,.25);}',
@@ -304,7 +304,7 @@
     row.appendChild(lbl);
     toggleLabelRef = lbl;
 
-    var sw = document.createElement('span');
+    var sw = document.createElement('label');
     sw.className = 'cv-a11y-switch';
     var input = document.createElement('input');
     input.type = 'checkbox';

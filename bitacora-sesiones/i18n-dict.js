@@ -127,6 +127,7 @@ window.CV_I18N_DICT = {
     toastNoHaySesionesInforme: 'No hay sesiones para generar informe.',
     toastInformePdfGenerado: (n)=> `Informe PDF generado (${n} sesión(es))`,
     toastErrorPdf: 'Ocurrió un error generando el PDF',
+    toastPdfLibNoCargada: 'No se pudo cargar la librería de PDF (revisa tu conexión a internet) — intenta de nuevo en unos segundos.',
     toastGenerando: 'Generando…',
 
     /* modales de confirmación */
@@ -177,7 +178,9 @@ window.CV_I18N_DICT = {
     qBtnPausar: 'Pausar',
     qBtnIniciar: 'Iniciar',
     qBtnReiniciar: 'Reiniciar',
-    qBtnQuitar: 'Quitar de la sesión'
+    qBtnQuitar: 'Quitar de la sesión',
+    ariaNombreEjercicio: 'Nombre del ejercicio',
+    ariaDuracionEjercicio: 'Duración en segundos del ejercicio'
   },
 
   pt: {
@@ -305,6 +308,7 @@ window.CV_I18N_DICT = {
     toastNoHaySesionesInforme: 'Não há sessões para gerar relatório.',
     toastInformePdfGenerado: (n)=> `Relatório PDF gerado (${n} sessão(ões))`,
     toastErrorPdf: 'Ocorreu um erro ao gerar o PDF',
+    toastPdfLibNoCargada: 'Não foi possível carregar a biblioteca de PDF (verifique sua conexão com a internet) — tente novamente em alguns segundos.',
     toastGenerando: 'Gerando…',
 
     modalVaciarTitulo: 'Esvaziar sessão de hoje',
@@ -353,7 +357,9 @@ window.CV_I18N_DICT = {
     qBtnPausar: 'Pausar',
     qBtnIniciar: 'Iniciar',
     qBtnReiniciar: 'Reiniciar',
-    qBtnQuitar: 'Remover da sessão'
+    qBtnQuitar: 'Remover da sessão',
+    ariaNombreEjercicio: 'Nome do exercício',
+    ariaDuracionEjercicio: 'Duração em segundos do exercício'
   },
 
   en: {
@@ -481,6 +487,7 @@ window.CV_I18N_DICT = {
     toastNoHaySesionesInforme: 'No sessions to generate a report.',
     toastInformePdfGenerado: (n)=> `PDF report generated (${n} session(s))`,
     toastErrorPdf: 'An error occurred while generating the PDF',
+    toastPdfLibNoCargada: 'Could not load the PDF library (check your internet connection) — try again in a few seconds.',
     toastGenerando: 'Generating…',
 
     modalVaciarTitulo: 'Clear today\u2019s session',
@@ -529,6 +536,8 @@ window.CV_I18N_DICT = {
     qBtnPausar: 'Pause',
     qBtnIniciar: 'Start',
     qBtnReiniciar: 'Reset',
-    qBtnQuitar: 'Remove from session'
+    qBtnQuitar: 'Remove from session',
+    ariaNombreEjercicio: 'Exercise name',
+    ariaDuracionEjercicio: 'Duration in seconds of exercise'
   }
 };
