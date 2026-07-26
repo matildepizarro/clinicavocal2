@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title data-i18n="pageTitle">Consultorio Vocal — Matilde Pizarro Toro</title>
+<script>document.documentElement.setAttribute('data-pastel-theme', (function(){try{return localStorage.getItem('cv-pastel-theme')||'rosa';}catch(e){return 'rosa';}})());</script>
+<script src="i18n-dict.js"></script>
+<script src="assets/i18n-engine.js"></script>
+<meta name="description" data-i18n-content="metaDescription" content="Plataforma integrada de herramientas para fonoaudiología vocal: entrenador de voz, analizador acústico, bitácora clínica, sesiones diarias, esfuerzo vocal y respiración." />
+<link rel="icon" href="vocalizador/icons/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fff5fa;
+    --bg-grad: radial-gradient(1200px 700px at 15% -10%, #ffeaf4 0%, #fff5fa 55%);
+    --surface: #ffffff;
+    --surface-2:#fff0f7;
+    --border: #f6d6e8;
+    --text:#4a2140;
+    --text-muted:#8a5b7a;
+    --gold:#e0a640;
+    --coral:#ff9d81;
+    --rose:#e0559e;
+    --teal:#4fb894;
+    --serif:'Fraunces', Georgia, serif;
+    --sans:'Inter', system-ui, sans-serif;
+    --mono:'IBM Plex Mono', monospace;
+    --radius: 18px;
+  }
+  :root[data-pastel-theme="rosa"]{
+    --bg:#fff5fa; --bg-grad: radial-gradient(1200px 700px at 15% -10%, #ffeaf4 0%, #fff5fa 55%);
+    --surface:#ffffff; --surface-2:#fff0f7; --border:#f6d6e8;
+    --text:#4a2140; --text-muted:#8a5b7a;
+    --gold:#e0a640; --coral:#ff9d81; --rose:#e0559e; --teal:#4fb894;
+  }
+  :root[data-pastel-theme="lavanda"]{
+    --bg:#f6f3ff; --bg-grad: radial-gradient(1200px 700px at 15% -10%, #ece4ff 0%, #f6f3ff 55%);
+    --surface:#ffffff; --surface-2:#efe9ff; --border:#ded1fb;
+    --text:#3d2e5c; --text-muted:#7a6a99;
+    --gold:#e0a640; --coral:#ff9d81; --rose:#9b7bd9; --teal:#7ec8c2;
+  }
+  :root[data-pastel-theme="menta"]{
+    --bg:#f0fbf6; --bg-grad: radial-gradient(1200px 700px at 15% -10%, #e0f5ea 0%, #f0fbf6 55%);
+    --surface:#ffffff; --surface-2:#e6f7ef; --border:#c9ecdb;
+    --text:#204a3a; --text-muted:#5a8a75;
+    --gold:#e0a640; --coral:#ff9d81; --rose:#4fb894; --teal:#7ec8e3;
+  }
+  :root[data-pastel-theme="durazno"]{
+    --bg:#fff7f0; --bg-grad: radial-gradient(1200px 700px at 15% -10%, #ffece0 0%, #fff7f0 55%);
+    --surface:#ffffff; --surface-2:#ffece0; --border:#ffd8bd;
+    --text:#5c3520; --text-muted:#a3775a;
+    --gold:#e0a640; --coral:#ff9d66; --rose:#e0559e; --teal:#7ec8c2;
+  }
+  :root[data-pastel-theme="cielo"]{
+    --bg:#f0f8ff; --bg-grad: radial-gradient(1200px 700px at 15% -10%, #e3f2ff 0%, #f0f8ff 55%);
+    --surface:#ffffff; --surface-2:#e3f2ff; --border:#c9e4fb;
+    --text:#1e3a5c; --text-muted:#5a7fa3;
+    --gold:#e0a640; --coral:#ff9d81; --rose:#5bb3e0; --teal:#7ec8c2;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; min-height:100vh; background:var(--bg-grad); background-color:var(--bg);
+    color:var(--text); font-family:var(--sans); line-height:1.5;
+  }
+  a{color:inherit;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 24px;}
+
+  /* ---------- Hero ---------- */
+  header.hero{padding:64px 0 40px; position:relative; overflow:hidden;}
+  .eyebrow{
+    font-family:var(--mono); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--teal); display:flex; align-items:center; gap:10px; margin-bottom:18px;
+  }
+  .eyebrow::before{content:''; width:22px; height:1px; background:var(--teal); display:inline-block;}
+  h1.title{
+    font-family:var(--serif); font-weight:600; font-size:clamp(2.3rem, 5vw, 3.6rem);
+    line-height:1.05; margin:0 0 18px; max-width:820px; letter-spacing:-.01em;
+  }
+  h1.title em{font-style:italic; font-weight:500; color:var(--gold);}
+  p.lede{font-size:1.08rem; color:var(--text-muted); max-width:600px; margin:0 0 8px;}
+  .author-line{font-size:.85rem; color:var(--text-muted); margin-top:22px;}
+  .author-line b{color:var(--rose); font-weight:600;}
+
+  /* signature breathing waveform */
+  .breath-rig{
+    position:absolute; top:30px; right:-40px; width:420px; height:420px; pointer-events:none;
+    opacity:.9;
+  }
+  @media (max-width:880px){ .breath-rig{display:none;} }
+  .ring{fill:none; stroke-width:1; }
+  .ring.r1{stroke:var(--coral); opacity:.5; animation: breathe 12s ease-in-out infinite;}
+  .ring.r2{stroke:var(--gold); opacity:.35; animation: breathe 12s ease-in-out infinite; animation-delay:.15s;}
+  .ring.r3{stroke:var(--teal); opacity:.25; animation: breathe 12s ease-in-out infinite; animation-delay:.3s;}
+  .wavebar{fill:var(--rose); opacity:.75; transform-origin:center;}
+  @keyframes breathe{
+    0%,100%{ transform:scale(.82); }
+    25%{ transform:scale(1); }
+    50%{ transform:scale(1); }
+    75%{ transform:scale(.82); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .ring{animation:none !important;}
+  }
+
+  /* ---------- Nav rail ---------- */
+  nav.rail{
+    position:sticky; top:0; z-index:20; backdrop-filter:blur(10px);
+    background:rgba(255,255,255,.78); border-bottom:1px solid var(--border);
+  }
+  nav.rail .wrap{display:flex; align-items:center; justify-content:space-between; padding:14px 24px; gap:16px;}
+  .brand-mini{font-family:var(--serif); font-weight:600; font-size:1.05rem;}
+  .brand-mini span{color:var(--gold);}
+  .rail-links{display:flex; gap:4px; flex-wrap:wrap;}
+  .rail-links a{
+    font-size:.82rem; padding:7px 12px; border-radius:999px; color:var(--text-muted);
+    text-decoration:none; transition:.15s; white-space:nowrap;
+  }
+  .rail-links a:hover{color:var(--text); background:var(--surface-2);}
+  .rail-tour-btn{
+    font-family:var(--sans); font-size:.8rem; font-weight:600; padding:7px 14px; border-radius:999px;
+    border:1px solid var(--border); background:var(--surface-2); color:var(--rose); cursor:pointer;
+    transition:.15s; white-space:nowrap;
+  }
+  .rail-tour-btn:hover{ background:var(--rose); color:#fff; border-color:var(--rose); }
+
+  /* ---------- Section labels ---------- */
+  section{padding:36px 0;}
+  .section-head{display:flex; align-items:baseline; gap:14px; margin-bottom:26px;}
+  .section-head h2{font-family:var(--serif); font-weight:600; font-size:1.5rem; margin:0;}
+  .section-head .count{font-family:var(--mono); font-size:.75rem; color:var(--text-muted);}
+  .section-head::after{content:''; flex:1; height:1px; background:var(--border);}
+
+  /* ---------- Cards grid ---------- */
+  .grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(300px,1fr)); gap:18px;}
+  .card{
+    background:linear-gradient(180deg, var(--surface), var(--surface-2));
+    border:1px solid var(--border); border-radius:var(--radius); padding:24px;
+    display:flex; flex-direction:column; gap:14px; text-decoration:none; color:var(--text);
+    position:relative; overflow:hidden; transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    box-shadow:0 4px 18px rgba(200,110,170,.10);
+  }
+  .card:hover{transform:translateY(-3px); border-color:var(--card-accent, var(--gold)); box-shadow:0 14px 34px rgba(200,110,170,.18);}
+  .card::before{
+    content:''; position:absolute; inset:0 0 auto 0; height:3px;
+    background:var(--card-accent, var(--gold));
+  }
+  .card .icon{
+    width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center;
+    background:color-mix(in srgb, var(--card-accent, var(--gold)) 18%, transparent);
+    color:var(--card-accent, var(--gold)); font-size:1.3rem;
+  }
+  .card h3{font-family:var(--serif); font-size:1.2rem; margin:0; font-weight:600;}
+  .card p{margin:0; font-size:.88rem; color:var(--text-muted); flex:1;}
+  .card .feats{display:flex; flex-wrap:wrap; gap:6px; margin-top:2px;}
+  .card .feats span{
+    font-family:var(--mono); font-size:.66rem; letter-spacing:.02em; padding:3px 8px;
+    border-radius:999px; background:var(--surface-2); border:1px solid var(--border); color:var(--text-muted);
+  }
+  .card .go{
+    font-size:.82rem; font-weight:600; color:var(--card-accent, var(--gold));
+    display:flex; align-items:center; gap:6px; margin-top:4px;
+  }
+  .card .go svg{width:14px; height:14px; transition:transform .15s;}
+  .card:hover .go svg{transform:translateX(3px);}
+
+  .badge-pwa{
+    position:absolute; top:16px; right:16px; font-family:var(--mono); font-size:.6rem;
+    padding:3px 7px; border-radius:999px; background:color-mix(in srgb, var(--teal) 18%, white); color:var(--teal);
+    border:1px solid color-mix(in srgb, var(--teal) 40%, white);
+  }
+
+  /* ---------- footer ---------- */
+  footer{padding:50px 0 70px; border-top:1px solid var(--border); margin-top:20px;}
+  footer .wrap{display:flex; flex-wrap:wrap; justify-content:space-between; gap:20px; font-size:.82rem; color:var(--text-muted);}
+  footer b{color:var(--text);}
+  .foot-note{max-width:560px;}
+</style>
+</head>
+<body>
+
+<nav class="rail">
+  <div class="wrap">
+    <div class="brand-mini">Consultorio <span data-i18n="brandVocal">Vocal</span></div>
+    <div class="rail-links">
+      <a href="#entrenamiento" data-i18n="navEntrenamiento">Entrenamiento</a>
+      <a href="#clinico" data-i18n="navClinico">Uso clínico</a>
+      <button type="button" id="cv-tour-btn" class="rail-tour-btn" data-i18n="tourBtn">✨ Tour guiado</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="cv-tour-hero">
+  <div class="wrap">
+    <h1 class="title"><span data-i18n="heroTitlePre">Centro de herramientas para </span><em data-i18n="heroTitleEm">Fonoaudiología</em></h1>
+    <p class="lede" data-i18n="heroLede">Desde la evaluación hasta el seguimiento, todas las herramientas que necesitas reunidas en un único entorno, diseñadas para agilizar el trabajo diario del profesional.</p>
+  </div>
+  <svg class="breath-rig" viewBox="0 0 400 400" aria-hidden="true">
+    <circle class="ring r3" cx="200" cy="200" r="170"/>
+    <circle class="ring r2" cx="200" cy="200" r="130"/>
+    <circle class="ring r1" cx="200" cy="200" r="90"/>
+    <g transform="translate(200,200)">
+      <rect class="wavebar" x="-58" y="-6" width="6" height="12" rx="3"/>
+      <rect class="wavebar" x="-40" y="-16" width="6" height="32" rx="3"/>
+      <rect class="wavebar" x="-22" y="-28" width="6" height="56" rx="3"/>
+      <rect class="wavebar" x="-4" y="-38" width="6" height="76" rx="3"/>
+      <rect class="wavebar" x="14" y="-24" width="6" height="48" rx="3"/>
+      <rect class="wavebar" x="32" y="-14" width="6" height="28" rx="3"/>
+      <rect class="wavebar" x="50" y="-6" width="6" height="12" rx="3"/>
+    </g>
+  </svg>
+</header>
+
+<main class="wrap">
+
+  <section id="entrenamiento">
+    <div class="section-head"><h2 data-i18n="sectionEntrenamiento">Entrenamiento &amp; análisis</h2><span class="count" data-i18n="countTools3">03 herramientas</span></div>
+    <div class="grid">
+
+      <a class="card" style="--card-accent:var(--gold)" href="vocalizador/index.html">
+        <span class="badge-pwa" data-i18n="badgePwa">instalable · offline</span>
+        <div class="icon">🎤</div>
+        <h3 data-i18n="vocalizerTitle">Ejercicios Vocales</h3>
+        <p data-i18n="vocalizerDesc">Entrenador vocal completo: 34 ejercicios en 7 categorías, afinador en tiempo real, evaluación de grabaciones con curva de pitch, entrenamiento de vibrato, rutinas personalizadas y clasificación de tipo de voz.</p>
+        <div class="feats">
+          <span data-i18n="vocalizerFeat1">Afinador</span><span data-i18n="vocalizerFeat2">Grabadora</span><span data-i18n="vocalizerFeat3">Vibrato</span><span data-i18n="vocalizerFeat4">IndexedDB</span><span data-i18n="vocalizerFeat5">PWA</span>
+        </div>
+        <div class="go"><span data-i18n="vocalizerGo">Abrir entrenador</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
+      </a>
+
+      <a class="card" style="--card-accent:var(--teal)" href="praat-web/index.html">
+        <div class="icon">📊</div>
+        <h3 data-i18n="praatTitle">Plataforma de Análisis Acústico de la Voz</h3>
+        <p data-i18n="praatDesc">Analizador acústico en el navegador: inspecciona frecuencia fundamental, formantes y demás métricas de una grabación de voz, sin instalar nada.</p>
+        <div class="feats">
+          <span data-i18n="praatFeat1">Análisis acústico</span><span data-i18n="praatFeat2">F0 / formantes</span>
+        </div>
+        <div class="go"><span data-i18n="praatGo">Abrir analizador</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
+      </a>
+
+      <a class="card" style="--card-accent:var(--teal)" href="respiracion-cuadrada/index.html">
+        <div class="icon">🫁</div>
+        <h3 data-i18n="respiracionTitle">Respira Cuadrada</h3>
+        <p data-i18n="respiracionDesc">Temporizador de respiración cuadrada con biblioteca de patrones, editor propio, animación guía y metrónomo en BPM para marcar el ritmo.</p>
+        <div class="feats">
+          <span data-i18n="respiracionFeat1">Biblioteca de patrones</span><span data-i18n="respiracionFeat2">Editor</span><span data-i18n="respiracionFeat3">Animación</span><span data-i18n="respiracionFeat4">Metrónomo</span>
+        </div>
+        <div class="go"><span data-i18n="respiracionGo">Abrir temporizador</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
+      </a>
+
+    </div>
+  </section>
+
+  <section id="clinico">
+    <div class="section-head"><h2 data-i18n="sectionClinico">Uso clínico diario</h2><span class="count" data-i18n="countTools7">07 herramientas</span></div>
+    <div class="grid">
+
+      <a class="card" style="--card-accent:var(--teal)" href="evaluacion-vocal/index.html">
+        <div class="icon">🩺</div>
+        <h3 data-i18n="evalVocalTitle">Evaluación clínica de voz</h3>
+        <p data-i18n="evalVocalDesc">Batería de evaluación: IDV-Cl (adaptación chilena oficial del VHI), escala perceptual GRBAS, y tiempo máximo de fonación con relación s/z, con historial y exportación a PDF.</p>
+        <div class="feats">
+          <span data-i18n="evalVocalFeat1">IDV-Cl chileno</span><span data-i18n="evalVocalFeat2">GRBAS</span><span data-i18n="evalVocalFeat3">TMF / s-z</span><span data-i18n="evalVocalFeat4">PDF</span>
+        </div>
+        <div class="go"><span data-i18n="evalVocalGo">Abrir evaluación</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
+      </a>
+
+      <a class="card" style="--card-accent:var(--gold)" href="anamnesis-vocal/index.html">
+        <div class="icon">📝</div>
+        <h3 data-i18n="anamnesisTitle">Anamnesis vocal</h3>
+        <p data-i18n="anamnesisDesc">Ficha estructurada de ingreso para la primera consulta: motivo de consulta, antecedentes médicos, hábitos y factores de riesgo vocal, con exportación a PDF.</p>
+        <div class="feats">
+          <span data-i18n="anamnesisFeat1">Ficha de ingreso</span><span data-i18n="anamnesisFeat2">Antecedentes</span><span data-i18n="anamnesisFeat3">Factores de riesgo</span><span data-i18n="anamnesisFeat4">PDF</span>
+        </div>
+        <div class="go"><span data-i18n="anamnesisGo">Abrir anamnesis</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
+      </a>
+
+      <a class="card" style="--card-accent:var(--coral)" href="bitacora-sesiones/index.html">
+        <div class="icon">📋</div>
+        <h3 data-i18n="bitacoraTitle">Bitácora de sesiones</h3>
+        <p data-i18n="bitacoraDesc">Registro clínico sesión a sesión con cronómetros de ejercicios, piano en vivo con detector de nota, cola de sesiones y exportación a PDF.</p>
+        <div class="feats">
+          <span data-i18n="bitacoraFeat1">Registro clínico</span><span data-i18n="bitacoraFeat2">Cronómetro</span><span data-i18n="bitacoraFeat3">Piano + detector</span><span data-i18n="bitacoraFeat4">PDF</span>
+        </div>
+        <div class="go"><span data-i18n="bitacoraGo">Abrir bitácora</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
+      </a>
+
+      <a class="card" style="--card-accent:var(--rose)" href="sesion-diaria/index.html">
+        <div class="icon">🗓️</div>
+        <h3 data-i18n="sesionTitle">Sesión diaria</h3>
+        <p data-i18n="sesionDesc">Acompañamiento vocal afirmativo día a día: panel de seguimiento y estado del pitch persistente, con exportación de sesiones en PDF y ZIP.</p>
+        <div class="feats">
+          <span data-i18n="sesionFeat1">Seguimiento diario</span><span data-i18n="sesionFeat2">Estado persistente</span><span data-i18n="sesionFeat3">PDF / ZIP</span>
+        </div>
+        <div class="go"><span data-i18n="sesionGo">Abrir sesión diaria</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
+      </a>
+
+      <a class="card" style="--card-accent:var(--gold)" href="esfuerzo-vocal/index.html">
+        <div class="icon">📈</div>
+        <h3 data-i18n="esfuerzoTitle">Esfuerzo vocal</h3>
+        <p data-i18n="esfuerzoDesc">Medición del esfuerzo vocal percibido durante la práctica o la sesión clínica, con referencia a la literatura especializada y exportación a PDF.</p>
+        <div class="feats">
+          <span data-i18n="esfuerzoFeat1">Escala de esfuerzo</span><span data-i18n="esfuerzoFeat2">Referencia científica</span><span data-i18n="esfuerzoFeat3">PDF</span>
+        </div>
+        <div class="go"><span data-i18n="esfuerzoGo">Abrir medición</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
+      </a>
+
+      <a class="card" style="--card-accent:var(--teal)" href="higiene-vocal/index.html">
+        <div class="icon">💧</div>
+        <h3 data-i18n="higieneTitle">Higiene vocal</h3>
+        <p data-i18n="higieneDesc">Checklist diario de hábitos que protegen la voz: hidratación, reflujo, descanso vocal y factores de riesgo, con calendario de racha y evolución de 28 días.</p>
+        <div class="feats">
+          <span data-i18n="higieneFeat1">Checklist diario</span><span data-i18n="higieneFeat2">Racha de hábitos</span><span data-i18n="higieneFeat3">Calendario 28 días</span>
+        </div>
+        <div class="go"><span data-i18n="higieneGo">Abrir higiene vocal</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
+      </a>
+
+      <a class="card" style="--card-accent:var(--coral)" href="biblioteca-educativa/index.html">
+        <div class="icon">📚</div>
+        <h3 data-i18n="bibliotecaTitle">Biblioteca educativa</h3>
+        <p data-i18n="bibliotecaDesc">Explicaciones en lenguaje simple sobre anatomía vocal, diagnósticos frecuentes (nódulos, pólipos, reflujo, tensión muscular) y cuándo consultar.</p>
+        <div class="feats">
+          <span data-i18n="bibliotecaFeat1">9 temas</span><span data-i18n="bibliotecaFeat2">Lenguaje simple</span><span data-i18n="bibliotecaFeat3">Buscador</span>
+        </div>
+        <div class="go"><span data-i18n="bibliotecaGo">Abrir biblioteca</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
+      </a>
+
+      <a class="card" style="--card-accent:var(--rose)" href="rango-tonal-afirmativo/index.html">
+        <div class="icon">🎚️</div>
+        <h3 data-i18n="rangoTonalTitle">Rango tonal afirmativo</h3>
+        <p data-i18n="rangoTonalDesc">Entrenamiento de tono habitual y rango objetivo para voz afirmativa de género, con ejercicios de glide guiados y seguimiento de progreso.</p>
+        <div class="feats">
+          <span data-i18n="rangoTonalFeat1">Medición de F0</span><span data-i18n="rangoTonalFeat2">Glide guiado</span><span data-i18n="rangoTonalFeat3">Progreso</span>
+        </div>
+        <div class="go"><span data-i18n="rangoTonalGo">Abrir entrenamiento</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
+      </a>
+
+      <a class="card" style="--card-accent:var(--teal)" href="dashboard-longitudinal/index.html">
+        <div class="icon">📊</div>
+        <h3 data-i18n="dashboardTitle">Evolución longitudinal</h3>
+        <p data-i18n="dashboardDesc">Cruza IDV-Cl/GRBAS/TMF de Evaluación vocal, la escala de Borg de Esfuerzo vocal y Anamnesis, por paciente y a lo largo del tiempo, a partir de los datos ya guardados en el navegador.</p>
+        <div class="feats">
+          <span data-i18n="dashboardFeat1">Línea de tiempo</span><span data-i18n="dashboardFeat2">Gráfico de puntajes</span><span data-i18n="dashboardFeat3">CSV</span>
+        </div>
+        <div class="go"><span data-i18n="dashboardGo">Abrir dashboard</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
+      </a>
+
+    </div>
+  </section>
+
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-note" data-i18n-html="footNote">Todas las herramientas de entrenamiento y práctica vocal son autoría de <b>Matilde Pizarro Toro</b>, Fonoaudióloga. © 2026 Matilde Pizarro Toro — desarrollo e integración de esta plataforma. Todos los derechos reservados.<br>Atención profesional en <a href="https://matildepizarro.github.io/fonoaudiologia/" target="_blank" rel="noopener" style="color:var(--rose); text-decoration:underline;">matildepizarro.github.io/fonoaudiologia</a></div>
+    <div data-i18n-html="footBrand"><b>Consultorio Vocal</b><br>Matilde Pizarro Toro · Fonoaudióloga</div>
+  </div>
+</footer>
+
+<script src="assets/theme-switcher.js" defer></script>
+<script src="assets/a11y-reader.js" defer></script>
+
+<!-- Música de fondo -->
+<audio id="cv-bg-music" src="assets/audio/musica-fondo.opus" loop preload="none"></audio>
+<style>
+  #cv-music-fab{
+    position:fixed; bottom:18px; left:18px; z-index:9999;
+    width:50px; height:50px; border-radius:50%; border:none; cursor:pointer;
+    background:linear-gradient(135deg, var(--rose), var(--teal)); color:#fff; font-size:19px;
+    box-shadow:0 8px 24px rgba(120,50,100,.30); display:flex; align-items:center; justify-content:center;
+    transition:transform .18s ease;
+  }
+  #cv-music-fab:hover{ transform:scale(1.08) rotate(6deg); }
+  #cv-music-fab.playing{ animation:cv-music-pulse 1.8s ease-in-out infinite; }
+  @keyframes cv-music-pulse{
+    0%,100%{ box-shadow:0 8px 24px rgba(120,50,100,.30); }
+    50%{ box-shadow:0 8px 30px rgba(120,50,100,.55); }
+  }
+  #cv-music-hint{
+    position:fixed; bottom:22px; left:78px; z-index:9998;
+    background:var(--surface); color:var(--text); font-family:var(--sans, Inter, sans-serif);
+    font-size:.78rem; padding:8px 14px; border-radius:999px; border:1px solid var(--border);
+    box-shadow:0 6px 18px rgba(120,50,100,.14); opacity:0; pointer-events:none;
+    transition:opacity .25s ease;
+  }
+  #cv-music-hint.show{ opacity:1; }
+  @media (max-width:600px){ #cv-music-hint{ display:none; } }
+</style>
+<script>
+(function(){
+  var audio = document.getElementById('cv-bg-music');
+  var KEY = 'cv-bg-music-playing';
+
+  var fab = document.createElement('button');
+  fab.id = 'cv-music-fab';
+  fab.type = 'button';
+  fab.textContent = '🎵';
+
+  var hint = document.createElement('div');
+  hint.id = 'cv-music-hint';
+  hint.textContent = (window.CV_I18N ? window.CV_I18N.t('musicHint') : 'Música de fondo');
+  document.body.appendChild(hint);
+  document.body.appendChild(fab);
+  fab.setAttribute('aria-label', (window.CV_I18N ? window.CV_I18N.t('musicFabLabel') : 'Reproducir música de fondo'));
+  window.addEventListener('cv-lang-changed', function(){
+    hint.textContent = window.CV_I18N.t('musicHint');
+    fab.setAttribute('aria-label', window.CV_I18N.t('musicFabLabel'));
+  });
+
+  function setPlaying(isPlaying){
+    fab.classList.toggle('playing', isPlaying);
+    fab.textContent = isPlaying ? '🔊' : '🎵';
+    try { localStorage.setItem(KEY, isPlaying ? '1' : '0'); } catch(e){}
+  }
+
+  fab.addEventListener('click', function(){
+    if (audio.paused){
+      audio.volume = 0.35;
+      audio.play().then(function(){ setPlaying(true); }).catch(function(){});
+    } else {
+      audio.pause();
+      setPlaying(false);
+    }
+  });
+
+  // Intenta reanudar automáticamente si el navegador lo permite; si no,
+  // muestra una pista breve invitando a activarla manualmente.
+  var wantsAutoplay = true;
+  try { wantsAutoplay = localStorage.getItem(KEY) !== '0'; } catch(e){}
+  if (wantsAutoplay){
+    audio.volume = 0.35;
+    var p = audio.play();
+    if (p && p.then){
+      p.then(function(){ setPlaying(true); }).catch(function(){
+        setPlaying(false);
+        hint.classList.add('show');
+        setTimeout(function(){ hint.classList.remove('show'); }, 4500);
+      });
+    }
+  } else {
+    setPlaying(false);
+  }
+})();
+</script>
+<!-- Tour guiado / asistente de bienvenida -->
+<style>
+  #cv-tour-overlay{
+    position:fixed; inset:0; z-index:10000; background:rgba(74,33,64,.32);
+    display:none; align-items:center; justify-content:center; padding:20px;
+    font-family:var(--sans);
+  }
+  #cv-tour-overlay.show{ display:flex; }
+  #cv-tour-welcome{
+    background:var(--surface); border-radius:20px; max-width:420px; width:100%;
+    padding:30px 28px; box-shadow:0 24px 60px rgba(90,30,70,.28); text-align:center;
+    border:1px solid var(--border);
+  }
+  #cv-tour-welcome .emoji{font-size:2.4rem; margin-bottom:8px;}
+  #cv-tour-welcome h3{font-family:var(--serif); font-size:1.35rem; margin:0 0 10px; color:var(--text);}
+  #cv-tour-welcome p{font-size:.92rem; color:var(--text-muted); margin:0 0 22px; line-height:1.5;}
+  .cv-tour-actions{display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
+  .cv-tour-btn{
+    font-family:var(--sans); font-size:.86rem; font-weight:600; padding:10px 18px; border-radius:999px;
+    border:none; cursor:pointer; transition:.15s;
+  }
+  .cv-tour-btn.primary{ background:var(--rose); color:#fff; }
+  .cv-tour-btn.primary:hover{ filter:brightness(1.06); transform:translateY(-1px); }
+  .cv-tour-btn.ghost{ background:var(--surface-2); color:var(--text-muted); }
+  .cv-tour-btn.ghost:hover{ background:var(--border); }
+
+  #cv-tour-tooltip{
+    position:fixed; z-index:10001; max-width:300px; background:var(--surface);
+    border:1px solid var(--border); border-radius:16px; padding:18px 20px;
+    box-shadow:0 20px 50px rgba(90,30,70,.30); display:none; font-family:var(--sans);
+  }
+  #cv-tour-tooltip.show{ display:block; }
+  #cv-tour-tooltip .step-count{ font-family:var(--mono); font-size:.66rem; color:var(--teal); letter-spacing:.06em; text-transform:uppercase; margin-bottom:6px; }
+  #cv-tour-tooltip h4{ font-family:var(--serif); font-size:1.02rem; margin:0 0 6px; color:var(--text); }
+  #cv-tour-tooltip p{ font-size:.84rem; color:var(--text-muted); margin:0 0 14px; line-height:1.45; }
+  .cv-tour-nav{ display:flex; align-items:center; justify-content:space-between; gap:8px; }
+  .cv-tour-nav .cv-tour-btn{ padding:7px 13px; font-size:.78rem; }
+  .cv-tour-skip{ background:none; border:none; color:var(--text-muted); font-size:.76rem; cursor:pointer; text-decoration:underline; padding:0; }
+
+  .cv-tour-highlight{
+    outline:3px solid var(--rose) !important; outline-offset:4px !important;
+    border-radius:14px !important; transition:outline-color .2s ease !important;
+    scroll-margin-top:100px;
+  }
+</style>
+
+<div id="cv-tour-overlay">
+  <div id="cv-tour-welcome">
+    <div class="emoji">👋</div>
+    <h3 data-i18n="tourWelcomeTitle">¡Bienvenido/a a Consultorio Vocal!</h3>
+    <p data-i18n="tourWelcomeText">Soy tu asistente de bienvenida. ¿Quieres que te muestre en un minuto cómo está organizada la plataforma y qué herramienta usar en cada momento?</p>
+    <div class="cv-tour-actions">
+      <button type="button" class="cv-tour-btn primary" id="cv-tour-start" data-i18n="tourStart">Sí, tomar el tour</button>
+      <button type="button" class="cv-tour-btn ghost" id="cv-tour-dismiss" data-i18n="tourDismiss">Ahora no</button>
+    </div>
+  </div>
+</div>
+
+<div id="cv-tour-tooltip">
+  <div class="step-count"></div>
+  <h4></h4>
+  <p></p>
+  <div class="cv-tour-nav">
+    <button type="button" class="cv-tour-skip" id="cv-tour-skip-btn" data-i18n="tourSkip">Saltar tour</button>
+    <div style="display:flex; gap:6px;">
+      <button type="button" class="cv-tour-btn ghost" id="cv-tour-prev" data-i18n="tourPrev">Atrás</button>
+      <button type="button" class="cv-tour-btn primary" id="cv-tour-next" data-i18n="tourNext">Siguiente</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var SEEN_KEY = 'cv-tour-seen';
+  var T = function(key){ return window.CV_I18N ? window.CV_I18N.t(key) : key; };
+  var steps = [
+    { selector:'#cv-tour-hero', titleKey:'tourStep1Title', textKey:'tourStep1Text', placement:'bottom' },
+    { selector:'.rail-links', titleKey:'tourStep2Title', textKey:'tourStep2Text', placement:'bottom' },
+    { selector:'#entrenamiento', titleKey:'tourStep3Title', textKey:'tourStep3Text', placement:'top' },
+    { selector:'#clinico', titleKey:'tourStep4Title', textKey:'tourStep4Text', placement:'top' },
+    { selector:'#cv-lang-fab', titleKey:'tourStep5Title', textKey:'tourStep5Text', placement:'left' },
+    { selector:'#cv-theme-fab', titleKey:'tourStep6Title', textKey:'tourStep6Text', placement:'left' },
+    { selector:'#cv-a11y-fab', titleKey:'tourStep7Title', textKey:'tourStep7Text', placement:'left' },
+    { selector:'#cv-music-fab', titleKey:'tourStep8Title', textKey:'tourStep8Text', placement:'right' }
+  ];
+  var current = -1;
+  var highlighted = null;
+
+  var overlay = document.getElementById('cv-tour-overlay');
+  var welcome = document.getElementById('cv-tour-welcome');
+  var tooltip = document.getElementById('cv-tour-tooltip');
+  var stepCountEl = tooltip.querySelector('.step-count');
+  var titleEl = tooltip.querySelector('h4');
+  var textEl = tooltip.querySelector('p');
+  var prevBtn = document.getElementById('cv-tour-prev');
+  var nextBtn = document.getElementById('cv-tour-next');
+
+  function clearHighlight(){
+    if (highlighted){ highlighted.classList.remove('cv-tour-highlight'); highlighted = null; }
+  }
+
+  function positionTooltip(target, placement){
+    var r = target.getBoundingClientRect();
+    var tw = tooltip.offsetWidth || 300, th = tooltip.offsetHeight || 140;
+    var top, left;
+    if (placement === 'left'){ top = r.top - th/2 + r.height/2; left = r.left - tw - 16; }
+    else if (placement === 'right'){ top = r.top - th/2 + r.height/2; left = r.right + 16; }
+    else if (placement === 'top'){ top = r.top - th - 16; left = r.left; }
+    else { top = r.bottom + 16; left = r.left; }
+    left = Math.max(12, Math.min(left, window.innerWidth - tw - 12));
+    top = Math.max(12, Math.min(top, window.innerHeight - th - 12));
+    tooltip.style.top = top + 'px';
+    tooltip.style.left = left + 'px';
+  }
+
+  function showStep(i){
+    clearHighlight();
+    if (i < 0 || i >= steps.length){ endTour(); return; }
+    current = i;
+    var s = steps[i];
+    var target = document.querySelector(s.selector);
+    if (!target){ endTour(); return; }
+    target.scrollIntoView({ behavior:'smooth', block:'center' });
+    target.classList.add('cv-tour-highlight');
+    highlighted = target;
+    stepCountEl.textContent = T('tourStepOf').replace('{n}', i+1).replace('{total}', steps.length);
+    titleEl.textContent = T(s.titleKey);
+    textEl.textContent = T(s.textKey);
+    prevBtn.style.visibility = i === 0 ? 'hidden' : 'visible';
+    nextBtn.textContent = i === steps.length - 1 ? T('tourFinish') : T('tourNext');
+    setTimeout(function(){
+      tooltip.classList.add('show');
+      positionTooltip(target, s.placement);
+    }, 280);
+  }
+
+  function startTour(){
+    overlay.classList.remove('show');
+    try { localStorage.setItem(SEEN_KEY, '1'); } catch(e){}
+    showStep(0);
+  }
+
+  function endTour(){
+    tooltip.classList.remove('show');
+    clearHighlight();
+    current = -1;
+  }
+
+  function dismissWelcome(){
+    overlay.classList.remove('show');
+    try { localStorage.setItem(SEEN_KEY, '1'); } catch(e){}
+  }
+
+  document.getElementById('cv-tour-start').addEventListener('click', startTour);
+  document.getElementById('cv-tour-dismiss').addEventListener('click', dismissWelcome);
+  document.getElementById('cv-tour-skip-btn').addEventListener('click', endTour);
+  nextBtn.addEventListener('click', function(){ showStep(current + 1); });
+  prevBtn.addEventListener('click', function(){ showStep(current - 1); });
+  document.getElementById('cv-tour-btn').addEventListener('click', function(){
+    tooltip.classList.remove('show');
+    overlay.classList.add('show');
+  });
+  window.addEventListener('keydown', function(e){
+    if (e.key === 'Escape'){ endTour(); overlay.classList.remove('show'); }
+  });
+  window.addEventListener('resize', function(){
+    if (highlighted && current >= 0) positionTooltip(highlighted, steps[current].placement);
+  });
+  window.addEventListener('cv-lang-changed', function(){
+    if (current >= 0) showStep(current);
+  });
+
+  var alreadySeen = false;
+  try { alreadySeen = localStorage.getItem(SEEN_KEY) === '1'; } catch(e){}
+  if (!alreadySeen){
+    setTimeout(function(){ overlay.classList.add('show'); }, 900);
+  }
+})();
+</script>
+
+</body>
+</html>

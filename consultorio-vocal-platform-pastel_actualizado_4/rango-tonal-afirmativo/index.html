@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title data-i18n="pageTitle">Rango tonal afirmativo — Entrenamiento de tono</title>
+<meta name="description" data-i18n-content="metaDescription" content="Herramienta de entrenamiento de tono habitual y rango objetivo para voz afirmativa de género." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='7' fill='%239b7bd9'/%3E%3Cpath d='M6 17 L10 9 L14 13 L18 6' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/shared.css">
+<script>document.documentElement.setAttribute('data-pastel-theme', (function(){try{return localStorage.getItem('cv-pastel-theme')||'rosa';}catch(e){return 'rosa';}})());</script>
+<script src="i18n-dict.js"></script>
+<script src="../assets/i18n-engine.js"></script>
+<style>
+  :root{
+    --bg:#f6f3ff; --bg-2:#ece4ff; --card:#ffffff; --card-2:#efe9ff; --line:#ded1fb;
+    --ink:#3d2e5c; --muted:#7a6a99; --muted-2:#9689b3; --accent:#9b7bd9; --accent-2:#e0559e;
+    --accent-ink:#f6f3ff; --radius:18px;
+    --shadow:0 20px 50px rgba(70,45,20,0.12); --shadow-soft:0 8px 24px rgba(70,45,20,0.08);
+    --font-display:'Fraunces',serif; --font-body:'Inter',system-ui,sans-serif; --font-mono:'IBM Plex Mono',monospace;
+    --ok:#2f9e6e; --warn:#d9633a;
+  }
+  html[data-pastel-theme="rosa"], html[data-pastel-theme="rosa"] #app{
+    --bg:#fff5fa; --bg-2:#ffeaf4; --card:#ffffff; --card-2:#fff0f7; --line:#f6d6e8;
+    --ink:#4a2140; --muted:#8a5b7a; --muted-2:#a9819c; --accent:#e0559e; --accent-2:#ff9d81; --accent-ink:#fff5fa;
+  }
+  html[data-pastel-theme="lavanda"], html[data-pastel-theme="lavanda"] #app{
+    --bg:#f6f3ff; --bg-2:#ece4ff; --card:#ffffff; --card-2:#efe9ff; --line:#ded1fb;
+    --ink:#3d2e5c; --muted:#7a6a99; --muted-2:#9689b3; --accent:#9b7bd9; --accent-2:#e0559e; --accent-ink:#f6f3ff;
+  }
+  html[data-pastel-theme="menta"], html[data-pastel-theme="menta"] #app{
+    --bg:#f0fbf6; --bg-2:#e0f5ea; --card:#ffffff; --card-2:#e6f7ef; --line:#c9ecdb;
+    --ink:#204a3a; --muted:#5a8a75; --muted-2:#79a390; --accent:#4fb894; --accent-2:#e0559e; --accent-ink:#f0fbf6;
+  }
+  html[data-pastel-theme="durazno"], html[data-pastel-theme="durazno"] #app{
+    --bg:#fff7f0; --bg-2:#ffece0; --card:#ffffff; --card-2:#ffece0; --line:#ffd8bd;
+    --ink:#5c3520; --muted:#a3775a; --muted-2:#c19a7e; --accent:#ff9d66; --accent-2:#e0559e; --accent-ink:#fff7f0;
+  }
+  html[data-pastel-theme="cielo"], html[data-pastel-theme="cielo"] #app{
+    --bg:#f0f8ff; --bg-2:#e3f2ff; --card:#ffffff; --card-2:#e3f2ff; --line:#c9e4fb;
+    --ink:#1e3a5c; --muted:#5a7fa3; --muted-2:#7fa0c0; --accent:#5bb3e0; --accent-2:#ff9d81; --accent-ink:#f0f8ff;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0}
+  body{
+    font-family:var(--font-body);
+    background:
+      radial-gradient(1200px 600px at 15% -10%, var(--bg-2), transparent 60%),
+      radial-gradient(900px 500px at 110% 10%, var(--bg-2), transparent 55%),
+      var(--bg);
+    color:var(--ink); min-height:100%; transition:background .4s ease,color .4s ease;
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:28px 20px 60px}
+  .brand{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+  .brand .mark{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,var(--accent),var(--accent-2));box-shadow:var(--shadow-soft);flex:none}
+  .brand h1{font-family:var(--font-display);font-weight:600;font-size:20px;margin:0}
+  .brand span{display:block;font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+  a.back{display:inline-block;margin:14px 0 20px;color:var(--muted);text-decoration:none;font-size:13px}
+  a.back:hover{color:var(--accent)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow-soft);margin-bottom:18px}
+  .disclaimer{background:var(--card-2);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:14px 16px;margin-bottom:20px;font-size:13.5px;color:var(--muted)}
+  .disclaimer strong{color:var(--ink)}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+  .tab{padding:9px 16px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--muted);font-size:13.5px;font-weight:600;cursor:pointer}
+  .tab[aria-selected="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+  .view{display:none}
+  .view.active{display:block}
+  h2{font-family:var(--font-display);font-size:19px;margin:0 0 6px}
+  p.desc{color:var(--muted);font-size:13.5px;line-height:1.5;margin:0 0 16px}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+  button{font-family:var(--font-body);font-weight:600;font-size:13.5px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:10px 16px;cursor:pointer}
+  button.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+  button:disabled{opacity:.5;cursor:not-allowed}
+  .big-num{font-family:var(--font-mono);font-size:44px;font-weight:700;color:var(--accent)}
+  .big-num small{font-size:16px;color:var(--muted);font-weight:500}
+  label{font-size:13px;color:var(--muted);display:block;margin-bottom:4px}
+  input[type=number]{font-family:var(--font-mono);padding:8px 10px;border-radius:10px;border:1px solid var(--line);width:110px}
+  select{padding:8px 10px;border-radius:10px;border:1px solid var(--line);font-family:var(--font-body)}
+  .status-pill{display:inline-block;padding:4px 12px;border-radius:999px;font-size:12.5px;font-weight:700}
+  .status-pill.in{background:rgba(47,158,110,.15);color:var(--ok)}
+  .status-pill.out{background:rgba(217,99,58,.15);color:var(--warn)}
+  .bar-wrap{position:relative;height:56px;background:var(--card-2);border-radius:14px;border:1px solid var(--line);overflow:hidden;margin:14px 0}
+  .bar-target{position:absolute;top:0;bottom:0;background:rgba(155,123,217,.25);border-left:2px dashed var(--accent);border-right:2px dashed var(--accent)}
+  .bar-cursor{position:absolute;top:4px;bottom:4px;width:6px;border-radius:3px;background:var(--ink);transition:left .08s linear}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.03em}
+  .muted{color:var(--muted);font-size:12.5px}
+  .toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--accent-ink);padding:10px 18px;border-radius:12px;font-size:13.5px;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .25s}
+  .toast.show{opacity:1}
+  footer{margin-top:24px;text-align:center;font-size:12px;color:var(--muted-2)}
+</style>
+</head>
+<body>
+<div class="wrap" id="app">
+  <div class="brand">
+    <div class="mark"></div>
+    <div>
+      <h1 data-i18n="brandName">Rango Tonal</h1>
+      <span data-i18n="brandSub">Entrenamiento vocal afirmativo</span>
+    </div>
+  </div>
+  <a class="back" href="../index.html" data-i18n="navBack">← Volver al portal</a>
+
+  <div class="disclaimer">
+    <strong data-i18n="disclaimerTitle">Aviso importante</strong><br>
+    <span data-i18n="disclaimerText">Esta es una herramienta de entrenamiento y autoexploración, no un instrumento clínico validado.</span>
+  </div>
+
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" data-tab="measure" aria-selected="true" data-i18n="tabMeasure">Medir tono habitual</button>
+    <button class="tab" role="tab" data-tab="target" aria-selected="false" data-i18n="tabTarget">Rango objetivo</button>
+    <button class="tab" role="tab" data-tab="glide" aria-selected="false" data-i18n="tabGlide">Ejercicio de glide</button>
+    <button class="tab" role="tab" data-tab="progress" aria-selected="false" data-i18n="tabProgress">Progreso</button>
+  </div>
+
+  <!-- MEDIR -->
+  <section class="view active" id="view-measure">
+    <div class="card">
+      <h2 data-i18n="measureTitle">Paso 1 — Medir tu tono habitual</h2>
+      <p class="desc" data-i18n="measureDesc">Habla con naturalidad durante unos segundos para estimar tu F0 habitual.</p>
+      <div class="row">
+        <button class="primary" id="btnStartMeasure" data-i18n="btnStartMeasure">Iniciar medición</button>
+        <button id="btnStopMeasure" data-i18n="btnStopMeasure" disabled>Detener</button>
+        <span class="muted" id="measureStatus"></span>
+      </div>
+      <div class="row">
+        <div>
+          <div class="muted" data-i18n="currentF0">F0 actual</div>
+          <div class="big-num" id="curF0">— <small>Hz</small></div>
+        </div>
+        <div>
+          <div class="muted" data-i18n="avgF0">F0 promedio de la medición</div>
+          <div class="big-num" id="avgF0">— <small>Hz</small></div>
+        </div>
+      </div>
+      <div class="row">
+        <button id="btnSaveMeasure" disabled data-i18n="saveMeasure">Guardar como tono habitual</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- OBJETIVO -->
+  <section class="view" id="view-target">
+    <div class="card">
+      <h2 data-i18n="targetTitle">Paso 2 — Definir banda objetivo</h2>
+      <p class="desc" data-i18n="targetDesc">Elige una banda de referencia o defínela manualmente junto con tu fonoaudióloga/o.</p>
+      <div class="row">
+        <select id="presetSelect" data-i18n-aria="targetTitle" aria-label="Definir banda objetivo">
+          <option value="feminizing" data-i18n="presetFeminizing">Referencia feminización (aprox. 180-220 Hz)</option>
+          <option value="masculinizing" data-i18n="presetMasculinizing">Referencia masculinización (aprox. 100-140 Hz)</option>
+          <option value="androgynous" data-i18n="presetAndrogynous">Referencia andrógina (aprox. 150-180 Hz)</option>
+          <option value="custom" data-i18n="presetCustom">Personalizado</option>
+        </select>
+      </div>
+      <div class="row">
+        <div>
+          <label for="targetMin" data-i18n="targetMin">Mínimo (Hz)</label>
+          <input type="number" id="targetMin" value="180" min="50" max="400">
+        </div>
+        <div>
+          <label for="targetMax" data-i18n="targetMax">Máximo (Hz)</label>
+          <input type="number" id="targetMax" value="220" min="50" max="400">
+        </div>
+      </div>
+      <div class="row">
+        <button class="primary" id="btnSaveTarget" data-i18n="btnSaveTarget">Guardar banda objetivo</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- GLIDE -->
+  <section class="view" id="view-glide">
+    <div class="card">
+      <h2 data-i18n="glideTitle">Paso 3 — Ejercicio de glide guiado</h2>
+      <p class="desc" data-i18n="glideDesc">Sigue el indicador con tu voz, deslizando el tono suavemente desde tu tono habitual hacia la banda objetivo.</p>
+      <div class="row">
+        <button class="primary" id="btnStartGlide" data-i18n="btnStartGlide">Iniciar ejercicio</button>
+        <button id="btnStopGlide" data-i18n="btnStopGlide" disabled>Detener</button>
+        <span class="status-pill out" id="glideStatusPill" data-i18n="outTarget">Fuera de la banda</span>
+      </div>
+      <div class="bar-wrap" id="glideBar">
+        <div class="bar-target" id="glideBarTarget"></div>
+        <div class="bar-cursor" id="glideBarCursor" style="left:0"></div>
+      </div>
+      <div class="row">
+        <div>
+          <div class="muted" data-i18n="currentF0">F0 actual</div>
+          <div class="big-num" id="glideF0">— <small>Hz</small></div>
+        </div>
+        <div>
+          <div class="muted" data-i18n="glideDuration">Duración de la sesión</div>
+          <div class="big-num" id="glideDuration">0 <small>s</small></div>
+        </div>
+        <div>
+          <div class="muted" data-i18n="glideSuccessRate">% del tiempo dentro de la banda</div>
+          <div class="big-num" id="glideSuccess">0 <small>%</small></div>
+        </div>
+      </div>
+      <div class="row">
+        <button id="btnSaveSession" disabled data-i18n="btnSaveSession">Guardar sesión en el progreso</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRESO -->
+  <section class="view" id="view-progress">
+    <div class="card">
+      <h2 data-i18n="progressTitle">Progreso a lo largo del tiempo</h2>
+      <p class="desc" data-i18n="progressDesc">Historial de tono habitual medido y de sesiones de glide practicadas.</p>
+      <div class="row">
+        <button id="btnExportCsv" data-i18n="btnExportCsv">Exportar historial (CSV)</button>
+        <button id="btnClearHistory" data-i18n="btnClearHistory">Borrar historial</button>
+      </div>
+      <table id="progressTable">
+        <thead>
+          <tr>
+            <th data-i18n="colDate">Fecha</th>
+            <th data-i18n="colHabitual">Tono habitual (Hz)</th>
+            <th data-i18n="colTarget">Banda objetivo (Hz)</th>
+            <th data-i18n="colSuccess">% en banda</th>
+            <th data-i18n="colDuration">Duración (s)</th>
+          </tr>
+        </thead>
+        <tbody id="progressBody"></tbody>
+      </table>
+      <p class="muted" id="noSessionsMsg" data-i18n="noSessions">Aún no hay sesiones guardadas.</p>
+    </div>
+  </section>
+
+  <footer data-i18n="footerNote">Herramienta de entrenamiento vocal — no reemplaza la evaluación fonoaudiológica.</footer>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  'use strict';
+  var STORAGE_KEY = 'rango_tonal_afirmativo_v1';
+  var tt = function(k, fb){ try{ return (window.CV_I18N && window.CV_I18N.t) ? window.CV_I18N.t(k) : fb; }catch(e){ return fb; } };
+
+  function $(id){ return document.getElementById(id); }
+
+  function loadState(){
+    try{
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if(!raw) return { habitual:null, target:{min:180,max:220}, sessions:[] };
+      var s = JSON.parse(raw);
+      if(!s.sessions) s.sessions = [];
+      if(!s.target) s.target = {min:180,max:220};
+      return s;
+    }catch(e){ return { habitual:null, target:{min:180,max:220}, sessions:[] }; }
+  }
+  function saveState(s){
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(s)); }catch(e){}
+  }
+  var state = loadState();
+
+  function toast(msg){
+    var el = $('toast');
+    el.textContent = msg;
+    el.classList.add('show');
+    clearTimeout(toast._t);
+    toast._t = setTimeout(function(){ el.classList.remove('show'); }, 2200);
+  }
+
+  // ---- Tabs ----
+  var tabs = document.querySelectorAll('.tab');
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      tabs.forEach(function(t){ t.setAttribute('aria-selected','false'); });
+      tab.setAttribute('aria-selected','true');
+      document.querySelectorAll('.view').forEach(function(v){ v.classList.remove('active'); });
+      $('view-' + tab.dataset.tab).classList.add('active');
+    });
+  });
+
+  // ---- YIN pitch detection (copia compacta, ver vocalizador/js/pitch.js) ----
+  function yinDetect(buffer, sampleRate, threshold){
+    threshold = threshold || 0.12;
+    var size = buffer.length;
+    var halfSize = Math.floor(size / 2);
+    var yinBuffer = new Float32Array(halfSize);
+    var tau, i, sum, delta;
+    for(tau = 0; tau < halfSize; tau++){
+      sum = 0;
+      for(i = 0; i < halfSize; i++){
+        delta = buffer[i] - buffer[i + tau];
+        sum += delta * delta;
+      }
+      yinBuffer[tau] = sum;
+    }
+    var runningSum = 0;
+    yinBuffer[0] = 1;
+    for(tau = 1; tau < halfSize; tau++){
+      runningSum += yinBuffer[tau];
+      yinBuffer[tau] = runningSum === 0 ? 1 : yinBuffer[tau] * tau / runningSum;
+    }
+    var tauEstimate = -1;
+    for(tau = 2; tau < halfSize; tau++){
+      if(yinBuffer[tau] < threshold){
+        while(tau + 1 < halfSize && yinBuffer[tau + 1] < yinBuffer[tau]) tau++;
+        tauEstimate = tau;
+        break;
+      }
+    }
+    if(tauEstimate === -1) return -1;
+    var betterTau = tauEstimate;
+    if(tauEstimate > 0 && tauEstimate < halfSize - 1){
+      var s0 = yinBuffer[tauEstimate - 1], s1 = yinBuffer[tauEstimate], s2 = yinBuffer[tauEstimate + 1];
+      var denom = (2 * s1 - s2 - s0);
+      if(denom !== 0) betterTau = tauEstimate + (s2 - s0) / (2 * denom);
+    }
+    var freq = sampleRate / betterTau;
+    if(freq < 60 || freq > 1500) return -1;
+    return freq;
+  }
+  function rms(buffer){
+    var sum = 0;
+    for(var i = 0; i < buffer.length; i++) sum += buffer[i] * buffer[i];
+    return Math.sqrt(sum / buffer.length);
+  }
+
+  // ---- Shared mic engine ----
+  var audioCtx = null, analyser = null, micStream = null, sourceNode = null, rafId = null;
+  var pitchBuf = new Float32Array(2048);
+
+  function startMic(onFrame){
+    return navigator.mediaDevices.getUserMedia({ audio: { echoCancellation:false, noiseSuppression:false, autoGainControl:false } })
+      .then(function(stream){
+        micStream = stream;
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        sourceNode = audioCtx.createMediaStreamSource(stream);
+        analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 2048;
+        sourceNode.connect(analyser);
+        pitchBuf = new Float32Array(analyser.fftSize);
+        function loop(){
+          analyser.getFloatTimeDomainData(pitchBuf);
+          var level = rms(pitchBuf);
+          var f0 = -1;
+          if(level > 0.01){
+            f0 = yinDetect(pitchBuf, audioCtx.sampleRate);
+          }
+          onFrame(f0 > 0 ? f0 : null);
+          rafId = requestAnimationFrame(loop);
+        }
+        loop();
+      });
+  }
+  function stopMic(){
+    if(rafId) cancelAnimationFrame(rafId);
+    rafId = null;
+    if(micStream){ micStream.getTracks().forEach(function(t){ t.stop(); }); micStream = null; }
+    if(audioCtx){ audioCtx.close().catch(function(){}); audioCtx = null; }
+    analyser = null; sourceNode = null;
+  }
+
+  // ---- Medición de tono habitual ----
+  var measureSamples = [];
+  var measuring = false;
+  $('btnStartMeasure').addEventListener('click', function(){
+    measureSamples = [];
+    measuring = true;
+    $('btnStartMeasure').disabled = true;
+    $('btnStopMeasure').disabled = false;
+    $('btnSaveMeasure').disabled = true;
+    $('measureStatus').textContent = tt('measuring','Escuchando…');
+    startMic(function(f0){
+      if(!measuring) return;
+      if(f0){
+        $('curF0').innerHTML = f0.toFixed(0) + ' <small>Hz</small>';
+        measureSamples.push(f0);
+        if(measureSamples.length > 0){
+          var avg = measureSamples.reduce(function(a,b){return a+b;},0) / measureSamples.length;
+          $('avgF0').innerHTML = avg.toFixed(0) + ' <small>Hz</small>';
+        }
+      } else {
+        $('curF0').innerHTML = '— <small>Hz</small>';
+      }
+    }).catch(function(){
+      toast(tt('micPermissionError','No se pudo acceder al micrófono.'));
+      resetMeasureUI();
+    });
+  });
+  $('btnStopMeasure').addEventListener('click', function(){
+    measuring = false;
+    stopMic();
+    resetMeasureUI();
+    if(measureSamples.length > 3) $('btnSaveMeasure').disabled = false;
+  });
+  function resetMeasureUI(){
+    $('btnStartMeasure').disabled = false;
+    $('btnStopMeasure').disabled = true;
+    $('measureStatus').textContent = '';
+  }
+  $('btnSaveMeasure').addEventListener('click', function(){
+    if(measureSamples.length === 0) return;
+    var avg = measureSamples.reduce(function(a,b){return a+b;},0) / measureSamples.length;
+    state.habitual = Math.round(avg);
+    saveState(state);
+    toast(tt('savedHabitual','Tono habitual guardado'));
+  });
+
+  // ---- Banda objetivo ----
+  var presets = {
+    feminizing: {min:180,max:220},
+    masculinizing: {min:100,max:140},
+    androgynous: {min:150,max:180}
+  };
+  $('presetSelect').addEventListener('change', function(){
+    var v = this.value;
+    if(presets[v]){
+      $('targetMin').value = presets[v].min;
+      $('targetMax').value = presets[v].max;
+    }
+  });
+  $('targetMin').value = state.target.min;
+  $('targetMax').value = state.target.max;
+  $('btnSaveTarget').addEventListener('click', function(){
+    var min = Number($('targetMin').value), max = Number($('targetMax').value);
+    if(!(min > 0 && max > min)){ toast('—'); return; }
+    state.target = { min: min, max: max };
+    saveState(state);
+    toast(tt('savedTarget','Banda objetivo guardada'));
+    updateGlideTargetBar();
+  });
+
+  // ---- Ejercicio de glide ----
+  var glideActive = false, glideStart = 0, glideInBandMs = 0, glideLastTs = 0, glideRafSummary = null;
+  var BAR_MIN = 60, BAR_MAX = 400; // rango del velocímetro visual
+
+  function freqToPct(f){
+    var pct = (f - BAR_MIN) / (BAR_MAX - BAR_MIN);
+    return Math.max(0, Math.min(1, pct)) * 100;
+  }
+  function updateGlideTargetBar(){
+    var t = state.target;
+    var leftPct = freqToPct(t.min);
+    var rightPct = freqToPct(t.max);
+    var el = $('glideBarTarget');
+    el.style.left = leftPct + '%';
+    el.style.width = (rightPct - leftPct) + '%';
+  }
+  updateGlideTargetBar();
+
+  $('btnStartGlide').addEventListener('click', function(){
+    glideActive = true;
+    glideStart = performance.now();
+    glideInBandMs = 0;
+    glideLastTs = glideStart;
+    $('btnStartGlide').disabled = true;
+    $('btnStopGlide').disabled = false;
+    $('btnSaveSession').disabled = true;
+    startMic(function(f0){
+      if(!glideActive) return;
+      var now = performance.now();
+      var dt = now - glideLastTs;
+      glideLastTs = now;
+      if(f0){
+        $('glideF0').innerHTML = f0.toFixed(0) + ' <small>Hz</small>';
+        $('glideBarCursor').style.left = freqToPct(f0) + '%';
+        var inBand = f0 >= state.target.min && f0 <= state.target.max;
+        if(inBand) glideInBandMs += dt;
+        $('glideStatusPill').className = 'status-pill ' + (inBand ? 'in' : 'out');
+        $('glideStatusPill').textContent = inBand ? tt('inTarget','Dentro de la banda') : tt('outTarget','Fuera de la banda');
+      }
+      var elapsedS = (now - glideStart) / 1000;
+      $('glideDuration').innerHTML = elapsedS.toFixed(0) + ' <small>s</small>';
+      var pctIn = elapsedS > 0 ? Math.round(100 * (glideInBandMs/1000) / elapsedS) : 0;
+      $('glideSuccess').innerHTML = pctIn + ' <small>%</small>';
+    }).catch(function(){
+      toast(tt('micPermissionError','No se pudo acceder al micrófono.'));
+      glideActive = false;
+      $('btnStartGlide').disabled = false;
+      $('btnStopGlide').disabled = true;
+    });
+  });
+  $('btnStopGlide').addEventListener('click', function(){
+    glideActive = false;
+    stopMic();
+    $('btnStartGlide').disabled = false;
+    $('btnStopGlide').disabled = true;
+    var elapsedS = (performance.now() - glideStart) / 1000;
+    if(elapsedS > 1) $('btnSaveSession').disabled = false;
+    lastGlideResult = {
+      durationS: Math.round(elapsedS),
+      successPct: elapsedS > 0 ? Math.round(100 * (glideInBandMs/1000) / elapsedS) : 0
+    };
+  });
+  var lastGlideResult = null;
+  $('btnSaveSession').addEventListener('click', function(){
+    if(!lastGlideResult) return;
+    state.sessions.push({
+      date: new Date().toISOString(),
+      habitual: state.habitual,
+      targetMin: state.target.min,
+      targetMax: state.target.max,
+      successPct: lastGlideResult.successPct,
+      durationS: lastGlideResult.durationS
+    });
+    saveState(state);
+    toast(tt('savedSession','Sesión guardada'));
+    $('btnSaveSession').disabled = true;
+    renderProgress();
+  });
+
+  // ---- Progreso ----
+  function renderProgress(){
+    var body = $('progressBody');
+    body.innerHTML = '';
+    var sessions = state.sessions.slice().reverse();
+    $('noSessionsMsg').style.display = sessions.length ? 'none' : 'block';
+    sessions.forEach(function(s){
+      var tr = document.createElement('tr');
+      var d = new Date(s.date);
+      var cells = [
+        d.toLocaleString(),
+        s.habitual ? s.habitual + ' Hz' : '—',
+        s.targetMin + '–' + s.targetMax + ' Hz',
+        s.successPct + '%',
+        s.durationS + ' s'
+      ];
+      cells.forEach(function(c){
+        var td = document.createElement('td');
+        td.textContent = c;
+        tr.appendChild(td);
+      });
+      body.appendChild(tr);
+    });
+  }
+  renderProgress();
+
+  $('btnExportCsv').addEventListener('click', function(){
+    var rows = [['date','habitual_hz','target_min_hz','target_max_hz','success_pct','duration_s']];
+    state.sessions.forEach(function(s){
+      rows.push([s.date, s.habitual||'', s.targetMin, s.targetMax, s.successPct, s.durationS]);
+    });
+    var csv = rows.map(function(r){ return r.join(','); }).join('\n');
+    var blob = new Blob([csv], {type:'text/csv;charset=utf-8'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = 'rango-tonal-afirmativo-progreso.csv';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+  $('btnClearHistory').addEventListener('click', function(){
+    if(!confirm(tt('confirmClear','¿Seguro que quieres borrar todo el historial?'))) return;
+    state.sessions = [];
+    saveState(state);
+    renderProgress();
+  });
+
+  window.addEventListener('cv-lang-changed', function(){ /* los textos estáticos ya se re-aplican vía data-i18n */ });
+})();
+</script>
+<script src="../assets/theme-switcher.js" defer></script>
+<script src="../assets/a11y-reader.js" defer></script>
+</body>
+</html>

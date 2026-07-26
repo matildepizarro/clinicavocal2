@@ -1,0 +1,780 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title data-i18n="pageTitle">Anamnesis Vocal</title>
+<meta name="description" data-i18n-content="metaDescription" content="Ficha estructurada de ingreso: antecedentes, hábitos y factores de riesgo vocal, con exportación a PDF." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='7' fill='%235bb3e0'/%3E%3Cpath d='M7 4h10v16l-5-3-5 3Z' fill='white'/%3E%3C/svg%3E">
+<script>document.documentElement.setAttribute('data-pastel-theme', (function(){try{return localStorage.getItem('cv-pastel-theme')||'rosa';}catch(e){return 'rosa';}})());</script>
+<script src="i18n-dict.js"></script>
+<script src="../assets/i18n-engine.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/shared.css">
+<style>
+  :root{ --bg:#fff5fa; --card:#ffffff; --accent:#5bb3e0; --muted:#8a5b7a; --border:#f6d6e8; --radius:14px; --bg-top:#fffafd; }
+  :root[data-pastel-theme="rosa"]{ --bg:#fff5fa; --bg-top:#fffafd; --accent:#e0559e; --muted:#8a5b7a; --border:#f6d6e8; }
+  :root[data-pastel-theme="lavanda"]{ --bg:#f6f3ff; --bg-top:#faf8ff; --accent:#9b7bd9; --muted:#7a6a99; --border:#ded1fb; }
+  :root[data-pastel-theme="menta"]{ --bg:#f0fbf6; --bg-top:#f7fdfa; --accent:#4fb894; --muted:#5a8a75; --border:#c9ecdb; }
+  :root[data-pastel-theme="durazno"]{ --bg:#fff7f0; --bg-top:#fffbf6; --accent:#ff9d66; --muted:#a3775a; --border:#ffd8bd; }
+  :root[data-pastel-theme="cielo"]{ --bg:#f0f8ff; --bg-top:#f7fbff; --accent:#5bb3e0; --muted:#5a7fa3; --border:#c9e4fb; }
+  *{box-sizing:border-box} html,body{height:100%}
+  body{font-family:Inter,system-ui,Segoe UI,Roboto,Arial; background:linear-gradient(180deg,var(--bg-top) 0%,var(--bg) 100%); margin:0; color:#3a2436; -webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:'Fraunces',Georgia,serif; font-weight:600;}
+  .container{max-width:900px;margin:28px auto;padding:18px}
+  .header{display:flex;gap:18px;align-items:center;background:linear-gradient(180deg,#fff,#fbfeff);padding:18px;border-radius:16px;box-shadow:0 10px 30px rgba(12,25,50,0.06)}
+  .brand{width:72px;height:72px;border-radius:12px;background:linear-gradient(135deg,#eef6ff,#ffffff);display:flex;align-items:center;justify-content:center;border:1px solid var(--border);font-weight:700;color:var(--accent);font-size:20px}
+  .title-wrap h1{margin:0;font-size:20px} .title-wrap p{margin:6px 0 0 0;color:var(--muted);font-size:13px}
+  .card{background:var(--card);border-radius:12px;padding:18px;margin-top:16px;box-shadow:0 6px 20px rgba(10,20,40,0.04)}
+  h2{margin:0 0 8px 0;font-size:16px;color:var(--accent)}
+  p.lead{color:var(--muted);margin:6px 0 14px 0}
+  .field-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:4px}
+  label.f-label{display:block;font-weight:600;margin:10px 0 6px 0;font-size:13px}
+  input[type="text"], input[type="number"], input[type="date"], select, textarea{width:100%;padding:10px;border-radius:10px;border:1px solid var(--border);background:#fbfdff;font-size:14px}
+  textarea{min-height:70px;resize:vertical}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+  .chip{background:#f6fbff;border:1px solid var(--border);padding:7px 12px;border-radius:12px;display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px}
+  .chip input{margin:0}
+  .scale-row{display:flex;align-items:center;gap:12px;margin-top:8px}
+  .scale-row input[type=range]{flex:1;accent-color:var(--accent)}
+  .scale-val{font-weight:800;color:var(--accent);font-family:'IBM Plex Mono',monospace;min-width:24px;text-align:center}
+  .controls{display:flex;gap:12px;justify-content:flex-end;margin-top:16px;flex-wrap:wrap}
+  .btn{padding:10px 14px;border-radius:10px;border:0;cursor:pointer;font-weight:700;font-size:13.5px}
+  .btn-primary{background:var(--accent);color:#fff}
+  .btn-ghost{background:#eef6ff;color:var(--accent);border:1px solid #dbeffb}
+  .btn-danger{background:#ef4444;color:#fff}
+  table{width:100%;border-collapse:collapse;margin-top:14px}
+  th,td{padding:10px;border-bottom:1px solid #f2f6fb;text-align:left;font-size:13px}
+  th{background:#fbfdff;font-weight:700}
+  .footer{margin-top:14px;text-align:center;color:var(--muted);font-size:12.5px;line-height:1.6}
+  details.card{padding:0} details.card>summary{list-style:none;cursor:pointer;padding:18px;font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:16px;color:var(--accent);display:flex;align-items:center;justify-content:space-between;gap:10px}
+  details.card>summary::-webkit-details-marker{display:none}
+  details.card>summary::after{content:'▾';font-family:Inter,system-ui;color:var(--muted);transition:transform .2s}
+  details.card[open]>summary::after{transform:rotate(180deg)}
+  details.card>summary small{display:block;font-family:Inter,system-ui;font-weight:400;font-size:12px;color:var(--muted);margin-top:3px}
+  details.card>.details-body{padding:0 18px 18px}
+  .sub h3{font-size:14px;margin:18px 0 4px;color:#3a2436;border-top:1px dashed var(--border);padding-top:14px}
+  .sub:first-child h3{border-top:none;padding-top:0;margin-top:6px}
+  .yn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:8px 16px;margin-top:8px}
+  .yn-row{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fbfdff;border:1px solid var(--border);border-radius:10px;padding:8px 10px;font-size:13px}
+  .yn-row .yn-label{flex:1}
+  .yn-opts{display:flex;gap:10px;flex:0 0 auto}
+  .yn-opts label{display:flex;align-items:center;gap:4px;font-size:12.5px;font-weight:600;cursor:pointer}
+  .yn-cual{width:120px;padding:5px 7px;font-size:12px;border-radius:7px;border:1px solid var(--border)}
+  .mini-note{font-size:11.5px;color:var(--muted);margin-top:2px}
+  #toastHost{position:fixed;bottom:20px;right:20px;display:flex;flex-direction:column;gap:10px;z-index:9999}
+  .toast{background:#2c2432;color:#fff;padding:11px 16px;border-radius:10px;font-size:13.5px;box-shadow:0 10px 30px rgba(0,0,0,.25);max-width:320px;opacity:0;transform:translateY(8px);animation:cv-toast-in .2s ease forwards}
+  .toast.err{background:#8a2846} .toast.ok{background:#2f6b56}
+  @keyframes cv-toast-in{to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<div id="toastHost"></div>
+<a href="../index.html" class="cv-back-link"><span class="cv-back-arrow" aria-hidden="true">←</span><span class="cv-back-text" data-i18n="backToPortal">Volver al portal</span></a>
+  <div class="container">
+    <header class="header">
+      <div class="brand" aria-hidden="true">MP</div>
+      <div class="title-wrap">
+        <h1 data-i18n="headerTitle">Anamnesis Vocal</h1>
+        <p class="lead" data-i18n="headerLead">Ficha estructurada de ingreso para la primera consulta: antecedentes, hábitos y factores de riesgo vocal.</p>
+      </div>
+    </header>
+
+    <div class="card">
+      <h2 data-i18n="secIdentificacion">Identificación</h2>
+      <div class="field-row">
+        <div><label class="f-label" for="fNombre" data-i18n="labelNombre">Nombre o ID</label><input type="text" id="fNombre"></div>
+        <div><label class="f-label" for="fEdad" data-i18n="labelEdad">Edad</label><input type="number" id="fEdad" min="0" max="120"></div>
+        <div><label class="f-label" for="fFecha" data-i18n="labelFechaEval">Fecha</label><input type="date" id="fFecha"></div>
+        <div><label class="f-label" for="fOcupacion" data-i18n="labelOcupacion">Ocupación / uso vocal</label><input type="text" id="fOcupacion" data-i18n-placeholder="ocupacionPlaceholder" placeholder="Docente, cantante, call center…"></div>
+        <div><label class="f-label" for="fDerivadoPor" data-i18n="labelDerivadoPor">Derivado por</label><input type="text" id="fDerivadoPor" data-i18n-placeholder="derivadoPlaceholder" placeholder="Otorrinolaringólogo, autoconsulta…"></div>
+        <div><label class="f-label" for="fRut" data-i18n="labelRut">RUT</label><input type="text" id="fRut"></div>
+        <div><label class="f-label" for="fDomicilio" data-i18n="labelDomicilio">Domicilio</label><input type="text" id="fDomicilio"></div>
+        <div><label class="f-label" for="fTelefono" data-i18n="labelTelefono">Teléfono</label><input type="text" id="fTelefono"></div>
+        <div><label class="f-label" for="fEmail" data-i18n="labelEmail">Email</label><input type="text" id="fEmail"></div>
+        <div><label class="f-label" for="fActSecundaria" data-i18n="labelActSecundaria">Actividades secundarias</label><input type="text" id="fActSecundaria"></div>
+        <div><label class="f-label" for="fPrevision" data-i18n="labelPrevision">Previsión social</label><input type="text" id="fPrevision"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 data-i18n="secMotivo">Motivo de consulta</h2>
+      <label class="f-label" for="fMotivo" data-i18n="labelMotivo">Descripción del problema vocal (en palabras del paciente)</label>
+      <textarea id="fMotivo"></textarea>
+      <div class="field-row">
+        <div>
+          <label class="f-label" for="fInicio" data-i18n="labelInicioSintomas">Inicio de los síntomas</label>
+          <select id="fInicio">
+            <option value="subito" data-i18n="optInicioSubito">Súbito</option>
+            <option value="gradual" data-i18n="optInicioGradual">Gradual</option>
+            <option value="intermitente" data-i18n="optInicioIntermitente">Intermitente / variable</option>
+          </select>
+        </div>
+        <div>
+          <label class="f-label" for="fDuracion" data-i18n="labelDuracionSintomas">Duración (aprox.)</label>
+          <input type="text" id="fDuracion" data-i18n-placeholder="duracionPlaceholder" placeholder="2 semanas, 6 meses…">
+        </div>
+      </div>
+      <label class="f-label" data-i18n="labelSeveridadPercibida">Severidad percibida (0 = sin problema, 10 = máxima)</label>
+      <div class="scale-row"><input type="range" id="fSeveridad" min="0" max="10" value="5" aria-label="Severidad percibida (0 a 10)" data-i18n-aria="labelSeveridadPercibida"><span class="scale-val" id="fSeveridadVal">5</span></div>
+      <div class="field-row">
+        <div>
+          <label class="f-label" for="fInstalacionQueja" data-i18n="labelInstalacionQueja">Instalación de la queja vocal</label>
+          <select id="fInstalacionQueja">
+            <option value="abrupta" data-i18n="optInstalacionAbrupta">Abrupta</option>
+            <option value="progresiva" data-i18n="optInstalacionProgresiva">Progresiva / Insidiosa</option>
+          </select>
+        </div>
+        <div>
+          <label class="f-label" for="fEventoAsociado" data-i18n="labelEventoAsociado">Evento asociado</label>
+          <input type="text" id="fEventoAsociado" data-i18n-placeholder="eventoAsociadoPlaceholder" placeholder="Evento asociado…">
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 data-i18n="secAntecedentes">Antecedentes relevantes</h2>
+      <div class="chips" id="antecedentesChips"></div>
+      <label class="f-label" for="fAntecedentesOtros" data-i18n="labelOtrosAntecedentes">Otros antecedentes médicos relevantes</label>
+      <textarea id="fAntecedentesOtros"></textarea>
+    </div>
+
+    <div class="card">
+      <h2 data-i18n="secHabitos">Hábitos y factores de riesgo vocal</h2>
+      <div class="chips" id="habitosChips"></div>
+    </div>
+
+    <div class="card">
+      <h2 data-i18n="secObservaciones">Observaciones clínicas iniciales</h2>
+      <label class="f-label" for="fObservaciones" style="position:absolute;left:-9999px" data-i18n="secObservaciones">Observaciones clínicas iniciales</label>
+      <textarea id="fObservaciones" data-i18n-placeholder="observacionesPlaceholder" placeholder="Impresión diagnóstica preliminar, plan sugerido…"></textarea>
+    </div>
+
+    <details class="card" id="protocoloDetails">
+      <summary data-i18n="secProtocoloCompleto">📋 Protocolo de evaluación de voz — ficha completa
+        <small data-i18n="secProtocoloCompletoSub">Antecedentes mórbidos, hábitos vocales, evaluación clínica y perceptual (formato adaptado)</small>
+      </summary>
+      <div class="details-body">
+
+        <div class="sub">
+          <h3 data-i18n="subAntecedentesMorbidos">1. Antecedentes mórbidos</h3>
+          <div class="field-row">
+            <div><label class="f-label" for="pDxOrl" data-i18n="labelDxOrl">Diagnóstico ORL</label><input type="text" id="pDxOrl"></div>
+            <div><label class="f-label" for="pDxOrlMedFecha" data-i18n="labelMedicoFecha">Médico / Fecha</label><input type="text" id="pDxOrlMedFecha"></div>
+          </div>
+          <div class="field-row">
+            <div><label class="f-label" for="pMetodosExploracion" data-i18n="labelMetodosExploracion">Métodos de exploración utilizados</label><input type="text" id="pMetodosExploracion"></div>
+          </div>
+          <div class="field-row">
+            <div><label class="f-label" for="pPatologiasVocalesPrevias" data-i18n="labelPatologiasVocalesPrevias">Patologías vocales previas</label><input type="text" id="pPatologiasVocalesPrevias"></div>
+            <div><label class="f-label" for="pTratamientosVocalesPrevios" data-i18n="labelTratamientosVocalesPrevios">Tratamientos vocales previos</label><input type="text" id="pTratamientosVocalesPrevios"></div>
+          </div>
+          <div class="yn-grid" id="ynAntecedentesMorbidos"></div>
+          <div class="field-row">
+            <div><label class="f-label" for="pMedicamentos" data-i18n="labelMedicamentos">Medicamentos que consume a diario</label><textarea id="pMedicamentos"></textarea></div>
+            <div><label class="f-label" for="pOtrosDxTto" data-i18n="labelOtrosDxTto">Otros diagnósticos / Tratamientos</label><textarea id="pOtrosDxTto"></textarea></div>
+          </div>
+          <label class="f-label" for="pObsAntecedentes" data-i18n="labelObservaciones">Observaciones</label>
+          <textarea id="pObsAntecedentes"></textarea>
+        </div>
+
+        <div class="sub">
+          <h3 data-i18n="subAntecedentesSociales">2. Antecedentes sociales y entrenamiento vocal</h3>
+          <div class="field-row">
+            <div><label class="f-label" for="pGrupoFamiliar" data-i18n="labelGrupoFamiliar">Integrantes del grupo familiar</label><input type="text" id="pGrupoFamiliar"></div>
+            <div><label class="f-label" for="pActRecreativas" data-i18n="labelActRecreativas">Actividades recreativas en tiempo libre</label><input type="text" id="pActRecreativas"></div>
+          </div>
+          <div class="field-row">
+            <div><label class="f-label" for="pEntrenamientoVocal" data-i18n="labelEntrenamientoVocal">Entrenamiento vocal previo / dirigido por / frecuencia / fecha</label><input type="text" id="pEntrenamientoVocal"></div>
+          </div>
+          <label class="f-label" for="pObsSociales" data-i18n="labelObservaciones">Observaciones</label>
+          <textarea id="pObsSociales"></textarea>
+        </div>
+
+        <div class="sub">
+          <h3 data-i18n="subHabitos">3. Hábitos del comportamiento vocal y consumo de irritantes</h3>
+          <div class="yn-grid" id="ynHabitosComportamiento"></div>
+          <div class="yn-grid" id="ynHabitosIrritantes" style="margin-top:14px"></div>
+          <div class="field-row">
+            <div><label class="f-label" for="pOtrosIrritantes" data-i18n="labelOtrosIrritantes">Otros</label><input type="text" id="pOtrosIrritantes"></div>
+            <div><label class="f-label" for="pObsHabitos" data-i18n="labelObservaciones">Observaciones</label><input type="text" id="pObsHabitos"></div>
+          </div>
+          <h3 data-i18n="subFactoresRiesgo">Factores de riesgo</h3>
+          <div class="field-row">
+            <div><label class="f-label" for="pConsumoAgua" data-i18n="labelConsumoAgua">Consumo de agua</label><input type="text" id="pConsumoAgua"></div>
+            <div><label class="f-label" for="pHorasSueno" data-i18n="labelHorasSueno">Horas de sueño</label><input type="text" id="pHorasSueno"></div>
+            <div><label class="f-label" for="pDieta" data-i18n="labelDieta">Dieta</label><input type="text" id="pDieta"></div>
+          </div>
+        </div>
+
+        <div class="sub">
+          <h3 data-i18n="subAutovaloracion">4. Autovaloración vocal — síntomas</h3>
+          <div class="yn-grid" id="ynSintomas"></div>
+          <div class="field-row">
+            <div><label class="f-label" for="pAcidezDuracion" data-i18n="labelAcidezDuracion">Respecto a la acidez — Duración</label><input type="text" id="pAcidezDuracion"></div>
+            <div><label class="f-label" for="pAcidezAlimentos" data-i18n="labelAcidezAlimentos">Asociado a alimentos</label><input type="text" id="pAcidezAlimentos"></div>
+            <div><label class="f-label" for="pAcidezPeriodicidad" data-i18n="labelAcidezPeriodicidad">Periodicidad</label><input type="text" id="pAcidezPeriodicidad"></div>
+          </div>
+          <div class="field-row">
+            <div><label class="f-label" for="pHandicapVocal" data-i18n="labelHandicapVocal">Hándicap vocal utilizado</label><input type="text" id="pHandicapVocal"></div>
+            <div><label class="f-label" for="pHandicapPuntajes" data-i18n="labelHandicapPuntajes">Puntajes</label><input type="text" id="pHandicapPuntajes"></div>
+          </div>
+          <label class="f-label" for="pHandicapAnalisis" data-i18n="labelHandicapAnalisis">Análisis / observaciones del hándicap vocal</label>
+          <textarea id="pHandicapAnalisis"></textarea>
+        </div>
+
+        <div class="sub">
+          <h3 data-i18n="subParamNoLocutivos">5. Evaluación clínica — parámetros no locutivos</h3>
+          <div class="field-row">
+            <div><label class="f-label" for="pPosturaAnterior" data-i18n="labelPosturaAnterior">Postura estática — Anterior</label><input type="text" id="pPosturaAnterior"></div>
+            <div><label class="f-label" for="pPosturaPosterior" data-i18n="labelPosturaPosterior">Posterior</label><input type="text" id="pPosturaPosterior"></div>
+            <div><label class="f-label" for="pPosturaLateral" data-i18n="labelPosturaLateral">Lateral</label><input type="text" id="pPosturaLateral"></div>
+          </div>
+          <div class="field-row">
+            <div><label class="f-label" for="pAlturaLaringeaReposo" data-i18n="labelAlturaLaringeaReposo">Altura laríngea — Reposo</label><input type="text" id="pAlturaLaringeaReposo"></div>
+            <div><label class="f-label" for="pAlturaLaringeaFonacion" data-i18n="labelAlturaLaringeaFonacion">Fonación</label><input type="text" id="pAlturaLaringeaFonacion"></div>
+          </div>
+          <label class="f-label" for="pPosturaDinamicaObs" data-i18n="notaPosturaDinamica">Postura dinámica (flexión, extensión, lateralización D/I, rotación): registra en observaciones si hay dolor, crujido o rango insuficiente.</label>
+          <textarea id="pPosturaDinamicaObs" data-i18n-placeholder="obsPosturaDinamicaPlaceholder" placeholder="Ej: Rotación derecha con crujido, resto adecuado…"></textarea>
+          <div class="field-row">
+            <div>
+              <label class="f-label" for="pTonicidadGeneral" data-i18n="labelTonicidadGeneral">Tonicidad general</label>
+              <select id="pTonicidadGeneral"><option value="eutonico" data-i18n="optEutonico">Eutónico</option><option value="hipotonico" data-i18n="optHipotonico">Hipotónico</option><option value="hipertonico" data-i18n="optHipertonico">Hipertónico</option></select>
+            </div>
+            <div>
+              <label class="f-label" for="pTonicidadLaringea" data-i18n="labelTonicidadLaringea">Tonicidad laríngea</label>
+              <select id="pTonicidadLaringea"><option value="eutonico" data-i18n="optEutonico">Eutónico</option><option value="hipotonico" data-i18n="optHipotonico">Hipotónico</option><option value="hipertonico" data-i18n="optHipertonico">Hipertónico</option></select>
+            </div>
+          </div>
+        </div>
+
+        <div class="sub">
+          <h3 data-i18n="subParamLocutivos">6. Parámetros locutivos</h3>
+          <div class="field-row">
+            <div>
+              <label class="f-label" for="pTipoReposo" data-i18n="labelTipoReposo">Tipo respiratorio en reposo</label>
+              <select id="pTipoReposo"><option value="costal_alto" data-i18n="optCostalAlto">Costal alto</option><option value="costodiafragmatico" data-i18n="optCostodiafragmatico">Costodiafragmático</option><option value="abdominal" data-i18n="optAbdominal">Abdominal</option></select>
+            </div>
+            <div>
+              <label class="f-label" for="pTipoFonacion" data-i18n="labelTipoFonacion">Tipo respiratorio en fonación</label>
+              <select id="pTipoFonacion"><option value="costal_alto" data-i18n="optCostalAlto">Costal alto</option><option value="costodiafragmatico" data-i18n="optCostodiafragmatico">Costodiafragmático</option><option value="abdominal" data-i18n="optAbdominal">Abdominal</option></select>
+            </div>
+          </div>
+          <div class="field-row">
+            <div>
+              <label class="f-label" for="pModoReposo" data-i18n="labelModoReposo">Modo respiratorio en reposo</label>
+              <select id="pModoReposo"><option value="nasal" data-i18n="optNasal">Nasal</option><option value="oral" data-i18n="optOral">Oral</option><option value="mixto" data-i18n="optMixto">Mixto</option></select>
+            </div>
+            <div>
+              <label class="f-label" for="pModoFonacion" data-i18n="labelModoFonacion">Modo respiratorio en fonación</label>
+              <select id="pModoFonacion"><option value="nasal" data-i18n="optNasal">Nasal</option><option value="oral" data-i18n="optOral">Oral</option><option value="mixto" data-i18n="optMixto">Mixto</option></select>
+            </div>
+          </div>
+          <div class="field-row">
+            <div><label class="f-label" for="pCFR" data-i18n="labelCFR">CFR</label><input type="text" id="pCFR"></div>
+            <div><label class="f-label" for="pTMS" data-i18n="labelTMS">TMS</label><input type="text" id="pTMS"></div>
+            <div><label class="f-label" for="pTMF" data-i18n="labelTMF">TMF</label><input type="text" id="pTMF"></div>
+            <div><label class="f-label" for="pIndiceSZ" data-i18n="labelIndiceSZ">Índice S/Z</label><input type="text" id="pIndiceSZ"></div>
+          </div>
+          <div class="field-row">
+            <div>
+              <label class="f-label" for="pApoyoRespiratorio" data-i18n="labelApoyoRespiratorio">Apoyo respiratorio</label>
+              <select id="pApoyoRespiratorio"><option value="belly_in" data-i18n="optBellyIn">Belly in</option><option value="belly_out" data-i18n="optBellyOut">Belly out</option><option value="ausente" data-i18n="optAusente">Ausente</option></select>
+            </div>
+            <div>
+              <label class="f-label" for="pResonancia" data-i18n="labelResonancia">Resonancia</label>
+              <select id="pResonancia">
+                <option value="oral" data-i18n="optResOral">Oral</option><option value="faringea" data-i18n="optResFaringea">Faríngea</option>
+                <option value="laringofaringea" data-i18n="optResLaringofaringea">Laringofaríngea</option><option value="hipernasal" data-i18n="optResHipernasal">Hipernasal</option>
+                <option value="hiponasal" data-i18n="optResHiponasal">Hiponasal</option><option value="cul_de_sac" data-i18n="optResCulDeSac">Cul de sac</option>
+              </select>
+            </div>
+          </div>
+          <label class="f-label" for="pObsLocutivos" data-i18n="labelObservaciones">Observaciones</label>
+          <textarea id="pObsLocutivos"></textarea>
+        </div>
+
+        <div class="sub">
+          <h3 data-i18n="subEvalPerceptual">7. Evaluación perceptual de la voz</h3>
+          <div class="field-row">
+            <div>
+              <label class="f-label" for="pSonoridad" data-i18n="labelSonoridad">Sonoridad</label>
+              <select id="pSonoridad"><option value="adecuada" data-i18n="optAdecuada">Adecuada</option><option value="debil" data-i18n="optDebil">Débil</option><option value="fuerte" data-i18n="optFuerte">Fuerte</option></select>
+            </div>
+            <div>
+              <label class="f-label" for="pRegistro" data-i18n="labelRegistro">Registro</label>
+              <select id="pRegistro"><option value="basal" data-i18n="optBasal">Basal</option><option value="modal" data-i18n="optModal">Modal</option><option value="alto" data-i18n="optAlto">Alto</option></select>
+            </div>
+            <div>
+              <label class="f-label" for="pAtaqueVocal" data-i18n="labelAtaqueVocal">Ataque vocal</label>
+              <select id="pAtaqueVocal"><option value="hipotonico" data-i18n="optHipotonico">Hipotónico</option><option value="isotonico" data-i18n="optIsotonico">Isotónico</option><option value="hipertonico" data-i18n="optHipertonico">Hipertónico</option></select>
+            </div>
+          </div>
+          <div class="field-row">
+            <div><label class="f-label" for="pExtensionTonal" data-i18n="labelExtensionTonal">Extensión tonal</label><input type="text" id="pExtensionTonal"></div>
+            <div><label class="f-label" for="pAlturaTonal" data-i18n="labelAlturaTonal">Altura tonal / pitch</label><input type="text" id="pAlturaTonal"></div>
+            <div>
+              <label class="f-label" for="pQuiebresTonales" data-i18n="labelQuiebresTonales">Quiebres tonales</label>
+              <select id="pQuiebresTonales"><option value="presente" data-i18n="optPresente">Presente</option><option value="ausente" data-i18n="optAusente">Ausente</option></select>
+            </div>
+            <div>
+              <label class="f-label" for="pCalidadVocal" data-i18n="labelCalidadVocal">Calidad vocal</label>
+              <select id="pCalidadVocal"><option value="normal" data-i18n="optNormal">Normal</option><option value="disfonica" data-i18n="optDisfonica">Disfónica</option><option value="afonica" data-i18n="optAfonica">Afónica</option></select>
+            </div>
+          </div>
+          <div class="chips" id="chipsVozRasgos"></div>
+          <div class="field-row" style="margin-top:10px">
+            <div><label class="f-label" for="pVozOtra" data-i18n="labelVozOtra">Otra característica de voz</label><input type="text" id="pVozOtra"></div>
+          </div>
+          <label class="f-label" for="pObsPerceptual" data-i18n="labelObservaciones">Observaciones</label>
+          <textarea id="pObsPerceptual"></textarea>
+          <h3 data-i18n="subRasati" style="margin-top:16px">Escala RASATI</h3>
+          <div class="field-row" id="rasatiRow">
+            <div><label class="f-label" for="pRasR">R</label><input type="number" min="0" max="3" id="pRasR"></div>
+            <div><label class="f-label" for="pRasA1">A (aspereza)</label><input type="number" min="0" max="3" id="pRasA1"></div>
+            <div><label class="f-label" for="pRasS">S (soplo)</label><input type="number" min="0" max="3" id="pRasS"></div>
+            <div><label class="f-label" for="pRasA2">A (astenia)</label><input type="number" min="0" max="3" id="pRasA2"></div>
+            <div><label class="f-label" for="pRasT">T (tensión)</label><input type="number" min="0" max="3" id="pRasT"></div>
+            <div><label class="f-label" for="pRasI">I (inestabilidad)</label><input type="number" min="0" max="3" id="pRasI"></div>
+          </div>
+          <h3 data-i18n="subParamHabla" style="margin-top:16px">Parámetros del habla</h3>
+          <div class="field-row">
+            <div>
+              <label class="f-label" for="pFluidez" data-i18n="labelFluidez">Fluidez</label>
+              <select id="pFluidez"><option value="adecuada" data-i18n="optAdecuada">Adecuada</option><option value="aumentada" data-i18n="optAumentada">Aumentada</option><option value="disminuida" data-i18n="optDisminuida">Disminuida</option></select>
+            </div>
+            <div>
+              <label class="f-label" for="pInteligibilidad" data-i18n="labelInteligibilidad">Inteligibilidad</label>
+              <select id="pInteligibilidad"><option value="adecuada" data-i18n="optAdecuada">Adecuada</option><option value="deficiente" data-i18n="optDeficiente">Deficiente</option><option value="nula" data-i18n="optNula">Nula</option></select>
+            </div>
+            <div>
+              <label class="f-label" for="pVelocidad" data-i18n="labelVelocidad">Velocidad</label>
+              <select id="pVelocidad"><option value="adecuada" data-i18n="optAdecuada">Adecuada</option><option value="aumentada" data-i18n="optAumentada">Aumentada</option><option value="disminuida" data-i18n="optDisminuida">Disminuida</option></select>
+            </div>
+            <div>
+              <label class="f-label" for="pArticulacion" data-i18n="labelArticulacion">Articulación</label>
+              <select id="pArticulacion"><option value="adecuada" data-i18n="optAdecuada">Adecuada</option><option value="aumentada" data-i18n="optAumentada">Aumentada</option><option value="disminuida" data-i18n="optDisminuida">Disminuida</option></select>
+            </div>
+          </div>
+        </div>
+
+        <div class="sub">
+          <h3 data-i18n="subEvalObjetivas">8. Evaluaciones objetivas de la voz</h3>
+          <p class="mini-note" data-i18n="notaTextoAbuelo">Texto de lectura estandarizado sugerido para la muestra de habla: "El abuelo".</p>
+          <div class="field-row">
+            <div><label class="f-label" for="pF0" data-i18n="labelF0">F0</label><input type="text" id="pF0"></div>
+            <div><label class="f-label" for="pJitter" data-i18n="labelJitter">Jitter</label><input type="text" id="pJitter"></div>
+            <div><label class="f-label" for="pShimmer" data-i18n="labelShimmer">Shimmer</label><input type="text" id="pShimmer"></div>
+            <div><label class="f-label" for="pHNR" data-i18n="labelHNR">HNR</label><input type="text" id="pHNR"></div>
+            <div>
+              <label class="f-label" for="pTipoVoz" data-i18n="labelTipoVoz">Tipo de voz</label>
+              <select id="pTipoVoz"><option value="I">I</option><option value="II">II</option><option value="III">III</option></select>
+            </div>
+          </div>
+          <label class="f-label" for="pNasofibro" data-i18n="labelNasofibro">Nasofibrolaringoscopía</label>
+          <textarea id="pNasofibro"></textarea>
+        </div>
+
+      </div>
+    </details>
+
+    <div class="controls">
+      <button class="btn btn-ghost" id="resetBtn" data-i18n="btnLimpiar">Limpiar</button>
+      <button class="btn btn-primary" id="saveBtn" data-i18n="btnGuardarRegistro">Guardar ficha</button>
+    </div>
+
+    <div class="card">
+      <h2 data-i18n="secHistorial">Fichas guardadas</h2>
+      <div class="controls" style="justify-content:flex-start;margin-top:0">
+        <button class="btn btn-ghost" id="exportPdfBtn" data-i18n="btnExportarPdf">📄 Exportar PDF</button>
+        <button class="btn btn-danger" id="clearHistBtn" data-i18n="btnBorrarTodo">Borrar todo</button>
+      </div>
+      <table>
+        <thead><tr><th data-i18n="thFecha">Fecha</th><th data-i18n="thPaciente">Paciente</th><th data-i18n="thMotivo">Motivo</th><th></th></tr></thead>
+        <tbody id="histTbody"></tbody>
+      </table>
+    </div>
+
+    <footer class="footer">
+      <div data-i18n="footerNote">Herramienta de apoyo clínico. No reemplaza el juicio profesional. Todos los datos se guardan únicamente en este dispositivo.</div>
+      <div>Matilde Pizarro Toro · Fonoaudióloga</div>
+    </footer>
+  </div>
+
+<script src="../assets/shared.js"></script>
+<script>
+const LS_KEY = 'anamnesis_vocal_v1';
+let registros = JSON.parse(localStorage.getItem(LS_KEY) || '[]');
+const tt = (key, fallback) => (window.CV_I18N ? window.CV_I18N.t(key) : (fallback !== undefined ? fallback : key));
+
+function toast(msg, type){
+  const host = document.getElementById('toastHost');
+  const el = document.createElement('div');
+  el.className = 'toast' + (type ? ' '+type : '');
+  el.textContent = msg;
+  host.appendChild(el);
+  setTimeout(()=>{ el.style.transition='opacity .3s ease, transform .3s ease'; el.style.opacity='0'; el.style.transform='translateY(-6px)'; setTimeout(()=>el.remove(), 320); }, 2600);
+}
+
+const ANTECEDENTES = [
+  {id:'reflujo', key:'antReflujo', fallback:'Reflujo gastroesofágico / laringofaríngeo'},
+  {id:'alergias', key:'antAlergias', fallback:'Alergias respiratorias'},
+  {id:'tiroides', key:'antTiroides', fallback:'Patología tiroidea'},
+  {id:'cirugia_cervical', key:'antCirugiaCervical', fallback:'Cirugía cervical o de tiroides previa'},
+  {id:'intubacion', key:'antIntubacion', fallback:'Intubación orotraqueal reciente'},
+  {id:'neurologico', key:'antNeurologico', fallback:'Antecedente neurológico'},
+  {id:'menopausia', key:'antMenopausia', fallback:'Menopausia / cambios hormonales'},
+  {id:'terapia_hormonal', key:'antTerapiaHormonal', fallback:'Terapia hormonal (incluye afirmación de género)'},
+  {id:'asma', key:'antAsma', fallback:'Asma / uso de corticoides inhalados'}
+];
+const HABITOS = [
+  {id:'tabaco', key:'habTabaco', fallback:'Tabaco'},
+  {id:'alcohol', key:'habAlcohol', fallback:'Alcohol frecuente'},
+  {id:'cafeina', key:'habCafeina', fallback:'Alto consumo de cafeína'},
+  {id:'hidratacion_baja', key:'habHidratacionBaja', fallback:'Baja ingesta de agua'},
+  {id:'uso_vocal_intenso', key:'habUsoVocalIntenso', fallback:'Uso vocal profesional intenso'},
+  {id:'ambiente_ruidoso', key:'habAmbienteRuidoso', fallback:'Habla frecuente en ambientes ruidosos'},
+  {id:'gritar', key:'habGritar', fallback:'Grita o fuerza la voz con frecuencia'},
+  {id:'ambiente_seco', key:'habAmbienteSeco', fallback:'Ambiente laboral seco / con polvo o químicos'},
+  {id:'canto_no_entrenado', key:'habCantoNoEntrenado', fallback:'Canto sin entrenamiento vocal'},
+  {id:'estres', key:'habEstres', fallback:'Alto nivel de estrés percibido'}
+];
+
+const YN_ANTECEDENTES_MORBIDOS = [
+  {id:'psiquiatricos', key:'ynPsiquiatricos', fallback:'Antecedentes psiquiátricos/psicológicos'},
+  {id:'desordenes_hormonales', key:'ynDesordenesHormonales', fallback:'Desórdenes hormonales'},
+  {id:'cirugias', key:'ynCirugias', fallback:'Cirugías'},
+  {id:'rinitis', key:'ynRinitis', fallback:'Rinitis'},
+  {id:'rge_rfl', key:'ynRgeRfl', fallback:'RGE / RFL'},
+  {id:'hipoacusia', key:'ynHipoacusia', fallback:'Hipoacusia'},
+  {id:'patologias_dentales', key:'ynPatologiasDentales', fallback:'Patologías dentales y de oclusión'},
+  {id:'hipotiroidismo', key:'ynHipotiroidismo', fallback:'Hipotiroidismo / hipertiroidismo'},
+  {id:'hospitalizacion_intubacion', key:'ynHospitalizacionIntubacion', fallback:'Hospitalización c/intubación'}
+];
+const YN_HABITOS_COMPORTAMIENTO = [
+  {id:'susurrar', key:'ynSusurrar', fallback:'Susurrar'},
+  {id:'carraspear', key:'ynCarraspear', fallback:'Carraspear'},
+  {id:'hablar_exceso', key:'ynHablarExceso', fallback:'Hablar en exceso'},
+  {id:'gritar_habito', key:'ynGritarHabito', fallback:'Gritar'},
+  {id:'risa_abusiva', key:'ynRisaAbusiva', fallback:'Risa abusiva'},
+  {id:'imitar_voces', key:'ynImitarVoces', fallback:'Imitar voces'}
+];
+const YN_HABITOS_IRRITANTES = [
+  {id:'tabaco_p', key:'ynTabaco', fallback:'Tabaco'},
+  {id:'alcohol_p', key:'ynAlcohol', fallback:'Alcohol'},
+  {id:'calefaccion', key:'ynCalefaccion', fallback:'Calefacción'},
+  {id:'inhalantes', key:'ynInhalantes', fallback:'Inhalantes'},
+  {id:'drogas', key:'ynDrogas', fallback:'Drogas'},
+  {id:'cafeina_p', key:'ynCafeina', fallback:'Cafeína'},
+  {id:'exposicion_ruido', key:'ynExposicionRuido', fallback:'Exposición a ruido'},
+  {id:'mascarilla', key:'ynMascarilla', fallback:'Mascarilla / escudo facial'}
+];
+const YN_SINTOMAS = [
+  {id:'afonia_disfonia', key:'ynAfoniaDisfonia', fallback:'Afonía / Disfonía'},
+  {id:'esfuerzo', key:'ynEsfuerzo', fallback:'Esfuerzo'},
+  {id:'ardor_picazon', key:'ynArdorPicazon', fallback:'Ardor / Picazón'},
+  {id:'fonalgia', key:'ynFonalgia', fallback:'Fonalgia'},
+  {id:'ronquera', key:'ynRonquera', fallback:'Ronquera'},
+  {id:'temblor', key:'ynTemblor', fallback:'Temblor'},
+  {id:'quiebres', key:'ynQuiebres', fallback:'Quiebres'},
+  {id:'ce', key:'ynCE', fallback:'Cuerpo extraño (C.E.)'},
+  {id:'alt_intensidad', key:'ynAltIntensidad', fallback:'Alteración de la intensidad'},
+  {id:'bitonalidad', key:'ynBitonalidad', fallback:'Bitonalidad'},
+  {id:'fatiga_vocal', key:'ynFatigaVocal', fallback:'Fatiga vocal'},
+  {id:'acidez', key:'ynAcidez', fallback:'Acidez'}
+];
+const VOZ_RASGOS = [
+  {id:'voz_ronca', key:'vozRonca', fallback:'Voz ronca'}, {id:'voz_aspera', key:'vozAspera', fallback:'Voz áspera'},
+  {id:'voz_susurrada', key:'vozSusurrada', fallback:'Voz susurrada'}, {id:'voz_soplada', key:'vozSoplada', fallback:'Voz soplada'},
+  {id:'voz_infantilizada', key:'vozInfantilizada', fallback:'Voz infantilizada'}, {id:'voz_virilizada', key:'vozVirilizada', fallback:'Voz virilizada'},
+  {id:'voz_diplofonica', key:'vozDiplofonica', fallback:'Voz diplofónica'}
+];
+
+function renderYesNoGroup(containerId, items){
+  const wrap = document.getElementById(containerId);
+  if(!wrap) return;
+  wrap.innerHTML = items.map(it=>`
+    <div class="yn-row" data-yn="${it.id}">
+      <span class="yn-label">${tt(it.key, it.fallback)}</span>
+      <div class="yn-opts">
+        <label><input type="radio" name="yn-${it.id}" value="si">${tt('ynSi','Sí')}</label>
+        <label><input type="radio" name="yn-${it.id}" value="no">${tt('ynNo','No')}</label>
+      </div>
+      <input type="text" class="yn-cual" data-cual="${it.id}" placeholder="${tt('ynCualPlaceholder','¿Cuál?')}">
+    </div>
+  `).join('');
+}
+function readYesNoGroup(items){
+  const out = {};
+  items.forEach(it=>{
+    const checked = document.querySelector(`input[name="yn-${it.id}"]:checked`);
+    const cual = document.querySelector(`[data-cual="${it.id}"]`);
+    out[it.id] = { label: tt(it.key, it.fallback), valor: checked ? checked.value : '', cual: cual ? cual.value : '' };
+  });
+  return out;
+}
+function resetYesNoGroup(items){
+  items.forEach(it=>{
+    document.querySelectorAll(`input[name="yn-${it.id}"]`).forEach(r=>r.checked=false);
+    const cual = document.querySelector(`[data-cual="${it.id}"]`); if(cual) cual.value='';
+  });
+}
+
+function renderChips(containerId, items){
+  const wrap = document.getElementById(containerId);
+  wrap.innerHTML = items.map(it=>`
+    <label class="chip"><input type="checkbox" data-chip="${it.id}"><span>${tt(it.key, it.fallback)}</span></label>
+  `).join('');
+}
+renderChips('antecedentesChips', ANTECEDENTES);
+renderChips('habitosChips', HABITOS);
+renderYesNoGroup('ynAntecedentesMorbidos', YN_ANTECEDENTES_MORBIDOS);
+renderYesNoGroup('ynHabitosComportamiento', YN_HABITOS_COMPORTAMIENTO);
+renderYesNoGroup('ynHabitosIrritantes', YN_HABITOS_IRRITANTES);
+renderYesNoGroup('ynSintomas', YN_SINTOMAS);
+renderChips('chipsVozRasgos', VOZ_RASGOS);
+
+const sevInput = document.getElementById('fSeveridad');
+sevInput.addEventListener('input', ()=>{ document.getElementById('fSeveridadVal').textContent = sevInput.value; });
+
+document.getElementById('resetBtn').addEventListener('click', resetForm);
+const PROTOCOLO_TEXT_IDS = [
+  'fRut','fDomicilio','fTelefono','fEmail','fActSecundaria','fPrevision','fEventoAsociado',
+  'pDxOrl','pDxOrlMedFecha','pMetodosExploracion','pPatologiasVocalesPrevias','pTratamientosVocalesPrevios',
+  'pMedicamentos','pOtrosDxTto','pObsAntecedentes',
+  'pGrupoFamiliar','pActRecreativas','pEntrenamientoVocal','pObsSociales',
+  'pOtrosIrritantes','pObsHabitos','pConsumoAgua','pHorasSueno','pDieta',
+  'pAcidezDuracion','pAcidezAlimentos','pAcidezPeriodicidad','pHandicapVocal','pHandicapPuntajes','pHandicapAnalisis',
+  'pPosturaAnterior','pPosturaPosterior','pPosturaLateral','pAlturaLaringeaReposo','pAlturaLaringeaFonacion','pPosturaDinamicaObs',
+  'pCFR','pTMS','pTMF','pIndiceSZ','pObsLocutivos',
+  'pExtensionTonal','pAlturaTonal','pVozOtra','pObsPerceptual',
+  'pRasR','pRasA1','pRasS','pRasA2','pRasT','pRasI',
+  'pF0','pJitter','pShimmer','pHNR','pNasofibro'
+];
+const PROTOCOLO_SELECT_IDS = [
+  'pTonicidadGeneral','pTonicidadLaringea','pTipoReposo','pTipoFonacion','pModoReposo','pModoFonacion',
+  'pApoyoRespiratorio','pResonancia','pSonoridad','pRegistro','pAtaqueVocal','pQuiebresTonales','pCalidadVocal',
+  'pFluidez','pInteligibilidad','pVelocidad','pArticulacion','pTipoVoz'
+];
+function resetForm(){
+  ['fNombre','fEdad','fOcupacion','fDerivadoPor','fMotivo','fDuracion','fAntecedentesOtros','fObservaciones'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('fFecha').value = new Date().toISOString().slice(0,10);
+  document.getElementById('fInicio').value = 'gradual';
+  document.getElementById('fInstalacionQueja').value = 'abrupta';
+  sevInput.value = 5; document.getElementById('fSeveridadVal').textContent = '5';
+  document.querySelectorAll('[data-chip]').forEach(c=>c.checked=false);
+  PROTOCOLO_TEXT_IDS.forEach(id=>{ const el = document.getElementById(id); if(el) el.value=''; });
+  PROTOCOLO_SELECT_IDS.forEach(id=>{ const el = document.getElementById(id); if(el) el.selectedIndex = 0; });
+  resetYesNoGroup(YN_ANTECEDENTES_MORBIDOS); resetYesNoGroup(YN_HABITOS_COMPORTAMIENTO);
+  resetYesNoGroup(YN_HABITOS_IRRITANTES); resetYesNoGroup(YN_SINTOMAS);
+  document.getElementById('protocoloDetails').open = false;
+}
+resetForm();
+
+function v(id){ const el = document.getElementById(id); return el ? el.value : ''; }
+document.getElementById('saveBtn').addEventListener('click', ()=>{
+  const nombre = document.getElementById('fNombre').value.trim();
+  if(!nombre){ toast(tt('toastFaltaNombre','Ingresa el nombre o ID del paciente.'), 'err'); return; }
+  const antecedentesSel = ANTECEDENTES.filter(a=>document.querySelector(`[data-chip="${a.id}"]`).checked).map(a=>tt(a.key,a.fallback));
+  const habitosSel = HABITOS.filter(h=>document.querySelector(`[data-chip="${h.id}"]`).checked).map(h=>tt(h.key,h.fallback));
+  const registro = {
+    id: Date.now(),
+    nombre, edad: document.getElementById('fEdad').value,
+    fecha: document.getElementById('fFecha').value || new Date().toISOString().slice(0,10),
+    ocupacion: document.getElementById('fOcupacion').value,
+    derivadoPor: document.getElementById('fDerivadoPor').value,
+    motivo: document.getElementById('fMotivo').value,
+    inicio: document.getElementById('fInicio').value,
+    duracion: document.getElementById('fDuracion').value,
+    severidad: sevInput.value,
+    antecedentes: antecedentesSel,
+    antecedentesOtros: document.getElementById('fAntecedentesOtros').value,
+    habitos: habitosSel,
+    observaciones: document.getElementById('fObservaciones').value,
+    instalacionQueja: document.getElementById('fInstalacionQueja').value,
+    protocolo: {
+      identificacion: { rut: v('fRut'), domicilio: v('fDomicilio'), telefono: v('fTelefono'), email: v('fEmail'), actSecundaria: v('fActSecundaria'), prevision: v('fPrevision') },
+      eventoAsociado: v('fEventoAsociado'),
+      antecedentesMorbidos: {
+        dxOrl: v('pDxOrl'), dxOrlMedFecha: v('pDxOrlMedFecha'), metodosExploracion: v('pMetodosExploracion'),
+        patologiasVocalesPrevias: v('pPatologiasVocalesPrevias'), tratamientosVocalesPrevios: v('pTratamientosVocalesPrevios'),
+        yn: readYesNoGroup(YN_ANTECEDENTES_MORBIDOS),
+        medicamentos: v('pMedicamentos'), otrosDxTto: v('pOtrosDxTto'), observaciones: v('pObsAntecedentes')
+      },
+      sociales: { grupoFamiliar: v('pGrupoFamiliar'), actRecreativas: v('pActRecreativas'), entrenamientoVocal: v('pEntrenamientoVocal'), observaciones: v('pObsSociales') },
+      habitos: {
+        comportamiento: readYesNoGroup(YN_HABITOS_COMPORTAMIENTO), irritantes: readYesNoGroup(YN_HABITOS_IRRITANTES),
+        otros: v('pOtrosIrritantes'), observaciones: v('pObsHabitos'),
+        consumoAgua: v('pConsumoAgua'), horasSueno: v('pHorasSueno'), dieta: v('pDieta')
+      },
+      sintomas: {
+        yn: readYesNoGroup(YN_SINTOMAS), acidezDuracion: v('pAcidezDuracion'), acidezAlimentos: v('pAcidezAlimentos'), acidezPeriodicidad: v('pAcidezPeriodicidad'),
+        handicapVocal: v('pHandicapVocal'), handicapPuntajes: v('pHandicapPuntajes'), handicapAnalisis: v('pHandicapAnalisis')
+      },
+      noLocutivos: {
+        posturaAnterior: v('pPosturaAnterior'), posturaPosterior: v('pPosturaPosterior'), posturaLateral: v('pPosturaLateral'),
+        alturaLaringeaReposo: v('pAlturaLaringeaReposo'), alturaLaringeaFonacion: v('pAlturaLaringeaFonacion'), posturaDinamicaObs: v('pPosturaDinamicaObs'),
+        tonicidadGeneral: v('pTonicidadGeneral'), tonicidadLaringea: v('pTonicidadLaringea')
+      },
+      locutivos: {
+        tipoReposo: v('pTipoReposo'), tipoFonacion: v('pTipoFonacion'), modoReposo: v('pModoReposo'), modoFonacion: v('pModoFonacion'),
+        cfr: v('pCFR'), tms: v('pTMS'), tmf: v('pTMF'), indiceSZ: v('pIndiceSZ'), apoyoRespiratorio: v('pApoyoRespiratorio'),
+        resonancia: v('pResonancia'), observaciones: v('pObsLocutivos')
+      },
+      perceptual: {
+        sonoridad: v('pSonoridad'), registro: v('pRegistro'), ataqueVocal: v('pAtaqueVocal'), extensionTonal: v('pExtensionTonal'),
+        alturaTonal: v('pAlturaTonal'), quiebresTonales: v('pQuiebresTonales'), calidadVocal: v('pCalidadVocal'),
+        rasgosVoz: VOZ_RASGOS.filter(r=>document.querySelector(`[data-chip="${r.id}"]`).checked).map(r=>tt(r.key,r.fallback)),
+        vozOtra: v('pVozOtra'), observaciones: v('pObsPerceptual'),
+        rasati: { r: v('pRasR'), a1: v('pRasA1'), s: v('pRasS'), a2: v('pRasA2'), t: v('pRasT'), i: v('pRasI') }
+      },
+      habla: { fluidez: v('pFluidez'), inteligibilidad: v('pInteligibilidad'), velocidad: v('pVelocidad'), articulacion: v('pArticulacion') },
+      objetivas: { f0: v('pF0'), jitter: v('pJitter'), shimmer: v('pShimmer'), hnr: v('pHNR'), tipoVoz: v('pTipoVoz'), nasofibro: v('pNasofibro') }
+    }
+  };
+  registros.push(registro);
+  localStorage.setItem(LS_KEY, JSON.stringify(registros));
+  renderHistorial();
+  toast(tt('toastFichaGuardada','Ficha guardada.'), 'ok');
+  resetForm();
+});
+
+function renderHistorial(){
+  const tbody = document.getElementById('histTbody');
+  if(!registros.length){ tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;color:var(--muted)">${tt('historialVacio','Sin fichas guardadas aún.')}</td></tr>`; return; }
+  tbody.innerHTML = registros.slice().reverse().map(r=>`
+    <tr>
+      <td>${r.fecha}</td>
+      <td>${escapeHtml(r.nombre)}</td>
+      <td>${escapeHtml((r.motivo||'').slice(0,60))}${(r.motivo||'').length>60?'…':''}</td>
+      <td><button class="btn btn-danger" style="padding:5px 9px" onclick="deleteRegistro(${r.id})">✕</button></td>
+    </tr>`).join('');
+}
+function deleteRegistro(id){ registros = registros.filter(r=>r.id!==id); localStorage.setItem(LS_KEY, JSON.stringify(registros)); renderHistorial(); }
+document.getElementById('clearHistBtn').addEventListener('click', ()=>{
+  if(!confirm(tt('confirmBorrarTodos','¿Borrar todas las fichas guardadas?'))) return;
+  registros = []; localStorage.removeItem(LS_KEY); renderHistorial();
+});
+
+document.getElementById('exportPdfBtn').addEventListener('click', ()=>{
+  if(!window.jspdf || !window.jspdf.jsPDF){ toast(tt('toastPdfLibNoCargada','No se pudo cargar la librería de PDF (revisa tu conexión a internet) — intenta de nuevo en unos segundos.'), 'err'); return; }
+  if(!registros.length){ toast(tt('toastSinRegistros','No hay fichas para exportar.'), 'err'); return; }
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF({unit:'mm', format:'a4'});
+  const margin = 16; const pageWidth = pdf.internal.pageSize.getWidth(); const pageHeight = pdf.internal.pageSize.getHeight();
+  registros.forEach((r, idx)=>{
+    if(idx>0) pdf.addPage();
+    let y = 20;
+    pdf.setFontSize(14); pdf.text(tt('pdfTitulo','Anamnesis Vocal — Ficha de ingreso'), margin, y); y += 8;
+    pdf.setFontSize(9); pdf.setTextColor(100); pdf.text(`${tt('thFecha','Fecha')}: ${r.fecha}`, margin, y); y += 6;
+    pdf.setDrawColor(230); pdf.line(margin, y, pageWidth-margin, y); y += 8;
+    pdf.setTextColor(20); pdf.setFontSize(10);
+    const rows = [
+      [tt('labelNombre','Nombre o ID'), r.nombre], [tt('labelEdad','Edad'), r.edad || '—'],
+      [tt('labelOcupacion','Ocupación / uso vocal'), r.ocupacion || '—'], [tt('labelDerivadoPor','Derivado por'), r.derivadoPor || '—'],
+      [tt('labelInicioSintomas','Inicio de los síntomas'), r.inicio], [tt('labelDuracionSintomas','Duración'), r.duracion || '—'],
+      [tt('labelSeveridadPercibida','Severidad percibida'), r.severidad + '/10']
+    ];
+    rows.forEach(([lbl,val])=>{
+      pdf.setFont(undefined,'bold'); pdf.text(lbl+':', margin, y);
+      pdf.setFont(undefined,'normal');
+      const lines = pdf.splitTextToSize(String(val), pageWidth-margin*2-60);
+      pdf.text(lines, margin+62, y);
+      y += Math.max(6, lines.length*5);
+    });
+    y += 3;
+    const block = (title, text)=>{
+      if(!text) return;
+      pdf.setFont(undefined,'bold'); pdf.text(title, margin, y); y += 5;
+      pdf.setFont(undefined,'normal');
+      const lines = pdf.splitTextToSize(text, pageWidth-margin*2);
+      lines.forEach(ln=>{ if(y>pageHeight-20){ pdf.addPage(); y=20; } pdf.text(ln, margin, y); y += 5; });
+      y += 3;
+    };
+    block(tt('labelMotivo','Motivo de consulta')+':', r.motivo);
+    block(tt('secAntecedentes','Antecedentes relevantes')+':', r.antecedentes.join(', ') || tt('ninguno','Ninguno marcado'));
+    block(tt('labelOtrosAntecedentes','Otros antecedentes médicos relevantes')+':', r.antecedentesOtros);
+    block(tt('secHabitos','Hábitos y factores de riesgo vocal')+':', r.habitos.join(', ') || tt('ninguno','Ninguno marcado'));
+    block(tt('secObservaciones','Observaciones clínicas iniciales')+':', r.observaciones);
+
+    if(r.protocolo){
+      const p = r.protocolo;
+      const ynText = (obj) => Object.values(obj).filter(o=>o.valor).map(o=>`${o.label}: ${o.valor==='si'?tt('ynSi','Sí'):tt('ynNo','No')}${o.cual?' ('+o.cual+')':''}`).join(' · ');
+      pdf.addPage(); y = 20;
+      pdf.setFontSize(13); pdf.setFont(undefined,'bold'); pdf.text(tt('secProtocoloCompleto','Protocolo de evaluación de voz — ficha completa'), margin, y); y+=8;
+      pdf.setFont(undefined,'normal'); pdf.setFontSize(10);
+      block(tt('subAntecedentesMorbidos','1. Antecedentes mórbidos')+':', [
+        p.antecedentesMorbidos.dxOrl && (tt('labelDxOrl','Diagnóstico ORL')+': '+p.antecedentesMorbidos.dxOrl+' ('+p.antecedentesMorbidos.dxOrlMedFecha+')'),
+        p.antecedentesMorbidos.metodosExploracion && (tt('labelMetodosExploracion','Métodos de exploración')+': '+p.antecedentesMorbidos.metodosExploracion),
+        p.antecedentesMorbidos.patologiasVocalesPrevias && (tt('labelPatologiasVocalesPrevias','Patologías vocales previas')+': '+p.antecedentesMorbidos.patologiasVocalesPrevias),
+        p.antecedentesMorbidos.tratamientosVocalesPrevios && (tt('labelTratamientosVocalesPrevios','Tratamientos vocales previos')+': '+p.antecedentesMorbidos.tratamientosVocalesPrevios),
+        ynText(p.antecedentesMorbidos.yn),
+        p.antecedentesMorbidos.medicamentos && (tt('labelMedicamentos','Medicamentos')+': '+p.antecedentesMorbidos.medicamentos),
+        p.antecedentesMorbidos.otrosDxTto && (tt('labelOtrosDxTto','Otros dx/tto')+': '+p.antecedentesMorbidos.otrosDxTto),
+        p.antecedentesMorbidos.observaciones
+      ].filter(Boolean).join('\n'));
+      block(tt('subAntecedentesSociales','2. Antecedentes sociales y entrenamiento vocal')+':', [
+        p.sociales.grupoFamiliar && (tt('labelGrupoFamiliar','Grupo familiar')+': '+p.sociales.grupoFamiliar),
+        p.sociales.actRecreativas && (tt('labelActRecreativas','Act. recreativas')+': '+p.sociales.actRecreativas),
+        p.sociales.entrenamientoVocal && (tt('labelEntrenamientoVocal','Entrenamiento vocal')+': '+p.sociales.entrenamientoVocal),
+        p.sociales.observaciones
+      ].filter(Boolean).join('\n'));
+      block(tt('subHabitos','3. Hábitos del comportamiento vocal y consumo de irritantes')+':', [
+        ynText(p.habitos.comportamiento), ynText(p.habitos.irritantes),
+        p.habitos.otros && (tt('labelOtrosIrritantes','Otros')+': '+p.habitos.otros), p.habitos.observaciones,
+        (p.habitos.consumoAgua||p.habitos.horasSueno||p.habitos.dieta) ? `${tt('labelConsumoAgua','Agua')}: ${p.habitos.consumoAgua||'—'} · ${tt('labelHorasSueno','Sueño')}: ${p.habitos.horasSueno||'—'} · ${tt('labelDieta','Dieta')}: ${p.habitos.dieta||'—'}` : ''
+      ].filter(Boolean).join('\n'));
+      block(tt('subAutovaloracion','4. Autovaloración vocal — síntomas')+':', [
+        ynText(p.sintomas.yn),
+        (p.sintomas.acidezDuracion||p.sintomas.acidezAlimentos||p.sintomas.acidezPeriodicidad) ? `${tt('labelAcidezDuracion','Acidez — duración')}: ${p.sintomas.acidezDuracion||'—'} · ${tt('labelAcidezAlimentos','alimentos')}: ${p.sintomas.acidezAlimentos||'—'} · ${tt('labelAcidezPeriodicidad','periodicidad')}: ${p.sintomas.acidezPeriodicidad||'—'}` : '',
+        p.sintomas.handicapVocal && (tt('labelHandicapVocal','Hándicap vocal')+': '+p.sintomas.handicapVocal+' — '+tt('labelHandicapPuntajes','Puntajes')+': '+(p.sintomas.handicapPuntajes||'—')),
+        p.sintomas.handicapAnalisis
+      ].filter(Boolean).join('\n'));
+      block(tt('subParamNoLocutivos','5. Parámetros no locutivos')+':', [
+        `${tt('labelPosturaAnterior','Postura — Anterior')}: ${p.noLocutivos.posturaAnterior||'—'} · ${tt('labelPosturaPosterior','Posterior')}: ${p.noLocutivos.posturaPosterior||'—'} · ${tt('labelPosturaLateral','Lateral')}: ${p.noLocutivos.posturaLateral||'—'}`,
+        `${tt('labelAlturaLaringeaReposo','Altura laríngea — Reposo')}: ${p.noLocutivos.alturaLaringeaReposo||'—'} · ${tt('labelAlturaLaringeaFonacion','Fonación')}: ${p.noLocutivos.alturaLaringeaFonacion||'—'}`,
+        p.noLocutivos.posturaDinamicaObs,
+        `${tt('labelTonicidadGeneral','Tonicidad general')}: ${p.noLocutivos.tonicidadGeneral} · ${tt('labelTonicidadLaringea','Tonicidad laríngea')}: ${p.noLocutivos.tonicidadLaringea}`
+      ].filter(Boolean).join('\n'));
+      block(tt('subParamLocutivos','6. Parámetros locutivos')+':', [
+        `${tt('labelTipoReposo','Tipo reposo')}: ${p.locutivos.tipoReposo} · ${tt('labelTipoFonacion','Tipo fonación')}: ${p.locutivos.tipoFonacion}`,
+        `${tt('labelModoReposo','Modo reposo')}: ${p.locutivos.modoReposo} · ${tt('labelModoFonacion','Modo fonación')}: ${p.locutivos.modoFonacion}`,
+        `CFR: ${p.locutivos.cfr||'—'} · TMS: ${p.locutivos.tms||'—'} · TMF: ${p.locutivos.tmf||'—'} · S/Z: ${p.locutivos.indiceSZ||'—'}`,
+        `${tt('labelApoyoRespiratorio','Apoyo respiratorio')}: ${p.locutivos.apoyoRespiratorio} · ${tt('labelResonancia','Resonancia')}: ${p.locutivos.resonancia}`,
+        p.locutivos.observaciones
+      ].filter(Boolean).join('\n'));
+      block(tt('subEvalPerceptual','7. Evaluación perceptual de la voz')+':', [
+        `${tt('labelSonoridad','Sonoridad')}: ${p.perceptual.sonoridad} · ${tt('labelRegistro','Registro')}: ${p.perceptual.registro} · ${tt('labelAtaqueVocal','Ataque vocal')}: ${p.perceptual.ataqueVocal}`,
+        `${tt('labelExtensionTonal','Extensión tonal')}: ${p.perceptual.extensionTonal||'—'} · ${tt('labelAlturaTonal','Altura tonal')}: ${p.perceptual.alturaTonal||'—'}`,
+        `${tt('labelQuiebresTonales','Quiebres tonales')}: ${p.perceptual.quiebresTonales} · ${tt('labelCalidadVocal','Calidad vocal')}: ${p.perceptual.calidadVocal}`,
+        p.perceptual.rasgosVoz.join(', '), p.perceptual.vozOtra, p.perceptual.observaciones,
+        `RASATI — R:${p.perceptual.rasati.r||'—'} A:${p.perceptual.rasati.a1||'—'} S:${p.perceptual.rasati.s||'—'} A:${p.perceptual.rasati.a2||'—'} T:${p.perceptual.rasati.t||'—'} I:${p.perceptual.rasati.i||'—'}`
+      ].filter(Boolean).join('\n'));
+      block(tt('subParamHabla','Parámetros del habla')+':', `${tt('labelFluidez','Fluidez')}: ${p.habla.fluidez} · ${tt('labelInteligibilidad','Inteligibilidad')}: ${p.habla.inteligibilidad} · ${tt('labelVelocidad','Velocidad')}: ${p.habla.velocidad} · ${tt('labelArticulacion','Articulación')}: ${p.habla.articulacion}`);
+      block(tt('subEvalObjetivas','8. Evaluaciones objetivas de la voz')+':', [
+        `F0: ${p.objetivas.f0||'—'} · Jitter: ${p.objetivas.jitter||'—'} · Shimmer: ${p.objetivas.shimmer||'—'} · HNR: ${p.objetivas.hnr||'—'} · ${tt('labelTipoVoz','Tipo de voz')}: ${p.objetivas.tipoVoz}`,
+        p.objetivas.nasofibro && (tt('labelNasofibro','Nasofibrolaringoscopía')+': '+p.objetivas.nasofibro)
+      ].filter(Boolean).join('\n'));
+    }
+  });
+  pdf.save(`anamnesis_vocal_${new Date().toISOString().slice(0,10)}.pdf`);
+});
+
+renderHistorial();
+window.addEventListener('cv-lang-changed', ()=>{
+  renderChips('antecedentesChips', ANTECEDENTES); renderChips('habitosChips', HABITOS);
+  renderYesNoGroup('ynAntecedentesMorbidos', YN_ANTECEDENTES_MORBIDOS);
+  renderYesNoGroup('ynHabitosComportamiento', YN_HABITOS_COMPORTAMIENTO);
+  renderYesNoGroup('ynHabitosIrritantes', YN_HABITOS_IRRITANTES);
+  renderYesNoGroup('ynSintomas', YN_SINTOMAS);
+  renderChips('chipsVozRasgos', VOZ_RASGOS);
+  renderHistorial();
+});
+</script>
+<script src="../assets/theme-switcher.js" defer></script>
+<script src="../assets/a11y-reader.js" defer></script>
+</body>
+</html>

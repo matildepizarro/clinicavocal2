@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="pageTitle">Plataforma de Análisis Acústico de la Voz</title>
+<meta name="description" data-i18n-content="metaDescription" content="Analizador acústico en el navegador: F0, formantes, intensidad, espectrograma y anotaciones, con registro en vivo desde el micrófono.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='7' fill='%23e0559e'/%3E%3Cpath d='M5 15h2.4l1.6-6 2.4 12 2-9.5 1.4 3.5H19' stroke='white' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/shared.css">
+<script>document.documentElement.setAttribute('data-pastel-theme', (function(){try{return localStorage.getItem('cv-pastel-theme')||'rosa';}catch(e){return 'rosa';}})());</script>
+<script src="i18n-dict.js"></script>
+<script src="../assets/i18n-engine.js"></script>
+<style>
+  :root{
+    --bg:#fff5fa;
+    --panel:#ffffff;
+    --panel-alt:#fff0f7;
+    --line:#f6d6e8;
+    --text:#4a2140;
+    --text-dim:#8a5b7a;
+    --accent:#e0559e;
+    --accent-dim:#c94a8c;
+    --accent-2:#4fb894;
+    --danger:#e2566b;
+    --ok:#4caf7d;
+    --mono:'IBM Plex Mono', ui-monospace, 'SF Mono', 'Cascadia Code', Consolas, monospace;
+    --sans:'Inter', -apple-system, 'Segoe UI', system-ui, sans-serif;
+  }
+  :root[data-pastel-theme="rosa"]{ --bg:#fff5fa; --panel:#ffffff; --panel-alt:#fff0f7; --line:#f6d6e8; --text:#4a2140; --text-dim:#8a5b7a; --accent:#e0559e; --accent-dim:#c94a8c; --accent-2:#4fb894; }
+  :root[data-pastel-theme="lavanda"]{ --bg:#f6f3ff; --panel:#ffffff; --panel-alt:#efe9ff; --line:#ded1fb; --text:#3d2e5c; --text-dim:#7a6a99; --accent:#9b7bd9; --accent-dim:#7e5cc4; --accent-2:#e0559e; }
+  :root[data-pastel-theme="menta"]{ --bg:#f0fbf6; --panel:#ffffff; --panel-alt:#e6f7ef; --line:#c9ecdb; --text:#204a3a; --text-dim:#5a8a75; --accent:#4fb894; --accent-dim:#3a9a79; --accent-2:#e0559e; }
+  :root[data-pastel-theme="durazno"]{ --bg:#fff7f0; --panel:#ffffff; --panel-alt:#ffece0; --line:#ffd8bd; --text:#5c3520; --text-dim:#a3775a; --accent:#ff9d66; --accent-dim:#e87f45; --accent-2:#e0559e; }
+  :root[data-pastel-theme="cielo"]{ --bg:#f0f8ff; --panel:#ffffff; --panel-alt:#e3f2ff; --line:#c9e4fb; --text:#1e3a5c; --text-dim:#5a7fa3; --accent:#5bb3e0; --accent-dim:#3f96c4; --accent-2:#ff9d81; }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:var(--sans);}
+  body{min-height:100vh;}
+  ::selection{background:var(--accent-dim);color:#fff;}
+  .app{max-width:1180px;margin:0 auto;padding:20px 20px 60px;}
+
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding-bottom:14px;margin-bottom:14px;border-bottom:1px solid var(--line);gap:16px;flex-wrap:wrap;}
+  .brand{display:flex;align-items:baseline;gap:10px;}
+  .brand .mark{font-family:var(--mono);font-weight:600;letter-spacing:0.08em;font-size:19px;color:var(--text);}
+  .brand .mark span{color:var(--accent);}
+  .brand .sub{font-size:12px;color:var(--text-dim);font-family:var(--mono);}
+
+  .tabs{display:flex;gap:2px;background:var(--panel-alt);border:1px solid var(--line);border-radius:3px;padding:2px;}
+  .tab{font-family:var(--mono);font-size:12px;padding:7px 14px;color:var(--text-dim);cursor:pointer;border-radius:2px;user-select:none;}
+  .tab.active{background:var(--accent);color:#1a1305;font-weight:600;}
+
+  .toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+  button.btn{font-family:var(--sans);font-size:13px;font-weight:500;color:var(--text);background:var(--panel-alt);border:1px solid var(--line);border-radius:3px;padding:8px 12px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:border-color .15s, background .15s;}
+  button.btn:hover{border-color:var(--accent-dim);background:#252b31;}
+  button.btn:active{transform:translateY(1px);}
+  button.btn:disabled{opacity:0.35;cursor:not-allowed;}
+  button.btn.primary{border-color:var(--accent-dim);}
+  button.btn.on{border-color:var(--danger);color:#fff;background:rgba(209,85,74,0.15);}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--text-dim);display:inline-block;}
+  button.btn.on .dot{background:var(--danger);animation:pulse 1.1s infinite;}
+  @keyframes pulse{0%{opacity:1;}50%{opacity:.25;}100%{opacity:1;}}
+
+  input[type=file]{display:none;}
+  .status{font-family:var(--mono);font-size:12px;color:var(--text-dim);padding:8px 2px;min-height:18px;}
+  .status.warn{color:var(--danger);}
+
+  .view{display:none;}
+  .view.active{display:block;}
+
+  .layout{display:grid;grid-template-columns:1fr 220px;gap:16px;align-items:start;}
+  @media (max-width:820px){.layout{grid-template-columns:1fr;}}
+  .stack{display:flex;flex-direction:column;gap:2px;}
+  .panel-label{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-dim);padding:6px 8px 4px;background:var(--panel);border:1px solid var(--line);border-bottom:none;}
+  .canvas-wrap{position:relative;background:var(--panel);border:1px solid var(--line);overflow:hidden;}
+  canvas{display:block;width:100%;}
+  #waveCanvas{height:100px;cursor:crosshair;}
+  #specCanvas{height:230px;cursor:crosshair;}
+  #annCanvas{height:46px;cursor:pointer;}
+  #liveWaveCanvas{height:70px;}
+  #liveSpecCanvas{height:260px;}
+  #vowelCanvas{height:480px;cursor:crosshair;}
+
+  .empty-hint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;color:var(--text-dim);text-align:center;padding:20px;pointer-events:none;}
+
+  .readout{font-family:var(--mono);font-size:12px;color:var(--text-dim);background:var(--panel);border:1px solid var(--line);border-top:none;padding:9px 12px;display:flex;flex-wrap:wrap;gap:18px;}
+  .readout b{color:var(--accent);font-weight:600;}
+  .readout .rv{color:var(--text);}
+
+  .side{display:flex;flex-direction:column;gap:14px;}
+  .field-group{background:var(--panel);border:1px solid var(--line);padding:12px;}
+  .field-group h4{margin:0 0 10px;font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-dim);font-weight:500;}
+  .field{margin-bottom:10px;}
+  .field:last-child{margin-bottom:0;}
+  .field label{display:flex;justify-content:space-between;font-size:12px;color:var(--text-dim);margin-bottom:4px;}
+  .field label .val{font-family:var(--mono);color:var(--accent);}
+  .field input[type=range]{width:100%;accent-color:var(--accent);}
+
+  .ann-list{display:flex;flex-direction:column;gap:6px;max-height:160px;overflow:auto;}
+  .ann-chip{display:flex;align-items:center;gap:6px;background:var(--panel-alt);border:1px solid var(--line);padding:4px 6px;font-size:12px;}
+  .ann-chip .t{font-family:var(--mono);color:var(--text-dim);font-size:11px;white-space:nowrap;}
+  .ann-chip span[contenteditable]{flex:1;outline:none;color:var(--text);border-bottom:1px dashed transparent;}
+  .ann-chip span[contenteditable]:focus{border-bottom-color:var(--accent-dim);}
+  .ann-chip .del{color:var(--text-dim);cursor:pointer;font-size:13px;padding:0 2px;background:none;border:none;font-family:inherit;}
+  .ann-chip .del:hover{color:var(--danger);}
+  .ann-empty{font-size:11px;color:var(--text-dim);font-style:italic;}
+
+  .legend{display:flex;gap:14px;font-size:11px;color:var(--text-dim);flex-wrap:wrap;}
+  .legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:middle;}
+
+  /* live HUD */
+  .live-top{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:10px;}
+  .led{width:10px;height:10px;border-radius:50%;background:#3a4046;display:inline-block;transition:background .1s, box-shadow .1s;}
+  .led.on{background:var(--ok);box-shadow:0 0 8px var(--ok);}
+  .led-wrap{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;color:var(--text-dim);}
+  .meter{position:relative;width:140px;height:8px;background:var(--panel-alt);border:1px solid var(--line);border-radius:2px;overflow:hidden;}
+  .meter-fill{position:absolute;left:0;top:0;bottom:0;width:0%;background:linear-gradient(to right,var(--accent-2),var(--accent) 70%,var(--danger));}
+
+  .hud{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0;}
+  .hud-card{background:var(--panel);border:1px solid var(--line);padding:10px 16px;min-width:96px;text-align:center;}
+  .hud-card .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);margin-bottom:5px;}
+  .hud-card .valnum{font-family:var(--mono);font-size:26px;font-weight:600;color:var(--accent);text-shadow:0 0 10px rgba(232,163,61,.35);font-variant-numeric:tabular-nums;}
+  .hud-card.f0 .valnum{color:var(--accent-2);text-shadow:0 0 10px rgba(95,180,176,.35);}
+
+  footer{margin-top:22px;font-size:11px;color:var(--text-dim);line-height:1.6;}
+</style>
+</head>
+<body>
+<a href="../index.html" class="cv-back-link"><span class="cv-back-arrow" aria-hidden="true">←</span><span class="cv-back-text">Volver al portal</span></a>
+<div class="app">
+
+  <div class="topbar">
+    <div class="brand">
+      <div class="mark">Plataforma de Análisis Acústico de la Voz</div>
+      <div class="sub" data-i18n="brandSub">prototipo — análisis acústico en el navegador</div>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Modo de análisis">
+      <div class="tab active" id="tabFile" role="tab" aria-selected="true" tabindex="0" data-i18n="tabArchivo">Archivo</div>
+      <div class="tab" id="tabLive" role="tab" aria-selected="false" tabindex="0" data-i18n="tabEnVivo">En vivo</div>
+      <div class="tab" id="tabVowels" role="tab" aria-selected="false" tabindex="0" data-i18n="tabVocales">Mapa de vocales</div>
+    </div>
+  </div>
+
+  <div class="status" id="status" data-i18n="statusInicial">Carga un archivo de audio, graba un clip, o pasa a «En vivo» para medir en tiempo real.</div>
+
+  <!-- ===================== VISTA ARCHIVO ===================== -->
+  <div class="view active" id="viewFile">
+    <div class="toolbar" style="margin-bottom:12px;">
+      <button class="btn primary" id="btnOpen" data-i18n="btnAbrirAudio">Abrir audio</button>
+      <input type="file" id="fileInput" accept="audio/*">
+      <button class="btn" id="btnRec"><span class="dot"></span><span data-i18n="btnGrabarClip">Grabar clip</span></button>
+      <button class="btn" id="btnPlay" disabled data-i18n="btnReproducir">▶ Reproducir</button>
+      <button class="btn" id="btnStop" disabled data-i18n="btnDetener">■ Detener</button>
+      <button class="btn" id="btnExportImg" disabled data-i18n="btnExportarPng">Exportar PNG</button>
+      <button class="btn" id="btnExportAnn" disabled data-i18n="btnExportarAnotaciones">Exportar anotaciones</button>
+      <button class="btn primary" id="btnReport" disabled data-i18n="btnGenerarInforme">Generar informe</button>
+    </div>
+
+    <div class="canvas-wrap" id="reportWrap" style="display:none;margin-bottom:14px;">
+      <div class="panel-label" style="border:none;" data-i18n="informeTitulo">Informe acústico (estilo Praat)</div>
+      <pre id="reportText" style="margin:0;padding:12px;font-family:var(--mono);font-size:12px;line-height:1.6;color:var(--text);white-space:pre-wrap;max-height:340px;overflow:auto;"></pre>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;padding:0 12px 12px;">
+        <button class="btn" id="btnDownloadReport" data-i18n="btnDescargarInforme">Descargar informe (.txt)</button>
+        <button class="btn" id="btnCsvPitch" data-i18n="btnCsvF0">Listado F0 (.csv)</button>
+        <button class="btn" id="btnCsvFormants" data-i18n="btnCsvFormantes">Listado formantes (.csv)</button>
+        <button class="btn" id="btnCsvIntensity" data-i18n="btnCsvIntensidad">Listado intensidad (.csv)</button>
+      </div>
+    </div>
+
+    <div class="layout">
+      <div class="stack">
+        <div class="panel-label" data-i18n="labelFormaOnda">Forma de onda</div>
+        <div class="canvas-wrap" id="waveWrap">
+          <canvas id="waveCanvas"></canvas>
+          <div class="empty-hint" id="emptyHint" data-i18n="sinSenalCargada">sin señal cargada</div>
+        </div>
+
+        <div class="panel-label" style="margin-top:6px;" data-i18n="labelEspectrograma">Espectrograma · F0 (cian) · formantes (puntos claros)</div>
+        <div class="canvas-wrap"><canvas id="specCanvas"></canvas></div>
+
+        <div class="panel-label" style="margin-top:6px;" data-i18n="labelAnotaciones">Anotaciones</div>
+        <div class="canvas-wrap"><canvas id="annCanvas"></canvas></div>
+
+        <div class="readout" id="readout">
+          <span>t=<b class="rv" id="rT">–</b> s</span>
+          <span>F0=<b class="rv" id="rF0">–</b> Hz</span>
+          <span>F1=<b class="rv" id="rF1">–</b></span>
+          <span>F2=<b class="rv" id="rF2">–</b></span>
+          <span>F3=<b class="rv" id="rF3">–</b></span>
+          <span>F4=<b class="rv" id="rF4">–</b></span>
+          <span><span data-i18n="labelIntensidadDb">Int=</span><b class="rv" id="rI">–</b> dB</span>
+        </div>
+
+        <div class="legend" style="margin-top:8px;">
+          <span><i style="background:var(--accent-2)"></i><span data-i18n="legendCurvaF0">curva de F0</span></span>
+          <span><i style="background:#f4f0d8"></i><span data-i18n="legendFormantes">formantes estimados</span></span>
+          <span><i style="background:var(--accent)"></i><span data-i18n="legendCursor">cursor / selección</span></span>
+        </div>
+      </div>
+
+      <div class="side">
+        <div class="field-group">
+          <h4 data-i18n="fgAnotaciones">Anotaciones</h4>
+          <button class="btn" id="btnAddAnn" style="width:100%;margin-bottom:8px;" disabled data-i18n="btnMarcaCursor">+ Marca en cursor</button>
+          <div class="ann-list" id="annList"><div class="ann-empty" data-i18n="sinMarcas">sin marcas</div></div>
+        </div>
+
+        <div class="field-group">
+          <h4 data-i18n="fgAnalisisTono">Análisis de tono (F0)</h4>
+          <div class="field"><label for="pitchFloor"><span data-i18n="labelPiso">Piso</span> <span class="val" id="vPitchFloor">75</span> Hz</label><input type="range" id="pitchFloor" min="40" max="200" step="1" value="75"></div>
+          <div class="field"><label for="pitchCeil"><span data-i18n="labelTecho">Techo</span> <span class="val" id="vPitchCeil">500</span> Hz</label><input type="range" id="pitchCeil" min="200" max="900" step="5" value="500"></div>
+        </div>
+
+        <div class="field-group">
+          <h4 data-i18n="fgFormantesLpc">Formantes (LPC)</h4>
+          <div class="field"><label for="numForm"><span data-i18n="labelCantidad">Cantidad</span> <span class="val" id="vNumForm">4</span></label><input type="range" id="numForm" min="3" max="5" step="1" value="4"></div>
+          <div class="field"><label for="formCeil"><span data-i18n="labelTecho">Techo</span> <span class="val" id="vFormCeil">5500</span> Hz</label><input type="range" id="formCeil" min="3500" max="7500" step="100" value="5500"></div>
+        </div>
+
+        <div class="field-group">
+          <h4 data-i18n="fgEspectrograma">Espectrograma</h4>
+          <div class="field"><label for="winLen"><span data-i18n="labelVentana">Ventana</span> <span class="val" id="vWinLen">30</span> ms</label><input type="range" id="winLen" min="10" max="60" step="1" value="30"></div>
+          <div class="field"><label for="dynRange"><span data-i18n="labelRangoDinamico">Rango dinámico</span> <span class="val" id="vDynRange">60</span> dB</label><input type="range" id="dynRange" min="30" max="90" step="1" value="60"></div>
+          <div class="field"><label for="maxFreq"><span data-i18n="labelFrecMax">Frec. máxima</span> <span class="val" id="vMaxFreq">5000</span> Hz</label><input type="range" id="maxFreq" min="2000" max="8000" step="100" value="5000"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== VISTA EN VIVO ===================== -->
+  <div class="view" id="viewLive">
+    <div class="toolbar" style="margin-bottom:10px;">
+      <button class="btn primary" id="btnLiveStart" data-i18n="btnIniciarMic">● Iniciar micrófono</button>
+      <button class="btn" id="btnLiveFreeze" disabled data-i18n="btnCongelar">❚❚ Congelar</button>
+      <button class="btn" id="btnLiveRec" disabled><span class="dot"></span><span data-i18n="btnGrabarEsteClip">Grabar este clip</span></button>
+      <button class="btn" id="btnLiveLog" disabled data-i18n="btnAnotarLectura">+ Anotar lectura</button>
+      <button class="btn" id="btnLiveLogExport" disabled data-i18n="btnExportarBitacora">Exportar bitácora (.csv)</button>
+    </div>
+
+    <div class="live-top">
+      <div class="led-wrap"><span class="led" id="ledVoiced"></span><span data-i18n="vozDetectada">voz detectada</span></div>
+      <div class="led-wrap"><span data-i18n="nivelEntrada">nivel de entrada</span>
+        <div class="meter"><div class="meter-fill" id="meterFill"></div></div>
+      </div>
+    </div>
+
+    <div class="hud">
+      <div class="hud-card f0"><div class="lbl">F0</div><div class="valnum" id="lF0">– Hz</div></div>
+      <div class="hud-card"><div class="lbl">F1</div><div class="valnum" id="lF1">–</div></div>
+      <div class="hud-card"><div class="lbl">F2</div><div class="valnum" id="lF2">–</div></div>
+      <div class="hud-card"><div class="lbl">F3</div><div class="valnum" id="lF3">–</div></div>
+      <div class="hud-card"><div class="lbl">F4</div><div class="valnum" id="lF4">–</div></div>
+      <div class="hud-card"><div class="lbl" data-i18n="hudNivel">Nivel</div><div class="valnum" id="lInt">– dB</div></div>
+    </div>
+
+    <div class="panel-label" data-i18n="labelOscilogramaVivo">Oscilograma en vivo</div>
+    <div class="canvas-wrap"><canvas id="liveWaveCanvas"></canvas></div>
+
+    <div class="panel-label" style="margin-top:6px;" data-i18n="labelEspectrogramaVivo">Espectrograma en vivo (waterfall) · F0 (cian) · formantes (puntos claros)</div>
+    <div class="canvas-wrap">
+      <canvas id="liveSpecCanvas"></canvas>
+      <div class="empty-hint" id="liveEmptyHint" data-i18n="micDetenido">micrófono detenido</div>
+    </div>
+
+    <div class="legend" style="margin-top:8px;">
+      <span><i style="background:var(--accent-2)"></i><span data-i18n="legendF0Instantaneo">F0 instantáneo</span></span>
+      <span><i style="background:#f4f0d8"></i><span data-i18n="legendFormantesInstantaneos">formantes instantáneos</span></span>
+      <span data-i18n="legendSinRetroalimentacion">el audio no se reproduce en vivo (se evita retroalimentación)</span>
+    </div>
+
+    <div class="panel-label" style="margin-top:14px;" data-i18n="labelBitacoraLecturas">Bitácora de lecturas</div>
+    <div class="canvas-wrap" style="max-height:180px;overflow:auto;">
+      <table style="width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12px;" id="liveLogTable">
+        <thead><tr style="color:var(--text-dim);text-align:left;">
+          <th style="padding:6px 10px;" data-i18n="thTiempo">t (s)</th><th>F0</th><th>F1</th><th>F2</th><th>F3</th><th>F4</th><th data-i18n="thNivel">Nivel</th>
+        </tr></thead>
+        <tbody id="liveLogBody"></tbody>
+      </table>
+      <div class="ann-empty" id="liveLogEmpty" style="padding:10px;" data-i18n="sinLecturasAnotadas">sin lecturas anotadas</div>
+    </div>
+  </div>
+
+  <!-- ===================== VISTA MAPA DE VOCALES (F1-F2) ===================== -->
+  <div class="view" id="viewVowels">
+    <div class="toolbar" style="margin-bottom:10px;">
+      <button class="btn primary" id="btnVowelFromFile" disabled data-i18n="btnMapearArchivo">Mapear vocales del archivo</button>
+      <button class="btn on" id="btnVowelLiveTrail" disabled><span class="dot"></span><span data-i18n="btnTrazoEnVivo">Trazo en vivo</span></button>
+      <button class="btn" id="btnVowelClear" data-i18n="btnLimpiarTrazo">Limpiar trazo</button>
+      <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-dim);font-family:var(--sans);">
+        <input type="checkbox" id="chkVowelRef" checked style="accent-color:var(--accent);">
+        <span data-i18n="chkMostrarReferencias">Mostrar zonas de referencia (español, valores promedio)</span>
+      </label>
+      <button class="btn" id="btnVowelExport" data-i18n="btnExportarVocalesCsv">Exportar puntos (.csv)</button>
+    </div>
+
+    <div class="panel-label" data-i18n="labelMapaVocalico">Espacio vocálico · F1 (vertical, invertido) × F2 (horizontal, invertido)</div>
+    <div class="canvas-wrap" id="vowelWrap">
+      <canvas id="vowelCanvas"></canvas>
+      <div class="empty-hint" id="vowelEmptyHint" data-i18n="sinPuntosVocales">sin puntos aún — abrí un archivo y tocá «Mapear vocales del archivo», o iniciá el micrófono en «En vivo» con el trazo activado</div>
+    </div>
+
+    <div class="legend" style="margin-top:8px;">
+      <span><i style="background:#f4f0d8"></i><span data-i18n="legendReferenciasVocales">referencias /a e i o u/</span></span>
+      <span><i style="background:var(--accent-2)"></i><span data-i18n="legendPuntosArchivo">puntos del archivo</span></span>
+      <span><i style="background:var(--accent)"></i><span data-i18n="legendPuntoActual">punto en vivo actual</span></span>
+    </div>
+
+    <p style="font-size:12px;color:var(--text-dim);line-height:1.6;margin-top:12px;max-width:760px;" data-i18n="notaMapaVocales">
+      Las zonas de referencia muestran valores promedio publicados en la literatura de fonética
+      del español (adulto genérico, sin distinción de sexo/edad) y son solo orientativas —
+      no son un instrumento validado ni un punto de corte diagnóstico. La posición real de
+      las vocales de una persona varía según dialecto, edad, sexo y características vocales
+      individuales. Los formantes se estiman con el mismo motor LPC aproximado usado en las
+      otras pestañas.
+    </p>
+  </div>
+
+  <footer data-i18n="footerText">
+    Prototipo escrito en JavaScript puro (FFT propia, autocorrelación para F0, LPC + búsqueda de raíces para formantes).
+    No es una compilación del código fuente de Praat: reimplementa los algoritmos DSP equivalentes para funcionar
+    íntegramente en el navegador, incluida la medición en vivo desde el micrófono. Las estimaciones de formantes
+    son aproximadas (fines demostrativos).
+  </footer>
+</div>
+
+<script src="../assets/shared.js"></script>
+<script>
+(() => {
+  "use strict";
+
+  // ==================================================================
+  // ESTADO GLOBAL
+  // ==================================================================
+  const S = {
+    audioCtx: null,
+    audioBuffer: null,
+    workBuffer: null, workSR: 0,
+    formBuffer: null, formSR: 0,
+    duration: 0,
+    times: [], spec: null, pitch: [], intensity: [], formants: [],
+    playing: false, playSrc: null, playCtxStart: 0, playOffset: 0,
+    cursor: 0, selection: null, dragging: false, dragStartT: 0,
+    annotations: [],
+    recStream: null, recorder: null, recChunks: [],
+    params: { pitchFloor:75, pitchCeil:500, numForm:4, formCeil:5500, winLen:30, dynRange:60, maxFreq:5000 },
+    live: {
+      active:false, frozen:false, ctx:null, stream:null, source:null, analyser:null,
+      timeArr:null, freqArr:null, lastPitch:{freq:NaN,strength:0}, lastFormants:[], lastIntensity:-90,
+      frameCounter:0, recorder:null, recChunks:[], startTime:0, log:[]
+    },
+    vowel: { fileTrail:[], liveTrail:[], liveOn:false }
+  };
+
+  const $ = id => document.getElementById(id);
+  const tt = (key, fallback) => (window.CV_I18N ? window.CV_I18N.t(key) : (fallback !== undefined ? fallback : key));
+  const statusEl = $('status');
+  const setStatus = (msg, warn=false) => { statusEl.textContent = msg; statusEl.className = 'status' + (warn?' warn':''); };
+
+  function getCss(varName){ return getComputedStyle(document.documentElement).getPropertyValue(varName).trim(); }
+
+  // ==================================================================
+  // PESTAÑAS
+  // ==================================================================
+  function selectTab(mode){
+    const isFile = mode==='file', isLive = mode==='live', isVowels = mode==='vowels';
+    $('tabFile').classList.toggle('active', isFile);
+    $('tabLive').classList.toggle('active', isLive);
+    $('tabVowels').classList.toggle('active', isVowels);
+    $('tabFile').setAttribute('aria-selected', String(isFile));
+    $('tabLive').setAttribute('aria-selected', String(isLive));
+    $('tabVowels').setAttribute('aria-selected', String(isVowels));
+    $('viewFile').classList.toggle('active', isFile);
+    $('viewLive').classList.toggle('active', isLive);
+    $('viewVowels').classList.toggle('active', isVowels);
+    if (isVowels){ fitVowelCanvas(); drawVowelMap(); }
+  }
+  $('tabFile').addEventListener('click', ()=> selectTab('file'));
+  $('tabLive').addEventListener('click', ()=> selectTab('live'));
+  $('tabVowels').addEventListener('click', ()=> selectTab('vowels'));
+  $('tabFile').addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); selectTab('file'); } });
+  $('tabLive').addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); selectTab('live'); } });
+  $('tabVowels').addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); selectTab('vowels'); } });
+
+  // ==================================================================
+  // UTILIDADES NUMÉRICAS (DSP) — compartidas por ambos modos
+  // ==================================================================
+  function nextPow2(n){ let p=1; while(p<n) p*=2; return p; }
+
+  function hammingWindow(N){
+    const w = new Float32Array(N);
+    for (let n=0;n<N;n++) w[n] = 0.54 - 0.46*Math.cos(2*Math.PI*n/(N-1));
+    return w;
+  }
+
+  function fft(re, im){
+    const n = re.length;
+    for (let i=1,j=0;i<n;i++){
+      let bit = n>>1;
+      for (; j & bit; bit >>= 1) j ^= bit;
+      j ^= bit;
+      if (i<j){ let t=re[i];re[i]=re[j];re[j]=t; t=im[i];im[i]=im[j];im[j]=t; }
+    }
+    for (let len=2; len<=n; len<<=1){
+      const ang = -2*Math.PI/len;
+      const wr = Math.cos(ang), wi = Math.sin(ang);
+      for (let i=0;i<n;i+=len){
+        let curWr=1, curWi=0;
+        for (let k=0;k<len/2;k++){
+          const ur=re[i+k], ui=im[i+k];
+          const vr = re[i+k+len/2]*curWr - im[i+k+len/2]*curWi;
+          const vi = re[i+k+len/2]*curWi + im[i+k+len/2]*curWr;
+          re[i+k] = ur+vr; im[i+k] = ui+vi;
+          re[i+k+len/2] = ur-vr; im[i+k+len/2] = ui-vi;
+          const nwr = curWr*wr - curWi*wi;
+          const nwi = curWr*wi + curWi*wr;
+          curWr = nwr; curWi = nwi;
+        }
+      }
+    }
+  }
+
+  function resampleLinear(input, inRate, outRate){
+    if (Math.abs(inRate-outRate) < 1e-6) return input.slice();
+    const ratio = inRate/outRate;
+    const outLen = Math.max(1, Math.floor(input.length/ratio));
+    const out = new Float32Array(outLen);
+    for (let i=0;i<outLen;i++){
+      const p = i*ratio;
+      const i0 = Math.floor(p);
+      const frac = p-i0;
+      const s0 = input[i0] ?? 0;
+      const s1 = (input[i0+1] !== undefined) ? input[i0+1] : s0;
+      out[i] = s0 + (s1-s0)*frac;
+    }
+    return out;
+  }
+
+  const cx = {
+    add:(a,b)=>({re:a.re+b.re, im:a.im+b.im}),
+    sub:(a,b)=>({re:a.re-b.re, im:a.im-b.im}),
+    mul:(a,b)=>({re:a.re*b.re-a.im*b.im, im:a.re*b.im+a.im*b.re}),
+    div:(a,b)=>{ const d=b.re*b.re+b.im*b.im || 1e-12; return {re:(a.re*b.re+a.im*b.im)/d, im:(a.im*b.re-a.re*b.im)/d}; },
+    abs:a=>Math.sqrt(a.re*a.re+a.im*a.im)
+  };
+
+  function evalPoly(coeffs, x){
+    let r = {re:coeffs[0], im:0};
+    for (let i=1;i<coeffs.length;i++) r = cx.add(cx.mul(r,x), {re:coeffs[i], im:0});
+    return r;
+  }
+
+  function findRoots(coeffs, maxIter=120){
+    const deg = coeffs.length-1;
+    if (deg <= 0) return [];
+    let roots = [];
+    for (let k=0;k<deg;k++){
+      const ang = (2*Math.PI*k/deg) + 0.61803;
+      roots.push({re:0.45*Math.cos(ang), im:0.45*Math.sin(ang)});
+    }
+    for (let iter=0; iter<maxIter; iter++){
+      let maxDelta = 0;
+      const next = roots.map(r=>({...r}));
+      for (let i=0;i<deg;i++){
+        let denom = {re:1, im:0};
+        for (let j=0;j<deg;j++){ if (j!==i) denom = cx.mul(denom, cx.sub(roots[i], roots[j])); }
+        const numer = evalPoly(coeffs, roots[i]);
+        const delta = cx.div(numer, denom);
+        next[i] = cx.sub(roots[i], delta);
+        maxDelta = Math.max(maxDelta, cx.abs(delta));
+      }
+      roots = next;
+      if (maxDelta < 1e-6) break;
+    }
+    return roots;
+  }
+
+  function lpcCoeffs(frame, order){
+    const n = frame.length;
+    const r = new Float64Array(order+1);
+    for (let lag=0; lag<=order; lag++){
+      let s=0;
+      for (let i=0;i<n-lag;i++) s += frame[i]*frame[i+lag];
+      r[lag] = s;
+    }
+    if (r[0] <= 1e-12) return null;
+    let a = new Float64Array(order+1); a[0]=1;
+    let e = r[0];
+    for (let i=1;i<=order;i++){
+      let acc = r[i];
+      for (let j=1;j<i;j++) acc += a[j]*r[i-j];
+      const k = -acc/e;
+      const na = a.slice();
+      for (let j=1;j<i;j++) na[j] = a[j] + k*a[i-j];
+      na[i] = k;
+      a = na;
+      e *= (1-k*k);
+      if (e <= 1e-9) e = 1e-9;
+    }
+    return a;
+  }
+
+  function estimateFormants(frame, sr, order, maxN, iters=120){
+    const pre = new Float32Array(frame.length);
+    pre[0] = frame[0];
+    for (let i=1;i<frame.length;i++) pre[i] = frame[i] - 0.97*frame[i-1];
+    const win = hammingWindow(pre.length);
+    for (let i=0;i<pre.length;i++) pre[i] *= win[i];
+    const a = lpcCoeffs(pre, order);
+    if (!a) return [];
+    const roots = findRoots(Array.from(a), iters);
+    const out = [];
+    for (const z of roots){
+      if (z.im <= 0) continue;
+      const r = cx.abs(z);
+      if (r <= 0.05 || r >= 1.05) continue;
+      const theta = Math.atan2(z.im, z.re);
+      const freq = Math.abs(theta) * sr/(2*Math.PI);
+      const bw = -(sr/Math.PI) * Math.log(Math.min(r,0.9999));
+      if (freq > 60 && freq < sr*0.49 && bw < 500 && bw > 0) out.push(freq);
+    }
+    out.sort((x,y)=>x-y);
+    return out.slice(0, maxN);
+  }
+
+  function detectPitch(frame, sr, fmin, fmax){
+    const n = frame.length;
+    let mean=0; for (let i=0;i<n;i++) mean += frame[i];
+    mean/=n;
+    const x = new Float32Array(n);
+    for (let i=0;i<n;i++) x[i] = frame[i]-mean;
+    let r0=0; for (let i=0;i<n;i++) r0 += x[i]*x[i];
+    if (r0 < 1e-9) return {freq:NaN, strength:0};
+    const lagMin = Math.max(1, Math.floor(sr/fmax));
+    const lagMax = Math.min(n-2, Math.ceil(sr/fmin));
+    if (lagMin >= lagMax) return {freq:NaN, strength:0};
+    let bestLag=-1, bestVal=-Infinity;
+    const autoc = (lag)=>{ let s=0; for (let i=0;i<n-lag;i++) s += x[i]*x[i+lag]; return s; };
+    for (let lag=lagMin; lag<=lagMax; lag++){
+      const v = autoc(lag)/r0;
+      if (v > bestVal){ bestVal = v; bestLag = lag; }
+    }
+    if (bestLag <= 0 || bestVal < 0.28) return {freq:NaN, strength:bestVal};
+    const rM1 = autoc(bestLag-1)/r0, r0v = bestVal, rP1 = autoc(bestLag+1)/r0;
+    const denom = (rM1 - 2*r0v + rP1);
+    let refined = bestLag;
+    if (Math.abs(denom) > 1e-9) refined += 0.5*(rM1-rP1)/denom;
+    return {freq: sr/refined, strength: bestVal};
+  }
+
+  const STOPS = [
+    [0.00, 10,10,22], [0.22, 45,20,85], [0.46,140,35,95],
+    [0.68,205,90,50], [0.86,240,170,60], [1.00,252,232,150]
+  ];
+  function colormap(t){
+    t = Math.max(0, Math.min(1, t));
+    for (let i=0;i<STOPS.length-1;i++){
+      const a = STOPS[i], b = STOPS[i+1];
+      if (t >= a[0] && t <= b[0]){
+        const f = (t-a[0])/(b[0]-a[0] || 1);
+        return [ a[1]+(b[1]-a[1])*f, a[2]+(b[2]-a[2])*f, a[3]+(b[3]-a[3])*f ];
+      }
+    }
+    return STOPS[STOPS.length-1].slice(1);
+  }
+
+  function ensureCtx(){
+    if (!S.audioCtx) S.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    return S.audioCtx;
+  }
+
+  // ==================================================================
+  // ================  MODO ARCHIVO (análisis offline)  =============
+  // ==================================================================
+  function runAnalysis(){
+    if (!S.audioBuffer) return;
+    setStatus(tt('stAnalizando','Analizando…'));
+    requestAnimationFrame(()=> setTimeout(doAnalysis, 10));
+  }
+
+  function doAnalysis(){
+    $('reportWrap').style.display = 'none';
+    const buf = S.audioBuffer;
+    const n = buf.length;
+    const chans = [];
+    for (let c=0;c<buf.numberOfChannels;c++) chans.push(buf.getChannelData(c));
+    const mono = new Float32Array(n);
+    for (let i=0;i<n;i++){ let s=0; for (const ch of chans) s+=ch[i]; mono[i]=s/chans.length; }
+
+    const origSR = buf.sampleRate;
+    const workSR = Math.min(origSR, 22050);
+    S.workBuffer = resampleLinear(mono, origSR, workSR);
+    S.workSR = workSR;
+    S.duration = buf.duration;
+
+    const p = S.params;
+    const winN = Math.max(32, Math.round(workSR * p.winLen/1000));
+    const fftN = nextPow2(winN);
+    const targetFrames = 1400;
+    const hop = Math.max(4, Math.round(Math.max(winN/4, (S.workBuffer.length)/targetFrames)));
+    const nFrames = Math.max(1, Math.floor((S.workBuffer.length - winN) / hop) + 1);
+    const win = hammingWindow(winN);
+    const nBins = fftN/2 + 1;
+    const times = new Array(nFrames);
+
+    const formSR = Math.min(origSR, Math.max(8000, Math.round(2.2 * p.formCeil)));
+    S.formBuffer = resampleLinear(mono, origSR, formSR);
+    S.formSR = formSR;
+    const formWinN = Math.max(64, Math.round(formSR * 0.025));
+    const order = p.numForm*2 + 2;
+
+    let maxDb = -Infinity;
+    const rawFrames = new Array(nFrames);
+
+    for (let f=0; f<nFrames; f++){
+      const start = f*hop;
+      const re = new Float32Array(fftN), im = new Float32Array(fftN);
+      for (let i=0;i<winN;i++) re[i] = (S.workBuffer[start+i]||0) * win[i];
+      fft(re, im);
+      const mag = new Float32Array(nBins);
+      for (let k=0;k<nBins;k++){
+        const m = Math.sqrt(re[k]*re[k]+im[k]*im[k]);
+        mag[k] = m;
+        const db = 20*Math.log10(m+1e-9);
+        if (db > maxDb) maxDb = db;
+      }
+      rawFrames[f] = mag;
+      const tCenter = (start + winN/2) / workSR;
+      times[f] = tCenter;
+
+      const pFrameLen = Math.min(S.workBuffer.length-1, Math.max(winN, Math.ceil(workSR/p.pitchFloor)*3));
+      const pStart = Math.max(0, Math.min(S.workBuffer.length-pFrameLen, start + winN/2 - pFrameLen/2));
+      const pFrame = S.workBuffer.subarray(pStart, pStart+pFrameLen);
+      S.pitch[f] = detectPitch(pFrame, workSR, p.pitchFloor, p.pitchCeil);
+
+      let rms=0; for (let i=0;i<winN;i++) rms += (S.workBuffer[start+i]||0)**2;
+      rms = Math.sqrt(rms/winN);
+      S.intensity[f] = 20*Math.log10(rms+1e-9);
+
+      const fStartT = tCenter - formWinN/2/formSR;
+      const fStartIdx = Math.max(0, Math.min(S.formBuffer.length-formWinN, Math.round(fStartT*formSR)));
+      const fFrame = S.formBuffer.subarray(fStartIdx, fStartIdx+formWinN);
+      S.formants[f] = estimateFormants(fFrame, formSR, order, p.numForm);
+    }
+    S.pitch.length = nFrames; S.intensity.length = nFrames; S.formants.length = nFrames;
+
+    const specDb = new Array(nFrames);
+    for (let f=0; f<nFrames; f++){
+      const mag = rawFrames[f];
+      const db = new Float32Array(nBins);
+      for (let k=0;k<nBins;k++) db[k] = 20*Math.log10(mag[k]+1e-9) - maxDb;
+      specDb[f] = db;
+    }
+
+    S.spec = { frames: specDb, nBins, fftN, sr: workSR };
+    S.times = times;
+
+    setStatus(window.CV_I18N ? window.CV_I18N.t('stListo')(S.duration.toFixed(2), nFrames) : `Listo · ${S.duration.toFixed(2)} s · ${nFrames} cuadros de análisis`);
+    buildSpectrogramImage();
+    draw();
+  }
+
+  let specImgCanvas = document.createElement('canvas');
+  function buildSpectrogramImage(){
+    if (!S.spec) return;
+    const { frames, nBins } = S.spec;
+    const nFrames = frames.length;
+    specImgCanvas.width = nFrames;
+    specImgCanvas.height = nBins;
+    const ctx = specImgCanvas.getContext('2d');
+    const imgData = ctx.createImageData(nFrames, nBins);
+    const dyn = S.params.dynRange;
+    for (let f=0; f<nFrames; f++){
+      const col = frames[f];
+      for (let k=0;k<nBins;k++){
+        const db = col[k];
+        const t = 1 - Math.max(0, Math.min(1, -db/dyn));
+        const [r,g,b] = colormap(t);
+        const y = nBins-1-k;
+        const idx = (y*nFrames + f)*4;
+        imgData.data[idx] = r; imgData.data[idx+1] = g; imgData.data[idx+2] = b; imgData.data[idx+3] = 255;
+      }
+    }
+    ctx.putImageData(imgData, 0, 0);
+  }
+
+  const waveCanvas = $('waveCanvas'), specCanvas = $('specCanvas'), annCanvas = $('annCanvas');
+  const emptyHint = $('emptyHint');
+
+  function fitCanvas(canvas){
+    const rect = canvas.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = Math.max(1, Math.round(rect.width*dpr));
+    canvas.height = Math.max(1, Math.round(rect.height*dpr));
+    return dpr;
+  }
+
+  function timeToX(t, w){ return (S.duration>0) ? (t/S.duration)*w : 0; }
+  function xToTime(x, w){ return (S.duration>0) ? (x/w)*S.duration : 0; }
+  function freqToY(freq, h, maxFreq){ return h - Math.max(0, Math.min(1, freq/maxFreq))*h; }
+
+  function draw(){ drawWave(); drawSpec(); drawAnn(); }
+
+  function drawWave(){
+    const dpr = fitCanvas(waveCanvas);
+    const ctx = waveCanvas.getContext('2d');
+    const w = waveCanvas.width, h = waveCanvas.height;
+    ctx.clearRect(0,0,w,h);
+    if (!S.workBuffer){ emptyHint.style.display='flex'; return; }
+    emptyHint.style.display='none';
+
+    ctx.strokeStyle = '#3a4046';
+    ctx.lineWidth = 1*dpr;
+    ctx.beginPath(); ctx.moveTo(0,h/2); ctx.lineTo(w,h/2); ctx.stroke();
+
+    const buf = S.workBuffer, sr = S.workSR;
+    ctx.strokeStyle = getCss('--accent');
+    ctx.lineWidth = 1*dpr;
+    ctx.beginPath();
+    for (let x=0;x<w;x++){
+      const t0 = xToTime(x,w), t1 = xToTime(x+1,w);
+      const i0 = Math.floor(t0*sr), i1 = Math.max(i0+1, Math.floor(t1*sr));
+      let mn=1, mx=-1;
+      for (let i=i0; i<i1 && i<buf.length; i++){ const v=buf[i]; if (v<mn) mn=v; if (v>mx) mx=v; }
+      if (mn>mx){ mn=0; mx=0; }
+      const y1 = h/2 - mx*h/2*0.92, y2 = h/2 - mn*h/2*0.92;
+      ctx.moveTo(x+0.5, y1); ctx.lineTo(x+0.5, y2);
+    }
+    ctx.stroke();
+    drawSelectionAndCursor(ctx, w, h);
+  }
+
+  function drawSelectionAndCursor(ctx, w, h){
+    if (S.selection){
+      const x0 = timeToX(S.selection.start, w), x1 = timeToX(S.selection.end, w);
+      ctx.fillStyle = 'rgba(232,163,61,0.12)';
+      ctx.fillRect(Math.min(x0,x1), 0, Math.abs(x1-x0), h);
+    }
+    const cxp = timeToX(S.cursor, w);
+    ctx.strokeStyle = getCss('--accent');
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(cxp,0); ctx.lineTo(cxp,h); ctx.stroke();
+  }
+
+  function drawSpec(){
+    const dpr = fitCanvas(specCanvas);
+    const ctx = specCanvas.getContext('2d');
+    const w = specCanvas.width, h = specCanvas.height;
+    ctx.clearRect(0,0,w,h);
+    if (!S.spec){ return; }
+
+    const maxFreq = S.params.maxFreq;
+    const nyquist = S.spec.sr/2;
+    const cropFrac = Math.min(1, maxFreq/nyquist);
+    const srcH = Math.round(specImgCanvas.height * cropFrac);
+    ctx.imageSmoothingEnabled = true;
+    ctx.drawImage(specImgCanvas, 0, specImgCanvas.height-srcH, specImgCanvas.width, srcH, 0, 0, w, h);
+
+    ctx.fillStyle = getCss('--accent-2');
+    for (let f=0; f<S.times.length; f++){
+      const pt = S.pitch[f];
+      if (!pt || isNaN(pt.freq)) continue;
+      const x = timeToX(S.times[f], w);
+      const y = freqToY(pt.freq, h, maxFreq);
+      ctx.beginPath(); ctx.arc(x, y, 1.6*dpr, 0, Math.PI*2); ctx.fill();
+    }
+    ctx.fillStyle = '#f4f0d8';
+    for (let f=0; f<S.times.length; f++){
+      const arr = S.formants[f];
+      if (!arr) continue;
+      const x = timeToX(S.times[f], w);
+      for (const fr of arr){
+        if (fr > maxFreq) continue;
+        const y = freqToY(fr, h, maxFreq);
+        ctx.beginPath(); ctx.arc(x, y, 1.3*dpr, 0, Math.PI*2); ctx.fill();
+      }
+    }
+    drawSelectionAndCursor(ctx, w, h);
+  }
+
+  function drawAnn(){
+    const dpr = fitCanvas(annCanvas);
+    const ctx = annCanvas.getContext('2d');
+    const w = annCanvas.width, h = annCanvas.height;
+    ctx.clearRect(0,0,w,h);
+    ctx.strokeStyle = '#2a3036';
+    ctx.beginPath(); ctx.moveTo(0,h*0.5); ctx.lineTo(w,h*0.5); ctx.stroke();
+    ctx.font = `${11*dpr}px ${getCss('--mono') || 'monospace'}`;
+    ctx.fillStyle = getCss('--text-dim');
+    for (const a of S.annotations){
+      const x = timeToX(a.t, w);
+      ctx.strokeStyle = getCss('--accent');
+      ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,h); ctx.stroke();
+      ctx.fillText(a.label || '', x+4, h*0.4);
+    }
+    const cxp = timeToX(S.cursor, w);
+    ctx.strokeStyle = 'rgba(232,163,61,0.5)';
+    ctx.beginPath(); ctx.moveTo(cxp,0); ctx.lineTo(cxp,h); ctx.stroke();
+  }
+
+  function nearestFrameIndex(t){
+    if (!S.times.length) return -1;
+    let lo=0, hi=S.times.length-1;
+    while (lo<hi){ const mid=(lo+hi)>>1; if (S.times[mid] < t) lo=mid+1; else hi=mid; }
+    return lo;
+  }
+
+  function updateReadout(t){
+    $('rT').textContent = t.toFixed(3);
+    const idx = nearestFrameIndex(t);
+    if (idx < 0){ ['rF0','rF1','rF2','rF3','rF4','rI'].forEach(id=>$(id).textContent='–'); return; }
+    const pt = S.pitch[idx];
+    $('rF0').textContent = (pt && !isNaN(pt.freq)) ? pt.freq.toFixed(0) : '–';
+    const fr = S.formants[idx] || [];
+    for (let i=0;i<4;i++) $('rF'+(i+1)).textContent = fr[i] ? fr[i].toFixed(0) : '–';
+    $('rI').textContent = S.intensity[idx] !== undefined ? S.intensity[idx].toFixed(1) : '–';
+  }
+
+  function attachPointer(canvas){
+    canvas.addEventListener('mousemove', (e)=>{
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const t = xToTime(x, rect.width);
+      updateReadout(Math.max(0, Math.min(S.duration, t)));
+      if (S.dragging){
+        S.selection = { start: Math.min(S.dragStartT, t), end: Math.max(S.dragStartT, t) };
+        draw();
+      }
+    });
+    canvas.addEventListener('mousedown', (e)=>{
+      if (!S.duration) return;
+      const rect = canvas.getBoundingClientRect();
+      const t = xToTime(e.clientX-rect.left, rect.width);
+      S.dragging = true; S.dragStartT = t; S.selection = null; S.cursor = t;
+      draw();
+    });
+    window.addEventListener('mouseup', ()=>{
+      if (S.dragging){
+        S.dragging = false;
+        if (S.selection && Math.abs(S.selection.end-S.selection.start) < 0.01) S.selection = null;
+        draw();
+      }
+    });
+  }
+  attachPointer(waveCanvas);
+  attachPointer(specCanvas);
+
+  annCanvas.addEventListener('click', (e)=>{
+    if (!S.duration) return;
+    const rect = annCanvas.getBoundingClientRect();
+    const t = xToTime(e.clientX-rect.left, rect.width);
+    S.cursor = t; draw();
+  });
+
+  window.addEventListener('resize', ()=>{
+    if (S.audioBuffer){ buildSpectrogramImage(); draw(); }
+    fitLiveCanvases();
+    if ($('viewVowels').classList.contains('active')){ fitVowelCanvas(); drawVowelMap(); }
+  });
+
+  function play(){
+    if (!S.audioBuffer) return;
+    const ctx = ensureCtx();
+    if (ctx.state === 'suspended') ctx.resume();
+    const src = ctx.createBufferSource();
+    src.buffer = S.audioBuffer;
+    src.connect(ctx.destination);
+    const startAt = S.selection ? S.selection.start : S.cursor;
+    const endAt = S.selection ? S.selection.end : S.duration;
+    src.start(0, startAt);
+    S.playSrc = src; S.playCtxStart = ctx.currentTime; S.playOffset = startAt; S.playing = true;
+    $('btnPlay').textContent = tt('btnPausar','⏸ Pausar');
+    const dur = endAt-startAt;
+    src.stop(ctx.currentTime + Math.max(0.01, dur));
+    src.onended = () => { if (S.playing){ S.playing=false; $('btnPlay').textContent='▶ Reproducir'; } };
+    requestAnimationFrame(tickPlayback);
+  }
+
+  function tickPlayback(){
+    if (!S.playing) return;
+    const ctx = S.audioCtx;
+    const t = S.playOffset + (ctx.currentTime - S.playCtxStart);
+    const endAt = S.selection ? S.selection.end : S.duration;
+    if (t >= endAt){ S.cursor = endAt; draw(); return; }
+    S.cursor = t; draw(); updateReadout(t);
+    requestAnimationFrame(tickPlayback);
+  }
+
+  function stopPlayback(){
+    if (S.playSrc){ try{ S.playSrc.stop(); }catch(e){} S.playSrc=null; }
+    S.playing = false;
+    $('btnPlay').textContent = tt('btnReproducir','▶ Reproducir');
+  }
+
+  $('btnPlay').addEventListener('click', ()=>{ if (S.playing) stopPlayback(); else play(); });
+  $('btnStop').addEventListener('click', ()=>{ stopPlayback(); S.cursor = S.selection?S.selection.start:0; draw(); });
+
+  $('btnOpen').addEventListener('click', ()=> $('fileInput').click());
+  $('fileInput').addEventListener('change', async (e)=>{
+    const file = e.target.files[0];
+    if (!file) return;
+    await loadFromArrayBuffer(await file.arrayBuffer());
+  });
+
+  async function loadFromArrayBuffer(arrayBuffer){
+    try{
+      setStatus(tt('stDecodificando','Decodificando audio…'));
+      const ctx = ensureCtx();
+      const buf = await ctx.decodeAudioData(arrayBuffer.slice(0));
+      S.audioBuffer = buf;
+      S.selection = null; S.cursor = 0; S.annotations = [];
+      renderAnnList();
+      ['btnPlay','btnStop','btnExportImg','btnExportAnn','btnAddAnn','btnReport','btnVowelFromFile'].forEach(id=>$(id).disabled=false);
+      $('reportWrap').style.display = 'none';
+      runAnalysis();
+    }catch(err){
+      setStatus((window.CV_I18N ? window.CV_I18N.t('stErrorDecodificar')(err.message) : 'No se pudo decodificar el audio: ' + err.message), true);
+    }
+  }
+
+  $('btnRec').addEventListener('click', async ()=>{
+    const btn = $('btnRec');
+    if (!S.recorder || S.recorder.state !== 'recording'){
+      try{
+        setStatus(tt('stSolicitandoMic','Solicitando permiso de micrófono…'));
+        S.recStream = await navigator.mediaDevices.getUserMedia({audio:true});
+        S.recChunks = [];
+        S.recorder = new MediaRecorder(S.recStream);
+        S.recorder.ondataavailable = (ev)=>{ if (ev.data.size>0) S.recChunks.push(ev.data); };
+        S.recorder.onstop = async ()=>{
+          btn.classList.remove('on');
+          S.recStream.getTracks().forEach(t=>t.stop());
+          const blob = new Blob(S.recChunks, {type: S.recorder.mimeType || 'audio/webm'});
+          await loadFromArrayBuffer(await blob.arrayBuffer());
+        };
+        S.recorder.start();
+        btn.classList.add('on');
+        setStatus(tt('stGrabando','Grabando… presiona nuevamente para detener.'));
+      }catch(err){
+        setStatus((window.CV_I18N ? window.CV_I18N.t('stErrorMic')(err.message) : 'No se pudo acceder al micrófono: ' + err.message), true);
+      }
+    } else {
+      S.recorder.stop();
+      setStatus(tt('stProcesandoGrabacion','Procesando grabación…'));
+    }
+  });
+
+  $('btnAddAnn').addEventListener('click', ()=>{
+    if (!S.duration) return;
+    S.annotations.push({ t: S.cursor, label: tt('marcaPrefix','marca') + (S.annotations.length+1) });
+    S.annotations.sort((a,b)=>a.t-b.t);
+    renderAnnList(); draw();
+  });
+
+  function renderAnnList(){
+    const list = $('annList');
+    list.innerHTML = '';
+    if (!S.annotations.length){ list.innerHTML = '<div class="ann-empty">' + escapeHtml(tt('sinMarcas','sin marcas')) + '</div>'; return; }
+    S.annotations.forEach((a, i)=>{
+      const chip = document.createElement('div'); chip.className='ann-chip';
+      const t = document.createElement('span'); t.className='t'; t.textContent = a.t.toFixed(2)+'s';
+      const label = document.createElement('span'); label.contentEditable='true'; label.textContent = a.label;
+      label.setAttribute('role','textbox'); label.setAttribute('aria-label', tt('etiquetaMarca','Etiqueta de la marca'));
+      label.addEventListener('input', ()=>{ a.label = label.textContent; draw(); });
+      const del = document.createElement('button'); del.type='button'; del.className='del'; del.textContent='✕';
+      del.setAttribute('aria-label', tt('eliminarMarca','Eliminar marca'));
+      del.addEventListener('click', ()=>{ S.annotations.splice(i,1); renderAnnList(); draw(); });
+      chip.append(t,label,del);
+      list.appendChild(chip);
+    });
+  }
+
+  $('btnExportImg').addEventListener('click', ()=>{
+    const link = document.createElement('a');
+    link.download = tt('fileEspectrograma','espectrograma.png');
+    link.href = specCanvas.toDataURL('image/png');
+    link.click();
+  });
+  $('btnExportAnn').addEventListener('click', ()=>{
+    const data = JSON.stringify(S.annotations, null, 2);
+    const blob = new Blob([data], {type:'application/json'});
+    const link = document.createElement('a');
+    link.download = tt('fileAnotaciones','anotaciones.json');
+    link.href = URL.createObjectURL(blob);
+    link.click();
+  });
+
+  function bindRange(id, valId, key, fmt=(v=>v)){
+    const el = $(id);
+    el.addEventListener('input', ()=>{ $(valId).textContent = fmt(el.value); S.params[key] = Number(el.value); });
+    el.addEventListener('change', ()=>{ if (S.audioBuffer) runAnalysis(); });
+  }
+  bindRange('pitchFloor','vPitchFloor','pitchFloor');
+  bindRange('pitchCeil','vPitchCeil','pitchCeil');
+  bindRange('numForm','vNumForm','numForm');
+  bindRange('formCeil','vFormCeil','formCeil');
+  bindRange('winLen','vWinLen','winLen');
+  bindRange('dynRange','vDynRange','dynRange');
+  $('dynRange').addEventListener('input', ()=>{ if (S.spec){ buildSpectrogramImage(); draw(); } });
+  bindRange('maxFreq','vMaxFreq','maxFreq');
+  $('maxFreq').addEventListener('input', ()=>{ if (S.spec) draw(); });
+
+  // ==================================================================
+  // ================  INFORMES Y LISTADOS (estilo Praat)  ==========
+  // ==================================================================
+  function mean(a){ return a.length ? a.reduce((s,v)=>s+v,0)/a.length : NaN; }
+  function stdev(a){ if (a.length<2) return NaN; const m=mean(a); return Math.sqrt(a.reduce((s,v)=>s+(v-m)**2,0)/(a.length-1)); }
+
+  function computeReport(){
+    const pitchArr = S.pitch, intensityArr = S.intensity, formantsArr = S.formants;
+    const freqs = pitchArr.filter(p=>p && !isNaN(p.freq)).map(p=>p.freq);
+    const voicedFrac = pitchArr.length ? freqs.length/pitchArr.length : 0;
+
+    let periodDiffs=[], periods=[];
+    for (let i=0;i<pitchArr.length-1;i++){
+      const a=pitchArr[i], b=pitchArr[i+1];
+      if (a && b && !isNaN(a.freq) && !isNaN(b.freq)){
+        const T1=1/a.freq, T2=1/b.freq;
+        periods.push(T1); periodDiffs.push(Math.abs(T1-T2));
+      }
+    }
+    const jitterLocal = periods.length ? (mean(periodDiffs)/mean(periods))*100 : NaN;
+
+    let ampDiffs=[], amps=[];
+    for (let i=0;i<intensityArr.length-1;i++){
+      const a=pitchArr[i], b=pitchArr[i+1];
+      if (a && b && !isNaN(a.freq) && !isNaN(b.freq)){
+        const amp1=Math.pow(10, intensityArr[i]/20), amp2=Math.pow(10, intensityArr[i+1]/20);
+        amps.push(amp1); ampDiffs.push(Math.abs(amp1-amp2));
+      }
+    }
+    const shimmerLocal = amps.length ? (mean(ampDiffs)/mean(amps))*100 : NaN;
+
+    const intVals = intensityArr.filter(v=>isFinite(v));
+    const p = S.params;
+    const formMeans = [], formSd = [];
+    for (let fi=0; fi<p.numForm; fi++){
+      const vals = [];
+      for (const arr of formantsArr){ if (arr && arr[fi]!==undefined) vals.push(arr[fi]); }
+      formMeans.push(mean(vals)); formSd.push(stdev(vals));
+    }
+
+    return {
+      duration:S.duration, nFrames:pitchArr.length, voicedFrac,
+      f0Mean:mean(freqs), f0Min: freqs.length?Math.min(...freqs):NaN, f0Max: freqs.length?Math.max(...freqs):NaN,
+      f0Sd:stdev(freqs), jitterLocal, shimmerLocal,
+      intMean:mean(intVals), intMin: intVals.length?Math.min(...intVals):NaN, intMax: intVals.length?Math.max(...intVals):NaN,
+      formMeans, formSd, numForm:p.numForm
+    };
+  }
+
+  function formatReport(r){
+    const f = (v,d=1)=> isFinite(v) ? v.toFixed(d) : '—';
+    const T = (k,fb) => tt(k,fb);
+    const L = [];
+    L.push(T('repTitulo','INFORME ACÚSTICO — Plataforma de Análisis Acústico de la Voz'));
+    L.push('='.repeat(42));
+    L.push(`${T('repDuracion','Duración total:')}              ${f(r.duration,3)} s`);
+    L.push(`${T('repCuadros','Cuadros de análisis:')}         ${r.nFrames}`);
+    L.push(`${T('repFraccionSonora','Fracción sonora (F0 válido):')} ${f(r.voicedFrac*100,1)} %`);
+    L.push('');
+    L.push(T('repTono','— Tono (F0) —'));
+    L.push(`  ${T('repMedia','Media:')}                ${f(r.f0Mean,1)} Hz`);
+    L.push(`  ${T('repMinimo','Mínimo:')}               ${f(r.f0Min,1)} Hz`);
+    L.push(`  ${T('repMaximo','Máximo:')}               ${f(r.f0Max,1)} Hz`);
+    L.push(`  ${T('repDesvEstandar','Desviación estándar:')}  ${f(r.f0Sd,2)} Hz`);
+    L.push(`  ${T('repJitter','Jitter local (aprox):')} ${f(r.jitterLocal,2)} %`);
+    L.push('');
+    L.push(T('repIntensidad','— Intensidad —'));
+    L.push(`  ${T('repMediaF','Media:')}                 ${f(r.intMean,1)} dB`);
+    L.push(`  ${T('repMinimaF','Mínima:')}                ${f(r.intMin,1)} dB`);
+    L.push(`  ${T('repMaximaF','Máxima:')}                ${f(r.intMax,1)} dB`);
+    L.push(`  ${T('repShimmer','Shimmer local (aprox):')} ${f(r.shimmerLocal,2)} %`);
+    L.push('');
+    L.push(T('repFormantes','— Formantes (media ± desv. estándar sobre todos los cuadros) —'));
+    for (let i=0;i<r.numForm;i++) L.push(`  F${i+1}: ${f(r.formMeans[i],0)} Hz  (±${f(r.formSd[i],0)})`);
+    L.push('');
+    L.push(T('repNota','Nota: jitter/shimmer son aproximaciones cuadro a cuadro sobre la envolvente de F0\ne intensidad, no el cálculo período-a-período exacto que usa Praat; formantes vía\nLPC + búsqueda de raíces (Durand-Kerner), también aproximado.'));
+    return L.join('\n');
+  }
+
+  function downloadText(text, filename, mime='text/plain'){
+    const blob = new Blob([text], {type:mime});
+    const link = document.createElement('a');
+    link.download = filename; link.href = URL.createObjectURL(blob); link.click();
+  }
+
+  $('btnReport').addEventListener('click', ()=>{
+    if (!S.spec) return;
+    const r = computeReport();
+    $('reportText').textContent = formatReport(r);
+    $('reportWrap').style.display = 'block';
+    $('reportWrap').scrollIntoView({behavior:'smooth', block:'nearest'});
+  });
+  $('btnDownloadReport').addEventListener('click', ()=>{
+    downloadText($('reportText').textContent || formatReport(computeReport()), tt('fileInforme','informe_acustico.txt'));
+  });
+  $('btnCsvPitch').addEventListener('click', ()=>{
+    const rows = ['tiempo_s,F0_Hz'];
+    for (let i=0;i<S.times.length;i++){
+      const p = S.pitch[i];
+      rows.push(`${S.times[i].toFixed(4)},${(p && !isNaN(p.freq)) ? p.freq.toFixed(2) : ''}`);
+    }
+    downloadText(rows.join('\n'), tt('fileListadoF0','listado_f0.csv'), 'text/csv');
+  });
+  $('btnCsvFormants').addEventListener('click', ()=>{
+    const rows = ['tiempo_s,F1_Hz,F2_Hz,F3_Hz,F4_Hz,F5_Hz'];
+    for (let i=0;i<S.times.length;i++){
+      const arr = S.formants[i] || [];
+      rows.push([S.times[i].toFixed(4), arr[0]?.toFixed(0)||'', arr[1]?.toFixed(0)||'', arr[2]?.toFixed(0)||'', arr[3]?.toFixed(0)||'', arr[4]?.toFixed(0)||''].join(','));
+    }
+    downloadText(rows.join('\n'), tt('fileListadoFormantes','listado_formantes.csv'), 'text/csv');
+  });
+  $('btnCsvIntensity').addEventListener('click', ()=>{
+    const rows = ['tiempo_s,intensidad_dB'];
+    for (let i=0;i<S.times.length;i++) rows.push(`${S.times[i].toFixed(4)},${S.intensity[i]!==undefined ? S.intensity[i].toFixed(2) : ''}`);
+    downloadText(rows.join('\n'), tt('fileListadoIntensidad','listado_intensidad.csv'), 'text/csv');
+  });
+
+  // ==================================================================
+  // ================  MODO EN VIVO (micrófono en tiempo real)  =====
+  // ==================================================================
+  const liveWaveCanvas = $('liveWaveCanvas'), liveSpecCanvas = $('liveSpecCanvas');
+  const liveEmptyHint = $('liveEmptyHint');
+
+  function fitLiveCanvases(){
+    fitCanvas(liveWaveCanvas);
+    // el espectrograma en vivo mantiene su contenido: solo redimensiona si aún no tiene tamaño
+    const rect = liveSpecCanvas.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    const w = Math.max(1, Math.round(rect.width*dpr)), h = Math.max(1, Math.round(rect.height*dpr));
+    if (liveSpecCanvas.width !== w || liveSpecCanvas.height !== h){
+      liveSpecCanvas.width = w; liveSpecCanvas.height = h;
+    }
+  }
+
+  // ==================================================================
+  // MAPA DE VOCALES (F1-F2)
+  // ==================================================================
+  const vowelCanvas = $('vowelCanvas');
+  const vowelEmptyHint = $('vowelEmptyHint');
+  const VOWEL_F1_MIN = 200, VOWEL_F1_MAX = 900;   // eje vertical (invertido: agudo arriba)
+  const VOWEL_F2_MIN = 600, VOWEL_F2_MAX = 2500;  // eje horizontal (invertido: convención fonética)
+  // Valores promedio de referencia para vocales del español (adulto genérico, sin
+  // distinción de sexo/edad), aproximados a partir de literatura de fonética acústica
+  // del español (p. ej. Martínez-Celdrán / Quilis). Solo orientativos, no diagnósticos.
+  const VOWEL_REFS = [
+    { v:'i', f1:280, f2:2300 },
+    { v:'e', f1:460, f2:1900 },
+    { v:'a', f1:700, f2:1400 },
+    { v:'o', f1:500, f2:900  },
+    { v:'u', f1:310, f2:800  }
+  ];
+
+  function fitVowelCanvas(){ fitCanvas(vowelCanvas); }
+
+  function vF2toX(f2, w){ return w - Math.max(0, Math.min(1, (f2-VOWEL_F2_MIN)/(VOWEL_F2_MAX-VOWEL_F2_MIN)))*w; }
+  function vF1toY(f1, h){ return Math.max(0, Math.min(1, (f1-VOWEL_F1_MIN)/(VOWEL_F1_MAX-VOWEL_F1_MIN)))*h; }
+
+  function drawVowelMap(){
+    if (!vowelCanvas.width) fitVowelCanvas();
+    const ctx = vowelCanvas.getContext('2d');
+    const w = vowelCanvas.width, h = vowelCanvas.height;
+    ctx.clearRect(0,0,w,h);
+
+    const fileN = S.vowel.fileTrail.length, liveN = S.vowel.liveTrail.length;
+    vowelEmptyHint.style.display = (fileN===0 && liveN===0) ? 'flex' : 'none';
+
+    // grilla
+    ctx.strokeStyle = getCss('--line'); ctx.lineWidth = 1;
+    ctx.font = '10px ' + getCss('--mono');
+    ctx.fillStyle = getCss('--text-dim');
+    for (let f2=VOWEL_F2_MIN; f2<=VOWEL_F2_MAX; f2+=400){
+      const x = vF2toX(f2,w);
+      ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,h); ctx.stroke();
+      ctx.fillText(f2+'Hz', x+3, 12);
+    }
+    for (let f1=VOWEL_F1_MIN; f1<=VOWEL_F1_MAX; f1+=150){
+      const y = vF1toY(f1,h);
+      ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(w,y); ctx.stroke();
+      ctx.fillText(f1+'Hz', 3, y-3);
+    }
+
+    // referencias de vocales
+    if ($('chkVowelRef').checked){
+      for (const r of VOWEL_REFS){
+        const x = vF2toX(r.f2,w), y = vF1toY(r.f1,h);
+        const rad = Math.max(18, w*0.045);
+        ctx.beginPath(); ctx.arc(x,y,rad,0,Math.PI*2);
+        ctx.fillStyle = 'rgba(244,240,216,0.25)'; ctx.fill();
+        ctx.strokeStyle = '#f4f0d8'; ctx.lineWidth = 1.4; ctx.stroke();
+        ctx.fillStyle = '#f4f0d8';
+        ctx.font = '600 13px ' + getCss('--sans');
+        ctx.fillText('/'+r.v+'/', x-9, y+4);
+      }
+    }
+
+    // puntos del archivo (nube completa, un color)
+    ctx.fillStyle = getCss('--accent-2');
+    for (const p of S.vowel.fileTrail){
+      const x = vF2toX(p.f2,w), y = vF1toY(p.f1,h);
+      ctx.beginPath(); ctx.arc(x,y,2.4,0,Math.PI*2); ctx.fill();
+    }
+
+    // trazo en vivo (con estela: más viejo más transparente)
+    const liveTrail = S.vowel.liveTrail;
+    for (let i=0;i<liveTrail.length;i++){
+      const p = liveTrail[i];
+      const x = vF2toX(p.f2,w), y = vF1toY(p.f1,h);
+      const age = (liveTrail.length-1-i) / Math.max(1,liveTrail.length-1);
+      const alpha = Math.max(0.08, 1 - age);
+      ctx.fillStyle = `rgba(224,85,158,${alpha})`;
+      ctx.beginPath(); ctx.arc(x,y, i===liveTrail.length-1?5:3, 0, Math.PI*2); ctx.fill();
+    }
+  }
+
+  function pushVowelPoint(formants){
+    if (!S.vowel.liveOn) return;
+    if (!formants || formants[0]===undefined || formants[1]===undefined) return;
+    const f1 = formants[0], f2 = formants[1];
+    if (f1 < 100 || f1 > 1200 || f2 < 400 || f2 > 3200) return; // descarta lecturas espurias
+    S.vowel.liveTrail.push({f1,f2});
+    if (S.vowel.liveTrail.length > 400) S.vowel.liveTrail.shift();
+    if ($('viewVowels').classList.contains('active')) drawVowelMap();
+  }
+
+  $('btnVowelFromFile').addEventListener('click', ()=>{
+    if (!S.formants || !S.formants.length) return;
+    const pts = [];
+    for (const fr of S.formants){
+      if (fr && fr[0]!==undefined && fr[1]!==undefined) pts.push({f1:fr[0], f2:fr[1]});
+    }
+    S.vowel.fileTrail = pts;
+    setStatus(tt('stMapaVocalesGenerado','Mapa de vocales generado a partir del archivo: {n} puntos.').replace('{n}', pts.length));
+    drawVowelMap();
+  });
+
+  $('btnVowelLiveTrail').addEventListener('click', ()=>{
+    S.vowel.liveOn = !S.vowel.liveOn;
+    $('btnVowelLiveTrail').classList.toggle('on', S.vowel.liveOn);
+  });
+
+  $('btnVowelClear').addEventListener('click', ()=>{
+    S.vowel.fileTrail = []; S.vowel.liveTrail = [];
+    drawVowelMap();
+  });
+
+  $('chkVowelRef').addEventListener('change', drawVowelMap);
+
+  $('btnVowelExport').addEventListener('click', ()=>{
+    const rows = [tt('csvHeaderVocales','origen,F1_Hz,F2_Hz')];
+    for (const p of S.vowel.fileTrail) rows.push(`archivo,${p.f1.toFixed(0)},${p.f2.toFixed(0)}`);
+    for (const p of S.vowel.liveTrail) rows.push(`vivo,${p.f1.toFixed(0)},${p.f2.toFixed(0)}`);
+    downloadText(rows.join('\n'), tt('fileMapaVocales','mapa_vocales.csv'), 'text/csv');
+  });
+
+  $('btnLiveStart').addEventListener('click', async ()=>{
+    if (S.live.active){ stopLive(); return; }
+    try{
+      setStatus(tt('stSolicitandoMicVivo','Solicitando permiso de micrófono para el modo en vivo…'));
+      const ctx = ensureCtx();
+      if (ctx.state === 'suspended') await ctx.resume();
+      const stream = await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true, noiseSuppression:false, autoGainControl:false}});
+      const source = ctx.createMediaStreamSource(stream);
+      const analyser = ctx.createAnalyser();
+      analyser.fftSize = 4096;
+      analyser.smoothingTimeConstant = 0;
+      source.connect(analyser); // no se conecta a destination: evita retroalimentación
+
+      S.live.ctx = ctx; S.live.stream = stream; S.live.source = source; S.live.analyser = analyser;
+      S.live.timeArr = new Float32Array(analyser.fftSize);
+      S.live.freqArr = new Float32Array(analyser.frequencyBinCount);
+      S.live.active = true; S.live.frozen = false; S.live.frameCounter = 0;
+
+      fitLiveCanvases();
+      liveSpecCanvas.getContext('2d').clearRect(0,0,liveSpecCanvas.width,liveSpecCanvas.height);
+      liveEmptyHint.style.display = 'none';
+
+      S.live.startTime = performance.now();
+
+      $('btnLiveStart').textContent = tt('btnDetenerMic','■ Detener micrófono');
+      $('btnLiveStart').classList.add('on');
+      $('btnLiveFreeze').disabled = false;
+      $('btnLiveRec').disabled = false;
+      $('btnLiveLog').disabled = false;
+      $('btnVowelLiveTrail').disabled = false;
+      $('btnLiveLogExport').disabled = S.live.log.length === 0;
+      setStatus(tt('stMicVivoActivo','Micrófono en vivo activo.'));
+      requestAnimationFrame(liveTick);
+    }catch(err){
+      setStatus((window.CV_I18N ? window.CV_I18N.t('stErrorMic')(err.message) : 'No se pudo acceder al micrófono: ' + err.message), true);
+    }
+  });
+
+  $('btnLiveFreeze').addEventListener('click', ()=>{
+    S.live.frozen = !S.live.frozen;
+    $('btnLiveFreeze').textContent = S.live.frozen ? tt('btnReanudar','▶ Reanudar') : tt('btnCongelar','❚❚ Congelar');
+    if (!S.live.frozen) requestAnimationFrame(liveTick);
+  });
+
+  $('btnLiveRec').addEventListener('click', ()=>{
+    const btn = $('btnLiveRec');
+    if (!S.live.stream){ return; }
+    if (!S.live.recorder || S.live.recorder.state !== 'recording'){
+      S.live.recChunks = [];
+      S.live.recorder = new MediaRecorder(S.live.stream);
+      S.live.recorder.ondataavailable = (ev)=>{ if (ev.data.size>0) S.live.recChunks.push(ev.data); };
+      S.live.recorder.onstop = async ()=>{
+        btn.classList.remove('on');
+        const blob = new Blob(S.live.recChunks, {type: S.live.recorder.mimeType || 'audio/webm'});
+        setStatus(tt('stClipCapturado','Clip capturado. Cargando en la vista Archivo para análisis detallado…'));
+        await loadFromArrayBuffer(await blob.arrayBuffer());
+        $('tabFile').click();
+      };
+      S.live.recorder.start();
+      btn.classList.add('on');
+      setStatus(tt('stGrabandoClipVivo','Grabando clip desde el flujo en vivo…'));
+    } else {
+      S.live.recorder.stop();
+    }
+  });
+
+  $('btnLiveLog').addEventListener('click', ()=>{
+    if (!S.live.active) return;
+    const t = (performance.now() - S.live.startTime)/1000;
+    S.live.log.push({
+      t, f0: S.live.lastPitch.freq, formants: S.live.lastFormants.slice(0,4), db: S.live.lastIntensity
+    });
+    $('btnLiveLogExport').disabled = false;
+    renderLiveLog();
+  });
+
+  function renderLiveLog(){
+    const body = $('liveLogBody');
+    body.innerHTML = '';
+    $('liveLogEmpty').style.display = S.live.log.length ? 'none' : 'block';
+    for (const e of S.live.log){
+      const tr = document.createElement('tr');
+      const cells = [
+        e.t.toFixed(2),
+        isNaN(e.f0) ? '–' : e.f0.toFixed(0),
+        e.formants[0] ? e.formants[0].toFixed(0) : '–',
+        e.formants[1] ? e.formants[1].toFixed(0) : '–',
+        e.formants[2] ? e.formants[2].toFixed(0) : '–',
+        e.formants[3] ? e.formants[3].toFixed(0) : '–',
+        isFinite(e.db) ? e.db.toFixed(1) : '–'
+      ];
+      cells.forEach(c=>{ const td=document.createElement('td'); td.style.padding='4px 10px'; td.textContent=c; tr.appendChild(td); });
+      body.appendChild(tr);
+    }
+  }
+
+  $('btnLiveLogExport').addEventListener('click', ()=>{
+    const rows = [tt('csvHeaderVivo','tiempo_s,F0_Hz,F1_Hz,F2_Hz,F3_Hz,F4_Hz,nivel_dB')];
+    for (const e of S.live.log){
+      rows.push([
+        e.t.toFixed(3), isNaN(e.f0)?'':e.f0.toFixed(1),
+        e.formants[0]?.toFixed(0)||'', e.formants[1]?.toFixed(0)||'', e.formants[2]?.toFixed(0)||'', e.formants[3]?.toFixed(0)||'',
+        isFinite(e.db)?e.db.toFixed(1):''
+      ].join(','));
+    }
+    downloadText(rows.join('\n'), tt('fileBitacoraVivo','bitacora_en_vivo.csv'), 'text/csv');
+  });
+
+  function stopLive(){
+    S.live.active = false;
+    if (S.live.stream) S.live.stream.getTracks().forEach(t=>t.stop());
+    S.live.source = null; S.live.analyser = null; S.live.stream = null;
+    $('btnLiveStart').textContent = tt('btnIniciarMic','● Iniciar micrófono');
+    $('btnLiveStart').classList.remove('on');
+    $('btnLiveFreeze').disabled = true; $('btnLiveFreeze').textContent = tt('btnCongelar','❚❚ Congelar'); S.live.frozen = false;
+    $('btnLiveRec').disabled = true;
+    $('btnLiveLog').disabled = true;
+    $('btnVowelLiveTrail').disabled = true;
+    $('ledVoiced').classList.remove('on');
+    $('meterFill').style.width = '0%';
+    liveEmptyHint.style.display = 'flex';
+    setStatus(tt('stMicVivoDetenido','Micrófono en vivo detenido.'));
+  }
+
+  function drawLiveOscilloscope(dpr){
+    const ctx = liveWaveCanvas.getContext('2d');
+    const w = liveWaveCanvas.width, h = liveWaveCanvas.height;
+    ctx.clearRect(0,0,w,h);
+    ctx.strokeStyle = '#3a4046'; ctx.lineWidth = 1*dpr;
+    ctx.beginPath(); ctx.moveTo(0,h/2); ctx.lineTo(w,h/2); ctx.stroke();
+    const buf = S.live.timeArr;
+    ctx.strokeStyle = getCss('--accent'); ctx.lineWidth = 1.2*dpr;
+    ctx.beginPath();
+    const step = Math.max(1, Math.floor(buf.length / w));
+    for (let x=0, i=0; x<w && i<buf.length; x++, i+=step){
+      const v = buf[i];
+      const y = h/2 - v*h/2*0.92;
+      if (x===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    }
+    ctx.stroke();
+  }
+
+  function drawLiveSpecColumn(dpr){
+    const ctx = liveSpecCanvas.getContext('2d');
+    const w = liveSpecCanvas.width, h = liveSpecCanvas.height;
+    const colW = Math.max(1, Math.round(1*dpr));
+    ctx.drawImage(liveSpecCanvas, colW, 0, w-colW, h, 0, 0, w-colW, h);
+    ctx.clearRect(w-colW, 0, colW, h);
+
+    const analyser = S.live.analyser;
+    const freqArr = S.live.freqArr;
+    analyser.getFloatFrequencyData(freqArr);
+    const sr = S.live.ctx.sampleRate;
+    const nyquist = sr/2;
+    const maxFreq = S.params.maxFreq;
+    const minDb = analyser.minDecibels, maxDb = analyser.maxDecibels;
+
+    for (let y=0; y<h; y++){
+      const freq = (1 - y/h) * maxFreq;
+      if (freq > nyquist){ continue; }
+      const binF = freq / nyquist * (freqArr.length-1);
+      const bin = Math.max(0, Math.min(freqArr.length-1, Math.round(binF)));
+      const db = freqArr[bin];
+      const t = Math.max(0, Math.min(1, (db-minDb)/(maxDb-minDb)));
+      const [r,g,b] = colormap(t);
+      ctx.fillStyle = `rgb(${r|0},${g|0},${b|0})`;
+      ctx.fillRect(w-colW, y, colW, 1);
+    }
+
+    // overlay: F0 y formantes de la última medición
+    const pt = S.live.lastPitch;
+    if (pt && !isNaN(pt.freq) && pt.freq <= maxFreq){
+      const y = h - (pt.freq/maxFreq)*h;
+      ctx.fillStyle = getCss('--accent-2');
+      ctx.fillRect(w-colW-1, Math.max(0,y-1.5*dpr), colW+2, 3*dpr);
+    }
+    ctx.fillStyle = '#f4f0d8';
+    for (const fr of S.live.lastFormants){
+      if (fr > maxFreq) continue;
+      const y = h - (fr/maxFreq)*h;
+      ctx.fillRect(w-colW-1, Math.max(0,y-1*dpr), colW+2, 2*dpr);
+    }
+  }
+
+  function computeLiveMeasures(){
+    const p = S.params;
+    const sr = S.live.ctx.sampleRate;
+    const timeArr = S.live.timeArr;
+
+    const pitch = detectPitch(timeArr, sr, p.pitchFloor, p.pitchCeil);
+    S.live.lastPitch = pitch;
+
+    let rms=0; for (let i=0;i<timeArr.length;i++) rms += timeArr[i]*timeArr[i];
+    rms = Math.sqrt(rms/timeArr.length);
+    const db = 20*Math.log10(rms+1e-9);
+    S.live.lastIntensity = db;
+
+    const formSR = Math.min(sr, Math.max(8000, Math.round(2.2*p.formCeil)));
+    const resampled = resampleLinear(timeArr, sr, formSR);
+    const formWinN = Math.min(resampled.length, Math.max(64, Math.round(formSR*0.025)));
+    const frame = resampled.subarray(resampled.length-formWinN);
+    const order = p.numForm*2 + 2;
+    S.live.lastFormants = estimateFormants(frame, formSR, order, p.numForm, 60);
+
+    updateLiveHUD(pitch, S.live.lastFormants, db);
+    pushVowelPoint(S.live.lastFormants);
+  }
+
+  function updateLiveHUD(pitch, formants, db){
+    $('lF0').textContent = (pitch && !isNaN(pitch.freq)) ? pitch.freq.toFixed(0)+' Hz' : '–';
+    for (let i=0;i<4;i++) $('lF'+(i+1)).textContent = formants[i] ? formants[i].toFixed(0) : '–';
+    $('lInt').textContent = isFinite(db) ? db.toFixed(1)+' dB' : '–';
+
+    const voiced = pitch && !isNaN(pitch.freq) && pitch.strength > 0.3;
+    $('ledVoiced').classList.toggle('on', !!voiced);
+
+    const level = Math.max(0, Math.min(100, (db+70)/70*100));
+    $('meterFill').style.width = level + '%';
+  }
+
+  function liveTick(){
+    if (!S.live.active || S.live.frozen) return;
+    const dpr = window.devicePixelRatio || 1;
+    S.live.analyser.getFloatTimeDomainData(S.live.timeArr);
+
+    drawLiveOscilloscope(dpr);
+    drawLiveSpecColumn(dpr);
+
+    S.live.frameCounter++;
+    if (S.live.frameCounter % 3 === 0) computeLiveMeasures();
+
+    requestAnimationFrame(liveTick);
+  }
+
+  // dibujo inicial
+  fitLiveCanvases();
+  fitVowelCanvas();
+  drawVowelMap();
+  draw();
+
+  window.addEventListener('cv-lang-changed', ()=>{
+    if ($('reportWrap').style.display !== 'none' && S.workBuffer){
+      $('reportText').textContent = formatReport(computeReport());
+    }
+  });
+})();
+</script>
+<script src="../assets/theme-switcher.js" defer></script>
+<script src="../assets/a11y-reader.js" defer></script>
+</body>
+</html>

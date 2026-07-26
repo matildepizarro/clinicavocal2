@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title data-i18n="pageTitle">Evaluación Clínica de Voz</title>
+<meta name="description" data-i18n-content="metaDescription" content="Batería de evaluación vocal: IDV-Cl (VHI chileno), GRBAS, tiempo máximo de fonación y relación s/z." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='7' fill='%239b7bd9'/%3E%3Cpath d='M7 11a5 5 0 0 0 10 0M12 16v3m-3 0h6M12 3a3 3 0 0 1 3 3v5a3 3 0 1 1-6 0V6a3 3 0 0 1 3-3Z' fill='none' stroke='white' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E">
+<script>document.documentElement.setAttribute('data-pastel-theme', (function(){try{return localStorage.getItem('cv-pastel-theme')||'rosa';}catch(e){return 'rosa';}})());</script>
+<script src="i18n-dict.js"></script>
+<script src="../assets/i18n-engine.js"></script>
+
+<!-- jsPDF (UMD) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/shared.css">
+
+<style>
+  :root{
+    --bg:#fff5fa; --card:#ffffff; --accent:#e0559e; --muted:#8a5b7a; --border:#f6d6e8; --radius:14px;
+    --glass: rgba(255,255,255,0.6); --bg-top:#fffafd;
+  }
+  :root[data-pastel-theme="rosa"]{ --bg:#fff5fa; --bg-top:#fffafd; --accent:#e0559e; --muted:#8a5b7a; --border:#f6d6e8; }
+  :root[data-pastel-theme="lavanda"]{ --bg:#f6f3ff; --bg-top:#faf8ff; --accent:#9b7bd9; --muted:#7a6a99; --border:#ded1fb; }
+  :root[data-pastel-theme="menta"]{ --bg:#f0fbf6; --bg-top:#f7fdfa; --accent:#4fb894; --muted:#5a8a75; --border:#c9ecdb; }
+  :root[data-pastel-theme="durazno"]{ --bg:#fff7f0; --bg-top:#fffbf6; --accent:#ff9d66; --muted:#a3775a; --border:#ffd8bd; }
+  :root[data-pastel-theme="cielo"]{ --bg:#f0f8ff; --bg-top:#f7fbff; --accent:#5bb3e0; --muted:#5a7fa3; --border:#c9e4fb; }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{font-family:Inter,system-ui,Segoe UI,Roboto,Arial; background:linear-gradient(180deg,var(--bg-top) 0%,var(--bg) 100%); margin:0; color:#3a2436; -webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:'Fraunces',Georgia,serif; font-weight:600;}
+
+  .container{max-width:1100px;margin:28px auto;padding:18px}
+  .header{display:flex;gap:18px;align-items:center;background:linear-gradient(180deg,#fff,#fbfeff);padding:18px;border-radius:16px;box-shadow:0 10px 30px rgba(12,25,50,0.06)}
+  .brand{width:72px;height:72px;border-radius:12px;background:linear-gradient(135deg,#eef6ff,#ffffff);display:flex;align-items:center;justify-content:center;border:1px solid var(--border);font-weight:700;color:var(--accent);font-size:20px}
+  .title-wrap h1{margin:0;font-size:20px;letter-spacing:0.2px}
+  .title-wrap p{margin:6px 0 0 0;color:var(--muted);font-size:13px}
+
+  .tabs{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
+  .tab-btn{padding:10px 16px;border-radius:12px;border:1px solid var(--border);background:#fff;color:var(--muted);font-weight:700;cursor:pointer;font-size:13.5px}
+  .tab-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .tab-panel{display:none}
+  .tab-panel.active{display:block}
+
+  .card{background:var(--card);border-radius:12px;padding:18px;margin-top:16px;box-shadow:0 6px 20px rgba(10,20,40,0.04)}
+  h2{margin:0 0 8px 0;font-size:17px}
+  h3{margin:18px 0 8px 0;font-size:14px;color:var(--accent)}
+  p.lead{color:var(--muted);margin:6px 0 14px 0}
+
+  .disclaimer{background:#fff8ee;border:1px solid #ffe3b0;border-radius:12px;padding:12px 14px;font-size:13px;color:#8a6a2a;margin-bottom:14px;line-height:1.5}
+  .disclaimer.ok{background:#f0fbf6;border-color:#c9ecdb;color:#2f6b56}
+
+  .idv-item{border-bottom:1px solid #f2eef7;padding:12px 0;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px}
+  .idv-item:last-child{border-bottom:none}
+  .idv-item-text{flex:1;min-width:220px;font-size:14px}
+  .idv-item-id{color:var(--muted);font-size:11px;font-weight:700;margin-right:6px}
+  .idv-scale{display:flex;gap:4px;flex-wrap:wrap}
+  .idv-scale label{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10.5px;color:var(--muted);cursor:pointer;padding:4px 7px;border-radius:8px;border:1px solid var(--border)}
+  .idv-scale input{margin:0}
+  .idv-scale input:checked + span{font-weight:800;color:var(--accent)}
+
+  .score-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:14px}
+  .score-box{background:#faf7ff;border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center}
+  .score-box .num{font-size:22px;font-weight:800;color:var(--accent);font-family:'IBM Plex Mono',monospace}
+  .score-box .lbl{font-size:11px;color:var(--muted);margin-top:2px}
+
+  .grbas-row{display:flex;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid #f2eef7;flex-wrap:wrap}
+  .grbas-row:last-child{border-bottom:none}
+  .grbas-letter{width:38px;height:38px;border-radius:10px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-family:'IBM Plex Mono',monospace}
+  .grbas-name{flex:0 0 160px;font-weight:700;font-size:13.5px}
+  .grbas-scale{display:flex;gap:6px}
+  .grbas-scale label{padding:6px 12px;border-radius:9px;border:1px solid var(--border);cursor:pointer;font-size:13px;color:var(--muted)}
+  .grbas-scale input:checked + span{color:#fff}
+  .grbas-scale label:has(input:checked){background:var(--accent);border-color:var(--accent)}
+  .grbas-scale input{position:absolute;opacity:0;width:0;height:0}
+  .grbas-scale label{position:relative}
+
+  .tmf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+  .tmf-box{background:#faf7ff;border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center}
+  .tmf-timer{font-family:'IBM Plex Mono',monospace;font-size:32px;font-weight:700;color:var(--accent);margin:8px 0}
+  .tmf-trials{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+  .tmf-trial-chip{background:#fff;border:1px solid var(--border);border-radius:8px;padding:4px 10px;font-size:12.5px;font-family:'IBM Plex Mono',monospace}
+
+  .field-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:10px}
+  label.f-label{display:block;font-weight:600;margin:10px 0 6px 0;font-size:13px}
+  input[type="text"], input[type="number"], select, textarea{width:100%;padding:10px;border-radius:10px;border:1px solid var(--border);background:#fbfdff;font-size:14px}
+  textarea{min-height:80px;resize:vertical}
+
+  .controls{display:flex;gap:12px;justify-content:flex-end;margin-top:14px;flex-wrap:wrap}
+  .btn{padding:10px 14px;border-radius:10px;border:0;cursor:pointer;font-weight:700;font-size:13.5px}
+  .btn-primary{background:var(--accent);color:#fff;box-shadow:0 8px 22px rgba(155,80,180,0.18)}
+  .btn-ghost{background:#faf3fb;color:var(--accent);border:1px solid var(--border)}
+  .btn-danger{background:#ef4444;color:#fff}
+
+  table{width:100%;border-collapse:collapse;margin-top:14px;border-radius:10px;overflow:hidden}
+  th,td{padding:10px;border-bottom:1px solid #f2f6fb;text-align:left;font-size:13px}
+  th{background:#fbfdff;font-weight:700}
+
+  .footer{margin-top:14px;text-align:center;color:var(--muted);font-size:12.5px;line-height:1.6}
+  .cite{font-size:11.5px;color:var(--muted);background:#faf7ff;border:1px solid var(--border);border-radius:10px;padding:10px 12px;margin-top:10px}
+
+  @media (max-width:720px){ .controls{flex-direction:column} .grbas-name{flex-basis:100%} }
+  input:focus, select:focus, textarea:focus{outline:none;box-shadow:0 6px 18px rgba(155,80,180,0.12);border-color:rgba(155,80,180,0.3)}
+
+  #toastHost{position:fixed;bottom:20px;right:20px;display:flex;flex-direction:column;gap:10px;z-index:9999}
+  .toast{background:#2c2432;color:#fff;padding:11px 16px;border-radius:10px;font-size:13.5px;box-shadow:0 10px 30px rgba(0,0,0,.25);max-width:320px;opacity:0;transform:translateY(8px);animation:cv-toast-in .2s ease forwards}
+  .toast.err{background:#8a2846}
+  .toast.ok{background:#2f6b56}
+  @keyframes cv-toast-in{to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<div id="toastHost"></div>
+<a href="../index.html" class="cv-back-link"><span class="cv-back-arrow" aria-hidden="true">←</span><span class="cv-back-text" data-i18n="backToPortal">Volver al portal</span></a>
+  <div class="container">
+    <header class="header">
+      <div class="brand" aria-hidden="true">MP</div>
+      <div class="title-wrap">
+        <h1 data-i18n="headerTitle">Evaluación Clínica de Voz</h1>
+        <p class="lead" data-i18n="headerLead">Batería de evaluación: autopercepción (IDV-Cl), análisis perceptual (GRBAS) y tiempos de fonación (TMF / relación s-z).</p>
+      </div>
+    </header>
+
+    <nav class="tabs" role="tablist">
+      <button class="tab-btn active" data-tab="idv" data-i18n="tabIdv">Autopercepción (IDV-Cl)</button>
+      <button class="tab-btn" data-tab="grbas" data-i18n="tabGrbas">GRBAS</button>
+      <button class="tab-btn" data-tab="tmf" data-i18n="tabTmf">TMF y relación s/z</button>
+      <button class="tab-btn" data-tab="historial" data-i18n="tabHistorial">Historial</button>
+    </nav>
+
+    <!-- ============ IDV-Cl ============ -->
+    <section id="panel-idv" class="tab-panel active">
+      <div class="card">
+        <h2 data-i18n="idvTitle">Índice de Desventaja Vocal Chileno (IDV-Cl)</h2>
+        <p class="lead" data-i18n="idvLead">Adaptación lingüística y cultural oficial al español chileno del Voice Handicap Index (VHI), validada para su comprensión en población chilena.</p>
+
+        <div class="disclaimer">
+          <strong data-i18n="idvDisclaimerTitle">Nota clínica importante:</strong>
+          <span data-i18n="idvDisclaimerText">Esta es la adaptación lingüística y cultural chilena (IDV-Cl / IDV-Cl-10), no una validación psicométrica con puntaje de corte para población chilena. El estudio original indica explícitamente que, al no haberse realizado un análisis factorial, no corresponde establecer puntos de corte, por lo que el resultado debe interpretarse de forma cualitativa y para comparación intrapersona a lo largo del proceso terapéutico — no como un diagnóstico ni como comparación contra un umbral poblacional.</span>
+        </div>
+
+        <div class="field-row">
+          <div>
+            <label class="f-label" for="idvPaciente" data-i18n="labelPaciente">Paciente (nombre o ID)</label>
+            <input type="text" id="idvPaciente" placeholder="—">
+          </div>
+          <div>
+            <label class="f-label" for="idvVersion" data-i18n="labelVersionCuestionario">Versión</label>
+            <select id="idvVersion">
+              <option value="30" data-i18n="optIdv30">IDV-Cl completo (30 ítems)</option>
+              <option value="10" data-i18n="optIdv10">IDV-Cl-10 (versión breve, 10 ítems)</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="idvItemsWrap"></div>
+
+        <div class="score-summary" id="idvScoreSummary"></div>
+
+        <div class="controls">
+          <button class="btn btn-ghost" id="idvResetBtn" data-i18n="btnLimpiar">Limpiar</button>
+          <button class="btn btn-primary" id="idvSaveBtn" data-i18n="btnGuardarRegistro">Guardar registro</button>
+        </div>
+
+        <div class="cite" data-i18n-html="idvCitation">Fuente: Correa Forno, S. A., Rangel Azevedo, R., &amp; Côrtes Gama, A. C. (2023). Adaptación lingüística y cultural chilena del Voice Handicap Index (VHI) y del Voice Handicap Index 10 (VHI-10). <em>Revista Chilena de Fonoaudiología, 22</em>(1), 1–17. https://doi.org/10.5354/0719-4692.2023.66978 — Departamento de Voz, Escuela de Fonoaudiología, Universidad de Valparaíso, Chile.</div>
+      </div>
+    </section>
+
+    <!-- ============ GRBAS ============ -->
+    <section id="panel-grbas" class="tab-panel">
+      <div class="card">
+        <h2 data-i18n="grbasTitle">Escala GRBAS</h2>
+        <p class="lead" data-i18n="grbasLead">Evaluación perceptual-auditiva de la calidad vocal. Escala internacional de referencia (Hirano, 1981), de uso clínico universal — no requiere adaptación cultural al ser una escala de juicio clínico del profesional, no un autoinforme traducido.</p>
+
+        <div class="field-row">
+          <div>
+            <label class="f-label" for="grbasPaciente" data-i18n="labelPaciente">Paciente (nombre o ID)</label>
+            <input type="text" id="grbasPaciente" placeholder="—">
+          </div>
+          <div>
+            <label class="f-label" for="grbasTarea" data-i18n="labelTareaEvaluada">Tarea evaluada</label>
+            <input type="text" id="grbasTarea" data-i18n-placeholder="grbasTareaPlaceholder" placeholder="Vocal sostenida /a/, lectura, habla espontánea…">
+          </div>
+        </div>
+
+        <div id="grbasItemsWrap" style="margin-top:14px"></div>
+
+        <label class="f-label" for="grbasNotas" data-i18n="labelNotasClinicas">Notas clínicas</label>
+        <textarea id="grbasNotas" data-i18n-placeholder="grbasNotasPlaceholder" placeholder="Observaciones cualitativas adicionales…"></textarea>
+
+        <div class="controls">
+          <button class="btn btn-ghost" id="grbasResetBtn" data-i18n="btnLimpiar">Limpiar</button>
+          <button class="btn btn-primary" id="grbasSaveBtn" data-i18n="btnGuardarRegistro">Guardar registro</button>
+        </div>
+        <div class="cite" data-i18n="grbasCitation">Referencia: Hirano, M. (1981). Clinical Examination of Voice. Springer-Verlag. Escala de 4 grados (0 = ausente/normal, 1 = leve, 2 = moderado, 3 = severo) para cada parámetro: G = Grado global de disfonía, R = Aspereza (Roughness), B = Soplosidad (Breathiness), A = Astenia (Asthenia), S = Tensión (Strain).</div>
+      </div>
+    </section>
+
+    <!-- ============ TMF / s-z ============ -->
+    <section id="panel-tmf" class="tab-panel">
+      <div class="card">
+        <h2 data-i18n="tmfTitle">Tiempo Máximo de Fonación (TMF) y relación s/z</h2>
+        <p class="lead" data-i18n="tmfLead">Cronometra 3 intentos de cada tarea. Se registra el mejor tiempo de cada una. Indicar al paciente inspirar profundo y sostener el sonido el mayor tiempo posible, a intensidad y tono cómodos.</p>
+
+        <div class="tmf-grid">
+          <div class="tmf-box">
+            <h3 style="margin-top:0" data-i18n="tmfVocalTitle">TMF — vocal /a/ sostenida</h3>
+            <div class="tmf-timer" id="tmfTimerA">00.0</div>
+            <div class="controls" style="justify-content:center">
+              <button class="btn btn-primary" id="tmfStartA" data-i18n="btnIniciar">Iniciar</button>
+              <button class="btn btn-danger" id="tmfStopA" disabled data-i18n="btnDetener">■ Detener</button>
+            </div>
+            <div class="tmf-trials" id="tmfTrialsA"></div>
+          </div>
+          <div class="tmf-box">
+            <h3 style="margin-top:0" data-i18n="tmfSTitle">Consonante /s/ sostenida</h3>
+            <div class="tmf-timer" id="tmfTimerS">00.0</div>
+            <div class="controls" style="justify-content:center">
+              <button class="btn btn-primary" id="tmfStartS" data-i18n="btnIniciar">Iniciar</button>
+              <button class="btn btn-danger" id="tmfStopS" disabled data-i18n="btnDetener">■ Detener</button>
+            </div>
+            <div class="tmf-trials" id="tmfTrialsS"></div>
+          </div>
+          <div class="tmf-box">
+            <h3 style="margin-top:0" data-i18n="tmfZTitle">Consonante /z/ sostenida</h3>
+            <div class="tmf-timer" id="tmfTimerZ">00.0</div>
+            <div class="controls" style="justify-content:center">
+              <button class="btn btn-primary" id="tmfStartZ" data-i18n="btnIniciar">Iniciar</button>
+              <button class="btn btn-danger" id="tmfStopZ" disabled data-i18n="btnDetener">■ Detener</button>
+            </div>
+            <div class="tmf-trials" id="tmfTrialsZ"></div>
+          </div>
+        </div>
+
+        <div class="score-summary" id="tmfSummary"></div>
+
+        <div class="disclaimer" id="tmfInterpretation" style="display:none"></div>
+
+        <div class="field-row">
+          <div>
+            <label class="f-label" for="tmfPaciente" data-i18n="labelPaciente">Paciente (nombre o ID)</label>
+            <input type="text" id="tmfPaciente" placeholder="—">
+          </div>
+        </div>
+        <div class="controls">
+          <button class="btn btn-ghost" id="tmfResetBtn" data-i18n="btnLimpiar">Limpiar</button>
+          <button class="btn btn-primary" id="tmfSaveBtn" data-i18n="btnGuardarRegistro">Guardar registro</button>
+        </div>
+        <div class="cite" data-i18n="tmfCitation">Referencia de valores: TMF adulto sano orientativo — hombres ≈ 25-35 s, mujeres ≈ 15-25 s (varía con edad y método). Relación s/z ≈ 1.0 en laringe sana; valores mayores a ≈1.4 son sugerentes (no diagnósticos) de incompetencia glótica y ameritan evaluación laringológica. Eckel &amp; Boone (1981); Boone et al. (2014), The Voice and Voice Therapy.</div>
+      </div>
+    </section>
+
+    <!-- ============ Historial ============ -->
+    <section id="panel-historial" class="tab-panel">
+      <div class="card">
+        <h2 data-i18n="historialTitle">Historial de evaluaciones</h2>
+        <p class="lead" data-i18n="historialLead">Registros guardados localmente en este dispositivo (100% privado, sin servidores).</p>
+        <div class="controls" style="justify-content:flex-start">
+          <button class="btn btn-ghost" id="exportPdfBtn" data-i18n="btnExportarPdf">📄 Exportar PDF</button>
+          <button class="btn btn-danger" id="clearHistBtn" data-i18n="btnBorrarTodo">Borrar todo</button>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th data-i18n="thFecha">Fecha</th>
+              <th data-i18n="thPaciente">Paciente</th>
+              <th data-i18n="thInstrumento">Instrumento</th>
+              <th data-i18n="thResultado">Resultado</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="histTbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div data-i18n="footerNote">Herramienta de apoyo clínico. No reemplaza el juicio profesional ni sustituye una evaluación laringológica cuando esté indicada. Todos los datos se guardan únicamente en este dispositivo.</div>
+      <div>Matilde Pizarro Toro · Fonoaudióloga</div>
+    </footer>
+  </div>
+
+<script src="../assets/shared.js"></script>
+<script>
+const LS_KEY = 'evaluacion_vocal_v1';
+let registros = JSON.parse(localStorage.getItem(LS_KEY) || '[]');
+const tt = (key, fallback) => (window.CV_I18N ? window.CV_I18N.t(key) : (fallback !== undefined ? fallback : key));
+
+function toast(msg, type){
+  const host = document.getElementById('toastHost');
+  const el = document.createElement('div');
+  el.className = 'toast' + (type ? ' '+type : '');
+  el.textContent = msg;
+  host.appendChild(el);
+  setTimeout(()=>{ el.style.transition='opacity .3s ease, transform .3s ease'; el.style.opacity='0'; el.style.transform='translateY(-6px)'; setTimeout(()=>el.remove(), 320); }, 2600);
+}
+
+/* ---------- Tabs ---------- */
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-'+btn.dataset.tab).classList.add('active');
+  });
+});
+
+/* ============================================================
+   IDV-Cl — Índice de Desventaja Vocal Chileno (VHI chileno)
+   Fuente: Correa Forno, Rangel Azevedo & Côrtes Gama (2023),
+   Revista Chilena de Fonoaudiología 22(1), 1-17, Anexos 1 y 2.
+   El texto de los ítems es en español (versión validada para
+   Chile) y no se traduce a otros idiomas: traducirlo invalidaría
+   la adaptación lingüística chilena que le da su valor clínico.
+   ============================================================ */
+const IDV_ITEMS = [
+  {id:'Fu.1', sub:'Fu', text:'A las personas les cuesta escucharme debido a mi voz', in10:true},
+  {id:'Fu.2', sub:'Fu', text:'Las personas tienen dificultades para entenderme en un lugar ruidoso', in10:true},
+  {id:'Fu.3', sub:'Fu', text:'A mi familia le cuesta escucharme cuando los llamo desde otra parte de la casa', in10:false},
+  {id:'Fu.4', sub:'Fu', text:'Hablo menos por teléfono de lo que me gustaría debido a mi calidad de voz', in10:false},
+  {id:'Fu.5', sub:'Fu', text:'Tiendo a evitar los grupos de personas debido a mi voz', in10:false},
+  {id:'Fu.6', sub:'Fu', text:'Hablo menos con amigos, vecinos o parientes debido a mi voz', in10:false},
+  {id:'Fu.7', sub:'Fu', text:'Las personas me piden que repita lo que digo cuando hablo frente a frente', in10:false},
+  {id:'Fu.8', sub:'Fu', text:'Mis dificultades de voz limitan mi vida personal y social', in10:true},
+  {id:'Fu.9', sub:'Fu', text:'Me siento excluido(a) de las conversaciones debido a mi voz', in10:true},
+  {id:'Fu.10', sub:'Fu', text:'Mi problema de voz me genera pérdida de ingresos', in10:true},
+  {id:'Fi.1', sub:'Fi', text:'Me quedo sin aire cuando hablo', in10:false},
+  {id:'Fi.2', sub:'Fi', text:'El sonido de mi voz varía a lo largo del día', in10:false},
+  {id:'Fi.3', sub:'Fi', text:'Las personas me preguntan ¿qué le pasa a tu voz?', in10:true},
+  {id:'Fi.4', sub:'Fi', text:'Mi voz suena ronca y seca', in10:false},
+  {id:'Fi.5', sub:'Fi', text:'Siento como si tuviera que tensar para producir voz', in10:true},
+  {id:'Fi.6', sub:'Fi', text:'La calidad de mi voz es impredecible', in10:true},
+  {id:'Fi.7', sub:'Fi', text:'Trato de cambiar mi voz para sonar diferente', in10:false},
+  {id:'Fi.8', sub:'Fi', text:'Me esfuerzo mucho para hablar', in10:false},
+  {id:'Fi.9', sub:'Fi', text:'Mi voz está peor en la noche', in10:false},
+  {id:'Fi.10', sub:'Fi', text:'Mi voz se cansa a la mitad de una conversación', in10:false},
+  {id:'E.1', sub:'E', text:'Me pongo tenso(a) cuando hablo con otros debido a mi voz', in10:false},
+  {id:'E.2', sub:'E', text:'A las personas parece molestarles mi voz', in10:false},
+  {id:'E.3', sub:'E', text:'Encuentro que otras personas no entienden mi problema de voz', in10:false},
+  {id:'E.4', sub:'E', text:'Mi problema de voz me molesta', in10:true},
+  {id:'E.5', sub:'E', text:'Soy menos extrovertido(a) debido a mi problema de voz', in10:false},
+  {id:'E.6', sub:'E', text:'Mi voz me hace sentir en desventaja para comunicarme', in10:true},
+  {id:'E.7', sub:'E', text:'Me molesta cuando las personas me piden que repita', in10:false},
+  {id:'E.8', sub:'E', text:'Me da vergüenza cuando las personas me piden que repita', in10:false},
+  {id:'E.9', sub:'E', text:'Mi voz me hace sentir incompetente', in10:false},
+  {id:'E.10', sub:'E', text:'Mi problema de voz me da vergüenza', in10:false}
+];
+const IDV_LIKERT = [
+  {v:0, k:'idvLikert0'}, {v:1, k:'idvLikert1'}, {v:2, k:'idvLikert2'}, {v:3, k:'idvLikert3'}, {v:4, k:'idvLikert4'}
+];
+const IDV_LIKERT_FALLBACK = ['Nunca','Casi nunca','A veces','Casi siempre','Siempre'];
+
+function renderIdvItems(){
+  const version = document.getElementById('idvVersion').value;
+  const items = version === '10' ? IDV_ITEMS.filter(i=>i.in10) : IDV_ITEMS;
+  const wrap = document.getElementById('idvItemsWrap');
+  let html = '';
+  let currentSub = null;
+  const subLabels = { Fu: tt('idvSubFuncional','PARTE I. FUNCIONAL'), Fi: tt('idvSubFisica','PARTE II. FÍSICA'), E: tt('idvSubEmocional','PARTE III. EMOCIONAL') };
+  items.forEach(item=>{
+    if(item.sub !== currentSub){ currentSub = item.sub; html += `<h3>${subLabels[currentSub]}</h3>`; }
+    html += `<div class="idv-item" data-item="${item.id}">
+      <div class="idv-item-text"><span class="idv-item-id">${item.id}</span>${item.text}</div>
+      <div class="idv-scale">`;
+    IDV_LIKERT.forEach(opt=>{
+      html += `<label><input type="radio" name="idv-${item.id}" value="${opt.v}"><span>${opt.v}</span></label>`;
+    });
+    html += `</div></div>`;
+  });
+  wrap.innerHTML = html;
+  wrap.querySelectorAll('input[type=radio]').forEach(r=>r.addEventListener('change', updateIdvScore));
+  updateIdvScore();
+}
+
+function updateIdvScore(){
+  const version = document.getElementById('idvVersion').value;
+  const items = version === '10' ? IDV_ITEMS.filter(i=>i.in10) : IDV_ITEMS;
+  let total = 0, fu = 0, fi = 0, e = 0, answered = 0;
+  items.forEach(item=>{
+    const checked = document.querySelector(`input[name="idv-${item.id}"]:checked`);
+    if(checked){
+      const v = parseInt(checked.value, 10);
+      total += v; answered++;
+      if(item.sub === 'Fu') fu += v; else if(item.sub === 'Fi') fi += v; else e += v;
+    }
+  });
+  const box = document.getElementById('idvScoreSummary');
+  box.innerHTML = `
+    <div class="score-box"><div class="num">${total}</div><div class="lbl">${tt('idvScoreTotal','Puntaje total')}</div></div>
+    <div class="score-box"><div class="num">${fu}</div><div class="lbl">${tt('idvScoreFuncional','Subescala funcional')}</div></div>
+    <div class="score-box"><div class="num">${fi}</div><div class="lbl">${tt('idvScoreFisica','Subescala física')}</div></div>
+    <div class="score-box"><div class="num">${e}</div><div class="lbl">${tt('idvScoreEmocional','Subescala emocional')}</div></div>
+    <div class="score-box"><div class="num">${answered}/${items.length}</div><div class="lbl">${tt('idvScoreRespondidos','Ítems respondidos')}</div></div>
+  `;
+}
+document.getElementById('idvVersion').addEventListener('change', renderIdvItems);
+document.getElementById('idvResetBtn').addEventListener('click', ()=>{ document.getElementById('idvPaciente').value=''; renderIdvItems(); });
+document.getElementById('idvSaveBtn').addEventListener('click', ()=>{
+  const version = document.getElementById('idvVersion').value;
+  const items = version === '10' ? IDV_ITEMS.filter(i=>i.in10) : IDV_ITEMS;
+  const answered = items.filter(i=>document.querySelector(`input[name="idv-${i.id}"]:checked`)).length;
+  if(answered < items.length){ toast(tt('toastCompletarTodos','Responde todos los ítems antes de guardar.'), 'err'); return; }
+  const paciente = document.getElementById('idvPaciente').value.trim() || tt('sinNombre','(sin nombre)');
+  const total = document.getElementById('idvScoreSummary').children[0].querySelector('.num').textContent;
+  registros.push({ id:Date.now(), tipo:'IDV-Cl'+(version==='10'?'-10':''), paciente, fecha:new Date().toISOString(), resumen: `${tt('idvScoreTotal','Puntaje total')}: ${total}/${items.length*4}` });
+  persist();
+  toast(tt('toastRegistroGuardado','Registro guardado.'), 'ok');
+});
+renderIdvItems();
+
+/* ============================================================
+   GRBAS — escala perceptual internacional (Hirano, 1981)
+   ============================================================ */
+const GRBAS_LETTERS = [
+  {k:'G', nameKey:'grbasG', fallback:'Grado global'},
+  {k:'R', nameKey:'grbasR', fallback:'Aspereza (Roughness)'},
+  {k:'B', nameKey:'grbasB', fallback:'Soplosidad (Breathiness)'},
+  {k:'A', nameKey:'grbasA', fallback:'Astenia (Asthenia)'},
+  {k:'S', nameKey:'grbasS', fallback:'Tensión (Strain)'}
+];
+function renderGrbas(){
+  const wrap = document.getElementById('grbasItemsWrap');
+  let html = '';
+  GRBAS_LETTERS.forEach(letter=>{
+    html += `<div class="grbas-row">
+      <div class="grbas-letter">${letter.k}</div>
+      <div class="grbas-name">${tt(letter.nameKey, letter.fallback)}</div>
+      <div class="grbas-scale">`;
+    [0,1,2,3].forEach(v=>{
+      html += `<label><input type="radio" name="grbas-${letter.k}" value="${v}"><span>${v}</span></label>`;
+    });
+    html += `</div></div>`;
+  });
+  wrap.innerHTML = html;
+}
+renderGrbas();
+document.getElementById('grbasResetBtn').addEventListener('click', ()=>{
+  document.getElementById('grbasPaciente').value=''; document.getElementById('grbasTarea').value=''; document.getElementById('grbasNotas').value='';
+  renderGrbas();
+});
+document.getElementById('grbasSaveBtn').addEventListener('click', ()=>{
+  const vals = GRBAS_LETTERS.map(l=>{
+    const checked = document.querySelector(`input[name="grbas-${l.k}"]:checked`);
+    return checked ? `${l.k}${checked.value}` : null;
+  });
+  if(vals.includes(null)){ toast(tt('toastCompletarTodos','Responde todos los ítems antes de guardar.'), 'err'); return; }
+  const paciente = document.getElementById('grbasPaciente').value.trim() || tt('sinNombre','(sin nombre)');
+  registros.push({ id:Date.now(), tipo:'GRBAS', paciente, fecha:new Date().toISOString(), resumen: vals.join(' ') });
+  persist();
+  toast(tt('toastRegistroGuardado','Registro guardado.'), 'ok');
+});
+
+/* ============================================================
+   TMF (tiempo máximo de fonación) y relación s/z
+   ============================================================ */
+const tmfState = { A:{running:false,start:0,raf:null,trials:[]}, S:{running:false,start:0,raf:null,trials:[]}, Z:{running:false,start:0,raf:null,trials:[]} };
+function tmfTick(letter){
+  const st = tmfState[letter];
+  if(!st.running) return;
+  const elapsed = (performance.now() - st.start)/1000;
+  document.getElementById('tmfTimer'+letter).textContent = elapsed.toFixed(1);
+  st.raf = requestAnimationFrame(()=>tmfTick(letter));
+}
+function tmfStart(letter){
+  const st = tmfState[letter];
+  st.running = true; st.start = performance.now();
+  document.getElementById('tmfStart'+letter).disabled = true;
+  document.getElementById('tmfStop'+letter).disabled = false;
+  tmfTick(letter);
+}
+function tmfStop(letter){
+  const st = tmfState[letter];
+  if(!st.running) return;
+  st.running = false;
+  cancelAnimationFrame(st.raf);
+  const elapsed = (performance.now() - st.start)/1000;
+  st.trials.push(elapsed);
+  if(st.trials.length > 3) st.trials.shift();
+  document.getElementById('tmfTimer'+letter).textContent = elapsed.toFixed(1);
+  document.getElementById('tmfStart'+letter).disabled = false;
+  document.getElementById('tmfStop'+letter).disabled = true;
+  renderTmfTrials(letter);
+  updateTmfSummary();
+}
+function renderTmfTrials(letter){
+  const el = document.getElementById('tmfTrials'+letter);
+  el.innerHTML = tmfState[letter].trials.map((t,i)=>`<span class="tmf-trial-chip">#${i+1}: ${t.toFixed(1)}s</span>`).join('');
+}
+['A','S','Z'].forEach(letter=>{
+  document.getElementById('tmfStart'+letter).addEventListener('click', ()=>tmfStart(letter));
+  document.getElementById('tmfStop'+letter).addEventListener('click', ()=>tmfStop(letter));
+});
+function bestOf(letter){ const t = tmfState[letter].trials; return t.length ? Math.max(...t) : null; }
+function updateTmfSummary(){
+  const bA = bestOf('A'), bS = bestOf('S'), bZ = bestOf('Z');
+  const box = document.getElementById('tmfSummary');
+  const ratio = (bS && bZ) ? (bS/bZ) : null;
+  box.innerHTML = `
+    <div class="score-box"><div class="num">${bA!==null?bA.toFixed(1)+'s':'—'}</div><div class="lbl">${tt('tmfMejorA','Mejor TMF /a/')}</div></div>
+    <div class="score-box"><div class="num">${bS!==null?bS.toFixed(1)+'s':'—'}</div><div class="lbl">${tt('tmfMejorS','Mejor /s/')}</div></div>
+    <div class="score-box"><div class="num">${bZ!==null?bZ.toFixed(1)+'s':'—'}</div><div class="lbl">${tt('tmfMejorZ','Mejor /z/')}</div></div>
+    <div class="score-box"><div class="num">${ratio!==null?ratio.toFixed(2):'—'}</div><div class="lbl">${tt('tmfRelacionSZ','Relación s/z')}</div></div>
+  `;
+  const interp = document.getElementById('tmfInterpretation');
+  if(ratio !== null){
+    interp.style.display = 'block';
+    if(ratio > 1.4){
+      interp.className = 'disclaimer';
+      interp.textContent = tt('tmfInterpAlta', 'Relación s/z > 1.4: hallazgo orientativo (no diagnóstico) de posible incompetencia glótica. Considera correlacionar con examen laringológico.');
+    } else {
+      interp.className = 'disclaimer ok';
+      interp.textContent = tt('tmfInterpNormal', 'Relación s/z dentro de rango orientativo esperado (≈1.0).');
+    }
+  }
+}
+document.getElementById('tmfResetBtn').addEventListener('click', ()=>{
+  ['A','S','Z'].forEach(l=>{ tmfState[l].trials=[]; renderTmfTrials(l); document.getElementById('tmfTimer'+l).textContent='00.0'; });
+  document.getElementById('tmfPaciente').value='';
+  document.getElementById('tmfSummary').innerHTML='';
+  document.getElementById('tmfInterpretation').style.display='none';
+});
+document.getElementById('tmfSaveBtn').addEventListener('click', ()=>{
+  const bA = bestOf('A'), bS = bestOf('S'), bZ = bestOf('Z');
+  if(bA===null && bS===null && bZ===null){ toast(tt('toastSinMediciones','Realiza al menos una medición antes de guardar.'), 'err'); return; }
+  const paciente = document.getElementById('tmfPaciente').value.trim() || tt('sinNombre','(sin nombre)');
+  const ratio = (bS && bZ) ? (bS/bZ).toFixed(2) : '—';
+  registros.push({ id:Date.now(), tipo:'TMF/s-z', paciente, fecha:new Date().toISOString(), resumen: `TMF/a=${bA?bA.toFixed(1):'—'}s · s=${bS?bS.toFixed(1):'—'}s · z=${bZ?bZ.toFixed(1):'—'}s · s/z=${ratio}` });
+  persist();
+  toast(tt('toastRegistroGuardado','Registro guardado.'), 'ok');
+});
+
+/* ============================================================
+   Historial + PDF
+   ============================================================ */
+function persist(){ localStorage.setItem(LS_KEY, JSON.stringify(registros)); renderHistorial(); }
+function renderHistorial(){
+  const tbody = document.getElementById('histTbody');
+  if(!registros.length){ tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;color:var(--muted)">${tt('historialVacio','Sin registros aún.')}</td></tr>`; return; }
+  tbody.innerHTML = registros.slice().reverse().map(r=>`
+    <tr>
+      <td>${new Date(r.fecha).toLocaleString()}</td>
+      <td>${escapeHtml(r.paciente)}</td>
+      <td>${r.tipo}</td>
+      <td>${escapeHtml(r.resumen)}</td>
+      <td><button class="btn btn-danger" style="padding:5px 9px" onclick="deleteRegistro(${r.id})">✕</button></td>
+    </tr>`).join('');
+}
+function deleteRegistro(id){
+  registros = registros.filter(r=>r.id !== id);
+  persist();
+}
+document.getElementById('clearHistBtn').addEventListener('click', ()=>{
+  if(!confirm(tt('confirmBorrarTodos','¿Borrar todos los registros?'))) return;
+  registros = []; localStorage.removeItem(LS_KEY); renderHistorial();
+});
+document.getElementById('exportPdfBtn').addEventListener('click', ()=>{
+  if(!window.jspdf || !window.jspdf.jsPDF){ toast(tt('toastPdfLibNoCargada','No se pudo cargar la librería de PDF (revisa tu conexión a internet) — intenta de nuevo en unos segundos.'), 'err'); return; }
+  if(!registros.length){ toast(tt('toastSinRegistros','No hay registros para exportar.'), 'err'); return; }
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF({unit:'mm', format:'a4'});
+  const margin = 16; let y = 20; const pageWidth = pdf.internal.pageSize.getWidth(); const pageHeight = pdf.internal.pageSize.getHeight();
+  pdf.setFontSize(14); pdf.text(tt('pdfTitulo','Evaluación Clínica de Voz — Informe'), margin, y); y += 6;
+  pdf.setFontSize(9); pdf.setTextColor(100); pdf.text(`${tt('pdfGenerado','Generado')}: ${new Date().toLocaleString()}`, margin, y); y += 8;
+  pdf.setDrawColor(230); pdf.line(margin, y, pageWidth-margin, y); y += 8;
+  pdf.setTextColor(20);
+  registros.forEach(r=>{
+    if(y > pageHeight - 30){ pdf.addPage(); y = 20; }
+    pdf.setFont(undefined,'bold'); pdf.setFontSize(11); pdf.text(`${r.tipo} — ${r.paciente}`, margin, y); y += 5;
+    pdf.setFont(undefined,'normal'); pdf.setFontSize(9.5);
+    pdf.text(new Date(r.fecha).toLocaleString(), margin, y); y += 5;
+    const lines = pdf.splitTextToSize(r.resumen, pageWidth - margin*2);
+    lines.forEach(ln=>{ if(y > pageHeight - 20){ pdf.addPage(); y = 20; } pdf.text(ln, margin, y); y += 5; });
+    y += 4;
+  });
+  if(y > pageHeight - 30){ pdf.addPage(); y = 20; }
+  pdf.setFontSize(8); pdf.setTextColor(120);
+  const cite = 'IDV-Cl: Correa Forno, S. A., Rangel Azevedo, R., & Côrtes Gama, A. C. (2023). Revista Chilena de Fonoaudiología, 22(1), 1-17. GRBAS: Hirano, M. (1981). Clinical Examination of Voice.';
+  pdf.splitTextToSize(cite, pageWidth - margin*2).forEach(ln=>{ if(y > pageHeight - 15){ pdf.addPage(); y = 20; } pdf.text(ln, margin, y); y += 4; });
+  pdf.save(`evaluacion_vocal_${new Date().toISOString().slice(0,10)}.pdf`);
+});
+
+renderHistorial();
+window.addEventListener('cv-lang-changed', ()=>{ renderIdvItems(); renderGrbas(); updateTmfSummary(); renderHistorial(); });
+</script>
+<script src="../assets/theme-switcher.js" defer></script>
+<script src="../assets/a11y-reader.js" defer></script>
+</body>
+</html>
