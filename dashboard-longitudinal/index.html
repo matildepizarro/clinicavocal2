@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title data-i18n="pageTitle">Dashboard de evolución longitudinal</title>
+<meta name="description" data-i18n-content="metaDescription" content="Cruce de datos de evaluación vocal, esfuerzo vocal y anamnesis por paciente a lo largo del tiempo." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='7' fill='%234fb894'/%3E%3Cpath d='M5 17 L9 11 L13 14 L19 6' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='5' cy='17' r='1.4' fill='white'/%3E%3Ccircle cx='9' cy='11' r='1.4' fill='white'/%3E%3Ccircle cx='13' cy='14' r='1.4' fill='white'/%3E%3Ccircle cx='19' cy='6' r='1.4' fill='white'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/shared.css">
+<script>document.documentElement.setAttribute('data-pastel-theme', (function(){try{return localStorage.getItem('cv-pastel-theme')||'rosa';}catch(e){return 'rosa';}})());</script>
+<script src="i18n-dict.js"></script>
+<script src="../assets/i18n-engine.js"></script>
+<style>
+  :root{
+    --bg:#f0fbf6; --bg-2:#e0f5ea; --card:#ffffff; --card-2:#e6f7ef; --line:#c9ecdb;
+    --ink:#204a3a; --muted:#5a8a75; --muted-2:#79a390; --accent:#4fb894; --accent-2:#e0559e;
+    --accent-ink:#f0fbf6; --radius:18px;
+    --shadow:0 20px 50px rgba(70,45,20,0.12); --shadow-soft:0 8px 24px rgba(70,45,20,0.08);
+    --font-display:'Fraunces',serif; --font-body:'Inter',system-ui,sans-serif; --font-mono:'IBM Plex Mono',monospace;
+    --idv:#9b7bd9; --borg:#ff9d66;
+  }
+  html[data-pastel-theme="rosa"], html[data-pastel-theme="rosa"] #app{
+    --bg:#fff5fa; --bg-2:#ffeaf4; --card:#ffffff; --card-2:#fff0f7; --line:#f6d6e8;
+    --ink:#4a2140; --muted:#8a5b7a; --muted-2:#a9819c; --accent:#e0559e; --accent-2:#ff9d81; --accent-ink:#fff5fa;
+  }
+  html[data-pastel-theme="lavanda"], html[data-pastel-theme="lavanda"] #app{
+    --bg:#f6f3ff; --bg-2:#ece4ff; --card:#ffffff; --card-2:#efe9ff; --line:#ded1fb;
+    --ink:#3d2e5c; --muted:#7a6a99; --muted-2:#9689b3; --accent:#9b7bd9; --accent-2:#e0559e; --accent-ink:#f6f3ff;
+  }
+  html[data-pastel-theme="menta"], html[data-pastel-theme="menta"] #app{
+    --bg:#f0fbf6; --bg-2:#e0f5ea; --card:#ffffff; --card-2:#e6f7ef; --line:#c9ecdb;
+    --ink:#204a3a; --muted:#5a8a75; --muted-2:#79a390; --accent:#4fb894; --accent-2:#e0559e; --accent-ink:#f0fbf6;
+  }
+  html[data-pastel-theme="durazno"], html[data-pastel-theme="durazno"] #app{
+    --bg:#fff7f0; --bg-2:#ffece0; --card:#ffffff; --card-2:#ffece0; --line:#ffd8bd;
+    --ink:#5c3520; --muted:#a3775a; --muted-2:#c19a7e; --accent:#ff9d66; --accent-2:#e0559e; --accent-ink:#fff7f0;
+  }
+  html[data-pastel-theme="cielo"], html[data-pastel-theme="cielo"] #app{
+    --bg:#f0f8ff; --bg-2:#e3f2ff; --card:#ffffff; --card-2:#e3f2ff; --line:#c9e4fb;
+    --ink:#1e3a5c; --muted:#5a7fa3; --muted-2:#7fa0c0; --accent:#5bb3e0; --accent-2:#ff9d81; --accent-ink:#f0f8ff;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0}
+  body{
+    font-family:var(--font-body);
+    background:
+      radial-gradient(1200px 600px at 15% -10%, var(--bg-2), transparent 60%),
+      radial-gradient(900px 500px at 110% 10%, var(--bg-2), transparent 55%),
+      var(--bg);
+    color:var(--ink); min-height:100%; transition:background .4s ease,color .4s ease;
+  }
+  .wrap{max-width:980px;margin:0 auto;padding:28px 20px 60px}
+  .brand{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+  .brand .mark{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,var(--accent),var(--accent-2));box-shadow:var(--shadow-soft);flex:none}
+  .brand h1{font-family:var(--font-display);font-weight:600;font-size:20px;margin:0}
+  .brand span{display:block;font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+  a.back{display:inline-block;margin:14px 0 20px;color:var(--muted);text-decoration:none;font-size:13px}
+  a.back:hover{color:var(--accent)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow-soft);margin-bottom:18px}
+  .disclaimer{background:var(--card-2);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:14px 16px;margin-bottom:20px;font-size:13.5px;color:var(--muted);line-height:1.5}
+  .disclaimer strong{color:var(--ink)}
+  h2{font-family:var(--font-display);font-size:19px;margin:0 0 6px}
+  p.desc{color:var(--muted);font-size:13.5px;line-height:1.5;margin:0 0 16px}
+  label{font-size:13px;color:var(--muted);display:block;margin-bottom:4px}
+  select{padding:9px 12px;border-radius:10px;border:1px solid var(--line);font-family:var(--font-body);font-size:14px;min-width:260px}
+  .muted{color:var(--muted);font-size:12.5px}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.03em}
+  .src-pill{display:inline-block;padding:3px 10px;border-radius:999px;font-size:11.5px;font-weight:700}
+  .src-evaluacion{background:rgba(155,123,217,.18);color:#6b4fb8}
+  .src-esfuerzo{background:rgba(255,157,102,.2);color:#c05a1f}
+  .src-anamnesis{background:rgba(79,184,148,.18);color:#2f7a5f}
+  button{font-family:var(--font-body);font-weight:600;font-size:13.5px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:9px 15px;cursor:pointer}
+  .legend{display:flex;gap:16px;margin-bottom:10px;font-size:12.5px}
+  .legend .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle}
+  footer{margin-top:24px;text-align:center;font-size:12px;color:var(--muted-2)}
+</style>
+</head>
+<body>
+<div class="wrap" id="app">
+  <div class="brand">
+    <div class="mark"></div>
+    <div>
+      <h1 data-i18n="brandName">Evolución longitudinal</h1>
+      <span data-i18n="brandSub">Cruce de datos por paciente</span>
+    </div>
+  </div>
+  <a class="back" href="../index.html" data-i18n="navBack">← Volver al portal</a>
+
+  <div class="disclaimer">
+    <strong data-i18n="disclaimerTitle">Cómo funciona esta herramienta (léase antes de usar)</strong><br>
+    <span data-i18n="disclaimerText">Este dashboard lee lo que ya guardaste con otras herramientas del consultorio.</span>
+  </div>
+
+  <div class="card" id="noDataCard" style="display:none">
+    <h2 data-i18n="noDataTitle">Sin datos guardados todavía</h2>
+    <p class="desc" data-i18n="noDataText">No se encontró ningún registro en este navegador.</p>
+  </div>
+
+  <div id="mainContent" style="display:none">
+    <div class="card">
+      <label for="patientSelect" data-i18n="selectPatientLabel">Selecciona un paciente</label>
+      <select id="patientSelect"></select>
+      <p class="muted" id="patientCount"></p>
+    </div>
+
+    <div class="card">
+      <h2 data-i18n="sectionChart">Gráfico de puntajes en el tiempo</h2>
+      <div class="legend">
+        <span><span class="dot" style="background:var(--idv)"></span><span data-i18n="chartIdv">IDV-Cl (puntaje total)</span></span>
+        <span><span class="dot" style="background:var(--borg)"></span><span data-i18n="chartBorg">Esfuerzo vocal (Borg 0-10)</span></span>
+      </div>
+      <canvas id="chart" width="900" height="260" style="width:100%;height:auto;max-width:100%"></canvas>
+      <p class="muted" id="noChartMsg" style="display:none" data-i18n="noChartData">No hay suficientes puntajes numéricos para graficar.</p>
+    </div>
+
+    <div class="card">
+      <h2 data-i18n="sectionTimeline">Línea de tiempo combinada</h2>
+      <div style="margin-bottom:10px"><button id="btnExportCsv" data-i18n="btnExportCsv">Exportar línea de tiempo (CSV)</button></div>
+      <table>
+        <thead>
+          <tr>
+            <th data-i18n="colDate">Fecha</th>
+            <th data-i18n="colSource">Herramienta</th>
+            <th data-i18n="colType">Tipo</th>
+            <th data-i18n="colSummary">Resumen</th>
+          </tr>
+        </thead>
+        <tbody id="timelineBody"></tbody>
+      </table>
+      <p class="muted" id="noEventsMsg" style="display:none" data-i18n="noEventsForPatient">No hay eventos registrados para este paciente.</p>
+    </div>
+  </div>
+
+  <footer data-i18n="footerNote">Herramienta de cruce de datos ya existentes — no reemplaza el juicio clínico.</footer>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var tt = function(k, fb){ try{ return (window.CV_I18N && window.CV_I18N.t) ? window.CV_I18N.t(k) : fb; }catch(e){ return fb; } };
+  function $(id){ return document.getElementById(id); }
+
+  function readJson(key){
+    try{ var raw = localStorage.getItem(key); return raw ? JSON.parse(raw) : []; }catch(e){ return []; }
+  }
+  function norm(s){ return (s||'').toString().trim().toLowerCase(); }
+
+  // ---- Leer las 3 fuentes existentes (ver disclaimer: praat-web y
+  // rango-tonal-afirmativo no guardan historial por paciente, no se leen aquí) ----
+  var evalRegs = readJson('evaluacion_vocal_v1');       // {id,tipo,paciente,fecha,resumen}
+  var esfRegs  = readJson('medicion_esfuerzo_v2');      // {participantId,evaluador,fecha,task,score,observaciones}
+  var anamRegs = readJson('anamnesis_vocal_v1');        // {id,nombre,edad,fecha,...}
+
+  // ---- Normalizar todo a una lista de eventos con paciente/fecha/fuente/tipo/resumen/valorNumerico ----
+  var events = [];
+
+  evalRegs.forEach(function(r){
+    var idvMatch = /(-?\d+(?:[.,]\d+)?)\s*\/\s*\d+/.exec(r.resumen || '');
+    var numeric = null;
+    if(/IDV/i.test(r.tipo || '') && idvMatch) numeric = parseFloat(idvMatch[1].replace(',', '.'));
+    events.push({
+      paciente: r.paciente || '', patienteKey: norm(r.paciente),
+      fecha: r.fecha, source: 'evaluacion', sourceLabel: tt('srcEvaluacion','Evaluación vocal'),
+      tipo: r.tipo || '', resumen: r.resumen || '',
+      metric: numeric !== null ? { series: 'idv', value: numeric } : null
+    });
+  });
+
+  esfRegs.forEach(function(r){
+    var scoreN = (r.score !== undefined && r.score !== '') ? parseFloat(r.score) : null;
+    events.push({
+      paciente: r.participantId || '', patienteKey: norm(r.participantId),
+      fecha: r.fecha, source: 'esfuerzo', sourceLabel: tt('srcEsfuerzo','Esfuerzo vocal'),
+      tipo: r.task || '', resumen: (scoreN !== null ? ('Borg ' + scoreN) : '') + (r.observaciones ? (' — ' + r.observaciones) : ''),
+      metric: (scoreN !== null && !isNaN(scoreN)) ? { series: 'borg', value: scoreN } : null
+    });
+  });
+
+  anamRegs.forEach(function(r){
+    events.push({
+      paciente: r.nombre || '', patienteKey: norm(r.nombre),
+      fecha: r.fecha, source: 'anamnesis', sourceLabel: tt('srcAnamnesis','Anamnesis vocal'),
+      tipo: 'Anamnesis', resumen: (r.edad ? ('Edad: ' + r.edad) : ''),
+      metric: null
+    });
+  });
+
+  events = events.filter(function(e){ return e.patienteKey; });
+
+  if(events.length === 0){
+    $('noDataCard').style.display = 'block';
+    return;
+  }
+  $('mainContent').style.display = 'block';
+
+  // ---- Lista de pacientes únicos (case/trim-insensitive), conservando el
+  // nombre "mejor" (el más largo/con más mayúsculas originales) para mostrar ----
+  var patientDisplay = {};
+  events.forEach(function(e){
+    if(!patientDisplay[e.patienteKey] || e.paciente.length > patientDisplay[e.patienteKey].length){
+      patientDisplay[e.patienteKey] = e.paciente;
+    }
+  });
+  var patientKeys = Object.keys(patientDisplay).sort(function(a,b){
+    return patientDisplay[a].localeCompare(patientDisplay[b]);
+  });
+
+  var select = $('patientSelect');
+  patientKeys.forEach(function(k){
+    var opt = document.createElement('option');
+    opt.value = k; opt.textContent = patientDisplay[k];
+    select.appendChild(opt);
+  });
+  $('patientCount').textContent = patientKeys.length + ' ' + tt('patientsFoundCount','pacientes encontrados en el historial combinado');
+
+  function renderTimeline(key){
+    var evs = events.filter(function(e){ return e.patienteKey === key; })
+      .sort(function(a,b){ return new Date(a.fecha) - new Date(b.fecha); });
+    var body = $('timelineBody');
+    body.innerHTML = '';
+    $('noEventsMsg').style.display = evs.length ? 'none' : 'block';
+    evs.forEach(function(e){
+      var tr = document.createElement('tr');
+      var tdFecha = document.createElement('td');
+      tdFecha.textContent = e.fecha ? new Date(e.fecha).toLocaleString() : '—';
+      var tdSrc = document.createElement('td');
+      var pill = document.createElement('span');
+      pill.className = 'src-pill src-' + e.source;
+      pill.textContent = e.sourceLabel;
+      tdSrc.appendChild(pill);
+      var tdTipo = document.createElement('td'); tdTipo.textContent = e.tipo;
+      var tdResumen = document.createElement('td'); tdResumen.textContent = e.resumen;
+      tr.appendChild(tdFecha); tr.appendChild(tdSrc); tr.appendChild(tdTipo); tr.appendChild(tdResumen);
+      body.appendChild(tr);
+    });
+    return evs;
+  }
+
+  function renderChart(evs){
+    var canvas = $('chart');
+    var ctx = canvas.getContext('2d');
+    var W = canvas.width, H = canvas.height, PAD = 36;
+    ctx.clearRect(0,0,W,H);
+
+    var idvPoints = evs.filter(function(e){ return e.metric && e.metric.series === 'idv'; })
+      .map(function(e){ return { t: new Date(e.fecha).getTime(), v: e.metric.value }; });
+    var borgPoints = evs.filter(function(e){ return e.metric && e.metric.series === 'borg'; })
+      .map(function(e){ return { t: new Date(e.fecha).getTime(), v: e.metric.value }; });
+
+    if(idvPoints.length === 0 && borgPoints.length === 0){
+      $('noChartMsg').style.display = 'block';
+      return;
+    }
+    $('noChartMsg').style.display = 'none';
+
+    var allPoints = idvPoints.concat(borgPoints);
+    var minT = Math.min.apply(null, allPoints.map(function(p){return p.t;}));
+    var maxT = Math.max.apply(null, allPoints.map(function(p){return p.t;}));
+    if(minT === maxT){ minT -= 86400000; maxT += 86400000; }
+
+    var css = getComputedStyle(document.documentElement);
+    var lineColor = css.getPropertyValue('--line').trim() || '#ddd';
+    var inkColor = css.getPropertyValue('--ink').trim() || '#222';
+    var idvColor = css.getPropertyValue('--idv').trim() || '#9b7bd9';
+    var borgColor = css.getPropertyValue('--borg').trim() || '#ff9d66';
+
+    // ejes
+    ctx.strokeStyle = lineColor; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(PAD, H-PAD); ctx.lineTo(W-10, H-PAD); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(PAD, 10); ctx.lineTo(PAD, H-PAD); ctx.stroke();
+
+    function drawSeries(points, color, maxVal){
+      if(points.length === 0) return;
+      points = points.slice().sort(function(a,b){ return a.t - b.t; });
+      ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = 2.2;
+      ctx.beginPath();
+      points.forEach(function(p, i){
+        var x = PAD + (W-PAD-10) * ((p.t - minT) / (maxT - minT || 1));
+        var y = (H-PAD) - (H-PAD-10) * (p.v / maxVal);
+        if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+      });
+      ctx.stroke();
+      points.forEach(function(p){
+        var x = PAD + (W-PAD-10) * ((p.t - minT) / (maxT - minT || 1));
+        var y = (H-PAD) - (H-PAD-10) * (p.v / maxVal);
+        ctx.beginPath(); ctx.arc(x,y,3.5,0,Math.PI*2); ctx.fill();
+      });
+    }
+    // IDV-Cl típicamente 0-120 (30 items x 4); Borg 0-10 — se normalizan por separado
+    drawSeries(idvPoints, idvColor, Math.max(120, Math.max.apply(null, idvPoints.map(function(p){return p.v;}) .concat([1]))));
+    drawSeries(borgPoints, borgColor, 10);
+
+    ctx.fillStyle = inkColor; ctx.font = '11px sans-serif';
+    ctx.fillText(new Date(minT).toLocaleDateString(), PAD, H-14);
+    ctx.textAlign = 'right';
+    ctx.fillText(new Date(maxT).toLocaleDateString(), W-10, H-14);
+    ctx.textAlign = 'left';
+  }
+
+  var currentEvs = [];
+  function refresh(){
+    var key = select.value;
+    currentEvs = renderTimeline(key);
+    renderChart(currentEvs);
+  }
+  select.addEventListener('change', refresh);
+  select.selectedIndex = 0;
+  refresh();
+
+  $('btnExportCsv').addEventListener('click', function(){
+    var rows = [['fecha','herramienta','tipo','resumen']];
+    currentEvs.forEach(function(e){
+      rows.push([e.fecha || '', e.sourceLabel, e.tipo, (e.resumen||'').replace(/,/g,';')]);
+    });
+    var csv = rows.map(function(r){ return r.join(','); }).join('\n');
+    var blob = new Blob([csv], {type:'text/csv;charset=utf-8'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = 'evolucion-longitudinal-' + (select.value||'paciente') + '.csv';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+
+  window.addEventListener('cv-lang-changed', function(){ refresh(); });
+})();
+</script>
+<script src="../assets/theme-switcher.js" defer></script>
+<script src="../assets/a11y-reader.js" defer></script>
+</body>
+</html>

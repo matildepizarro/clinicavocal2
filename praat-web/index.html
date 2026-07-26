@@ -79,6 +79,7 @@
   #annCanvas{height:46px;cursor:pointer;}
   #liveWaveCanvas{height:70px;}
   #liveSpecCanvas{height:260px;}
+  #vowelCanvas{height:480px;cursor:crosshair;}
 
   .empty-hint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;color:var(--text-dim);text-align:center;padding:20px;pointer-events:none;}
 
@@ -136,6 +137,7 @@
     <div class="tabs" role="tablist" aria-label="Modo de análisis">
       <div class="tab active" id="tabFile" role="tab" aria-selected="true" tabindex="0" data-i18n="tabArchivo">Archivo</div>
       <div class="tab" id="tabLive" role="tab" aria-selected="false" tabindex="0" data-i18n="tabEnVivo">En vivo</div>
+      <div class="tab" id="tabVowels" role="tab" aria-selected="false" tabindex="0" data-i18n="tabVocales">Mapa de vocales</div>
     </div>
   </div>
 
@@ -278,6 +280,41 @@
     </div>
   </div>
 
+  <!-- ===================== VISTA MAPA DE VOCALES (F1-F2) ===================== -->
+  <div class="view" id="viewVowels">
+    <div class="toolbar" style="margin-bottom:10px;">
+      <button class="btn primary" id="btnVowelFromFile" disabled data-i18n="btnMapearArchivo">Mapear vocales del archivo</button>
+      <button class="btn on" id="btnVowelLiveTrail" disabled><span class="dot"></span><span data-i18n="btnTrazoEnVivo">Trazo en vivo</span></button>
+      <button class="btn" id="btnVowelClear" data-i18n="btnLimpiarTrazo">Limpiar trazo</button>
+      <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-dim);font-family:var(--sans);">
+        <input type="checkbox" id="chkVowelRef" checked style="accent-color:var(--accent);">
+        <span data-i18n="chkMostrarReferencias">Mostrar zonas de referencia (español, valores promedio)</span>
+      </label>
+      <button class="btn" id="btnVowelExport" data-i18n="btnExportarVocalesCsv">Exportar puntos (.csv)</button>
+    </div>
+
+    <div class="panel-label" data-i18n="labelMapaVocalico">Espacio vocálico · F1 (vertical, invertido) × F2 (horizontal, invertido)</div>
+    <div class="canvas-wrap" id="vowelWrap">
+      <canvas id="vowelCanvas"></canvas>
+      <div class="empty-hint" id="vowelEmptyHint" data-i18n="sinPuntosVocales">sin puntos aún — abrí un archivo y tocá «Mapear vocales del archivo», o iniciá el micrófono en «En vivo» con el trazo activado</div>
+    </div>
+
+    <div class="legend" style="margin-top:8px;">
+      <span><i style="background:#f4f0d8"></i><span data-i18n="legendReferenciasVocales">referencias /a e i o u/</span></span>
+      <span><i style="background:var(--accent-2)"></i><span data-i18n="legendPuntosArchivo">puntos del archivo</span></span>
+      <span><i style="background:var(--accent)"></i><span data-i18n="legendPuntoActual">punto en vivo actual</span></span>
+    </div>
+
+    <p style="font-size:12px;color:var(--text-dim);line-height:1.6;margin-top:12px;max-width:760px;" data-i18n="notaMapaVocales">
+      Las zonas de referencia muestran valores promedio publicados en la literatura de fonética
+      del español (adulto genérico, sin distinción de sexo/edad) y son solo orientativas —
+      no son un instrumento validado ni un punto de corte diagnóstico. La posición real de
+      las vocales de una persona varía según dialecto, edad, sexo y características vocales
+      individuales. Los formantes se estiman con el mismo motor LPC aproximado usado en las
+      otras pestañas.
+    </p>
+  </div>
+
   <footer data-i18n="footerText">
     Prototipo escrito en JavaScript puro (FFT propia, autocorrelación para F0, LPC + búsqueda de raíces para formantes).
     No es una compilación del código fuente de Praat: reimplementa los algoritmos DSP equivalentes para funcionar
@@ -310,7 +347,8 @@
       active:false, frozen:false, ctx:null, stream:null, source:null, analyser:null,
       timeArr:null, freqArr:null, lastPitch:{freq:NaN,strength:0}, lastFormants:[], lastIntensity:-90,
       frameCounter:0, recorder:null, recChunks:[], startTime:0, log:[]
-    }
+    },
+    vowel: { fileTrail:[], liveTrail:[], liveOn:false }
   };
 
   const $ = id => document.getElementById(id);
@@ -323,18 +361,25 @@
   // ==================================================================
   // PESTAÑAS
   // ==================================================================
-  function selectTab(showFile){
-    $('tabFile').classList.toggle('active', showFile);
-    $('tabLive').classList.toggle('active', !showFile);
-    $('tabFile').setAttribute('aria-selected', String(showFile));
-    $('tabLive').setAttribute('aria-selected', String(!showFile));
-    $('viewFile').classList.toggle('active', showFile);
-    $('viewLive').classList.toggle('active', !showFile);
+  function selectTab(mode){
+    const isFile = mode==='file', isLive = mode==='live', isVowels = mode==='vowels';
+    $('tabFile').classList.toggle('active', isFile);
+    $('tabLive').classList.toggle('active', isLive);
+    $('tabVowels').classList.toggle('active', isVowels);
+    $('tabFile').setAttribute('aria-selected', String(isFile));
+    $('tabLive').setAttribute('aria-selected', String(isLive));
+    $('tabVowels').setAttribute('aria-selected', String(isVowels));
+    $('viewFile').classList.toggle('active', isFile);
+    $('viewLive').classList.toggle('active', isLive);
+    $('viewVowels').classList.toggle('active', isVowels);
+    if (isVowels){ fitVowelCanvas(); drawVowelMap(); }
   }
-  $('tabFile').addEventListener('click', ()=> selectTab(true));
-  $('tabLive').addEventListener('click', ()=> selectTab(false));
-  $('tabFile').addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); selectTab(true); } });
-  $('tabLive').addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); selectTab(false); } });
+  $('tabFile').addEventListener('click', ()=> selectTab('file'));
+  $('tabLive').addEventListener('click', ()=> selectTab('live'));
+  $('tabVowels').addEventListener('click', ()=> selectTab('vowels'));
+  $('tabFile').addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); selectTab('file'); } });
+  $('tabLive').addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); selectTab('live'); } });
+  $('tabVowels').addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); selectTab('vowels'); } });
 
   // ==================================================================
   // UTILIDADES NUMÉRICAS (DSP) — compartidas por ambos modos
@@ -809,6 +854,7 @@
   window.addEventListener('resize', ()=>{
     if (S.audioBuffer){ buildSpectrogramImage(); draw(); }
     fitLiveCanvases();
+    if ($('viewVowels').classList.contains('active')){ fitVowelCanvas(); drawVowelMap(); }
   });
 
   function play(){
@@ -863,7 +909,7 @@
       S.audioBuffer = buf;
       S.selection = null; S.cursor = 0; S.annotations = [];
       renderAnnList();
-      ['btnPlay','btnStop','btnExportImg','btnExportAnn','btnAddAnn','btnReport'].forEach(id=>$(id).disabled=false);
+      ['btnPlay','btnStop','btnExportImg','btnExportAnn','btnAddAnn','btnReport','btnVowelFromFile'].forEach(id=>$(id).disabled=false);
       $('reportWrap').style.display = 'none';
       runAnalysis();
     }catch(err){
@@ -1087,6 +1133,126 @@
     }
   }
 
+  // ==================================================================
+  // MAPA DE VOCALES (F1-F2)
+  // ==================================================================
+  const vowelCanvas = $('vowelCanvas');
+  const vowelEmptyHint = $('vowelEmptyHint');
+  const VOWEL_F1_MIN = 200, VOWEL_F1_MAX = 900;   // eje vertical (invertido: agudo arriba)
+  const VOWEL_F2_MIN = 600, VOWEL_F2_MAX = 2500;  // eje horizontal (invertido: convención fonética)
+  // Valores promedio de referencia para vocales del español (adulto genérico, sin
+  // distinción de sexo/edad), aproximados a partir de literatura de fonética acústica
+  // del español (p. ej. Martínez-Celdrán / Quilis). Solo orientativos, no diagnósticos.
+  const VOWEL_REFS = [
+    { v:'i', f1:280, f2:2300 },
+    { v:'e', f1:460, f2:1900 },
+    { v:'a', f1:700, f2:1400 },
+    { v:'o', f1:500, f2:900  },
+    { v:'u', f1:310, f2:800  }
+  ];
+
+  function fitVowelCanvas(){ fitCanvas(vowelCanvas); }
+
+  function vF2toX(f2, w){ return w - Math.max(0, Math.min(1, (f2-VOWEL_F2_MIN)/(VOWEL_F2_MAX-VOWEL_F2_MIN)))*w; }
+  function vF1toY(f1, h){ return Math.max(0, Math.min(1, (f1-VOWEL_F1_MIN)/(VOWEL_F1_MAX-VOWEL_F1_MIN)))*h; }
+
+  function drawVowelMap(){
+    if (!vowelCanvas.width) fitVowelCanvas();
+    const ctx = vowelCanvas.getContext('2d');
+    const w = vowelCanvas.width, h = vowelCanvas.height;
+    ctx.clearRect(0,0,w,h);
+
+    const fileN = S.vowel.fileTrail.length, liveN = S.vowel.liveTrail.length;
+    vowelEmptyHint.style.display = (fileN===0 && liveN===0) ? 'flex' : 'none';
+
+    // grilla
+    ctx.strokeStyle = getCss('--line'); ctx.lineWidth = 1;
+    ctx.font = '10px ' + getCss('--mono');
+    ctx.fillStyle = getCss('--text-dim');
+    for (let f2=VOWEL_F2_MIN; f2<=VOWEL_F2_MAX; f2+=400){
+      const x = vF2toX(f2,w);
+      ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,h); ctx.stroke();
+      ctx.fillText(f2+'Hz', x+3, 12);
+    }
+    for (let f1=VOWEL_F1_MIN; f1<=VOWEL_F1_MAX; f1+=150){
+      const y = vF1toY(f1,h);
+      ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(w,y); ctx.stroke();
+      ctx.fillText(f1+'Hz', 3, y-3);
+    }
+
+    // referencias de vocales
+    if ($('chkVowelRef').checked){
+      for (const r of VOWEL_REFS){
+        const x = vF2toX(r.f2,w), y = vF1toY(r.f1,h);
+        const rad = Math.max(18, w*0.045);
+        ctx.beginPath(); ctx.arc(x,y,rad,0,Math.PI*2);
+        ctx.fillStyle = 'rgba(244,240,216,0.25)'; ctx.fill();
+        ctx.strokeStyle = '#f4f0d8'; ctx.lineWidth = 1.4; ctx.stroke();
+        ctx.fillStyle = '#f4f0d8';
+        ctx.font = '600 13px ' + getCss('--sans');
+        ctx.fillText('/'+r.v+'/', x-9, y+4);
+      }
+    }
+
+    // puntos del archivo (nube completa, un color)
+    ctx.fillStyle = getCss('--accent-2');
+    for (const p of S.vowel.fileTrail){
+      const x = vF2toX(p.f2,w), y = vF1toY(p.f1,h);
+      ctx.beginPath(); ctx.arc(x,y,2.4,0,Math.PI*2); ctx.fill();
+    }
+
+    // trazo en vivo (con estela: más viejo más transparente)
+    const liveTrail = S.vowel.liveTrail;
+    for (let i=0;i<liveTrail.length;i++){
+      const p = liveTrail[i];
+      const x = vF2toX(p.f2,w), y = vF1toY(p.f1,h);
+      const age = (liveTrail.length-1-i) / Math.max(1,liveTrail.length-1);
+      const alpha = Math.max(0.08, 1 - age);
+      ctx.fillStyle = `rgba(224,85,158,${alpha})`;
+      ctx.beginPath(); ctx.arc(x,y, i===liveTrail.length-1?5:3, 0, Math.PI*2); ctx.fill();
+    }
+  }
+
+  function pushVowelPoint(formants){
+    if (!S.vowel.liveOn) return;
+    if (!formants || formants[0]===undefined || formants[1]===undefined) return;
+    const f1 = formants[0], f2 = formants[1];
+    if (f1 < 100 || f1 > 1200 || f2 < 400 || f2 > 3200) return; // descarta lecturas espurias
+    S.vowel.liveTrail.push({f1,f2});
+    if (S.vowel.liveTrail.length > 400) S.vowel.liveTrail.shift();
+    if ($('viewVowels').classList.contains('active')) drawVowelMap();
+  }
+
+  $('btnVowelFromFile').addEventListener('click', ()=>{
+    if (!S.formants || !S.formants.length) return;
+    const pts = [];
+    for (const fr of S.formants){
+      if (fr && fr[0]!==undefined && fr[1]!==undefined) pts.push({f1:fr[0], f2:fr[1]});
+    }
+    S.vowel.fileTrail = pts;
+    setStatus(tt('stMapaVocalesGenerado','Mapa de vocales generado a partir del archivo: {n} puntos.').replace('{n}', pts.length));
+    drawVowelMap();
+  });
+
+  $('btnVowelLiveTrail').addEventListener('click', ()=>{
+    S.vowel.liveOn = !S.vowel.liveOn;
+    $('btnVowelLiveTrail').classList.toggle('on', S.vowel.liveOn);
+  });
+
+  $('btnVowelClear').addEventListener('click', ()=>{
+    S.vowel.fileTrail = []; S.vowel.liveTrail = [];
+    drawVowelMap();
+  });
+
+  $('chkVowelRef').addEventListener('change', drawVowelMap);
+
+  $('btnVowelExport').addEventListener('click', ()=>{
+    const rows = [tt('csvHeaderVocales','origen,F1_Hz,F2_Hz')];
+    for (const p of S.vowel.fileTrail) rows.push(`archivo,${p.f1.toFixed(0)},${p.f2.toFixed(0)}`);
+    for (const p of S.vowel.liveTrail) rows.push(`vivo,${p.f1.toFixed(0)},${p.f2.toFixed(0)}`);
+    downloadText(rows.join('\n'), tt('fileMapaVocales','mapa_vocales.csv'), 'text/csv');
+  });
+
   $('btnLiveStart').addEventListener('click', async ()=>{
     if (S.live.active){ stopLive(); return; }
     try{
@@ -1116,6 +1282,7 @@
       $('btnLiveFreeze').disabled = false;
       $('btnLiveRec').disabled = false;
       $('btnLiveLog').disabled = false;
+      $('btnVowelLiveTrail').disabled = false;
       $('btnLiveLogExport').disabled = S.live.log.length === 0;
       setStatus(tt('stMicVivoActivo','Micrófono en vivo activo.'));
       requestAnimationFrame(liveTick);
@@ -1203,6 +1370,7 @@
     $('btnLiveFreeze').disabled = true; $('btnLiveFreeze').textContent = tt('btnCongelar','❚❚ Congelar'); S.live.frozen = false;
     $('btnLiveRec').disabled = true;
     $('btnLiveLog').disabled = true;
+    $('btnVowelLiveTrail').disabled = true;
     $('ledVoiced').classList.remove('on');
     $('meterFill').style.width = '0%';
     liveEmptyHint.style.display = 'flex';
@@ -1290,6 +1458,7 @@
     S.live.lastFormants = estimateFormants(frame, formSR, order, p.numForm, 60);
 
     updateLiveHUD(pitch, S.live.lastFormants, db);
+    pushVowelPoint(S.live.lastFormants);
   }
 
   function updateLiveHUD(pitch, formants, db){
@@ -1320,6 +1489,8 @@
 
   // dibujo inicial
   fitLiveCanvases();
+  fitVowelCanvas();
+  drawVowelMap();
   draw();
 
   window.addEventListener('cv-lang-changed', ()=>{
