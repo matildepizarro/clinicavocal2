@@ -10,6 +10,7 @@
 
 [![Licencia MIT](https://img.shields.io/badge/licencia-MIT-4fb894?style=flat-square)](#-licencia--license--licença)
 [![Sin backend](https://img.shields.io/badge/backend-cero%20servidores-5bb3e0?style=flat-square)](#-arquitectura-técnica--tech-stack--arquitetura-técnica)
+[![13 herramientas](https://img.shields.io/badge/herramientas-13-e0a5c8?style=flat-square)](#-las-13-herramientas)
 [![3 idiomas](https://img.shields.io/badge/idiomas-ES%20%C2%B7%20PT%20%C2%B7%20EN-e0a5c8?style=flat-square)](#-idioma--language--idioma)
 [![Accesible](https://img.shields.io/badge/accesibilidad-lector%20por%20voz-9b8bd4?style=flat-square)](#-accesibilidad--accessibility--acessibilidade)
 [![PWA offline](https://img.shields.io/badge/PWA-funciona%20sin%20internet-f5b98a?style=flat-square)](#-arquitectura-técnica--tech-stack--arquitetura-técnica)
@@ -27,7 +28,7 @@
 ¿Cuántas veces armaste una rutina de ejercicios vocales a mano, cronómetro en una
 ventana y planilla en otra? ¿Cuántas veces quisiste **medir** el rango vocal de tu
 paciente, su vibrato, su esfuerzo fonatorio o su afinación, y terminaste haciendo
-cálculos a ojo? **Consultorio Vocal** es una plataforma clínica completa —doce
+cálculos a ojo? **Consultorio Vocal** es una plataforma clínica completa —trece
 herramientas profesionales bajo un mismo portal— pensada por una fonoaudióloga,
 para fonoaudiólogos, para que tu tiempo de sesión sea para tu paciente y no para
 pelear con planillas.
@@ -40,7 +41,7 @@ en menos de cinco minutos con GitHub Pages.
 > en su propio consultorio, ahora disponible para toda la comunidad
 > fonoaudiológica hispanohablante, lusófona y anglófona.*
 
-### 🧰 Las 12 herramientas
+### 🧰 Las 13 herramientas
 
 | Herramienta | Qué resuelve en tu día a día clínico |
 |---|---|
@@ -55,6 +56,7 @@ en menos de cinco minutos con GitHub Pages.
 | 📝 **Anamnesis Vocal** | Ficha estructurada de ingreso: antecedentes, hábitos y factores de riesgo vocal, con exportación a PDF lista para la ficha clínica. |
 | 📚 **Biblioteca Educativa** | Contenido educativo sobre la voz —anatomía, diagnósticos frecuentes y cuándo consultar— explicado en lenguaje simple para compartir con pacientes. |
 | 🏳️‍⚧️ **Rango Tonal Afirmativo** | Entrenamiento de tono habitual y rango objetivo para voz afirmativa de género, con glides guiados y seguimiento de progreso. |
+| 📶 **Biofeedback Vocal en Tiempo Real** | Visualiza tu tono en vivo (como una "montaña rusa" de puntos que se desplaza) contra una banda objetivo, con 5 ejercicios guiados (vocal sostenida, lectura de frase, glide ascendente, glide descendente, habla espontánea), indicador aproximado de brillo/resonancia e historial de sesiones. Inspirada en la misma idea que [TruVox](https://ceas5.uc.edu/transvoice) (Universidad de Cincinnati / BITS Lab) — cita incluida dentro de la herramienta. |
 | 📈 **Dashboard de Evolución Longitudinal** | Cruza automáticamente los datos de Evaluación Vocal, Esfuerzo Vocal y Anamnesis por paciente a lo largo del tiempo (leídos desde el localStorage de esas herramientas), con línea de tiempo, gráfico y exportación a CSV. |
 
 Cada herramienta funciona **de forma completamente independiente** —podés
@@ -123,6 +125,7 @@ HTML, CSS y JavaScript estático, funciona en cualquier hosting estático
 ├── anamnesis-vocal/                     ← Anamnesis Vocal (ficha de ingreso)
 ├── biblioteca-educativa/                 ← Biblioteca Educativa para pacientes
 ├── rango-tonal-afirmativo/                ← Rango tonal afirmativo (voz afirmativa de género)
+├── biofeedback-vocal/                      ← Biofeedback Vocal en Tiempo Real (inspirado en TruVox, ref. citada)
 └── dashboard-longitudinal/                 ← Dashboard de evolución longitudinal
 ```
 
@@ -191,7 +194,7 @@ Quantas vezes você montou uma rotina de exercícios vocais na mão, cronômetro
 em uma janela e planilha em outra? Quantas vezes quis **medir** a extensão
 vocal do seu paciente, o vibrato, o esforço fonatório ou a afinação, e acabou
 fazendo cálculos no olho? **Consultorio Vocal** é uma plataforma clínica
-completa — doze ferramentas profissionais em um único portal — pensada por
+completa — treze ferramentas profissionais em um único portal — pensada por
 uma fonoaudióloga, para fonoaudiólogos, para que seu tempo de sessão seja
 para o seu paciente, e não para brigar com planilhas.
 
@@ -203,7 +206,7 @@ na internet em menos de cinco minutos com o GitHub Pages.
 > usa no próprio consultório, agora disponível para toda a comunidade
 > fonoaudiológica de língua portuguesa, espanhola e inglesa.*
 
-### 🧰 As 12 ferramentas
+### 🧰 As 13 ferramentas
 
 | Ferramenta | O que resolve no seu dia a dia clínico |
 |---|---|
@@ -218,6 +221,7 @@ na internet em menos de cinco minutos com o GitHub Pages.
 | 📝 **Anamnese Vocal** | Ficha estruturada de admissão: antecedentes, hábitos e fatores de risco vocal, com exportação em PDF pronta para o prontuário. |
 | 📚 **Biblioteca Educativa** | Conteúdo educativo sobre a voz — anatomia, diagnósticos frequentes e quando consultar — explicado em linguagem simples para compartilhar com pacientes. |
 | 🏳️‍⚧️ **Faixa Tonal Afirmativa** | Treinamento de tom habitual e faixa-alvo para voz afirmativa de gênero, com glides guiados e acompanhamento de progresso. |
+| 📶 **Biofeedback Vocal em Tempo Real** | Visualize seu tom ao vivo (como uma "montanha-russa" de pontos deslizando) em relação a uma faixa-alvo, com 5 exercícios guiados (vogal sustentada, leitura de frase, glide ascendente, glide descendente, fala espontânea), indicador aproximado de brilho/ressonância e histórico de sessões. Inspirada na mesma ideia do [TruVox](https://ceas5.uc.edu/transvoice) (Universidade de Cincinnati / BITS Lab) — citação incluída dentro da ferramenta. |
 | 📈 **Painel de Evolução Longitudinal** | Cruza automaticamente os dados de Avaliação Vocal, Esforço Vocal e Anamnese por paciente ao longo do tempo (lidos do localStorage dessas ferramentas), com linha do tempo, gráfico e exportação em CSV. |
 
 Cada ferramenta funciona **de forma totalmente independiente** — você pode
@@ -286,6 +290,7 @@ HTML, CSS e JavaScript estático, funciona em qualquer hospedagem estática
 ├── anamnesis-vocal/                      ← Anamnese Vocal (ficha de admissão)
 ├── biblioteca-educativa/                  ← Biblioteca Educativa para pacientes
 ├── rango-tonal-afirmativo/                 ← Faixa tonal afirmativa (voz afirmativa de gênero)
+├── biofeedback-vocal/                       ← Biofeedback Vocal em Tempo Real (inspirado no TruVox, ref. citada)
 └── dashboard-longitudinal/                  ← Painel de evolução longitudinal
 ```
 
@@ -348,7 +353,7 @@ How many times have you built a vocal-exercise routine by hand, a stopwatch in
 one window and a spreadsheet in another? How many times did you want to
 **measure** a patient's vocal range, their vibrato, their phonatory effort or
 their pitch accuracy, and ended up eyeballing it? **Consultorio Vocal** is a
-complete clinical platform — twelve professional tools under one portal —
+complete clinical platform — thirteen professional tools under one portal —
 designed by a speech-language pathologist, for speech-language pathologists,
 so your session time goes to your patient instead of fighting spreadsheets.
 
@@ -361,7 +366,7 @@ the web in under five minutes with GitHub Pages.
 > speech-language-pathology community — Spanish-, Portuguese- and
 > English-speaking alike.*
 
-### 🧰 The 12 tools
+### 🧰 The 13 tools
 
 | Tool | What it solves in your clinical day-to-day |
 |---|---|
@@ -376,6 +381,7 @@ the web in under five minutes with GitHub Pages.
 | 📝 **Vocal Case History** | A structured intake form: history, habits and vocal risk factors, with PDF export ready for the patient's chart. |
 | 📚 **Patient Education Library** | Educational content about the voice — anatomy, common diagnoses, and when to seek care — explained in plain language to share with patients. |
 | 🏳️‍⚧️ **Affirming Pitch Range** | Habitual pitch and target-range training for gender-affirming voice, with guided glides and progress tracking. |
+| 📶 **Real-Time Vocal Biofeedback** | Watch your pitch live (a "rollercoaster" of scrolling dots) against a target band, with 5 guided exercises (sustained vowel, phrase reading, rising glide, falling glide, spontaneous speech), an approximate brightness/resonance indicator, and a session history. Inspired by the same idea as [TruVox](https://ceas5.uc.edu/transvoice) (University of Cincinnati / BITS Lab) — citation included inside the tool. |
 | 📈 **Longitudinal Progress Dashboard** | Automatically cross-references Voice Assessment, Vocal Effort and Case History data per patient over time (read from those tools' localStorage), with a combined timeline, chart and CSV export. |
 
 Every tool works **fully standalone** — you can share the link to just one,
@@ -446,6 +452,7 @@ directly in a browser.
 ├── anamnesis-vocal/                      ← Vocal Case History (intake form)
 ├── biblioteca-educativa/                  ← Patient Education Library
 ├── rango-tonal-afirmativo/                 ← Affirming Pitch Range training
+├── biofeedback-vocal/                       ← Real-Time Vocal Biofeedback (inspired by TruVox, ref. cited)
 └── dashboard-longitudinal/                  ← Longitudinal progress dashboard
 ```
 

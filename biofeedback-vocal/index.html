@@ -1,0 +1,641 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title data-i18n="pageTitle">Biofeedback Vocal en Tiempo Real</title>
+<meta name="description" data-i18n-content="metaDescription" content="Visualización en vivo del tono y del brillo de la voz frente a una banda objetivo, con ejercicios guiados para entrenamiento vocal afirmativo de género." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='7' fill='%23ff9d66'/%3E%3Ccircle cx='7' cy='16' r='2' fill='white'/%3E%3Ccircle cx='12' cy='9' r='2' fill='white'/%3E%3Ccircle cx='17' cy='13' r='2' fill='white'/%3E%3Cpath d='M7 16 12 9 17 13' stroke='white' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<script>document.documentElement.setAttribute('data-pastel-theme', (function(){try{return localStorage.getItem('cv-pastel-theme')||'rosa';}catch(e){return 'rosa';}})());</script>
+<script src="i18n-dict.js"></script>
+<script src="../assets/i18n-engine.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/shared.css">
+<style>
+  :root{
+    --bg:#fff5fa; --bg-2:#ffeaf4; --card:#ffffff; --card-2:#fff0f7; --line:#f6d6e8;
+    --ink:#4a2140; --muted:#8a5b7a; --muted-2:#a9819c; --accent:#e0559e; --accent-2:#ff9d66; --accent-ink:#fff5fa;
+    --radius:18px; --shadow:0 20px 50px rgba(70,45,20,0.12); --shadow-soft:0 8px 24px rgba(70,45,20,0.08);
+    --font-display:'Fraunces',serif; --font-body:'Inter',system-ui,sans-serif; --font-mono:'IBM Plex Mono',monospace;
+    --ok:#2f9e6e; --warn:#d9633a;
+  }
+  html[data-pastel-theme="rosa"]{ --bg:#fff5fa; --bg-2:#ffeaf4; --card-2:#fff0f7; --line:#f6d6e8; --ink:#4a2140; --muted:#8a5b7a; --accent:#e0559e; --accent-2:#ff9d66; --accent-ink:#fff5fa; }
+  html[data-pastel-theme="lavanda"]{ --bg:#f6f3ff; --bg-2:#ece4ff; --card-2:#efe9ff; --line:#ded1fb; --ink:#3d2e5c; --muted:#7a6a99; --accent:#9b7bd9; --accent-2:#e0559e; --accent-ink:#f6f3ff; }
+  html[data-pastel-theme="menta"]{ --bg:#f0fbf6; --bg-2:#e0f5ea; --card-2:#e6f7ef; --line:#c9ecdb; --ink:#204a3a; --muted:#5a8a75; --accent:#4fb894; --accent-2:#e0559e; --accent-ink:#f0fbf6; }
+  html[data-pastel-theme="durazno"]{ --bg:#fff7f0; --bg-2:#ffece0; --card-2:#ffece0; --line:#ffd8bd; --ink:#5c3520; --muted:#a3775a; --accent:#ff9d66; --accent-2:#e0559e; --accent-ink:#fff7f0; }
+  html[data-pastel-theme="cielo"]{ --bg:#f0f8ff; --bg-2:#e3f2ff; --card-2:#e3f2ff; --line:#c9e4fb; --ink:#1e3a5c; --muted:#5a7fa3; --accent:#5bb3e0; --accent-2:#ff9d81; --accent-ink:#f0f8ff; }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0}
+  body{
+    font-family:var(--font-body); color:var(--ink); min-height:100%;
+    background:
+      radial-gradient(1200px 600px at 15% -10%, var(--bg-2), transparent 60%),
+      radial-gradient(900px 500px at 110% 10%, var(--bg-2), transparent 55%),
+      var(--bg);
+    transition:background .4s ease, color .4s ease;
+  }
+  h1,h2,h3{font-family:var(--font-display); font-weight:600; margin:0;}
+  .wrap{max-width:960px; margin:0 auto; padding:28px 20px 70px;}
+  .brand{display:flex; align-items:center; gap:12px; margin-bottom:8px;}
+  .brand .mark{width:36px; height:36px; border-radius:10px; background:linear-gradient(135deg,var(--accent),var(--accent-2)); box-shadow:var(--shadow-soft); flex:none; display:flex; align-items:center; justify-content:center; font-size:17px;}
+  h1{font-size:1.5rem;}
+  p.lede{color:var(--muted); margin:8px 0 0; font-size:.95rem; max-width:640px;}
+
+  .card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:20px 22px; margin-top:18px; box-shadow:var(--shadow-soft);}
+  .card h2{font-size:1.1rem; margin-bottom:8px;}
+  .muted{color:var(--muted);}
+  .small{font-size:.82rem;}
+
+  details.about summary{cursor:pointer; font-weight:600; font-family:var(--font-display); font-size:1.05rem; list-style:none; display:flex; align-items:center; gap:8px;}
+  details.about summary::-webkit-details-marker{display:none;}
+  details.about summary::before{content:'▸'; transition:transform .15s ease; color:var(--accent);}
+  details.about[open] summary::before{transform:rotate(90deg);}
+  details.about p{margin:10px 0; font-size:.9rem; line-height:1.55; color:var(--ink);}
+  details.about .refs{margin-top:6px; padding:12px 14px; background:var(--card-2); border-radius:12px; border:1px solid var(--line); font-size:.82rem; line-height:1.6;}
+  details.about .refs a{color:var(--accent); word-break:break-all;}
+  details.about .disclaimer{font-size:.8rem; color:var(--muted); border-left:3px solid var(--accent-2); padding-left:10px; margin-top:10px;}
+
+  .chips{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{border:1px solid var(--line); background:var(--card-2); color:var(--ink); padding:8px 13px; border-radius:999px; font-size:.82rem; cursor:pointer; font-family:inherit; transition:.15s;}
+  .chip.active{background:var(--accent); border-color:var(--accent); color:#fff; font-weight:600;}
+  .chip:hover:not(.active){border-color:var(--accent);}
+  .instructions{margin-top:12px; padding:12px 14px; background:var(--card-2); border-radius:12px; border:1px dashed var(--line); font-size:.86rem; line-height:1.5;}
+  .instructions b{color:var(--accent);}
+  .sample-phrase{margin-top:8px; font-family:var(--font-display); font-style:italic; font-size:1rem; color:var(--ink);}
+
+  .row{display:flex; flex-wrap:wrap; gap:14px; align-items:flex-end; margin-top:14px;}
+  .field{display:flex; flex-direction:column; gap:6px; flex:1; min-width:170px;}
+  .field label{font-size:.76rem; font-weight:700; letter-spacing:.02em; text-transform:uppercase; color:var(--muted);}
+  select, input[type="number"]{padding:9px 10px; border-radius:10px; border:1px solid var(--line); background:#fff; font-size:.88rem; font-family:inherit; color:var(--ink);}
+  .minmax{display:flex; gap:8px;}
+  .minmax input{width:80px;}
+
+  .btn{padding:10px 18px; border-radius:999px; border:none; cursor:pointer; font-weight:700; font-size:.86rem; font-family:inherit; transition:.15s;}
+  .btn-primary{background:var(--accent); color:#fff;}
+  .btn-primary:hover{filter:brightness(1.07);}
+  .btn-primary:disabled{opacity:.5; cursor:not-allowed;}
+  .btn-ghost{background:var(--card-2); color:var(--ink); border:1px solid var(--line);}
+  .btn-ghost:hover{border-color:var(--accent);}
+  .btn-danger{background:transparent; color:var(--warn); border:1px solid rgba(217,99,58,.4);}
+
+  .stage{margin-top:16px; position:relative;}
+  canvas#pitchCanvas{width:100%; height:220px; display:block; border-radius:14px; border:1px solid var(--line); background:linear-gradient(180deg,#fff,var(--card-2));}
+  .stage-hint{position:absolute; top:8px; left:12px; font-family:var(--font-mono); font-size:.66rem; letter-spacing:.05em; text-transform:uppercase; color:var(--muted);}
+
+  .stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:10px; margin-top:14px;}
+  .stat{background:var(--card-2); border:1px solid var(--line); border-radius:12px; padding:10px 12px; text-align:center;}
+  .stat .num{font-family:var(--font-mono); font-size:1.35rem; font-weight:600; color:var(--accent);}
+  .stat .lbl{font-size:.68rem; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); margin-top:2px;}
+
+  .reso-wrap{margin-top:16px;}
+  .reso-bar-track{height:14px; border-radius:999px; background:var(--card-2); border:1px solid var(--line); overflow:hidden; margin-top:6px;}
+  .reso-bar-fill{height:100%; width:0%; background:linear-gradient(90deg,var(--accent),var(--accent-2)); transition:width .12s linear;}
+  .reso-caveat{font-size:.74rem; color:var(--muted); margin-top:6px; line-height:1.4;}
+
+  table{width:100%; border-collapse:collapse; margin-top:12px; font-size:.82rem;}
+  th,td{padding:9px 10px; border-bottom:1px solid var(--line); text-align:left;}
+  th{color:var(--muted); font-weight:700; font-size:.72rem; text-transform:uppercase; letter-spacing:.03em;}
+  .table-actions{display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;}
+
+  .mic-error{margin-top:10px; padding:10px 12px; border-radius:10px; background:rgba(217,99,58,.1); color:var(--warn); font-size:.84rem; display:none;}
+  .mic-error.show{display:block;}
+
+  @media (max-width:600px){ .row{flex-direction:column; align-items:stretch;} }
+</style>
+</head>
+<body>
+<a href="../index.html" class="cv-back-link"><span class="cv-back-arrow" aria-hidden="true">←</span><span class="cv-back-text" data-i18n="backToPortal">Volver al portal</span></a>
+
+<div class="wrap">
+
+  <div class="brand" aria-hidden="true">
+    <div class="mark">📶</div>
+  </div>
+  <h1 data-i18n="headerTitle">Biofeedback Vocal en Tiempo Real</h1>
+  <p class="lede" data-i18n="headerLede">Visualiza tu tono en vivo mientras hablas o cantas, contra una banda objetivo, con ejercicios guiados de práctica y un indicador aproximado de brillo/resonancia.</p>
+
+  <details class="about" open>
+    <summary data-i18n="aboutSummary">Acerca de esta herramienta y referencias científicas</summary>
+    <p data-i18n="aboutText1">Esta herramienta ofrece retroalimentación visual en vivo del tono (F0) de la voz —una franja que se desplaza en el tiempo, como un "montaña rusa" de puntos— comparado con una banda objetivo, más un indicador aproximado de brillo tonal. La idea general está inspirada en el mismo enfoque que <b>TruVox</b> (Universidad de Cincinnati / BITS Lab), un software de entrenamiento vocal afirmativo de género con biofeedback en tiempo real.</p>
+    <p data-i18n="aboutText2">Esta es una <b>implementación propia e independiente</b> de Consultorio Vocal, creada únicamente a partir de la misma idea general (visualización de tono en vivo + ejercicios estructurados). No usa código, diseño ni contenido de TruVox, y no está afiliada ni respaldada por la Universidad de Cincinnati ni por BITS Lab.</p>
+    <div class="refs">
+      <div data-i18n="aboutRefsTitle"><b>Referencias:</b></div>
+      <div>· TruVox — <a href="https://ceas5.uc.edu/transvoice" target="_blank" rel="noopener">ceas5.uc.edu/transvoice</a> · <a href="https://truvox.bitslabstart.com/transvoice" target="_blank" rel="noopener">truvox.bitslabstart.com/transvoice</a></div>
+      <div style="margin-top:6px;">Weese, S. R., Wilkens, M. E., Jadhav, O., Wang, X., Bhanushali, A., DiLoreto, T., Kozel, R., Gustin, R. L., McAllister, T., McKenna, V. S., &amp; Novak, V. D. (2025). TruVox web-based software for vocal pitch training in transgender women: Development and single-session evaluations. <i>JMIR Formative Research, 9</i>, e73841. <a href="https://pubmed.ncbi.nlm.nih.gov/40953439/" target="_blank" rel="noopener">pubmed.ncbi.nlm.nih.gov/40953439</a></div>
+      <div style="margin-top:6px;">BITS Lab — Visual biofeedback for gender-affirming resonance work: <a href="https://www.vsmechlab.com/copy-of-speech-science" target="_blank" rel="noopener">vsmechlab.com/copy-of-speech-science</a></div>
+    </div>
+    <p class="disclaimer" data-i18n="aboutDisclaimer">Esta herramienta no reemplaza la orientación de una/un fonoaudióloga/o con experiencia en voz afirmativa de género. Las bandas de referencia son orientativas, no diagnósticas: trabájalas junto a tu profesional tratante.</p>
+  </details>
+
+  <div class="card">
+    <h2 data-i18n="exSectionTitle">1 · Elige un ejercicio</h2>
+    <div class="chips" id="exerciseChips">
+      <button type="button" class="chip active" data-ex="sostenida" data-i18n="exSostenidaLabel">Vocal sostenida</button>
+      <button type="button" class="chip" data-ex="lectura" data-i18n="exLecturaLabel">Lectura de frase</button>
+      <button type="button" class="chip" data-ex="glideUp" data-i18n="exGlideUpLabel">Glide ascendente</button>
+      <button type="button" class="chip" data-ex="glideDown" data-i18n="exGlideDownLabel">Glide descendente</button>
+      <button type="button" class="chip" data-ex="espontanea" data-i18n="exEspontaneaLabel">Habla espontánea</button>
+    </div>
+    <div class="instructions" id="exInstructions">
+      <span data-i18n="exSostenidaInstr"><b>Cómo hacerlo:</b> sostén la vocal "aaaa" con una respiración cómoda durante 5-8 segundos, apuntando dentro de la banda objetivo.</span>
+    </div>
+    <div class="sample-phrase" id="samplePhrase" style="display:none;" data-i18n="exLecturaPhrase">"Hoy elijo hablar con una voz que se sienta mía."</div>
+  </div>
+
+  <div class="card">
+    <h2 data-i18n="targetSectionTitle">2 · Banda objetivo</h2>
+    <div class="row">
+      <div class="field">
+        <label for="presetSelect" data-i18n="targetPresetLabel">Banda de referencia</label>
+        <select id="presetSelect">
+          <option value="feminizing" data-i18n="presetFeminizing">Feminización (aprox. 180-220 Hz)</option>
+          <option value="masculinizing" data-i18n="presetMasculinizing">Masculinización (aprox. 100-140 Hz)</option>
+          <option value="androgynous" data-i18n="presetAndrogynous">Andrógina (aprox. 150-180 Hz)</option>
+          <option value="custom" data-i18n="presetCustom">Personalizada</option>
+        </select>
+      </div>
+      <div class="field">
+        <label data-i18n="targetMinMaxLabel">Rango (Hz)</label>
+        <div class="minmax">
+          <input type="number" id="targetMin" value="180" min="50" max="400" aria-label="Mínimo Hz">
+          <input type="number" id="targetMax" value="220" min="50" max="400" aria-label="Máximo Hz">
+        </div>
+      </div>
+      <div class="field">
+        <label for="micSelect" data-i18n="micSelectLabel">Micrófono</label>
+        <select id="micSelect"></select>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 data-i18n="liveSectionTitle">3 · Práctica en vivo</h2>
+    <div class="row" style="margin-top:0;">
+      <button type="button" class="btn btn-primary" id="btnStart" data-i18n="btnStart">▶ Iniciar</button>
+      <button type="button" class="btn btn-ghost" id="btnStop" data-i18n="btnStop" disabled>■ Detener y guardar</button>
+    </div>
+    <div class="mic-error" id="micError"></div>
+
+    <div class="stage">
+      <span class="stage-hint" data-i18n="stageHint">últimos 10 s · Hz</span>
+      <canvas id="pitchCanvas" width="920" height="220"></canvas>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="num" id="statCurrent">—</div><div class="lbl" data-i18n="statCurrent">Tono actual</div></div>
+      <div class="stat"><div class="num" id="statAvg">—</div><div class="lbl" data-i18n="statAverage">Promedio</div></div>
+      <div class="stat"><div class="num" id="statPct">—</div><div class="lbl" data-i18n="statPctTarget">% en banda</div></div>
+      <div class="stat"><div class="num" id="statTime">0:00</div><div class="lbl" data-i18n="statDuration">Duración</div></div>
+    </div>
+
+    <div class="reso-wrap">
+      <span class="small muted" data-i18n="statResonance">Brillo / resonancia (aproximado)</span>
+      <div class="reso-bar-track"><div class="reso-bar-fill" id="resoBar"></div></div>
+      <div class="reso-caveat" data-i18n="resonanceCaveat">Indicador orientativo de brillo tonal (centroide espectral simplificado). No es un análisis formántico clínico ni sustituye una medición de F1/F2; para eso usa la Plataforma de Análisis Acústico.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 data-i18n="historyTitle">Historial de sesiones de práctica</h2>
+    <div id="historyContainer">
+      <p class="muted small" id="noHistoryMsg" data-i18n="noHistory">Todavía no hay sesiones guardadas.</p>
+      <table id="historyTable" style="display:none;">
+        <thead><tr>
+          <th data-i18n="thFecha">Fecha</th>
+          <th data-i18n="thEjercicio">Ejercicio</th>
+          <th data-i18n="thBanda">Banda (Hz)</th>
+          <th data-i18n="thPromedio">Promedio</th>
+          <th data-i18n="thPct">% en banda</th>
+          <th data-i18n="thDuracion">Duración</th>
+          <th data-i18n="thAcciones">Acciones</th>
+        </tr></thead>
+        <tbody id="historyBody"></tbody>
+      </table>
+    </div>
+    <div class="table-actions">
+      <button type="button" class="btn btn-ghost" id="btnExport" data-i18n="btnExportar">Exportar historial (JSON)</button>
+      <button type="button" class="btn btn-danger" id="btnClearAll" data-i18n="btnBorrarTodo">Borrar todo el historial</button>
+    </div>
+  </div>
+
+</div>
+
+<script src="../assets/shared.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var tt = function(key, fallback){ return (window.CV_I18N ? window.CV_I18N.t(key) : null) || fallback || key; };
+
+  var LS_TARGET = 'bfv_target_v1';
+  var LS_HISTORY = 'bfv_history_v1';
+  var WINDOW_S = 10;
+  var FREQ_MIN = 60, FREQ_MAX = 400;
+
+  var PRESETS = {
+    feminizing:{min:180,max:220}, masculinizing:{min:100,max:140}, androgynous:{min:150,max:180}
+  };
+
+  var EXERCISES = {
+    sostenida:{instrKey:'exSostenidaInstr', showPhrase:false},
+    lectura:{instrKey:'exLecturaInstr', showPhrase:true},
+    glideUp:{instrKey:'exGlideUpInstr', showPhrase:false},
+    glideDown:{instrKey:'exGlideDownInstr', showPhrase:false},
+    espontanea:{instrKey:'exEspontaneaInstr', showPhrase:false}
+  };
+
+  var state = {
+    exercise:'sostenida',
+    target: (function(){
+      try{ var raw = localStorage.getItem(LS_TARGET); if(raw) return JSON.parse(raw); }catch(e){}
+      return {min:180,max:220,preset:'feminizing'};
+    })()
+  };
+
+  var history = [];
+  try{ history = JSON.parse(localStorage.getItem(LS_HISTORY) || '[]'); }catch(e){ history = []; }
+
+  // ---------------- Selector de ejercicio ----------------
+  var chips = Array.prototype.slice.call(document.querySelectorAll('#exerciseChips .chip'));
+  function selectExercise(id){
+    state.exercise = id;
+    chips.forEach(function(c){ c.classList.toggle('active', c.dataset.ex === id); });
+    var ex = EXERCISES[id];
+    $('exInstructions').innerHTML = '<b>' + tt('howToLabel','Cómo hacerlo:') + '</b> ' + tt(ex.instrKey, '');
+    $('samplePhrase').style.display = ex.showPhrase ? 'block' : 'none';
+  }
+  chips.forEach(function(c){ c.addEventListener('click', function(){ selectExercise(c.dataset.ex); }); });
+
+  // ---------------- Banda objetivo ----------------
+  var presetSelect = $('presetSelect'), targetMin = $('targetMin'), targetMax = $('targetMax');
+  presetSelect.value = state.target.preset || 'custom';
+  targetMin.value = state.target.min;
+  targetMax.value = state.target.max;
+  function saveTarget(){
+    try{ localStorage.setItem(LS_TARGET, JSON.stringify(state.target)); }catch(e){}
+  }
+  presetSelect.addEventListener('change', function(){
+    var v = presetSelect.value;
+    if(PRESETS[v]){
+      targetMin.value = PRESETS[v].min; targetMax.value = PRESETS[v].max;
+    }
+    state.target = {min:Number(targetMin.value), max:Number(targetMax.value), preset:v};
+    saveTarget();
+  });
+  [targetMin, targetMax].forEach(function(inp){
+    inp.addEventListener('change', function(){
+      presetSelect.value = 'custom';
+      state.target = {min:Number(targetMin.value), max:Number(targetMax.value), preset:'custom'};
+      saveTarget();
+    });
+  });
+
+  // ---------------- Detección de tono (YIN) ----------------
+  function yinDetect(buffer, sampleRate){
+    var threshold = 0.15;
+    var halfSize = Math.floor(buffer.length / 2);
+    var yinBuffer = new Float32Array(halfSize);
+    yinBuffer[0] = 1;
+    var runningSum = 0;
+    for(var tau = 1; tau < halfSize; tau++){
+      var sum = 0;
+      for(var i = 0; i < halfSize; i++){
+        var d = buffer[i] - buffer[i + tau];
+        sum += d * d;
+      }
+      runningSum += sum;
+      yinBuffer[tau] = runningSum === 0 ? 1 : sum * tau / runningSum;
+    }
+    var tauEstimate = -1;
+    for(tau = 2; tau < halfSize; tau++){
+      if(yinBuffer[tau] < threshold){
+        while(tau + 1 < halfSize && yinBuffer[tau + 1] < yinBuffer[tau]) tau++;
+        tauEstimate = tau;
+        break;
+      }
+    }
+    if(tauEstimate === -1) return -1;
+    var betterTau = tauEstimate;
+    if(tauEstimate > 0 && tauEstimate < halfSize - 1){
+      var s0 = yinBuffer[tauEstimate - 1], s1 = yinBuffer[tauEstimate], s2 = yinBuffer[tauEstimate + 1];
+      var denom = (2 * s1 - s2 - s0);
+      if(denom !== 0) betterTau = tauEstimate + (s2 - s0) / (2 * denom);
+    }
+    var freq = sampleRate / betterTau;
+    if(freq < 60 || freq > 1500) return -1;
+    return freq;
+  }
+  function rms(buffer){
+    var sum = 0;
+    for(var i = 0; i < buffer.length; i++) sum += buffer[i] * buffer[i];
+    return Math.sqrt(sum / buffer.length);
+  }
+
+  // ---------------- Motor de micrófono ----------------
+  var audioCtx = null, analyser = null, freqAnalyser = null, micStream = null, sourceNode = null, rafId = null;
+  var timeBuf = new Float32Array(2048);
+  var freqBuf = null;
+  var selectedMicId = null;
+  try{ selectedMicId = localStorage.getItem('bfv_selected_mic') || null; }catch(e){}
+
+  function populateMicSelect(){
+    if(!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) return;
+    navigator.mediaDevices.enumerateDevices().then(function(devices){
+      var mics = devices.filter(function(d){ return d.kind === 'audioinput'; });
+      var sel = $('micSelect');
+      var prevValue = sel.value || selectedMicId || '';
+      sel.innerHTML = '';
+      if(mics.length === 0){
+        var opt = document.createElement('option');
+        opt.value = ''; opt.textContent = tt('micNoneFound','No se detectaron micrófonos');
+        sel.appendChild(opt); sel.disabled = true; return;
+      }
+      sel.disabled = false;
+      mics.forEach(function(d, i){
+        var opt = document.createElement('option');
+        opt.value = d.deviceId;
+        opt.textContent = d.label || (tt('micDefaultName','Micrófono') + ' ' + (i + 1));
+        sel.appendChild(opt);
+      });
+      var toSelect = mics.some(function(d){ return d.deviceId === prevValue; }) ? prevValue : mics[0].deviceId;
+      sel.value = toSelect;
+      selectedMicId = toSelect || null;
+    }).catch(function(){});
+  }
+  $('micSelect').addEventListener('change', function(e){
+    selectedMicId = e.target.value || null;
+    try{ localStorage.setItem('bfv_selected_mic', selectedMicId || ''); }catch(err){}
+  });
+  populateMicSelect();
+
+  function micErrorMessage(err){
+    var name = err && err.name;
+    if(name === 'NotAllowedError' || name === 'PermissionDeniedError') return tt('micErrorDenied','Permiso de micrófono denegado. Revisa los permisos del sitio y recarga la página.');
+    if(name === 'NotFoundError' || name === 'DevicesNotFoundError') return tt('micErrorNotFound','No se encontró ningún micrófono disponible en este dispositivo.');
+    if(name === 'NotReadableError' || name === 'TrackStartError') return tt('micErrorBusy','No se pudo usar el micrófono — puede estar siendo usado por otra aplicación.');
+    if(name === 'OverconstrainedError') return tt('micErrorUnavailable','El micrófono elegido ya no está disponible. Elige otro de la lista.');
+    return tt('micPermissionError','No se pudo acceder al micrófono.');
+  }
+
+  // Buffer de puntos para el trazo desplazable (ventana de WINDOW_S segundos)
+  var trace = []; // {t, f} — t en segundos relativos a runStart
+  var runSamples = []; // todos los F0 válidos de la corrida actual
+  var runStart = 0;
+  var running = false;
+
+  function startMic(){
+    var constraints = {
+      audio:{
+        echoCancellation:false, noiseSuppression:false, autoGainControl:false,
+        deviceId: selectedMicId ? { exact:selectedMicId } : undefined
+      }
+    };
+    return navigator.mediaDevices.getUserMedia(constraints).then(function(stream){
+      micStream = stream;
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      sourceNode = audioCtx.createMediaStreamSource(stream);
+      analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 2048;
+      freqAnalyser = audioCtx.createAnalyser();
+      freqAnalyser.fftSize = 1024;
+      sourceNode.connect(analyser);
+      sourceNode.connect(freqAnalyser);
+      timeBuf = new Float32Array(analyser.fftSize);
+      freqBuf = new Uint8Array(freqAnalyser.frequencyBinCount);
+      var resumeP = (audioCtx.state === 'suspended') ? audioCtx.resume() : Promise.resolve();
+      return resumeP.then(function(){
+        populateMicSelect();
+        runStart = performance.now();
+        trace = [];
+        runSamples = [];
+        loop();
+      });
+    });
+  }
+
+  function stopMic(){
+    if(rafId) cancelAnimationFrame(rafId);
+    rafId = null;
+    if(micStream){ micStream.getTracks().forEach(function(t){ t.stop(); }); micStream = null; }
+    if(audioCtx){ audioCtx.close().catch(function(){}); audioCtx = null; }
+    analyser = null; freqAnalyser = null; sourceNode = null;
+  }
+
+  function spectralBrightness(){
+    freqAnalyser.getByteFrequencyData(freqBuf);
+    var sr = audioCtx.sampleRate, binHz = sr / freqAnalyser.fftSize;
+    var num = 0, den = 0;
+    for(var i = 1; i < freqBuf.length; i++){
+      var mag = freqBuf[i];
+      if(mag < 4) continue;
+      var f = i * binHz;
+      num += f * mag;
+      den += mag;
+    }
+    if(den === 0) return 0;
+    var centroid = num / den;
+    // Mapea ~400-3500 Hz a 0-100 (rango orientativo de brillo tonal en voz hablada)
+    var pct = (centroid - 400) / (3500 - 400) * 100;
+    return Math.max(0, Math.min(100, pct));
+  }
+
+  function loop(){
+    analyser.getFloatTimeDomainData(timeBuf);
+    var level = rms(timeBuf);
+    var f0 = -1;
+    if(level > 0.01) f0 = yinDetect(timeBuf, audioCtx.sampleRate);
+    var now = (performance.now() - runStart) / 1000;
+    var validF0 = f0 > 0 ? f0 : null;
+    trace.push({ t: now, f: validF0 });
+    while(trace.length && trace[0].t < now - WINDOW_S) trace.shift();
+    if(validF0){ runSamples.push(validF0); }
+
+    var brightness = (validF0 && audioCtx) ? spectralBrightness() : null;
+
+    drawCanvas(now, brightness);
+    updateLiveStats(now, validF0);
+
+    rafId = requestAnimationFrame(loop);
+  }
+
+  // ---------------- Canvas de tono en vivo ----------------
+  var canvas = $('pitchCanvas'), ctx = canvas.getContext('2d');
+  function freqToY(f, h){
+    var lf = Math.log(Math.max(FREQ_MIN, Math.min(FREQ_MAX, f)));
+    var lmin = Math.log(FREQ_MIN), lmax = Math.log(FREQ_MAX);
+    var pct = (lf - lmin) / (lmax - lmin);
+    return h - pct * h;
+  }
+  function drawCanvas(now, brightness){
+    var w = canvas.width, h = canvas.height;
+    ctx.clearRect(0, 0, w, h);
+
+    // Banda objetivo
+    var yTop = freqToY(state.target.max, h), yBot = freqToY(state.target.min, h);
+    ctx.fillStyle = 'rgba(224,85,158,0.14)';
+    ctx.fillRect(0, yTop, w, yBot - yTop);
+    ctx.strokeStyle = 'rgba(224,85,158,0.55)';
+    ctx.setLineDash([5,4]);
+    ctx.beginPath(); ctx.moveTo(0, yTop); ctx.lineTo(w, yTop); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(0, yBot); ctx.lineTo(w, yBot); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Líneas de referencia Hz
+    ctx.font = '10px IBM Plex Mono, monospace';
+    ctx.fillStyle = 'rgba(74,33,64,0.35)';
+    [80,120,160,200,240,300,360].forEach(function(fHz){
+      var y = freqToY(fHz, h);
+      ctx.fillText(fHz + 'Hz', 4, y - 2);
+      ctx.strokeStyle = 'rgba(74,33,64,0.06)';
+      ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(w,y); ctx.stroke();
+    });
+
+    // Trazo de tono
+    ctx.lineWidth = 2.4;
+    ctx.strokeStyle = '#e0559e';
+    ctx.beginPath();
+    var drawing = false;
+    trace.forEach(function(p){
+      var x = w - ((now - p.t) / WINDOW_S) * w;
+      if(p.f === null){ drawing = false; return; }
+      var y = freqToY(p.f, h);
+      if(!drawing){ ctx.moveTo(x, y); drawing = true; } else { ctx.lineTo(x, y); }
+    });
+    ctx.stroke();
+
+    // Punto actual
+    var last = trace.length ? trace[trace.length - 1] : null;
+    if(last && last.f){
+      var lx = w - ((now - last.t) / WINDOW_S) * w;
+      var ly = freqToY(last.f, h);
+      ctx.fillStyle = '#ff9d66';
+      ctx.beginPath(); ctx.arc(lx, ly, 6, 0, Math.PI*2); ctx.fill();
+      ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke();
+    }
+
+    if(brightness !== null){
+      $('resoBar').style.width = brightness.toFixed(0) + '%';
+    }
+  }
+
+  function fmtTime(sec){
+    var m = Math.floor(sec/60), s = Math.floor(sec%60);
+    return m + ':' + (s < 10 ? '0' : '') + s;
+  }
+
+  function updateLiveStats(now, f0){
+    $('statCurrent').textContent = f0 ? f0.toFixed(0) + ' Hz' : '—';
+    if(runSamples.length){
+      var avg = runSamples.reduce(function(a,b){return a+b;},0) / runSamples.length;
+      $('statAvg').textContent = avg.toFixed(0) + ' Hz';
+      var inTarget = runSamples.filter(function(v){ return v >= state.target.min && v <= state.target.max; }).length;
+      $('statPct').textContent = Math.round(inTarget / runSamples.length * 100) + '%';
+    } else {
+      $('statAvg').textContent = '—'; $('statPct').textContent = '—';
+    }
+    $('statTime').textContent = fmtTime(now);
+  }
+
+  // ---------------- Iniciar / detener ----------------
+  var btnStart = $('btnStart'), btnStop = $('btnStop'), micErrorEl = $('micError');
+  btnStart.addEventListener('click', function(){
+    micErrorEl.classList.remove('show');
+    btnStart.disabled = true;
+    startMic().then(function(){
+      running = true;
+      btnStop.disabled = false;
+    }).catch(function(err){
+      micErrorEl.textContent = micErrorMessage(err);
+      micErrorEl.classList.add('show');
+      btnStart.disabled = false;
+    });
+  });
+
+  btnStop.addEventListener('click', function(){
+    if(!running) return;
+    var durationS = (performance.now() - runStart) / 1000;
+    var avg = runSamples.length ? runSamples.reduce(function(a,b){return a+b;},0) / runSamples.length : null;
+    var pct = runSamples.length ? Math.round(runSamples.filter(function(v){ return v >= state.target.min && v <= state.target.max; }).length / runSamples.length * 100) : null;
+    stopMic();
+    running = false;
+    btnStart.disabled = false;
+    btnStop.disabled = true;
+
+    if(runSamples.length > 0){
+      var record = {
+        date: new Date().toISOString(),
+        exercise: state.exercise,
+        targetMin: state.target.min,
+        targetMax: state.target.max,
+        avgHz: avg ? Math.round(avg) : null,
+        pct: pct,
+        durationS: Math.round(durationS)
+      };
+      history.unshift(record);
+      try{ localStorage.setItem(LS_HISTORY, JSON.stringify(history)); }catch(e){}
+      renderHistory();
+    }
+    $('statCurrent').textContent = '—'; $('statAvg').textContent = '—'; $('statPct').textContent = '—'; $('statTime').textContent = '0:00';
+    $('resoBar').style.width = '0%';
+  });
+
+  // ---------------- Historial ----------------
+  function exerciseLabel(id){
+    var map = { sostenida:'exSostenidaLabel', lectura:'exLecturaLabel', glideUp:'exGlideUpLabel', glideDown:'exGlideDownLabel', espontanea:'exEspontaneaLabel' };
+    return tt(map[id] || '', id);
+  }
+  function renderHistory(){
+    var noMsg = $('noHistoryMsg'), table = $('historyTable'), body = $('historyBody');
+    if(history.length === 0){ noMsg.style.display = 'block'; table.style.display = 'none'; return; }
+    noMsg.style.display = 'none'; table.style.display = 'table';
+    body.innerHTML = history.map(function(r, i){
+      var d = new Date(r.date);
+      return '<tr>' +
+        '<td>' + d.toLocaleString() + '</td>' +
+        '<td>' + escapeHtml(exerciseLabel(r.exercise)) + '</td>' +
+        '<td>' + r.targetMin + '\u2013' + r.targetMax + '</td>' +
+        '<td>' + (r.avgHz ? r.avgHz + ' Hz' : '—') + '</td>' +
+        '<td>' + (r.pct !== null ? r.pct + '%' : '—') + '</td>' +
+        '<td>' + fmtTime(r.durationS) + '</td>' +
+        '<td><button type="button" class="btn btn-ghost" data-del="' + i + '" style="padding:5px 10px;font-size:.76rem;">' + escapeHtml(tt('btnEliminar','Eliminar')) + '</button></td>' +
+      '</tr>';
+    }).join('');
+    Array.prototype.slice.call(body.querySelectorAll('[data-del]')).forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var idx = Number(btn.getAttribute('data-del'));
+        if(!confirm(tt('confirmDeleteRecord','¿Eliminar este registro?'))) return;
+        history.splice(idx, 1);
+        try{ localStorage.setItem(LS_HISTORY, JSON.stringify(history)); }catch(e){}
+        renderHistory();
+      });
+    });
+  }
+
+  $('btnExport').addEventListener('click', function(){
+    var blob = new Blob([JSON.stringify(history, null, 2)], {type:'application/json'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = 'biofeedback_vocal_historial_' + new Date().toISOString().slice(0,10) + '.json';
+    a.click(); URL.revokeObjectURL(url);
+  });
+  $('btnClearAll').addEventListener('click', function(){
+    if(!confirm(tt('confirmClearAll','¿Borrar todo el historial de sesiones de práctica?'))) return;
+    history = [];
+    try{ localStorage.removeItem(LS_HISTORY); }catch(e){}
+    renderHistory();
+  });
+
+  window.addEventListener('cv-lang-changed', function(){
+    selectExercise(state.exercise);
+    renderHistory();
+  });
+
+  selectExercise(state.exercise);
+  renderHistory();
+})();
+</script>
+<script src="../assets/theme-switcher.js" defer></script>
+<script src="../assets/a11y-reader.js" defer></script>
+</body>
+</html>
