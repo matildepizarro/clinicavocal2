@@ -13,6 +13,8 @@
 <script>document.documentElement.setAttribute('data-pastel-theme', (function(){try{return localStorage.getItem('cv-pastel-theme')||'rosa';}catch(e){return 'rosa';}})());</script>
 <script src="i18n-dict.js"></script>
 <script src="../assets/i18n-engine.js"></script>
+<!-- jsPDF (UMD) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer crossorigin="anonymous"></script>
 <style>
   :root{
     --bg:#f0fbf6; --bg-2:#e0f5ea; --card:#ffffff; --card-2:#e6f7ef; --line:#c9ecdb;
@@ -78,6 +80,21 @@
   .legend{display:flex;gap:16px;margin-bottom:10px;font-size:12.5px}
   .legend .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle}
   footer{margin-top:24px;text-align:center;font-size:12px;color:var(--muted-2)}
+  .filters-row{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end;margin-bottom:6px}
+  .filters-row .field{display:flex;flex-direction:column;gap:4px}
+  .filters-row input[type=date]{padding:8px 10px;border-radius:10px;border:1px solid var(--line);font-family:var(--font-body);font-size:13.5px}
+  .chip-toggle{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card);font-size:12.5px;cursor:pointer;user-select:none}
+  .chip-toggle input{accent-color:var(--accent)}
+  .chip-toggle.off{opacity:.5}
+  .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:6px}
+  .stat-box{background:var(--card-2);border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center}
+  .stat-box .num{font-family:var(--font-mono);font-size:20px;font-weight:700;color:var(--accent)}
+  .stat-box .lbl{font-size:11px;color:var(--muted);margin-top:2px}
+  .stat-box .trend{font-size:11px;margin-top:2px;font-weight:700}
+  .trend.up{color:#c05a1f}
+  .trend.down{color:#2f9e6e}
+  .trend.flat{color:var(--muted)}
+  .row-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}
 </style>
 </head>
 <body>
@@ -106,6 +123,25 @@
       <label for="patientSelect" data-i18n="selectPatientLabel">Selecciona un paciente</label>
       <select id="patientSelect"></select>
       <p class="muted" id="patientCount"></p>
+
+      <div class="filters-row" style="margin-top:14px">
+        <div class="field">
+          <label for="dateFrom" data-i18n="filterFrom">Desde</label>
+          <input type="date" id="dateFrom">
+        </div>
+        <div class="field">
+          <label for="dateTo" data-i18n="filterTo">Hasta</label>
+          <input type="date" id="dateTo">
+        </div>
+        <button id="btnClearFilters" data-i18n="btnClearFilters">Limpiar filtros</button>
+      </div>
+      <div class="filters-row" id="sourceToggles" style="margin-top:4px"></div>
+    </div>
+
+    <div class="card">
+      <h2 data-i18n="sectionStats">Resumen y análisis</h2>
+      <p class="desc" data-i18n="sectionStatsDesc">Cálculos automáticos a partir de los eventos filtrados: no reemplazan la interpretación clínica.</p>
+      <div class="stats-grid" id="statsGrid"></div>
     </div>
 
     <div class="card">
@@ -120,7 +156,10 @@
 
     <div class="card">
       <h2 data-i18n="sectionTimeline">Línea de tiempo combinada</h2>
-      <div style="margin-bottom:10px"><button id="btnExportCsv" data-i18n="btnExportCsv">Exportar línea de tiempo (CSV)</button></div>
+      <div class="row-actions">
+        <button id="btnExportCsv" data-i18n="btnExportCsv">Exportar línea de tiempo (CSV)</button>
+        <button id="btnExportPdf" data-i18n="btnExportPdf">📄 Exportar informe (PDF)</button>
+      </div>
       <table>
         <thead>
           <tr>
@@ -302,11 +341,120 @@
     ctx.textAlign = 'left';
   }
 
+  // ---- Filtros: rango de fechas + fuentes activas ----
+  var SOURCE_DEFS = [
+    {key:'evaluacion', labelKey:'srcEvaluacion', fallback:'Evaluación vocal'},
+    {key:'esfuerzo', labelKey:'srcEsfuerzo', fallback:'Esfuerzo vocal'},
+    {key:'anamnesis', labelKey:'srcAnamnesis', fallback:'Anamnesis vocal'}
+  ];
+  var activeSources = { evaluacion:true, esfuerzo:true, anamnesis:true };
+  function renderSourceToggles(){
+    var wrap = $('sourceToggles');
+    wrap.innerHTML = '';
+    SOURCE_DEFS.forEach(function(s){
+      var label = document.createElement('label');
+      label.className = 'chip-toggle' + (activeSources[s.key] ? '' : ' off');
+      var input = document.createElement('input');
+      input.type = 'checkbox'; input.checked = activeSources[s.key];
+      input.addEventListener('change', function(){
+        activeSources[s.key] = input.checked;
+        label.classList.toggle('off', !input.checked);
+        refresh();
+      });
+      label.appendChild(input);
+      label.appendChild(document.createTextNode(tt(s.labelKey, s.fallback)));
+      wrap.appendChild(label);
+    });
+  }
+  renderSourceToggles();
+
+  $('btnClearFilters').addEventListener('click', function(){
+    $('dateFrom').value = ''; $('dateTo').value = '';
+    activeSources = { evaluacion:true, esfuerzo:true, anamnesis:true };
+    renderSourceToggles();
+    refresh();
+  });
+  $('dateFrom').addEventListener('change', refresh);
+  $('dateTo').addEventListener('change', refresh);
+
+  function applyFilters(evs){
+    var from = $('dateFrom').value ? new Date($('dateFrom').value + 'T00:00:00') : null;
+    var to = $('dateTo').value ? new Date($('dateTo').value + 'T23:59:59') : null;
+    return evs.filter(function(e){
+      if(!activeSources[e.source]) return false;
+      if(!e.fecha) return true;
+      var d = new Date(e.fecha);
+      if(from && d < from) return false;
+      if(to && d > to) return false;
+      return true;
+    });
+  }
+
+  // ---- Estadísticas y otros análisis ----
+  function trendArrow(delta){
+    if(Math.abs(delta) < 0.001) return { cls:'flat', txt:'≈ ' + tt('trendFlat','sin cambio') };
+    return delta > 0 ? { cls:'up', txt:'▲ +' + delta.toFixed(1) } : { cls:'down', txt:'▼ ' + delta.toFixed(1) };
+  }
+  function renderStats(evs){
+    var grid = $('statsGrid');
+    grid.innerHTML = '';
+    function box(num, lbl, trend){
+      var el = document.createElement('div');
+      el.className = 'stat-box';
+      el.innerHTML = '<div class="num">' + num + '</div><div class="lbl">' + lbl + '</div>' + (trend ? ('<div class="trend ' + trend.cls + '">' + trend.txt + '</div>') : '');
+      grid.appendChild(el);
+    }
+    box(evs.length, tt('statTotalEventos','Eventos en el rango'));
+    if(evs.length){
+      var sorted = evs.slice().filter(function(e){return e.fecha;}).sort(function(a,b){return new Date(a.fecha)-new Date(b.fecha);});
+      if(sorted.length >= 2){
+        var days = Math.round((new Date(sorted[sorted.length-1].fecha) - new Date(sorted[0].fecha)) / 86400000);
+        box(days, tt('statDiasCubiertos','Días cubiertos'));
+      }
+      var idvVals = evs.filter(function(e){return e.metric && e.metric.series==='idv';}).sort(function(a,b){return new Date(a.fecha)-new Date(b.fecha);}).map(function(e){return e.metric.value;});
+      if(idvVals.length){
+        var first = idvVals[0], last = idvVals[idvVals.length-1];
+        box(last, tt('statIdvUltimo','Último IDV-Cl'), trendArrow(last-first));
+      }
+      var borgVals = evs.filter(function(e){return e.metric && e.metric.series==='borg';}).map(function(e){return e.metric.value;});
+      if(borgVals.length){
+        var avgBorg = borgVals.reduce(function(a,b){return a+b;},0) / borgVals.length;
+        box(avgBorg.toFixed(1), tt('statBorgPromedio','Esfuerzo Borg promedio'));
+      }
+      var counts = {};
+      evs.forEach(function(e){ counts[e.source] = (counts[e.source]||0) + 1; });
+      SOURCE_DEFS.forEach(function(s){
+        if(counts[s.key]) box(counts[s.key], tt(s.labelKey, s.fallback));
+      });
+    }
+  }
+
   var currentEvs = [];
   function refresh(){
     var key = select.value;
-    currentEvs = renderTimeline(key);
+    var evs = events.filter(function(e){ return e.patienteKey === key; });
+    evs = applyFilters(evs);
+    evs = evs.sort(function(a,b){ return new Date(a.fecha) - new Date(b.fecha); });
+    currentEvs = evs;
+    var body = $('timelineBody');
+    body.innerHTML = '';
+    $('noEventsMsg').style.display = evs.length ? 'none' : 'block';
+    evs.forEach(function(e){
+      var tr = document.createElement('tr');
+      var tdFecha = document.createElement('td');
+      tdFecha.textContent = e.fecha ? new Date(e.fecha).toLocaleString() : '—';
+      var tdSrc = document.createElement('td');
+      var pill = document.createElement('span');
+      pill.className = 'src-pill src-' + e.source;
+      pill.textContent = e.sourceLabel;
+      tdSrc.appendChild(pill);
+      var tdTipo = document.createElement('td'); tdTipo.textContent = e.tipo;
+      var tdResumen = document.createElement('td'); tdResumen.textContent = e.resumen;
+      tr.appendChild(tdFecha); tr.appendChild(tdSrc); tr.appendChild(tdTipo); tr.appendChild(tdResumen);
+      body.appendChild(tr);
+    });
     renderChart(currentEvs);
+    renderStats(currentEvs);
   }
   select.addEventListener('change', refresh);
   select.selectedIndex = 0;
@@ -326,7 +474,67 @@
     URL.revokeObjectURL(url);
   });
 
-  window.addEventListener('cv-lang-changed', function(){ refresh(); });
+  $('btnExportPdf').addEventListener('click', function(){
+    if(!window.jspdf || !window.jspdf.jsPDF){ alert(tt('toastPdfLibNoCargada','No se pudo cargar la librería de PDF (revisa tu conexión a internet) — intenta de nuevo en unos segundos.')); return; }
+    if(!currentEvs.length){ alert(tt('noEventsForPatient','No hay eventos registrados para este paciente.')); return; }
+    var jsPDF = window.jspdf.jsPDF;
+    var pdf = new jsPDF({unit:'mm', format:'a4'});
+    var margin = 16, y = 20;
+    var pageWidth = pdf.internal.pageSize.getWidth();
+    var pageHeight = pdf.internal.pageSize.getHeight();
+    function ensure(needed){ if(y + needed > pageHeight - 16){ pdf.addPage(); y = 20; } }
+    var patientName = patientDisplay[select.value] || select.value;
+    pdf.setFontSize(14); pdf.setFont(undefined,'bold'); pdf.setTextColor(20);
+    pdf.text(tt('brandName','Evolución longitudinal') + ' — ' + patientName, margin, y); y += 6;
+    pdf.setFont(undefined,'normal'); pdf.setFontSize(9); pdf.setTextColor(100);
+    pdf.text(tt('pdfGenerado','Generado') + ': ' + new Date().toLocaleString(), margin, y); y += 5;
+    var from = $('dateFrom').value, to = $('dateTo').value;
+    if(from || to){ pdf.text((tt('filterFrom','Desde') + ': ' + (from||'—') + '   ' + tt('filterTo','Hasta') + ': ' + (to||'—')), margin, y); y += 5; }
+    pdf.setDrawColor(230); pdf.line(margin, y, pageWidth-margin, y); y += 8;
+
+    // Resumen / estadísticas
+    pdf.setTextColor(20); pdf.setFont(undefined,'bold'); pdf.setFontSize(11);
+    pdf.text(tt('sectionStats','Resumen y análisis'), margin, y); y += 6;
+    pdf.setFont(undefined,'normal'); pdf.setFontSize(9.5);
+    Array.from($('statsGrid').children).forEach(function(box){
+      var num = box.querySelector('.num').textContent;
+      var lbl = box.querySelector('.lbl').textContent;
+      var trendEl = box.querySelector('.trend');
+      var line = lbl + ': ' + num + (trendEl ? ('  (' + trendEl.textContent + ')') : '');
+      ensure(5); pdf.text(line, margin, y); y += 5;
+    });
+    y += 3;
+
+    // Gráfico (imagen del canvas)
+    try{
+      var canvas = $('chart');
+      var imgData = canvas.toDataURL('image/png');
+      var imgW = pageWidth - margin*2;
+      var imgH = imgW * (canvas.height / canvas.width);
+      ensure(imgH + 12);
+      pdf.setFont(undefined,'bold'); pdf.setFontSize(11); pdf.text(tt('sectionChart','Gráfico de puntajes en el tiempo'), margin, y); y += 6;
+      pdf.addImage(imgData, 'PNG', margin, y, imgW, imgH);
+      y += imgH + 8;
+    }catch(e){ /* canvas vacío o no soportado — se omite el gráfico */ }
+
+    // Línea de tiempo
+    ensure(10);
+    pdf.setFont(undefined,'bold'); pdf.setFontSize(11); pdf.text(tt('sectionTimeline','Línea de tiempo combinada'), margin, y); y += 6;
+    pdf.setFont(undefined,'normal'); pdf.setFontSize(9);
+    currentEvs.forEach(function(e){
+      ensure(10);
+      var fecha = e.fecha ? new Date(e.fecha).toLocaleString() : '—';
+      pdf.setFont(undefined,'bold'); pdf.text(fecha + ' — ' + e.sourceLabel + ' — ' + e.tipo, margin, y); y += 5;
+      pdf.setFont(undefined,'normal');
+      var wrapped = pdf.splitTextToSize(e.resumen || '', pageWidth - margin*2);
+      wrapped.forEach(function(ln){ ensure(5); pdf.text(ln, margin, y); y += 5; });
+      y += 2;
+    });
+
+    pdf.save('evolucion-longitudinal-' + (select.value||'paciente') + '-' + new Date().toISOString().slice(0,10) + '.pdf');
+  });
+
+  window.addEventListener('cv-lang-changed', function(){ renderSourceToggles(); refresh(); });
 })();
 </script>
 <script src="../assets/theme-switcher.js" defer></script>

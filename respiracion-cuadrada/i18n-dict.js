@@ -1,10 +1,10 @@
 /* Consultorio Vocal — diccionario de traducción de Respiración cuadrada */
 window.CV_I18N_DICT = {
   es: {
-    pageTitle: 'Respira Cuadrada — Temporizador de respiración',
+    pageTitle: 'Respiración Cuadrada — Temporizador de respiración',
     metaDescription: 'Temporizador profesional para respiración cuadrada (box breathing): biblioteca de ejercicios, editor, animación de trazo cuadrado y metrónomo sonoro.',
 
-    brandTitle: 'Respira Cuadrada', brandSub: 'Box breathing',
+    brandTitle: 'Respiración Cuadrada', brandSub: 'Box breathing',
     authorLabel: 'Desarrollado por',
 
     btnThemeTitle: 'Cambiar tema', btnSoundTitle: 'Silenciar sonido', btnInteractiveTitle: 'Modo interactivo',

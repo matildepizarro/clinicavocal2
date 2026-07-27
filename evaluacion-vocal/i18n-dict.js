@@ -1,5 +1,6 @@
 window.CV_I18N_DICT = {
   es: {
+    toastPdfGenerado: 'PDF generado.',
     pageTitle: 'Evaluación Clínica de Voz',
     metaDescription: 'Batería de evaluación vocal: IDV-Cl (VHI chileno), GRBAS, tiempo máximo de fonación y relación s/z.',
     headerTitle: 'Evaluación Clínica de Voz',
@@ -48,7 +49,7 @@ window.CV_I18N_DICT = {
     tmfMejorA: 'Mejor TMF /a/', tmfMejorS: 'Mejor /s/', tmfMejorZ: 'Mejor /z/', tmfRelacionSZ: 'Relación s/z',
     tmfInterpAlta: 'Relación s/z > 1.4: hallazgo orientativo (no diagnóstico) de posible incompetencia glótica. Considera correlacionar con examen laringológico.',
     tmfInterpNormal: 'Relación s/z dentro de rango orientativo esperado (≈1.0).',
-    tmfCitation: 'Referencia de valores: TMF adulto sano orientativo — hombres ≈ 25-35 s, mujeres ≈ 15-25 s (varía con edad y método). Relación s/z ≈ 1.0 en laringe sana; valores mayores a ≈1.4 son sugerentes (no diagnósticos) de incompetencia glótica y ameritan evaluación laringológica. Eckel &amp; Boone (1981); Boone et al. (2014), The Voice and Voice Therapy.',
+    tmfCitation: 'Referencia de valores: TMF adulto sano orientativo — hombres ≈ 25-35 s, mujeres ≈ 15-25 s (varía con edad y método). Relación s/z ≈ 1.0 en laringe sana; valores mayores a ≈1.4 son sugerentes (no diagnósticos) de incompetencia glótica y ameritan evaluación laringológica. Eckel & Boone (1981); Boone et al. (2014), The Voice and Voice Therapy.',
 
     historialTitle: 'Historial de evaluaciones',
     historialLead: 'Registros guardados localmente en este dispositivo (100% privado, sin servidores).',
@@ -74,6 +75,7 @@ window.CV_I18N_DICT = {
   },
 
   pt: {
+    toastPdfGenerado: 'PDF gerado.',
     pageTitle: 'Avaliação Clínica de Voz',
     metaDescription: 'Bateria de avaliação vocal: IDV-Cl (VHI chileno), GRBAS, tempo máximo de fonação e relação s/z.',
     headerTitle: 'Avaliação Clínica de Voz',
@@ -122,7 +124,7 @@ window.CV_I18N_DICT = {
     tmfMejorA: 'Melhor TMF /a/', tmfMejorS: 'Melhor /s/', tmfMejorZ: 'Melhor /z/', tmfRelacionSZ: 'Relação s/z',
     tmfInterpAlta: 'Relação s/z > 1.4: achado orientativo (não diagnóstico) de possível incompetência glótica. Considere correlacionar com exame laringológico.',
     tmfInterpNormal: 'Relação s/z dentro da faixa orientativa esperada (≈1.0).',
-    tmfCitation: 'Referência de valores: TMF de adulto saudável orientativo — homens ≈ 25-35 s, mulheres ≈ 15-25 s (varia com idade e método). Relação s/z ≈ 1.0 em laringe saudável; valores acima de ≈1.4 sugerem (não diagnosticam) incompetência glótica e merecem avaliação laringológica. Eckel &amp; Boone (1981); Boone et al. (2014), The Voice and Voice Therapy.',
+    tmfCitation: 'Referência de valores: TMF de adulto saudável orientativo — homens ≈ 25-35 s, mulheres ≈ 15-25 s (varia com idade e método). Relação s/z ≈ 1.0 em laringe saudável; valores acima de ≈1.4 sugerem (não diagnosticam) incompetência glótica e merecem avaliação laringológica. Eckel & Boone (1981); Boone et al. (2014), The Voice and Voice Therapy.',
 
     historialTitle: 'Histórico de avaliações',
     historialLead: 'Registros salvos localmente neste dispositivo (100% privado, sem servidores).',
@@ -148,6 +150,7 @@ window.CV_I18N_DICT = {
   },
 
   en: {
+    toastPdfGenerado: 'PDF generated.',
     pageTitle: 'Clinical Voice Assessment',
     metaDescription: 'Voice assessment battery: IDV-Cl (Chilean VHI), GRBAS, maximum phonation time and s/z ratio.',
     headerTitle: 'Clinical Voice Assessment',
@@ -196,7 +199,7 @@ window.CV_I18N_DICT = {
     tmfMejorA: 'Best MPT /a/', tmfMejorS: 'Best /s/', tmfMejorZ: 'Best /z/', tmfRelacionSZ: 's/z ratio',
     tmfInterpAlta: 's/z ratio > 1.4: a suggestive (not diagnostic) finding of possible glottic incompetence. Consider correlating with a laryngological exam.',
     tmfInterpNormal: 's/z ratio within the expected reference range (≈1.0).',
-    tmfCitation: 'Reference values: healthy adult MPT (indicative) — men ≈ 25-35 s, women ≈ 15-25 s (varies with age and method). s/z ratio ≈ 1.0 in a healthy larynx; values above ≈1.4 suggest (do not diagnose) glottic incompetence and warrant laryngological evaluation. Eckel &amp; Boone (1981); Boone et al. (2014), The Voice and Voice Therapy.',
+    tmfCitation: 'Reference values: healthy adult MPT (indicative) — men ≈ 25-35 s, women ≈ 15-25 s (varies with age and method). s/z ratio ≈ 1.0 in a healthy larynx; values above ≈1.4 suggest (do not diagnose) glottic incompetence and warrant laryngological evaluation. Eckel & Boone (1981); Boone et al. (2014), The Voice and Voice Therapy.',
 
     historialTitle: 'Assessment history',
     historialLead: 'Records saved locally on this device (100% private, no servers).',

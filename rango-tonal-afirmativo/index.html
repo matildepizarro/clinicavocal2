@@ -13,6 +13,8 @@
 <script>document.documentElement.setAttribute('data-pastel-theme', (function(){try{return localStorage.getItem('cv-pastel-theme')||'rosa';}catch(e){return 'rosa';}})());</script>
 <script src="i18n-dict.js"></script>
 <script src="../assets/i18n-engine.js"></script>
+<!-- jsPDF (UMD) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer crossorigin="anonymous"></script>
 <style>
   :root{
     --bg:#f6f3ff; --bg-2:#ece4ff; --card:#ffffff; --card-2:#efe9ff; --line:#ded1fb;
@@ -78,6 +80,11 @@
   label{font-size:13px;color:var(--muted);display:block;margin-bottom:4px}
   input[type=number]{font-family:var(--font-mono);padding:8px 10px;border-radius:10px;border:1px solid var(--line);width:110px}
   select{padding:8px 10px;border-radius:10px;border:1px solid var(--line);font-family:var(--font-body)}
+  .mic-row{margin-bottom:4px}
+  .mic-select{width:100%;max-width:420px}
+  .level-meter-wrap{margin:10px 0 4px;height:10px;border-radius:6px;background:var(--line);overflow:hidden}
+  .level-meter-bar{height:100%;width:0%;background:var(--accent);transition:width .06s linear;border-radius:6px}
+  .mic-hint{font-size:12.5px;color:var(--muted);margin:2px 0 0 0}
   .status-pill{display:inline-block;padding:4px 12px;border-radius:999px;font-size:12.5px;font-weight:700}
   .status-pill.in{background:rgba(47,158,110,.15);color:var(--ok)}
   .status-pill.out{background:rgba(217,99,58,.15);color:var(--warn)}
@@ -121,11 +128,21 @@
     <div class="card">
       <h2 data-i18n="measureTitle">Paso 1 — Medir tu tono habitual</h2>
       <p class="desc" data-i18n="measureDesc">Habla con naturalidad durante unos segundos para estimar tu F0 habitual.</p>
+      <div class="row mic-row">
+        <div style="flex:1;min-width:200px">
+          <label for="micSelectMeasure" data-i18n="micSelectLabel">Micrófono</label>
+          <select id="micSelectMeasure" class="mic-select" data-i18n-aria="micSelectLabel" aria-label="Micrófono"></select>
+        </div>
+      </div>
       <div class="row">
         <button class="primary" id="btnStartMeasure" data-i18n="btnStartMeasure">Iniciar medición</button>
         <button id="btnStopMeasure" data-i18n="btnStopMeasure" disabled>Detener</button>
         <span class="muted" id="measureStatus"></span>
       </div>
+      <div class="level-meter-wrap" aria-hidden="true">
+        <div class="level-meter-bar" id="levelMeterMeasure"></div>
+      </div>
+      <p class="mic-hint" id="micHintMeasure" data-i18n="micHint">La barra se mueve cuando el micrófono detecta sonido. Si no se mueve al hablar, revisa el micrófono elegido arriba y los permisos del navegador.</p>
       <div class="row">
         <div>
           <div class="muted" data-i18n="currentF0">F0 actual</div>
@@ -176,11 +193,21 @@
     <div class="card">
       <h2 data-i18n="glideTitle">Paso 3 — Ejercicio de glide guiado</h2>
       <p class="desc" data-i18n="glideDesc">Sigue el indicador con tu voz, deslizando el tono suavemente desde tu tono habitual hacia la banda objetivo.</p>
+      <div class="row mic-row">
+        <div style="flex:1;min-width:200px">
+          <label for="micSelectGlide" data-i18n="micSelectLabel">Micrófono</label>
+          <select id="micSelectGlide" class="mic-select" data-i18n-aria="micSelectLabel" aria-label="Micrófono"></select>
+        </div>
+      </div>
       <div class="row">
         <button class="primary" id="btnStartGlide" data-i18n="btnStartGlide">Iniciar ejercicio</button>
         <button id="btnStopGlide" data-i18n="btnStopGlide" disabled>Detener</button>
         <span class="status-pill out" id="glideStatusPill" data-i18n="outTarget">Fuera de la banda</span>
       </div>
+      <div class="level-meter-wrap" aria-hidden="true">
+        <div class="level-meter-bar" id="levelMeterGlide"></div>
+      </div>
+      <p class="mic-hint" id="micHintGlide" data-i18n="micHint">La barra se mueve cuando el micrófono detecta sonido. Si no se mueve al hablar, revisa el micrófono elegido arriba y los permisos del navegador.</p>
       <div class="bar-wrap" id="glideBar">
         <div class="bar-target" id="glideBarTarget"></div>
         <div class="bar-cursor" id="glideBarCursor" style="left:0"></div>
@@ -212,6 +239,7 @@
       <p class="desc" data-i18n="progressDesc">Historial de tono habitual medido y de sesiones de glide practicadas.</p>
       <div class="row">
         <button id="btnExportCsv" data-i18n="btnExportCsv">Exportar historial (CSV)</button>
+        <button id="btnExportPdf" data-i18n="btnExportPdf">📄 Exportar historial (PDF)</button>
         <button id="btnClearHistory" data-i18n="btnClearHistory">Borrar historial</button>
       </div>
       <table id="progressTable">
@@ -326,9 +354,21 @@
   // ---- Shared mic engine ----
   var audioCtx = null, analyser = null, micStream = null, sourceNode = null, rafId = null;
   var pitchBuf = new Float32Array(2048);
+  var selectedMicId = null;
+  try{ selectedMicId = localStorage.getItem('rta_selected_mic') || null; }catch(e){}
 
+  // onFrame(f0, level): f0 es Hz o null si no hay tono claro; level es 0-1
+  // (nivel RMS) para poder mostrar el medidor incluso cuando no se detecta
+  // un tono limpio — así la persona ve que el micrófono SÍ está captando
+  // sonido aunque el algoritmo de tono no encuentre una frecuencia clara.
   function startMic(onFrame){
-    return navigator.mediaDevices.getUserMedia({ audio: { echoCancellation:false, noiseSuppression:false, autoGainControl:false } })
+    var constraints = {
+      audio: {
+        echoCancellation:false, noiseSuppression:false, autoGainControl:false,
+        deviceId: selectedMicId ? { exact: selectedMicId } : undefined
+      }
+    };
+    return navigator.mediaDevices.getUserMedia(constraints)
       .then(function(stream){
         micStream = stream;
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -337,17 +377,28 @@
         analyser.fftSize = 2048;
         sourceNode.connect(analyser);
         pitchBuf = new Float32Array(analyser.fftSize);
-        function loop(){
-          analyser.getFloatTimeDomainData(pitchBuf);
-          var level = rms(pitchBuf);
-          var f0 = -1;
-          if(level > 0.01){
-            f0 = yinDetect(pitchBuf, audioCtx.sampleRate);
+        // Bug real corregido: sin resume() explícito, algunos navegadores
+        // dejan el AudioContext en estado "suspended" incluso dentro de un
+        // gesto de click, y el analizador nunca llega a recibir audio real
+        // — eso hacía parecer que "no reconoce el micrófono".
+        var resumeP = (audioCtx.state === 'suspended') ? audioCtx.resume() : Promise.resolve();
+        return resumeP.then(function(){
+          // Refresca las etiquetas de los dispositivos ahora que hay permiso
+          // concedido (antes de conceder permiso, enumerateDevices() no
+          // entrega nombres legibles de los micrófonos).
+          populateMicSelectors();
+          function loop(){
+            analyser.getFloatTimeDomainData(pitchBuf);
+            var level = rms(pitchBuf);
+            var f0 = -1;
+            if(level > 0.01){
+              f0 = yinDetect(pitchBuf, audioCtx.sampleRate);
+            }
+            onFrame(f0 > 0 ? f0 : null, Math.min(1, level * 12));
+            rafId = requestAnimationFrame(loop);
           }
-          onFrame(f0 > 0 ? f0 : null);
-          rafId = requestAnimationFrame(loop);
-        }
-        loop();
+          loop();
+        });
       });
   }
   function stopMic(){
@@ -356,6 +407,70 @@
     if(micStream){ micStream.getTracks().forEach(function(t){ t.stop(); }); micStream = null; }
     if(audioCtx){ audioCtx.close().catch(function(){}); audioCtx = null; }
     analyser = null; sourceNode = null;
+  }
+  function micErrorMessage(err){
+    var name = err && err.name;
+    if(name === 'NotAllowedError' || name === 'PermissionDeniedError'){
+      return tt('micErrorDenied','Permiso de micrófono denegado. Revisa los permisos del sitio en tu navegador y recarga la página.');
+    }
+    if(name === 'NotFoundError' || name === 'DevicesNotFoundError'){
+      return tt('micErrorNotFound','No se encontró ningún micrófono disponible en este dispositivo.');
+    }
+    if(name === 'NotReadableError' || name === 'TrackStartError'){
+      return tt('micErrorBusy','No se pudo usar el micrófono — puede estar siendo usado por otra aplicación.');
+    }
+    if(name === 'OverconstrainedError'){
+      return tt('micErrorUnavailable','El micrófono elegido ya no está disponible. Elige otro de la lista.');
+    }
+    return tt('micPermissionError','No se pudo acceder al micrófono.');
+  }
+
+  // ---- Selector de micrófono ----
+  var micSelects = [];
+  function populateMicSelectors(){
+    if(!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) return;
+    navigator.mediaDevices.enumerateDevices().then(function(devices){
+      var mics = devices.filter(function(d){ return d.kind === 'audioinput'; });
+      micSelects.forEach(function(sel){
+        var prevValue = sel.value || selectedMicId || '';
+        sel.innerHTML = '';
+        if(mics.length === 0){
+          var opt = document.createElement('option');
+          opt.value = '';
+          opt.textContent = tt('micNoneFound','No se detectaron micrófonos');
+          sel.appendChild(opt);
+          sel.disabled = true;
+          return;
+        }
+        sel.disabled = false;
+        mics.forEach(function(d, i){
+          var opt = document.createElement('option');
+          opt.value = d.deviceId;
+          opt.textContent = d.label || (tt('micDefaultName','Micrófono') + ' ' + (i + 1));
+          sel.appendChild(opt);
+        });
+        var toSelect = mics.some(function(d){ return d.deviceId === prevValue; }) ? prevValue : mics[0].deviceId;
+        sel.value = toSelect;
+        selectedMicId = toSelect || null;
+      });
+    }).catch(function(){});
+  }
+  function onMicSelectChange(e){
+    selectedMicId = e.target.value || null;
+    try{ localStorage.setItem('rta_selected_mic', selectedMicId || ''); }catch(err){}
+    micSelects.forEach(function(sel){ if(sel !== e.target) sel.value = selectedMicId || ''; });
+  }
+  [$('micSelectMeasure'), $('micSelectGlide')].forEach(function(sel){
+    if(!sel) return;
+    micSelects.push(sel);
+    sel.addEventListener('change', onMicSelectChange);
+  });
+  // Primer intento de listado (sin permiso todavía los nombres pueden venir
+  // vacíos, pero al menos ya se ve cuántos dispositivos hay); se vuelve a
+  // poblar con nombres reales apenas se concede el permiso en startMic().
+  populateMicSelectors();
+  if(navigator.mediaDevices && navigator.mediaDevices.addEventListener){
+    navigator.mediaDevices.addEventListener('devicechange', populateMicSelectors);
   }
 
   // ---- Medición de tono habitual ----
@@ -368,8 +483,10 @@
     $('btnStopMeasure').disabled = false;
     $('btnSaveMeasure').disabled = true;
     $('measureStatus').textContent = tt('measuring','Escuchando…');
-    startMic(function(f0){
+    startMic(function(f0, level){
       if(!measuring) return;
+      var meter = $('levelMeterMeasure');
+      if(meter) meter.style.width = Math.round((level || 0) * 100) + '%';
       if(f0){
         $('curF0').innerHTML = f0.toFixed(0) + ' <small>Hz</small>';
         measureSamples.push(f0);
@@ -380,8 +497,8 @@
       } else {
         $('curF0').innerHTML = '— <small>Hz</small>';
       }
-    }).catch(function(){
-      toast(tt('micPermissionError','No se pudo acceder al micrófono.'));
+    }).catch(function(err){
+      toast(micErrorMessage(err));
       resetMeasureUI();
     });
   });
@@ -389,6 +506,7 @@
     measuring = false;
     stopMic();
     resetMeasureUI();
+    var meter = $('levelMeterMeasure'); if(meter) meter.style.width = '0%';
     if(measureSamples.length > 3) $('btnSaveMeasure').disabled = false;
   });
   function resetMeasureUI(){
@@ -454,8 +572,10 @@
     $('btnStartGlide').disabled = true;
     $('btnStopGlide').disabled = false;
     $('btnSaveSession').disabled = true;
-    startMic(function(f0){
+    startMic(function(f0, level){
       if(!glideActive) return;
+      var meter = $('levelMeterGlide');
+      if(meter) meter.style.width = Math.round((level || 0) * 100) + '%';
       var now = performance.now();
       var dt = now - glideLastTs;
       glideLastTs = now;
@@ -471,8 +591,8 @@
       $('glideDuration').innerHTML = elapsedS.toFixed(0) + ' <small>s</small>';
       var pctIn = elapsedS > 0 ? Math.round(100 * (glideInBandMs/1000) / elapsedS) : 0;
       $('glideSuccess').innerHTML = pctIn + ' <small>%</small>';
-    }).catch(function(){
-      toast(tt('micPermissionError','No se pudo acceder al micrófono.'));
+    }).catch(function(err){
+      toast(micErrorMessage(err));
       glideActive = false;
       $('btnStartGlide').disabled = false;
       $('btnStopGlide').disabled = true;
@@ -481,6 +601,7 @@
   $('btnStopGlide').addEventListener('click', function(){
     glideActive = false;
     stopMic();
+    var meter = $('levelMeterGlide'); if(meter) meter.style.width = '0%';
     $('btnStartGlide').disabled = false;
     $('btnStopGlide').disabled = true;
     var elapsedS = (performance.now() - glideStart) / 1000;
@@ -545,6 +666,36 @@
     a.href = url; a.download = 'rango-tonal-afirmativo-progreso.csv';
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
     URL.revokeObjectURL(url);
+  });
+  $('btnExportPdf').addEventListener('click', function(){
+    if(!window.jspdf || !window.jspdf.jsPDF){ toast(tt('toastPdfLibNoCargada','No se pudo cargar la librería de PDF (revisa tu conexión a internet) — intenta de nuevo en unos segundos.')); return; }
+    if(!state.sessions.length){ toast(tt('toastSinRegistros','No hay registros para exportar.')); return; }
+    var jsPDF = window.jspdf.jsPDF;
+    var pdf = new jsPDF({unit:'mm', format:'a4'});
+    var margin = 16, y = 20;
+    var pageWidth = pdf.internal.pageSize.getWidth();
+    var pageHeight = pdf.internal.pageSize.getHeight();
+    function ensure(needed){ if(y + needed > pageHeight - 16){ pdf.addPage(); y = 20; } }
+    pdf.setFontSize(14); pdf.setFont(undefined,'bold'); pdf.setTextColor(20);
+    pdf.text(tt('brandName','Rango Tonal') + ' — ' + tt('progressTitle','Progreso a lo largo del tiempo'), margin, y); y += 6;
+    pdf.setFont(undefined,'normal'); pdf.setFontSize(9); pdf.setTextColor(100);
+    pdf.text((tt('pdfGenerado','Generado')) + ': ' + new Date().toLocaleString(), margin, y); y += 6;
+    if(state.habitual){ pdf.text(tt('currentF0','F0 actual') + ' (' + tt('saveMeasure','tono habitual') + '): ' + state.habitual + ' Hz', margin, y); y += 5; }
+    pdf.text(tt('targetTitle','Banda objetivo') + ': ' + state.target.min + '–' + state.target.max + ' Hz', margin, y); y += 6;
+    pdf.setDrawColor(230); pdf.line(margin, y, pageWidth-margin, y); y += 7;
+    pdf.setTextColor(20); pdf.setFontSize(9.5);
+    state.sessions.slice().reverse().forEach(function(s){
+      ensure(20);
+      var d = new Date(s.date);
+      pdf.setFont(undefined,'bold'); pdf.text(d.toLocaleString(), margin, y); y += 5;
+      pdf.setFont(undefined,'normal');
+      var line1 = (tt('colHabitual','Tono habitual (Hz)') + ': ' + (s.habitual ? s.habitual + ' Hz' : '—') + '   ' + tt('colTarget','Banda objetivo (Hz)') + ': ' + s.targetMin + '–' + s.targetMax + ' Hz');
+      var line2 = (tt('colSuccess','% en banda') + ': ' + s.successPct + '%   ' + tt('colDuration','Duración (s)') + ': ' + s.durationS + ' s');
+      pdf.text(line1, margin, y); y += 5;
+      pdf.text(line2, margin, y); y += 7;
+    });
+    pdf.save('rango-tonal-afirmativo-progreso-' + new Date().toISOString().slice(0,10) + '.pdf');
+    toast(tt('toastPdfGenerado','PDF generado.'));
   });
   $('btnClearHistory').addEventListener('click', function(){
     if(!confirm(tt('confirmClear','¿Seguro que quieres borrar todo el historial?'))) return;

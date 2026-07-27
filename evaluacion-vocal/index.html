@@ -161,6 +161,7 @@
 
         <div class="controls">
           <button class="btn btn-ghost" id="idvResetBtn" data-i18n="btnLimpiar">Limpiar</button>
+          <button class="btn btn-ghost" id="idvExportPdfBtn" data-i18n="btnExportarPdf">📄 Exportar PDF</button>
           <button class="btn btn-primary" id="idvSaveBtn" data-i18n="btnGuardarRegistro">Guardar registro</button>
         </div>
 
@@ -192,6 +193,7 @@
 
         <div class="controls">
           <button class="btn btn-ghost" id="grbasResetBtn" data-i18n="btnLimpiar">Limpiar</button>
+          <button class="btn btn-ghost" id="grbasExportPdfBtn" data-i18n="btnExportarPdf">📄 Exportar PDF</button>
           <button class="btn btn-primary" id="grbasSaveBtn" data-i18n="btnGuardarRegistro">Guardar registro</button>
         </div>
         <div class="cite" data-i18n="grbasCitation">Referencia: Hirano, M. (1981). Clinical Examination of Voice. Springer-Verlag. Escala de 4 grados (0 = ausente/normal, 1 = leve, 2 = moderado, 3 = severo) para cada parámetro: G = Grado global de disfonía, R = Aspereza (Roughness), B = Soplosidad (Breathiness), A = Astenia (Asthenia), S = Tensión (Strain).</div>
@@ -246,6 +248,7 @@
         </div>
         <div class="controls">
           <button class="btn btn-ghost" id="tmfResetBtn" data-i18n="btnLimpiar">Limpiar</button>
+          <button class="btn btn-ghost" id="tmfExportPdfBtn" data-i18n="btnExportarPdf">📄 Exportar PDF</button>
           <button class="btn btn-primary" id="tmfSaveBtn" data-i18n="btnGuardarRegistro">Guardar registro</button>
         </div>
         <div class="cite" data-i18n="tmfCitation">Referencia de valores: TMF adulto sano orientativo — hombres ≈ 25-35 s, mujeres ≈ 15-25 s (varía con edad y método). Relación s/z ≈ 1.0 en laringe sana; valores mayores a ≈1.4 son sugerentes (no diagnósticos) de incompetencia glótica y ameritan evaluación laringológica. Eckel &amp; Boone (1981); Boone et al. (2014), The Voice and Voice Therapy.</div>
@@ -529,6 +532,128 @@ document.getElementById('tmfSaveBtn').addEventListener('click', ()=>{
   registros.push({ id:Date.now(), tipo:'TMF/s-z', paciente, fecha:new Date().toISOString(), resumen: `TMF/a=${bA?bA.toFixed(1):'—'}s · s=${bS?bS.toFixed(1):'—'}s · z=${bZ?bZ.toFixed(1):'—'}s · s/z=${ratio}` });
   persist();
   toast(tt('toastRegistroGuardado','Registro guardado.'), 'ok');
+});
+
+/* ============================================================
+   Exportación PDF individual por tipo de evaluación
+   ============================================================ */
+function pdfLibReady(){
+  if(!window.jspdf || !window.jspdf.jsPDF){ toast(tt('toastPdfLibNoCargada','No se pudo cargar la librería de PDF (revisa tu conexión a internet) — intenta de nuevo en unos segundos.'), 'err'); return false; }
+  return true;
+}
+function exportSingleReportPdf(opts){
+  // opts: {titulo, paciente, fecha, subtitulo, blocks:[{heading, lines:[]}], citation}
+  if(!pdfLibReady()) return;
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF({unit:'mm', format:'a4'});
+  const margin = 16; let y = 20;
+  const pageWidth = pdf.internal.pageSize.getWidth();
+  const pageHeight = pdf.internal.pageSize.getHeight();
+  const ensureSpace = (needed)=>{ if(y + needed > pageHeight - 18){ pdf.addPage(); y = 20; } };
+
+  pdf.setFontSize(14); pdf.setTextColor(20); pdf.setFont(undefined,'bold');
+  pdf.text(opts.titulo, margin, y); y += 6;
+  pdf.setFont(undefined,'normal'); pdf.setFontSize(9); pdf.setTextColor(100);
+  pdf.text(`${tt('pdfGenerado','Generado')}: ${new Date().toLocaleString()}`, margin, y); y += 5;
+  pdf.text(`${tt('labelPaciente','Paciente (nombre o ID)')}: ${opts.paciente}`, margin, y); y += 5;
+  if(opts.fecha){ pdf.text(`${tt('thFecha','Fecha')}: ${new Date(opts.fecha).toLocaleString()}`, margin, y); y += 5; }
+  pdf.setDrawColor(230); pdf.line(margin, y, pageWidth-margin, y); y += 7;
+
+  if(opts.subtitulo){
+    pdf.setFont(undefined,'bold'); pdf.setFontSize(10.5); pdf.setTextColor(20);
+    const subLines = pdf.splitTextToSize(opts.subtitulo, pageWidth - margin*2);
+    ensureSpace(subLines.length*5);
+    subLines.forEach(ln=>{ pdf.text(ln, margin, y); y += 5; });
+    y += 2;
+  }
+
+  (opts.blocks || []).forEach(block=>{
+    ensureSpace(10);
+    pdf.setFont(undefined,'bold'); pdf.setFontSize(11); pdf.setTextColor(20);
+    pdf.text(block.heading, margin, y); y += 6;
+    pdf.setFont(undefined,'normal'); pdf.setFontSize(9.5); pdf.setTextColor(30);
+    (block.lines || []).forEach(line=>{
+      const wrapped = pdf.splitTextToSize(line, pageWidth - margin*2);
+      wrapped.forEach(ln=>{ ensureSpace(5); pdf.text(ln, margin, y); y += 5; });
+    });
+    y += 4;
+  });
+
+  if(opts.citation){
+    ensureSpace(8);
+    pdf.setFontSize(8); pdf.setTextColor(120);
+    pdf.splitTextToSize(opts.citation, pageWidth - margin*2).forEach(ln=>{ ensureSpace(4); pdf.text(ln, margin, y); y += 4; });
+  }
+
+  pdf.save(`${opts.filename || 'evaluacion'}_${new Date().toISOString().slice(0,10)}.pdf`);
+  toast(tt('toastPdfGenerado','PDF generado.'), 'ok');
+}
+
+document.getElementById('idvExportPdfBtn').addEventListener('click', ()=>{
+  const version = document.getElementById('idvVersion').value;
+  const items = version === '10' ? IDV_ITEMS.filter(i=>i.in10) : IDV_ITEMS;
+  const paciente = document.getElementById('idvPaciente').value.trim() || tt('sinNombre','(sin nombre)');
+  const summaryBoxes = Array.from(document.getElementById('idvScoreSummary').children).map(b=>({num:b.querySelector('.num').textContent, lbl:b.querySelector('.lbl').textContent}));
+  if(!summaryBoxes.length){ toast(tt('toastSinMediciones','Realiza al menos una medición antes de guardar.'), 'err'); return; }
+  const resumenLines = summaryBoxes.map(s=>`${s.lbl}: ${s.num}`);
+  const detalleLines = items.map(item=>{
+    const checked = document.querySelector(`input[name="idv-${item.id}"]:checked`);
+    return `${item.id} — ${item.text}: ${checked ? checked.value : '—'}`;
+  });
+  exportSingleReportPdf({
+    titulo: tt('idvTitle','Índice de Desventaja Vocal Chileno (IDV-Cl)'),
+    paciente, fecha: new Date().toISOString(),
+    subtitulo: version === '10' ? 'IDV-Cl-10 (versión breve, 10 ítems)' : 'IDV-Cl completo (30 ítems)',
+    blocks: [ {heading: tt('idvScoreTotal','Puntaje total'), lines: resumenLines}, {heading: tt('tabIdv','Autopercepción (IDV-Cl)'), lines: detalleLines} ],
+    citation: 'IDV-Cl: Correa Forno, S. A., Rangel Azevedo, R., & Côrtes Gama, A. C. (2023). Revista Chilena de Fonoaudiología, 22(1), 1-17.',
+    filename: 'idv-cl'
+  });
+});
+
+document.getElementById('grbasExportPdfBtn').addEventListener('click', ()=>{
+  const paciente = document.getElementById('grbasPaciente').value.trim() || tt('sinNombre','(sin nombre)');
+  const tarea = document.getElementById('grbasTarea').value.trim();
+  const notas = document.getElementById('grbasNotas').value.trim();
+  const vals = GRBAS_LETTERS.map(l=>{
+    const checked = document.querySelector(`input[name="grbas-${l.k}"]:checked`);
+    return `${l.k} — ${tt(l.nameKey,l.fallback)}: ${checked ? checked.value : '—'}`;
+  });
+  const anyChecked = GRBAS_LETTERS.some(l=>document.querySelector(`input[name="grbas-${l.k}"]:checked`));
+  if(!anyChecked){ toast(tt('toastCompletarTodos','Responde todos los ítems antes de guardar.'), 'err'); return; }
+  exportSingleReportPdf({
+    titulo: tt('grbasTitle','Escala GRBAS'),
+    paciente, fecha: new Date().toISOString(),
+    subtitulo: tarea ? `${tt('labelTareaEvaluada','Tarea evaluada')}: ${tarea}` : '',
+    blocks: [ {heading: tt('grbasTitle','Escala GRBAS'), lines: vals}, ...(notas ? [{heading: tt('labelNotasClinicas','Notas clínicas'), lines:[notas]}] : []) ],
+    citation: 'Referencia: Hirano, M. (1981). Clinical Examination of Voice. Springer-Verlag.',
+    filename: 'grbas'
+  });
+});
+
+document.getElementById('tmfExportPdfBtn').addEventListener('click', ()=>{
+  const paciente = document.getElementById('tmfPaciente').value.trim() || tt('sinNombre','(sin nombre)');
+  const bA = bestOf('A'), bS = bestOf('S'), bZ = bestOf('Z');
+  if(bA===null && bS===null && bZ===null){ toast(tt('toastSinMediciones','Realiza al menos una medición antes de guardar.'), 'err'); return; }
+  const ratio = (bS && bZ) ? (bS/bZ) : null;
+  const resumenLines = [
+    `${tt('tmfMejorA','Mejor TMF /a/')}: ${bA!==null?bA.toFixed(1)+'s':'—'}`,
+    `${tt('tmfMejorS','Mejor /s/')}: ${bS!==null?bS.toFixed(1)+'s':'—'}`,
+    `${tt('tmfMejorZ','Mejor /z/')}: ${bZ!==null?bZ.toFixed(1)+'s':'—'}`,
+    `${tt('tmfRelacionSZ','Relación s/z')}: ${ratio!==null?ratio.toFixed(2):'—'}`
+  ];
+  const trialLines = ['A','S','Z'].map(l=>`${l}: ${tmfState[l].trials.map(t=>t.toFixed(1)+'s').join(', ') || '—'}`);
+  const interpText = document.getElementById('tmfInterpretation').textContent.trim();
+  exportSingleReportPdf({
+    titulo: tt('tmfTitle','Tiempo Máximo de Fonación (TMF) y relación s/z'),
+    paciente, fecha: new Date().toISOString(),
+    blocks: [
+      {heading: tt('tmfMejorA','Resultados'), lines: resumenLines},
+      {heading: tt('historialTitle','Historial de evaluaciones'), lines: trialLines},
+      ...(interpText ? [{heading: tt('tabTmf','TMF y relación s/z'), lines:[interpText]}] : [])
+    ],
+    citation: 'Boone et al. (2014), The Voice and Voice Therapy.',
+    filename: 'tmf-sz'
+  });
 });
 
 /* ============================================================

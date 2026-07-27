@@ -11,7 +11,7 @@ window.CV_I18N_DICT = {
     heroTitleEm: 'Fonoaudiología',
     heroLede: 'Desde la evaluación hasta el seguimiento, todas las herramientas que necesitas reunidas en un único entorno, diseñadas para agilizar el trabajo diario del profesional.',
 
-    sectionEntrenamiento: 'Entrenamiento &amp; análisis',
+    sectionEntrenamiento: 'Entrenamiento y análisis',
     countTools3: '03 herramientas',
     countTools4: '04 herramientas',
     countTools6: '06 herramientas',
@@ -53,7 +53,7 @@ window.CV_I18N_DICT = {
     praatFeat1: 'Análisis acústico', praatFeat2: 'F0 / formantes',
     praatGo: 'Abrir analizador',
 
-    respiracionTitle: 'Respira Cuadrada',
+    respiracionTitle: 'Respiración Cuadrada',
     respiracionDesc: 'Temporizador de respiración cuadrada con biblioteca de patrones, editor propio, animación guía y metrónomo en BPM para marcar el ritmo.',
     respiracionFeat1: 'Biblioteca de patrones', respiracionFeat2: 'Editor', respiracionFeat3: 'Animación', respiracionFeat4: 'Metrónomo',
     respiracionGo: 'Abrir temporizador',
@@ -94,7 +94,7 @@ window.CV_I18N_DICT = {
     tourStep2Title: 'Navegación rápida',
     tourStep2Text: 'Usa estos enlaces para saltar directo a las herramientas de entrenamiento o a las de uso clínico diario.',
     tourStep3Title: 'Entrenamiento & análisis',
-    tourStep3Text: 'Ejercicios Vocales, Plataforma de Análisis Acústico de la Voz y Respira Cuadrada: para practicar, analizar la voz y trabajar la respiración.',
+    tourStep3Text: 'Ejercicios Vocales, Plataforma de Análisis Acústico de la Voz y Respiración Cuadrada: para practicar, analizar la voz y trabajar la respiración.',
     tourStep4Title: 'Uso clínico diario',
     tourStep4Text: 'Bitácora de sesiones, Sesión diaria y Esfuerzo vocal: para registrar y acompañar el trabajo con cada paciente.',
     tourStep5Title: 'Elige tu idioma',
@@ -118,7 +118,7 @@ window.CV_I18N_DICT = {
     heroTitleEm: 'Fonoaudiologia',
     heroLede: 'Da avaliação ao acompanhamento, todas as ferramentas que você precisa reunidas em um único ambiente, pensadas para agilizar o trabalho diário do profissional.',
 
-    sectionEntrenamiento: 'Treinamento &amp; análise',
+    sectionEntrenamiento: 'Treinamento e análise',
     countTools3: '03 ferramentas',
     countTools4: '04 ferramentas',
     countTools6: '06 ferramentas',
@@ -225,7 +225,7 @@ window.CV_I18N_DICT = {
     heroTitleEm: 'Speech-Language Pathology',
     heroLede: 'From assessment to follow-up, every tool you need brought together in one place, designed to streamline the clinician\u2019s daily work.',
 
-    sectionEntrenamiento: 'Training &amp; analysis',
+    sectionEntrenamiento: 'Training & analysis',
     countTools3: '03 tools',
     countTools4: '04 tools',
     countTools6: '06 tools',

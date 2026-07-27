@@ -9,6 +9,8 @@
 <script>document.documentElement.setAttribute('data-pastel-theme', (function(){try{return localStorage.getItem('cv-pastel-theme')||'rosa';}catch(e){return 'rosa';}})());</script>
 <script src="i18n-dict.js"></script>
 <script src="../assets/i18n-engine.js"></script>
+<!-- jsPDF (UMD) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
@@ -92,6 +94,10 @@
       <textarea id="notasDia" data-i18n-placeholder="notasDiaPlaceholder" placeholder="¿Cómo sentiste tu voz hoy?"></textarea>
 
       <div class="streak-box" id="streakBox"></div>
+
+      <div class="controls">
+        <button class="btn btn-ghost" id="exportDayPdfBtn" data-i18n="btnExportarPdfDia">📄 Exportar día en PDF</button>
+      </div>
     </div>
 
     <div class="card">
@@ -101,6 +107,7 @@
     </div>
 
     <div class="controls">
+      <button class="btn btn-ghost" id="exportHistPdfBtn" data-i18n="btnExportarPdfHistorial">📄 Exportar historial completo (PDF)</button>
       <button class="btn btn-danger" id="clearAllBtn" data-i18n="btnBorrarTodo">Borrar todo el historial</button>
     </div>
 
@@ -126,7 +133,7 @@ function toast(msg, type){
 }
 
 const HABITS = [
-  {id:'agua', icon:'💧', nameKey:'habitAguaName', descKey:'habitAguaDesc', slider:true, sliderMax:12, sliderUnitKey:'unidadVasos'},
+  {id:'agua', icon:'💧', nameKey:'habitAguaName', descKey:'habitAguaDesc', slider:true, sliderMax:12, sliderGoal:6, sliderUnitKey:'unidadVasos'},
   {id:'reflujo', icon:'🔥', nameKey:'habitReflujoName', descKey:'habitReflujoDesc'},
   {id:'cafeina', icon:'☕', nameKey:'habitCafeinaName', descKey:'habitCafeinaDesc'},
   {id:'alcohol', icon:'🍷', nameKey:'habitAlcoholName', descKey:'habitAlcoholDesc'},
@@ -151,20 +158,26 @@ function renderHabits(){
   const grid = document.getElementById('habitGrid');
   grid.innerHTML = '';
   HABITS.forEach(h=>{
-    const checked = !!day.habits[h.id];
+    // Los hábitos con slider (por ahora solo "agua") no usan un check manual:
+    // el cumplimiento se calcula solo a partir de la meta (sliderGoal), para
+    // no tener dos controles distintos (slider + casillero) que se puedan
+    // contradecir entre sí.
+    const isSliderHabit = !!h.slider;
+    const sliderVal = isSliderHabit ? (day.sliders[h.id] ?? 0) : null;
+    const checked = isSliderHabit ? (sliderVal >= h.sliderGoal) : !!day.habits[h.id];
     const card = document.createElement('div');
     card.className = 'habit-card' + (checked ? ' checked' : '');
-    let inner = `<div class="habit-head" data-habit="${h.id}">
+    let inner = `<div class="habit-head" data-habit="${h.id}"${isSliderHabit ? ' data-no-toggle="1" style="cursor:default"' : ''}>
       <span class="habit-icon">${h.icon}</span>
       <span class="habit-name">${tt(h.nameKey, h.id)}</span>
       <span class="habit-check">${checked ? '✓' : ''}</span>
     </div>
     <div class="habit-desc">${tt(h.descKey, '')}</div>`;
     if(h.slider){
-      const val = day.sliders[h.id] ?? 0;
+      const goalLabel = tt('metaSugerida','Meta: {n} o más').replace('{n}', h.sliderGoal);
       inner += `<div class="habit-slider-wrap">
-        <input type="range" min="0" max="${h.sliderMax}" value="${val}" data-slider="${h.id}" aria-label="${tt(h.nameKey,h.id)}">
-        <div class="habit-slider-val">${val} ${tt(h.sliderUnitKey,'')}</div>
+        <input type="range" min="0" max="${h.sliderMax}" value="${sliderVal}" data-slider="${h.id}" aria-label="${tt(h.nameKey,h.id)}">
+        <div class="habit-slider-val">${sliderVal} ${tt(h.sliderUnitKey,'')} <span style="opacity:.65">· ${goalLabel}</span></div>
       </div>`;
     }
     card.innerHTML = inner;
@@ -172,7 +185,7 @@ function renderHabits(){
   });
   document.getElementById('notasDia').value = day.notas || '';
 
-  grid.querySelectorAll('.habit-head').forEach(el=>{
+  grid.querySelectorAll('.habit-head:not([data-no-toggle])').forEach(el=>{
     el.addEventListener('click', ()=>{
       const id = el.dataset.habit;
       const d = getDayData(key);
@@ -185,11 +198,26 @@ function renderHabits(){
   });
   grid.querySelectorAll('input[data-slider]').forEach(inp=>{
     inp.addEventListener('input', ()=>{
+      // Solo actualiza el número mientras se arrastra, sin re-renderizar la
+      // grilla completa (eso interrumpiría el arrastre del control).
+      const id = inp.dataset.slider;
+      const habitDef = HABITS.find(hh=>hh.id===id);
+      const valLabel = inp.parentElement.querySelector('.habit-slider-val');
+      const goalLabel = tt('metaSugerida','Meta: {n} o más').replace('{n}', habitDef.sliderGoal);
+      valLabel.innerHTML = `${inp.value} ${tt(habitDef.sliderUnitKey,'')} <span style="opacity:.65">· ${goalLabel}</span>`;
+    });
+    inp.addEventListener('change', ()=>{
+      // Al soltar el control: guarda el valor y recalcula si se cumplió la
+      // meta (el hábito de agua no tiene casillero aparte; el slider es la
+      // única fuente de verdad para evitar que ambos controles se contradigan).
       const id = inp.dataset.slider;
       const d = getDayData(key);
       d.sliders[id] = parseInt(inp.value, 10);
+      const habitDef = HABITS.find(hh=>hh.id===id);
+      if(habitDef && habitDef.sliderGoal != null){ d.habits[id] = d.sliders[id] >= habitDef.sliderGoal; }
       setDayData(key, d);
-      inp.nextElementSibling.textContent = `${inp.value} ${tt(HABITS.find(h=>h.id===id).sliderUnitKey,'')}`;
+      renderHabits();
+      renderStreak();
       renderCalendar();
     });
   });
@@ -242,6 +270,76 @@ function renderCalendar(){
     grid.appendChild(cell);
   });
 }
+
+/* ============================================================
+   Exportación PDF — día actual e historial completo
+   ============================================================ */
+function pdfLibReady(){
+  if(!window.jspdf || !window.jspdf.jsPDF){ toast(tt('toastPdfLibNoCargada','No se pudo cargar la librería de PDF (revisa tu conexión a internet) — intenta de nuevo en unos segundos.'), 'err'); return false; }
+  return true;
+}
+function newPdfDoc(titulo){
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF({unit:'mm', format:'a4'});
+  const margin = 16; let y = 20;
+  const pageWidth = pdf.internal.pageSize.getWidth();
+  const pageHeight = pdf.internal.pageSize.getHeight();
+  pdf.setFontSize(14); pdf.setFont(undefined,'bold'); pdf.setTextColor(20);
+  pdf.text(titulo, margin, y); y += 6;
+  pdf.setFont(undefined,'normal'); pdf.setFontSize(9); pdf.setTextColor(100);
+  pdf.text(`${tt('pdfGenerado','Generado')}: ${new Date().toLocaleString()}`, margin, y); y += 6;
+  pdf.setDrawColor(230); pdf.line(margin, y, pageWidth-margin, y); y += 7;
+  pdf.setTextColor(20);
+  return { pdf, margin, y, pageWidth, pageHeight,
+    ensure(needed){ if(this.y + needed > this.pageHeight - 16){ this.pdf.addPage(); this.y = 20; } },
+    line(text, opts){ opts = opts||{}; this.pdf.setFont(undefined, opts.bold?'bold':'normal'); this.pdf.setFontSize(opts.size||10);
+      const wrapped = this.pdf.splitTextToSize(text, this.pageWidth - this.margin*2);
+      wrapped.forEach(ln=>{ this.ensure(5); this.pdf.text(ln, this.margin, this.y); this.y += (opts.gap||5); });
+    }
+  };
+}
+document.getElementById('exportDayPdfBtn').addEventListener('click', ()=>{
+  if(!pdfLibReady()) return;
+  const key = fmtDate(currentDate);
+  const day = getDayData(key);
+  const doc = newPdfDoc(tt('headerTitle','Higiene Vocal'));
+  doc.line(`${tt('thFecha','Fecha')}: ${currentDate.toLocaleDateString(undefined,{weekday:'long', day:'numeric', month:'long', year:'numeric'})}`, {bold:true, size:12, gap:7});
+  HABITS.forEach(h=>{
+    const isSliderHabit = !!h.slider;
+    const sliderVal = isSliderHabit ? (day.sliders[h.id] ?? 0) : null;
+    const checked = isSliderHabit ? (sliderVal >= h.sliderGoal) : !!day.habits[h.id];
+    let text = `${checked ? '✓' : '—'} ${tt(h.nameKey, h.id)}`;
+    if(isSliderHabit) text += ` (${sliderVal} ${tt(h.sliderUnitKey,'')})`;
+    doc.line(text);
+  });
+  if(day.notas){ doc.y += 3; doc.line(tt('labelNotasDia','Notas del día (opcional)'), {bold:true, size:10.5, gap:6}); doc.line(day.notas); }
+  doc.pdf.save(`higiene-vocal-${key}.pdf`);
+  toast(tt('toastPdfGenerado','PDF generado.'), 'ok');
+});
+
+document.getElementById('exportHistPdfBtn').addEventListener('click', ()=>{
+  if(!pdfLibReady()) return;
+  const keys = Object.keys(data).sort();
+  if(!keys.length){ toast(tt('toastSinRegistros','No hay registros para exportar.'), 'err'); return; }
+  const doc = newPdfDoc(tt('headerTitle','Higiene Vocal') + ' — ' + tt('calTitle','Historial'));
+  keys.forEach(key=>{
+    const day = data[key];
+    doc.ensure(10);
+    doc.line(new Date(key).toLocaleDateString(undefined,{weekday:'long', day:'numeric', month:'long', year:'numeric'}), {bold:true, size:11, gap:6});
+    HABITS.forEach(h=>{
+      const isSliderHabit = !!h.slider;
+      const sliderVal = isSliderHabit ? (day.sliders[h.id] ?? 0) : null;
+      const checked = isSliderHabit ? (sliderVal >= h.sliderGoal) : !!day.habits[h.id];
+      let text = `${checked ? '✓' : '—'} ${tt(h.nameKey, h.id)}`;
+      if(isSliderHabit) text += ` (${sliderVal} ${tt(h.sliderUnitKey,'')})`;
+      doc.line(text, {size:9.5});
+    });
+    if(day.notas){ doc.line(`${tt('labelNotasDia','Notas del día (opcional)')}: ${day.notas}`, {size:9.5}); }
+    doc.y += 4;
+  });
+  doc.pdf.save(`higiene-vocal-historial-${new Date().toISOString().slice(0,10)}.pdf`);
+  toast(tt('toastPdfGenerado','PDF generado.'), 'ok');
+});
 
 document.getElementById('clearAllBtn').addEventListener('click', ()=>{
   if(!confirm(tt('confirmBorrarTodos','¿Borrar todo el historial de higiene vocal?'))) return;

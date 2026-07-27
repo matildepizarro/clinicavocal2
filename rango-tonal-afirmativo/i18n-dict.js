@@ -1,6 +1,11 @@
 /* Consultorio Vocal — diccionario de traducción de Rango Tonal Afirmativo */
 window.CV_I18N_DICT = {
   es: {
+    btnExportPdf: '📄 Exportar historial (PDF)',
+    toastPdfGenerado: 'PDF generado.',
+    toastSinRegistros: 'No hay registros para exportar.',
+    toastPdfLibNoCargada: 'No se pudo cargar la libreria de PDF (revisa tu conexion a internet) - intenta de nuevo en unos segundos.',
+    pdfGenerado: 'Generado',
     pageTitle: 'Rango tonal afirmativo — Entrenamiento de tono',
     metaDescription: 'Herramienta de entrenamiento de tono habitual y rango objetivo para voz afirmativa de género, con glides guiados y seguimiento de progreso.',
     brandName: 'Rango Tonal',
@@ -54,9 +59,20 @@ window.CV_I18N_DICT = {
     btnClearHistory: 'Borrar historial',
     confirmClear: '¿Seguro que quieres borrar todo el historial de progreso? Esta acción no se puede deshacer.',
     micPermissionError: 'No se pudo acceder al micrófono. Revisa los permisos del navegador.',
+    micSelectLabel: 'Micrófono', micNoneFound: 'No se detectaron micrófonos', micDefaultName: 'Micrófono',
+    micHint: 'La barra se mueve cuando el micrófono detecta sonido. Si no se mueve al hablar, revisa el micrófono elegido arriba y los permisos del navegador.',
+    micErrorDenied: 'Permiso de micrófono denegado. Revisa los permisos del sitio en tu navegador y recarga la página.',
+    micErrorNotFound: 'No se encontró ningún micrófono disponible en este dispositivo.',
+    micErrorBusy: 'No se pudo usar el micrófono — puede estar siendo usado por otra aplicación.',
+    micErrorUnavailable: 'El micrófono elegido ya no está disponible. Elige otro de la lista.',
     footerNote: 'Herramienta de entrenamiento vocal — no reemplaza la evaluación fonoaudiológica.'
   },
   pt: {
+    btnExportPdf: '📄 Exportar historico (PDF)',
+    toastPdfGenerado: 'PDF gerado.',
+    toastSinRegistros: 'Nao ha registros para exportar.',
+    toastPdfLibNoCargada: 'Nao foi possivel carregar a biblioteca de PDF (verifique sua conexao) - tente novamente em instantes.',
+    pdfGenerado: 'Gerado',
     pageTitle: 'Faixa tonal afirmativa — Treinamento de tom',
     metaDescription: 'Ferramenta de treinamento de tom habitual e faixa-alvo para voz afirmativa de gênero, com glides guiados e acompanhamento de progresso.',
     brandName: 'Faixa Tonal',
@@ -110,9 +126,20 @@ window.CV_I18N_DICT = {
     btnClearHistory: 'Apagar histórico',
     confirmClear: 'Tem certeza de que deseja apagar todo o histórico de progresso? Esta ação não pode ser desfeita.',
     micPermissionError: 'Não foi possível acessar o microfone. Verifique as permissões do navegador.',
+    micSelectLabel: 'Microfone', micNoneFound: 'Nenhum microfone detectado', micDefaultName: 'Microfone',
+    micHint: 'A barra se move quando o microfone detecta som. Se não se mover ao falar, verifique o microfone escolhido acima e as permissões do navegador.',
+    micErrorDenied: 'Permissão de microfone negada. Verifique as permissões do site no seu navegador e recarregue a página.',
+    micErrorNotFound: 'Nenhum microfone disponível foi encontrado neste dispositivo.',
+    micErrorBusy: 'Não foi possível usar o microfone — ele pode estar sendo usado por outro aplicativo.',
+    micErrorUnavailable: 'O microfone escolhido não está mais disponível. Escolha outro da lista.',
     footerNote: 'Ferramenta de treinamento vocal — não substitui a avaliação fonoaudiológica.'
   },
   en: {
+    btnExportPdf: '📄 Export history (PDF)',
+    toastPdfGenerado: 'PDF generated.',
+    toastSinRegistros: 'No records to export.',
+    toastPdfLibNoCargada: 'Could not load the PDF library (check your internet connection) - try again in a moment.',
+    pdfGenerado: 'Generated',
     pageTitle: 'Affirming Pitch Range — Pitch Training',
     metaDescription: 'Habitual pitch and target-range training tool for gender-affirming voice, with guided glides and progress tracking.',
     brandName: 'Pitch Range',
@@ -166,6 +193,12 @@ window.CV_I18N_DICT = {
     btnClearHistory: 'Clear history',
     confirmClear: 'Are you sure you want to clear the entire progress history? This action cannot be undone.',
     micPermissionError: 'Could not access the microphone. Check your browser permissions.',
+    micSelectLabel: 'Microphone', micNoneFound: 'No microphones detected', micDefaultName: 'Microphone',
+    micHint: 'The bar moves when the microphone picks up sound. If it doesn\u2019t move while you speak, check the microphone chosen above and your browser permissions.',
+    micErrorDenied: 'Microphone permission denied. Check this site\u2019s permissions in your browser and reload the page.',
+    micErrorNotFound: 'No microphone was found on this device.',
+    micErrorBusy: 'Could not use the microphone — it may be in use by another application.',
+    micErrorUnavailable: 'The chosen microphone is no longer available. Pick another one from the list.',
     footerNote: 'Voice training tool — does not replace speech-language pathology evaluation.'
   }
 };

@@ -27,7 +27,7 @@
 ¿Cuántas veces armaste una rutina de ejercicios vocales a mano, cronómetro en una
 ventana y planilla en otra? ¿Cuántas veces quisiste **medir** el rango vocal de tu
 paciente, su vibrato, su esfuerzo fonatorio o su afinación, y terminaste haciendo
-cálculos a ojo? **Consultorio Vocal** es una plataforma clínica completa —seis
+cálculos a ojo? **Consultorio Vocal** es una plataforma clínica completa —doce
 herramientas profesionales bajo un mismo portal— pensada por una fonoaudióloga,
 para fonoaudiólogos, para que tu tiempo de sesión sea para tu paciente y no para
 pelear con planillas.
@@ -40,16 +40,22 @@ en menos de cinco minutos con GitHub Pages.
 > en su propio consultorio, ahora disponible para toda la comunidad
 > fonoaudiológica hispanohablante, lusófona y anglófona.*
 
-### 🧰 Las 6 herramientas
+### 🧰 Las 12 herramientas
 
 | Herramienta | Qué resuelve en tu día a día clínico |
 |---|---|
+| 🩺 **Evaluación Clínica de Voz** | Batería de evaluación vocal: IDV-Cl (adaptación chilena oficial del VHI), IDV-Cl-10, GRBAS, tiempo máximo de fonación y relación s/z, con historial por paciente y exportación a PDF. |
 | 🎵 **Ejercicios Vocales** | Entrenador vocal con escalas, arpegios y glissandos guiados por sintetizador de audio, detección de tu rango vocal cantando (clasifica automáticamente entre bajo, barítono, tenor, contralto, mezzosoprano y soprano), grabación y evaluación de afinación nota por nota, análisis de vibrato, afinador en tiempo real y rutinas personalizadas. Funciona **sin conexión** como app instalable (PWA). |
-| 📊 **Plataforma de Análisis Acústico** | Tu Praat de bolsillo en el navegador: sube o graba audio y obtené F0, jitter, shimmer, HNR y espectrograma al instante, sin instalar software ni depender de un laboratorio. |
+| 📊 **Plataforma de Análisis Acústico** | Tu Praat de bolsillo en el navegador: sube o graba audio y obtené F0, jitter, shimmer, HNR, espectrograma y mapa de vocales F1-F2 al instante, sin instalar software ni depender de un laboratorio. |
 | 📋 **Bitácora de Sesiones** | Registro clínico de cada sesión —foco de trabajo, ejercicios realizados, sensaciones del paciente, notas clínicas, nivel y nota detectados— con exportación a PDF prolijo y con membrete, listo para la ficha del paciente. |
 | ☀️ **Sesión Diaria** | Acompañamiento vocal afirmativo día a día, para pacientes que necesitan práctica constante y guiada entre sesiones presenciales. |
-| 💪 **Medición del Esfuerzo Vocal** | Cuantificá el esfuerzo fonatorio de tu paciente con métricas objetivas, útil para seguimiento de disfonías y fatiga vocal. |
-| 🌬️ **Respira Cuadrada** | Temporizador visual de respiración cuadrada (4-4-4-4) para trabajar el soporte respiratorio antes o durante la sesión. |
+| 💪 **Medición del Esfuerzo Vocal** | Cuantificá el esfuerzo fonatorio percibido de tu paciente con la escala Borg CR-10 y síntomas asociados, útil para seguimiento de disfonías y fatiga vocal, con exportación a PDF. |
+| 🌬️ **Respiración Cuadrada** | Temporizador visual de respiración cuadrada (4-4-4-4) para trabajar el soporte respiratorio antes o durante la sesión. |
+| 🧴 **Higiene Vocal** | Checklist diario de hábitos de higiene vocal: hidratación, reflujo, descanso vocal y factores de riesgo, para que el paciente lo complete entre sesiones. |
+| 📝 **Anamnesis Vocal** | Ficha estructurada de ingreso: antecedentes, hábitos y factores de riesgo vocal, con exportación a PDF lista para la ficha clínica. |
+| 📚 **Biblioteca Educativa** | Contenido educativo sobre la voz —anatomía, diagnósticos frecuentes y cuándo consultar— explicado en lenguaje simple para compartir con pacientes. |
+| 🏳️‍⚧️ **Rango Tonal Afirmativo** | Entrenamiento de tono habitual y rango objetivo para voz afirmativa de género, con glides guiados y seguimiento de progreso. |
+| 📈 **Dashboard de Evolución Longitudinal** | Cruza automáticamente los datos de Evaluación Vocal, Esfuerzo Vocal y Anamnesis por paciente a lo largo del tiempo (leídos desde el localStorage de esas herramientas), con línea de tiempo, gráfico y exportación a CSV. |
 
 Cada herramienta funciona **de forma completamente independiente** —podés
 compartir el link de una sola, por ejemplo para que tu paciente practique en
@@ -106,12 +112,18 @@ HTML, CSS y JavaScript estático, funciona en cualquier hosting estático
 │   ├── theme-switcher.js
 │   ├── a11y-reader.js
 │   └── shared.css / shared.js
-├── vocalizador/                 ← Ejercicios Vocales (entrenador vocal, PWA offline)
-├── praat-web/                   ← Plataforma de Análisis Acústico de la Voz
-├── bitacora-sesiones/            ← Bitácora de sesiones clínicas
-├── sesion-diaria/                ← Sesión diaria / acompañamiento vocal
-├── esfuerzo-vocal/                ← Medición del esfuerzo vocal
-└── respiracion-cuadrada/          ← Respira Cuadrada (temporizador de respiración)
+├── evaluacion-vocal/              ← Evaluación Clínica de Voz (IDV-Cl, GRBAS, TMF/s-z)
+├── vocalizador/                    ← Ejercicios Vocales (entrenador vocal, PWA offline)
+├── praat-web/                      ← Plataforma de Análisis Acústico de la Voz
+├── bitacora-sesiones/               ← Bitácora de sesiones clínicas
+├── sesion-diaria/                   ← Sesión diaria / acompañamiento vocal
+├── esfuerzo-vocal/                   ← Medición del esfuerzo vocal
+├── respiracion-cuadrada/              ← Respiración Cuadrada (temporizador de respiración)
+├── higiene-vocal/                      ← Higiene Vocal (checklist diario)
+├── anamnesis-vocal/                     ← Anamnesis Vocal (ficha de ingreso)
+├── biblioteca-educativa/                 ← Biblioteca Educativa para pacientes
+├── rango-tonal-afirmativo/                ← Rango tonal afirmativo (voz afirmativa de género)
+└── dashboard-longitudinal/                 ← Dashboard de evolución longitudinal
 ```
 
 Cada carpeta funciona también de forma independiente si se abre directamente
@@ -179,7 +191,7 @@ Quantas vezes você montou uma rotina de exercícios vocais na mão, cronômetro
 em uma janela e planilha em outra? Quantas vezes quis **medir** a extensão
 vocal do seu paciente, o vibrato, o esforço fonatório ou a afinação, e acabou
 fazendo cálculos no olho? **Consultorio Vocal** é uma plataforma clínica
-completa — seis ferramentas profissionais em um único portal — pensada por
+completa — doze ferramentas profissionais em um único portal — pensada por
 uma fonoaudióloga, para fonoaudiólogos, para que seu tempo de sessão seja
 para o seu paciente, e não para brigar com planilhas.
 
@@ -191,16 +203,22 @@ na internet em menos de cinco minutos com o GitHub Pages.
 > usa no próprio consultório, agora disponível para toda a comunidade
 > fonoaudiológica de língua portuguesa, espanhola e inglesa.*
 
-### 🧰 As 6 ferramentas
+### 🧰 As 12 ferramentas
 
 | Ferramenta | O que resolve no seu dia a dia clínico |
 |---|---|
+| 🩺 **Avaliação Clínica de Voz** | Bateria de avaliação vocal: IDV-Cl (adaptação chilena oficial do VHI), IDV-Cl-10, GRBAS, tempo máximo de fonação e relação s/z, com histórico por paciente e exportação em PDF. |
 | 🎵 **Exercícios Vocais** | Treinador vocal com escalas, arpejos e glissandos guiados por sintetizador de áudio, detecção da extensão vocal cantando (classifica automaticamente entre baixo, barítono, tenor, contralto, mezzosoprano e soprano), gravação e avaliação de afinação nota por nota, análise de vibrato, afinador em tempo real e rotinas personalizadas. Funciona **sem conexão** como app instalável (PWA). |
-| 📊 **Plataforma de Análise Acústica** | Seu Praat de bolso no navegador: envie ou grave áudio e obtenha F0, jitter, shimmer, HNR e espectrograma na hora, sem instalar software nem depender de um laboratório. |
+| 📊 **Plataforma de Análise Acústica** | Seu Praat de bolso no navegador: envie ou grave áudio e obtenha F0, jitter, shimmer, HNR, espectrograma e mapa de vogais F1-F2 na hora, sem instalar software nem depender de um laboratório. |
 | 📋 **Diário de Sessões** | Registro clínico de cada sessão — foco de trabalho, exercícios realizados, sensações do paciente, notas clínicas, nível e nota detectados — com exportação em PDF organizado e com timbre, pronto para o prontuário. |
 | ☀️ **Sessão Diária** | Acompanhamento vocal afirmativo dia a dia, para pacientes que precisam de prática constante e guiada entre sessões presenciais. |
-| 💪 **Medição do Esforço Vocal** | Quantifique o esforço fonatório do seu paciente com métricas objetivas, útil para acompanhamento de disfonias e fadiga vocal. |
+| 💪 **Medição do Esforço Vocal** | Quantifique o esforço fonatório percebido do seu paciente com a escala Borg CR-10 e sintomas associados, útil para acompanhamento de disfonias e fadiga vocal, com exportação em PDF. |
 | 🌬️ **Respiração Quadrada** | Temporizador visual de respiração quadrada (4-4-4-4) para trabalhar o suporte respiratório antes ou durante a sessão. |
+| 🧴 **Higiene Vocal** | Checklist diário de hábitos de higiene vocal: hidratação, refluxo, descanso vocal e fatores de risco, para o paciente preencher entre sessões. |
+| 📝 **Anamnese Vocal** | Ficha estruturada de admissão: antecedentes, hábitos e fatores de risco vocal, com exportação em PDF pronta para o prontuário. |
+| 📚 **Biblioteca Educativa** | Conteúdo educativo sobre a voz — anatomia, diagnósticos frequentes e quando consultar — explicado em linguagem simples para compartilhar com pacientes. |
+| 🏳️‍⚧️ **Faixa Tonal Afirmativa** | Treinamento de tom habitual e faixa-alvo para voz afirmativa de gênero, com glides guiados e acompanhamento de progresso. |
+| 📈 **Painel de Evolução Longitudinal** | Cruza automaticamente os dados de Avaliação Vocal, Esforço Vocal e Anamnese por paciente ao longo do tempo (lidos do localStorage dessas ferramentas), com linha do tempo, gráfico e exportação em CSV. |
 
 Cada ferramenta funciona **de forma totalmente independiente** — você pode
 compartilhar o link de apenas uma, por exemplo para o paciente praticar em
@@ -257,12 +275,18 @@ HTML, CSS e JavaScript estático, funciona em qualquer hospedagem estática
 │   ├── theme-switcher.js
 │   ├── a11y-reader.js
 │   └── shared.css / shared.js
-├── vocalizador/                 ← Exercícios Vocais (treinador vocal, PWA offline)
-├── praat-web/                   ← Plataforma de Análise Acústica da Voz
-├── bitacora-sesiones/            ← Diário de sessões clínicas
-├── sesion-diaria/                ← Sessão diária / acompanhamento vocal
-├── esfuerzo-vocal/                ← Medição do esforço vocal
-└── respiracion-cuadrada/          ← Respiração Quadrada (temporizador de respiração)
+├── evaluacion-vocal/              ← Avaliação Clínica de Voz (IDV-Cl, GRBAS, TMF/s-z)
+├── vocalizador/                    ← Exercícios Vocais (treinador vocal, PWA offline)
+├── praat-web/                      ← Plataforma de Análise Acústica da Voz
+├── bitacora-sesiones/               ← Diário de sessões clínicas
+├── sesion-diaria/                    ← Sessão diária / acompanhamento vocal
+├── esfuerzo-vocal/                    ← Medição do esforço vocal
+├── respiracion-cuadrada/               ← Respiração Quadrada (temporizador de respiração)
+├── higiene-vocal/                       ← Higiene Vocal (checklist diário)
+├── anamnesis-vocal/                      ← Anamnese Vocal (ficha de admissão)
+├── biblioteca-educativa/                  ← Biblioteca Educativa para pacientes
+├── rango-tonal-afirmativo/                 ← Faixa tonal afirmativa (voz afirmativa de gênero)
+└── dashboard-longitudinal/                  ← Painel de evolução longitudinal
 ```
 
 Cada pasta também funciona de forma independente se aberta diretamente
@@ -324,7 +348,7 @@ How many times have you built a vocal-exercise routine by hand, a stopwatch in
 one window and a spreadsheet in another? How many times did you want to
 **measure** a patient's vocal range, their vibrato, their phonatory effort or
 their pitch accuracy, and ended up eyeballing it? **Consultorio Vocal** is a
-complete clinical platform — six professional tools under one portal —
+complete clinical platform — twelve professional tools under one portal —
 designed by a speech-language pathologist, for speech-language pathologists,
 so your session time goes to your patient instead of fighting spreadsheets.
 
@@ -337,16 +361,22 @@ the web in under five minutes with GitHub Pages.
 > speech-language-pathology community — Spanish-, Portuguese- and
 > English-speaking alike.*
 
-### 🧰 The 6 tools
+### 🧰 The 12 tools
 
 | Tool | What it solves in your clinical day-to-day |
 |---|---|
+| 🩺 **Clinical Voice Assessment** | Voice assessment battery: IDV-Cl (official Chilean adaptation of the VHI), IDV-Cl-10, GRBAS, maximum phonation time and s/z ratio, with per-patient history and PDF export. |
 | 🎵 **Vocal Exercises** | A vocal trainer with scales, arpeggios and glissandos guided by a built-in audio synthesizer, sung vocal-range detection (automatically classifies bass, baritone, tenor, alto, mezzo-soprano and soprano), note-by-note pitch-accuracy recording and evaluation, vibrato analysis, a real-time tuner, and custom routines. Works **fully offline** as an installable PWA. |
-| 📊 **Acoustic Analysis Platform** | A pocket Praat in your browser: upload or record audio and get F0, jitter, shimmer, HNR and a spectrogram instantly — no software install, no lab dependency. |
+| 📊 **Acoustic Analysis Platform** | A pocket Praat in your browser: upload or record audio and get F0, jitter, shimmer, HNR, a spectrogram and an F1-F2 vowel map instantly — no software install, no lab dependency. |
 | 📋 **Session Log** | A clinical record for every session — focus of work, exercises performed, patient sensations, clinical notes, detected level and pitch — exportable as a clean, letterhead-branded PDF, ready for the patient's chart. |
 | ☀️ **Daily Session** | Day-to-day affirming vocal coaching for patients who need consistent, guided practice between in-person sessions. |
-| 💪 **Vocal Effort Measurement** | Quantify your patient's phonatory effort with objective metrics — useful for tracking dysphonia and vocal fatigue over time. |
+| 💪 **Vocal Effort Measurement** | Quantify your patient's perceived phonatory effort with the Borg CR-10 scale and associated symptoms — useful for tracking dysphonia and vocal fatigue over time, with PDF export. |
 | 🌬️ **Square Breathing** | A visual square-breathing (4-4-4-4) timer to work on breath support before or during a session. |
+| 🧴 **Vocal Hygiene** | A daily checklist of vocal hygiene habits — hydration, reflux, vocal rest and risk factors — for patients to fill out between sessions. |
+| 📝 **Vocal Case History** | A structured intake form: history, habits and vocal risk factors, with PDF export ready for the patient's chart. |
+| 📚 **Patient Education Library** | Educational content about the voice — anatomy, common diagnoses, and when to seek care — explained in plain language to share with patients. |
+| 🏳️‍⚧️ **Affirming Pitch Range** | Habitual pitch and target-range training for gender-affirming voice, with guided glides and progress tracking. |
+| 📈 **Longitudinal Progress Dashboard** | Automatically cross-references Voice Assessment, Vocal Effort and Case History data per patient over time (read from those tools' localStorage), with a combined timeline, chart and CSV export. |
 
 Every tool works **fully standalone** — you can share the link to just one,
 for example so a patient can practice at home — and also fully integrated
@@ -405,12 +435,18 @@ directly in a browser.
 │   ├── theme-switcher.js
 │   ├── a11y-reader.js
 │   └── shared.css / shared.js
-├── vocalizador/                 ← Vocal Exercises (vocal trainer, offline PWA)
-├── praat-web/                   ← Acoustic Voice Analysis Platform
-├── bitacora-sesiones/            ← Clinical session log
-├── sesion-diaria/                ← Daily session / vocal coaching
-├── esfuerzo-vocal/                ← Vocal effort measurement
-└── respiracion-cuadrada/          ← Square Breathing (breathing timer)
+├── evaluacion-vocal/              ← Clinical Voice Assessment (IDV-Cl, GRBAS, MPT/s-z)
+├── vocalizador/                    ← Vocal Exercises (vocal trainer, offline PWA)
+├── praat-web/                      ← Acoustic Voice Analysis Platform
+├── bitacora-sesiones/               ← Clinical session log
+├── sesion-diaria/                    ← Daily session / vocal coaching
+├── esfuerzo-vocal/                    ← Vocal effort measurement
+├── respiracion-cuadrada/               ← Square Breathing (breathing timer)
+├── higiene-vocal/                       ← Vocal Hygiene (daily checklist)
+├── anamnesis-vocal/                      ← Vocal Case History (intake form)
+├── biblioteca-educativa/                  ← Patient Education Library
+├── rango-tonal-afirmativo/                 ← Affirming Pitch Range training
+└── dashboard-longitudinal/                  ← Longitudinal progress dashboard
 ```
 
 Each folder also works independently if opened directly (e.g.
