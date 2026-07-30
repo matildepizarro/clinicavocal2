@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title data-i18n="pageTitle">Biblioteca Educativa</title>
-<meta name="description" data-i18n-content="metaDescription" content="Contenido educativo sobre la voz: anatomía, diagnósticos frecuentes y cuándo consultar, explicado en lenguaje simple." />
+<title data-i18n="pageTitle">Biblioteca Educativa Profesional</title>
+<meta name="description" data-i18n-content="metaDescription" content="Biblioteca de referencia clínica para fonoaudiólogos: fisiopatología vocal, marcos diagnósticos, evidencia y protocolos de intervención." />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='7' fill='%23ff9d66'/%3E%3Cpath d='M6 5h7a3 3 0 0 1 3 3v11a2.5 2.5 0 0 0-2.5-2.5H6Zm12 0v11.5a2.5 2.5 0 0 0-2.5-2.5' fill='none' stroke='white' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E">
 <script>document.documentElement.setAttribute('data-pastel-theme', (function(){try{return localStorage.getItem('cv-pastel-theme')||'rosa';}catch(e){return 'rosa';}})());</script>
 <script src="i18n-dict.js"></script>
@@ -20,36 +20,80 @@
   :root[data-pastel-theme="menta"]{ --bg:#f0fbf6; --bg-top:#f7fdfa; --accent:#4fb894; --muted:#5a8a75; --border:#c9ecdb; }
   :root[data-pastel-theme="durazno"]{ --bg:#fff7f0; --bg-top:#fffbf6; --accent:#ff9d66; --muted:#a3775a; --border:#ffd8bd; }
   :root[data-pastel-theme="cielo"]{ --bg:#f0f8ff; --bg-top:#f7fbff; --accent:#5bb3e0; --muted:#5a7fa3; --border:#c9e4fb; }
-  *{box-sizing:border-box} html,body{height:100%}
+  *{box-sizing:border-box}
+  html,body{height:100%}
   body{font-family:Inter,system-ui,Segoe UI,Roboto,Arial; background:linear-gradient(180deg,var(--bg-top) 0%,var(--bg) 100%); margin:0; color:#3a2436; -webkit-font-smoothing:antialiased;}
   h1,h2,h3{font-family:'Fraunces',Georgia,serif; font-weight:600;}
-  .container{max-width:960px;margin:28px auto;padding:18px}
-  .header{display:flex;gap:18px;align-items:center;background:linear-gradient(180deg,#fff,#fbfeff);padding:18px;border-radius:16px;box-shadow:0 10px 30px rgba(12,25,50,0.06)}
-  .brand{width:72px;height:72px;border-radius:12px;background:linear-gradient(135deg,#eef6ff,#ffffff);display:flex;align-items:center;justify-content:center;border:1px solid var(--border);font-weight:700;color:var(--accent);font-size:20px}
-  .title-wrap h1{margin:0;font-size:20px} .title-wrap p{margin:6px 0 0 0;color:var(--muted);font-size:13px}
+  .container{max-width:880px;margin:28px auto;padding:18px 18px 60px}
 
-  .disclaimer{background:#fff8ee;border:1px solid #ffe3b0;border-radius:12px;padding:12px 14px;font-size:13px;color:#8a6a2a;margin:16px 0;line-height:1.5}
+  /* ---------- Header ---------- */
+  .header{display:flex;gap:18px;align-items:center;background:linear-gradient(135deg,#fff 0%,#fbfeff 100%);padding:22px;border-radius:18px;box-shadow:0 10px 30px rgba(12,25,50,0.06);position:relative;overflow:hidden}
+  .header::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 55%);pointer-events:none}
+  .brand{width:60px;height:60px;border-radius:14px;background:linear-gradient(135deg,#eef6ff,#ffffff);display:flex;align-items:center;justify-content:center;border:1px solid var(--border);font-weight:700;color:var(--accent);font-size:26px;flex:0 0 auto}
+  .title-wrap{min-width:0}
+  .title-wrap h1{margin:0;font-size:21px;line-height:1.25}
+  .title-wrap p{margin:6px 0 0 0;color:var(--muted);font-size:13px;line-height:1.5}
+  .topic-count-badge{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:4px 11px;border-radius:999px;background:color-mix(in srgb, var(--accent) 12%, white);color:var(--accent);font-size:11.5px;font-weight:700;letter-spacing:.02em}
 
-  .search-row{margin:16px 0}
-  .search-row input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:#fff;font-size:14px}
+  .disclaimer{background:#fff8ee;border:1px solid #ffe3b0;border-radius:12px;padding:12px 14px;font-size:13px;color:#8a6a2a;margin:16px 0;line-height:1.55}
+  .disclaimer strong{color:#7a5a1a}
 
-  .topic-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:6px}
-  .topic-card{background:var(--card);border-radius:14px;box-shadow:0 6px 20px rgba(10,20,40,0.05);overflow:hidden;border:1px solid var(--border)}
-  .topic-head{display:flex;align-items:center;gap:12px;padding:16px;cursor:pointer;background:#fff}
-  .topic-head:hover{background:#faf7ff}
-  .topic-icon{font-size:26px;flex:0 0 auto}
-  .topic-name{font-weight:700;font-size:14.5px;flex:1}
-  .topic-chevron{transition:transform .2s ease;color:var(--accent)}
-  .topic-card.open .topic-chevron{transform:rotate(90deg)}
-  .topic-body{max-height:0;overflow:hidden;transition:max-height .3s ease}
-  .topic-card.open .topic-body{max-height:900px}
-  .topic-inner{padding:0 18px 18px 18px;font-size:13.5px;line-height:1.6;color:#4a3a48}
-  .topic-inner h4{font-size:12.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--accent);margin:14px 0 6px 0}
-  .topic-inner ul{margin:4px 0;padding-left:20px}
-  .topic-inner li{margin-bottom:4px}
+  /* ---------- Controls: search + filters ---------- */
+  .controls{position:sticky;top:0;z-index:5;background:linear-gradient(180deg,var(--bg-top) 0%, var(--bg-top) 70%, transparent 100%);padding:10px 0 14px;margin:0 0 4px}
+  .search-row{position:relative}
+  .search-row input{width:100%;padding:13px 14px 13px 42px;border-radius:12px;border:1px solid var(--border);background:#fff;font-size:14.5px;font-family:inherit;box-shadow:0 4px 14px rgba(10,20,40,0.04)}
+  .search-row input:focus{outline:2px solid var(--accent);outline-offset:1px}
+  .search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:15px;pointer-events:none}
+
+  .cat-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .cat-chip{border:1px solid var(--border);background:#fff;color:var(--muted);font-family:inherit;font-size:12.5px;font-weight:600;padding:7px 13px;border-radius:999px;cursor:pointer;transition:background .15s ease,color .15s ease,border-color .15s ease}
+  .cat-chip:hover{background:#faf7ff}
+  .cat-chip.active{background:var(--accent);border-color:var(--accent);color:#fff}
+  .cat-chip .n{opacity:.75;font-weight:500;margin-left:2px}
+
+  .list-toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:16px 0 10px;font-size:12.5px;color:var(--muted)}
+  .toolbar-actions{display:flex;gap:14px}
+  .toolbar-actions button{background:none;border:none;color:var(--accent);font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer;padding:0}
+  .toolbar-actions button:hover{text-decoration:underline}
+
+  /* ---------- Category sections ---------- */
+  .cat-section{margin-bottom:26px}
+  .cat-section-title{display:flex;align-items:baseline;gap:8px;margin:0 2px 10px;font-size:14px;letter-spacing:.03em;text-transform:uppercase;color:var(--accent);font-family:Inter,sans-serif;font-weight:800}
+  .cat-section-title .n{color:var(--muted);font-weight:600;text-transform:none;letter-spacing:0;font-size:12.5px}
+
+  .topic-list{display:flex;flex-direction:column;gap:10px}
+  .topic-card{background:var(--card);border-radius:14px;box-shadow:0 4px 16px rgba(10,20,40,0.045);border:1px solid var(--border);overflow:hidden}
+  .topic-card > summary{list-style:none;display:flex;align-items:center;gap:13px;padding:15px 16px;cursor:pointer}
+  .topic-card > summary::-webkit-details-marker{display:none}
+  .topic-card > summary:hover{background:#faf7ff}
+  .topic-card > summary:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+  .topic-icon{font-size:22px;flex:0 0 auto;width:32px;text-align:center}
+  .topic-head-text{flex:1;min-width:0}
+  .topic-name{font-weight:700;font-size:14.5px;display:block}
+  .topic-preview{display:block;margin-top:2px;color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .topic-card[open] .topic-preview{display:none}
+  .topic-chevron{transition:transform .2s ease;color:var(--accent);flex:0 0 auto;font-size:12px}
+  .topic-card[open] .topic-chevron{transform:rotate(90deg)}
+
+  .topic-body-wrap{padding:0 18px 20px 61px}
+  .topic-inner{font-size:13.5px;line-height:1.65;color:#4a3a48;border-top:1px solid var(--border);padding-top:14px}
+  .topic-inner h4{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent);margin:16px 0 6px 0;font-family:Inter,sans-serif;font-weight:800}
+  .topic-inner h4:first-child{margin-top:0}
+  .topic-inner p{margin:6px 0}
+  .topic-inner ul{margin:6px 0;padding-left:20px}
+  .topic-inner li{margin-bottom:5px}
+  .topic-inner em{color:var(--muted);font-style:italic}
+
   .hidden{display:none !important}
+  .no-results{text-align:center;color:var(--muted);font-size:13.5px;padding:30px 10px;background:#fff;border-radius:14px;border:1px dashed var(--border)}
 
-  .footer{margin-top:22px;text-align:center;color:var(--muted);font-size:12.5px;line-height:1.6}
+  .footer{margin-top:30px;text-align:center;color:var(--muted);font-size:12.5px;line-height:1.6}
+
+  @media (max-width:600px){
+    .header{padding:16px}
+    .brand{width:50px;height:50px;font-size:22px}
+    .topic-body-wrap{padding-left:16px}
+  }
 </style>
 </head>
 <body>
@@ -58,24 +102,38 @@
     <header class="header">
       <div class="brand" aria-hidden="true">🎓</div>
       <div class="title-wrap">
-        <h1 data-i18n="headerTitle">Biblioteca Educativa</h1>
-        <p class="lead" data-i18n="headerLead">Información en lenguaje simple sobre la voz, para entender mejor lo que tu fonoaudióloga te explica en sesión.</p>
+        <h1 data-i18n="headerTitle">Biblioteca Educativa Profesional</h1>
+        <p class="lead" data-i18n="headerLead">Síntesis clínicas de referencia rápida para la práctica fonoaudiológica en voz: conceptos, evidencia y aplicación terapéutica.</p>
+        <span class="topic-count-badge">📚 <span id="topicCountLabel">23</span></span>
       </div>
     </header>
 
     <div class="disclaimer">
-      <strong data-i18n="disclaimerTitle">Importante:</strong>
-      <span data-i18n="disclaimerText">Este contenido es educativo y general. No reemplaza una evaluación profesional ni constituye un diagnóstico — cada voz y cada historia son distintas. Si algo de esto te preocupa, consúltalo con tu fonoaudióloga o médico otorrinolaringólogo.</span>
+      <strong data-i18n="disclaimerTitle">Uso profesional:</strong>
+      <span data-i18n="disclaimerText">Este contenido está dirigido a fonoaudiólogos/as y otros profesionales de la salud vocal. Es una síntesis de apoyo clínico y no reemplaza la lectura de fuentes primarias, las guías de práctica clínica vigentes ni el juicio clínico individualizado para cada caso.</span>
     </div>
 
-    <div class="search-row">
-      <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="Buscar un tema (ej: nódulos, reflujo, cuándo consultar)…">
+    <div class="controls">
+      <div class="search-row">
+        <span class="search-icon" aria-hidden="true">🔍</span>
+        <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="Buscar un tema clínico (ej: nódulos, MTD, voz afirmativa de género)…">
+      </div>
+      <div class="cat-row" id="catRow" role="group" aria-label="Filtrar por categoría"></div>
     </div>
 
-    <div class="topic-grid" id="topicGrid"></div>
+    <div class="list-toolbar">
+      <span id="resultsCount"></span>
+      <div class="toolbar-actions">
+        <button type="button" id="expandAllBtn" data-i18n="expandAllLabel">Expandir todo</button>
+        <button type="button" id="collapseAllBtn" data-i18n="collapseAllLabel">Contraer todo</button>
+      </div>
+    </div>
+
+    <div id="library"></div>
+    <div class="no-results hidden" id="noResults" data-i18n="noResultsText">No se encontraron temas que coincidan con la búsqueda.</div>
 
     <footer class="footer">
-      <div data-i18n="footerNote">Contenido educativo elaborado con criterio clínico. No sustituye la consulta profesional.</div>
+      <div data-i18n="footerNote">Biblioteca de referencia clínica. Contenido técnico para profesionales — consulta siempre las fuentes primarias citadas.</div>
       <div>Matilde Pizarro Toro · Fonoaudióloga</div>
     </footer>
   </div>
@@ -83,68 +141,156 @@
 <script>
 const tt = (key, fallback) => (window.CV_I18N ? window.CV_I18N.t(key) : (fallback !== undefined ? fallback : key));
 
-const TOPICS = [
-  {id:'anatomia', icon:'🫁'},
-  {id:'nodulos', icon:'🔵'},
-  {id:'polipos', icon:'💧'},
-  {id:'reflujo', icon:'🔥'},
-  {id:'tension', icon:'😖'},
-  {id:'edema', icon:'🎈'},
-  {id:'paresia', icon:'〰️'},
-  {id:'presbifonia', icon:'🕰️'},
-  {id:'vozGenero', icon:'🏳️‍⚧️'},
-  {id:'masculinizacionVocal', icon:'🎚️'},
-  {id:'cirugiaVozGenero', icon:'🔬'},
-  {id:'parametrosAcusticos', icon:'📈'},
-  {id:'tecnicasTerapeuticasVoz', icon:'🎯'},
-  {id:'lesionesEstructuralesMinimas', icon:'🔎'},
-  {id:'higieneVozProfesional', icon:'🧴'},
-  {id:'exploracionInstrumentalLaringe', icon:'🎥'},
-  {id:'disfoniaInfantil', icon:'🧒'},
-  {id:'trastornosNeurologicosVoz', icon:'🧠'},
-  {id:'lesionesPremalignasLaringe', icon:'⚠️'},
-  {id:'fonomicrocirugiaLaringea', icon:'🗡️'},
-  {id:'tratamientoFarmacologicoDisfonias', icon:'💊'},
-  {id:'vozCantada', icon:'🎤'},
-  {id:'cuandoConsultar', icon:'🚩'}
+/* Categorías clínicas — agrupan los 23 temas en un orden pedagógico:
+   de lo fisiológico general a lo específico, y de lo estructural a lo funcional,
+   terminando en criterios de derivación. */
+const CATEGORIES = [
+  { id:'fundamentos',              icon:'🫁' },
+  { id:'lesionesBenignas',         icon:'💧' },
+  { id:'funcionalesNeurologicos',  icon:'🧠' },
+  { id:'generoAfirmativo',         icon:'🏳️‍⚧️' },
+  { id:'evaluacionTratamiento',    icon:'🎯' },
+  { id:'poblacionesEspeciales',    icon:'🎤' },
+  { id:'altoRiesgoDerivacion',     icon:'🚩' },
 ];
 
-function renderTopics(){
-  const grid = document.getElementById('topicGrid');
-  grid.innerHTML = TOPICS.map(t=>`
-    <div class="topic-card" data-topic="${t.id}">
-      <div class="topic-head" role="button" tabindex="0" aria-expanded="false">
-        <span class="topic-icon">${t.icon}</span>
-        <span class="topic-name">${tt('topic_'+t.id+'_name', t.id)}</span>
-        <span class="topic-chevron">▶</span>
-      </div>
-      <div class="topic-body">
-        <div class="topic-inner">${tt('topic_'+t.id+'_body', '')}</div>
-      </div>
-    </div>
+const TOPICS = [
+  {id:'anatomia',                          icon:'🫁', cat:'fundamentos'},
+
+  {id:'nodulos',                           icon:'🔵', cat:'lesionesBenignas'},
+  {id:'polipos',                           icon:'💧', cat:'lesionesBenignas'},
+  {id:'edema',                             icon:'🎈', cat:'lesionesBenignas'},
+  {id:'lesionesEstructuralesMinimas',      icon:'🔎', cat:'lesionesBenignas'},
+
+  {id:'tension',                           icon:'😖', cat:'funcionalesNeurologicos'},
+  {id:'paresia',                           icon:'〰️', cat:'funcionalesNeurologicos'},
+  {id:'trastornosNeurologicosVoz',         icon:'🧠', cat:'funcionalesNeurologicos'},
+  {id:'presbifonia',                       icon:'🕰️', cat:'funcionalesNeurologicos'},
+
+  {id:'vozGenero',                         icon:'🏳️‍⚧️', cat:'generoAfirmativo'},
+  {id:'masculinizacionVocal',              icon:'🎚️', cat:'generoAfirmativo'},
+  {id:'cirugiaVozGenero',                  icon:'🔬', cat:'generoAfirmativo'},
+
+  {id:'parametrosAcusticos',               icon:'📈', cat:'evaluacionTratamiento'},
+  {id:'exploracionInstrumentalLaringe',    icon:'🎥', cat:'evaluacionTratamiento'},
+  {id:'tecnicasTerapeuticasVoz',           icon:'🎯', cat:'evaluacionTratamiento'},
+  {id:'tratamientoFarmacologicoDisfonias', icon:'💊', cat:'evaluacionTratamiento'},
+  {id:'fonomicrocirugiaLaringea',          icon:'🗡️', cat:'evaluacionTratamiento'},
+  {id:'reflujo',                           icon:'🔥', cat:'evaluacionTratamiento'},
+  {id:'higieneVozProfesional',             icon:'🧴', cat:'evaluacionTratamiento'},
+
+  {id:'disfoniaInfantil',                  icon:'🧒', cat:'poblacionesEspeciales'},
+  {id:'vozCantada',                        icon:'🎤', cat:'poblacionesEspeciales'},
+
+  {id:'lesionesPremalignasLaringe',        icon:'⚠️', cat:'altoRiesgoDerivacion'},
+  {id:'cuandoConsultar',                   icon:'🚩', cat:'altoRiesgoDerivacion'},
+];
+
+let activeCat = 'all';
+
+function stripHtml(html){
+  const div = document.createElement('div');
+  div.innerHTML = html || '';
+  return (div.textContent || '').replace(/\s+/g,' ').trim();
+}
+
+function previewOf(body){
+  const text = stripHtml(body);
+  return text.length > 130 ? text.slice(0,130).trim() + '…' : text;
+}
+
+function renderCategoryChips(){
+  const row = document.getElementById('catRow');
+  const totalCounts = {};
+  TOPICS.forEach(t => { totalCounts[t.cat] = (totalCounts[t.cat]||0) + 1; });
+
+  const chips = [{id:'all', icon:'📖', label: tt('catAll','Todos los temas'), n: TOPICS.length}]
+    .concat(CATEGORIES.map(c => ({id:c.id, icon:c.icon, label: tt('cat_'+c.id, c.id), n: totalCounts[c.id]||0})));
+
+  row.innerHTML = chips.map(c => `
+    <button type="button" class="cat-chip${activeCat===c.id ? ' active':''}" data-cat="${c.id}">
+      ${c.icon} ${c.label} <span class="n">(${c.n})</span>
+    </button>
   `).join('');
 
-  grid.querySelectorAll('.topic-head').forEach(head=>{
-    const toggle = ()=>{
-      const card = head.closest('.topic-card');
-      const open = card.classList.toggle('open');
-      head.setAttribute('aria-expanded', String(open));
-    };
-    head.addEventListener('click', toggle);
-    head.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); toggle(); } });
+  row.querySelectorAll('.cat-chip').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeCat = btn.getAttribute('data-cat');
+      renderCategoryChips();
+      renderLibrary();
+    });
   });
 }
-renderTopics();
 
-document.getElementById('searchInput').addEventListener('input', (e)=>{
-  const q = e.target.value.trim().toLowerCase();
-  document.querySelectorAll('.topic-card').forEach(card=>{
-    const text = card.textContent.toLowerCase();
-    card.classList.toggle('hidden', q.length > 0 && !text.includes(q));
+function renderLibrary(){
+  const lib = document.getElementById('library');
+  const q = (document.getElementById('searchInput').value || '').trim().toLowerCase();
+
+  const visibleCats = CATEGORIES.filter(c => activeCat==='all' || activeCat===c.id);
+
+  let totalVisible = 0;
+  let html = '';
+
+  visibleCats.forEach(cat=>{
+    const topicsInCat = TOPICS.filter(t=>t.cat===cat.id).map(t=>{
+      const name = tt('topic_'+t.id+'_name', t.id);
+      const body = tt('topic_'+t.id+'_body', '');
+      const haystack = (name + ' ' + stripHtml(body)).toLowerCase();
+      const match = q.length===0 || haystack.includes(q);
+      return {...t, name, body, match};
+    });
+
+    const visibleTopics = topicsInCat.filter(t=>t.match);
+    if(visibleTopics.length===0) return;
+    totalVisible += visibleTopics.length;
+
+    html += `
+      <section class="cat-section" data-cat-section="${cat.id}">
+        <h2 class="cat-section-title">${cat.icon} ${tt('cat_'+cat.id, cat.id)} <span class="n">(${visibleTopics.length})</span></h2>
+        <div class="topic-list">
+          ${visibleTopics.map(t => `
+            <details class="topic-card" data-topic="${t.id}">
+              <summary>
+                <span class="topic-icon">${t.icon}</span>
+                <span class="topic-head-text">
+                  <span class="topic-name">${t.name}</span>
+                  <span class="topic-preview">${previewOf(t.body)}</span>
+                </span>
+                <span class="topic-chevron">▶</span>
+              </summary>
+              <div class="topic-body-wrap">
+                <div class="topic-inner">${t.body}</div>
+              </div>
+            </details>
+          `).join('')}
+        </div>
+      </section>
+    `;
   });
+
+  lib.innerHTML = html;
+  document.getElementById('noResults').classList.toggle('hidden', totalVisible > 0);
+
+  const countLabel = tt('resultsCountLabel','temas');
+  document.getElementById('resultsCount').textContent = `${totalVisible} ${countLabel}`;
+  document.getElementById('topicCountLabel').textContent = `${TOPICS.length} ${countLabel}`;
+}
+
+document.getElementById('searchInput').addEventListener('input', renderLibrary);
+
+document.getElementById('expandAllBtn').addEventListener('click', ()=>{
+  document.querySelectorAll('.topic-card').forEach(d => d.open = true);
+});
+document.getElementById('collapseAllBtn').addEventListener('click', ()=>{
+  document.querySelectorAll('.topic-card').forEach(d => d.open = false);
 });
 
-window.addEventListener('cv-lang-changed', renderTopics);
+function renderAll(){
+  renderCategoryChips();
+  renderLibrary();
+}
+renderAll();
+window.addEventListener('cv-lang-changed', renderAll);
 </script>
 <script src="../assets/theme-switcher.js" defer></script>
 <script src="../assets/a11y-reader.js" defer></script>
