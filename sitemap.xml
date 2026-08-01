@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  IMPORTANTE — antes de publicar este archivo:
+  Reemplazá "https://TU-DOMINIO-AQUI" por la URL real donde quede publicado
+  este sitio (por ejemplo "https://tuusuario.github.io/consultorio-vocal" si
+  se sirve desde una subcarpeta de GitHub Pages, o tu dominio propio si
+  configuraste uno). Un sitemap con un dominio incorrecto no aporta nada a
+  los buscadores, así que hacé un buscar-y-reemplazar de esa cadena en todo
+  el archivo antes de subirlo o de enviarlo a Google Search Console.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://TU-DOMINIO-AQUI/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://TU-DOMINIO-AQUI/vocalizador/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://TU-DOMINIO-AQUI/praat-web/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://TU-DOMINIO-AQUI/respiracion-cuadrada/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://TU-DOMINIO-AQUI/evaluacion-vocal/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://TU-DOMINIO-AQUI/anamnesis-vocal/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://TU-DOMINIO-AQUI/bitacora-sesiones/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://TU-DOMINIO-AQUI/sesion-diaria/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://TU-DOMINIO-AQUI/esfuerzo-vocal/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://TU-DOMINIO-AQUI/higiene-vocal/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://TU-DOMINIO-AQUI/biblioteca-educativa/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://TU-DOMINIO-AQUI/rango-tonal-afirmativo/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://TU-DOMINIO-AQUI/biofeedback-vocal/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://TU-DOMINIO-AQUI/dashboard-longitudinal/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+</urlset>

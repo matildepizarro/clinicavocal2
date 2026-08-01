@@ -5,16 +5,40 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title data-i18n="pageTitle">Dashboard de evolución longitudinal</title>
 <meta name="description" data-i18n-content="metaDescription" content="Cruce de datos de evaluación vocal, esfuerzo vocal y anamnesis por paciente a lo largo del tiempo." />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Consultorio Vocal" />
+<meta property="og:locale" content="es_CL" />
+<meta property="og:title" content="Dashboard de evolución longitudinal" />
+<meta property="og:description" content="Cruce de datos de evaluación vocal, esfuerzo vocal y anamnesis por paciente a lo largo del tiempo." />
+<meta property="og:image" content="../assets/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:image" content="../assets/og-image.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Dashboard de evolución longitudinal" />
+<meta name="twitter:description" content="Cruce de datos de evaluación vocal, esfuerzo vocal y anamnesis por paciente a lo largo del tiempo." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='7' fill='%234fb894'/%3E%3Cpath d='M5 17 L9 11 L13 14 L19 6' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='5' cy='17' r='1.4' fill='white'/%3E%3Ccircle cx='9' cy='11' r='1.4' fill='white'/%3E%3Ccircle cx='13' cy='14' r='1.4' fill='white'/%3E%3Ccircle cx='19' cy='6' r='1.4' fill='white'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="../assets/shared.css">
-<script>document.documentElement.setAttribute('data-pastel-theme', (function(){try{return localStorage.getItem('cv-pastel-theme')||'rosa';}catch(e){return 'rosa';}})());</script>
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="../assets/shared.css?v=2">
+<script>(function(){
+  try{ document.documentElement.setAttribute('data-pastel-theme', localStorage.getItem('cv-pastel-theme')||'rosa'); }catch(e){}
+  /* Evita el "flash" de idioma incorrecto en visitas recurrentes: aplica el
+     idioma guardado al <html lang> antes del primer pintado, en vez de
+     esperar a que cargue assets/i18n-engine.js (mismo criterio que ya se
+     usaba arriba para el tema pastel). */
+  try{
+    var l = localStorage.getItem('cv-lang');
+    if(l === 'pt') document.documentElement.setAttribute('lang','pt-BR');
+    else if(l === 'en') document.documentElement.setAttribute('lang','en');
+  }catch(e){}
+})();</script>
 <script src="i18n-dict.js"></script>
-<script src="../assets/i18n-engine.js"></script>
+<script src="../assets/i18n-engine.js?v=2"></script>
 <!-- jsPDF (UMD) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer crossorigin="anonymous"></script>
+
 <style>
   :root{
     --bg:#f0fbf6; --bg-2:#e0f5ea; --card:#ffffff; --card-2:#e6f7ef; --line:#c9ecdb;
@@ -178,6 +202,7 @@
   <footer data-i18n="footerNote">Herramienta de cruce de datos ya existentes — no reemplaza el juicio clínico.</footer>
 </div>
 
+<script src="../assets/shared.js?v=2"></script>
 <script>
 (function(){
   'use strict';
@@ -463,20 +488,17 @@
   $('btnExportCsv').addEventListener('click', function(){
     var rows = [['fecha','herramienta','tipo','resumen']];
     currentEvs.forEach(function(e){
-      rows.push([e.fecha || '', e.sourceLabel, e.tipo, (e.resumen||'').replace(/,/g,';')]);
+      rows.push([e.fecha || '', e.sourceLabel, e.tipo, e.resumen || '']);
     });
-    var csv = rows.map(function(r){ return r.join(','); }).join('\n');
-    var blob = new Blob([csv], {type:'text/csv;charset=utf-8'});
-    var url = URL.createObjectURL(blob);
-    var a = document.createElement('a');
-    a.href = url; a.download = 'evolucion-longitudinal-' + (select.value||'paciente') + '.csv';
-    document.body.appendChild(a); a.click(); document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    downloadCsv('evolucion-longitudinal-' + (select.value||'paciente') + '.csv', rows);
   });
 
-  $('btnExportPdf').addEventListener('click', function(){
-    if(!window.jspdf || !window.jspdf.jsPDF){ alert(tt('toastPdfLibNoCargada','No se pudo cargar la librería de PDF (revisa tu conexión a internet) — intenta de nuevo en unos segundos.')); return; }
+  $('btnExportPdf').addEventListener('click', async function(){
     if(!currentEvs.length){ alert(tt('noEventsForPatient','No hay eventos registrados para este paciente.')); return; }
+    if(!window.jspdf || !window.jspdf.jsPDF){
+      try { await cvLoadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js'); } catch(e){ /* handled below */ }
+    }
+    if(!window.jspdf || !window.jspdf.jsPDF){ alert(tt('toastPdfLibNoCargada','No se pudo cargar la librería de PDF (revisa tu conexión a internet) — intenta de nuevo en unos segundos.')); return; }
     var jsPDF = window.jspdf.jsPDF;
     var pdf = new jsPDF({unit:'mm', format:'a4'});
     var margin = 16, y = 20;
@@ -537,7 +559,7 @@
   window.addEventListener('cv-lang-changed', function(){ renderSourceToggles(); refresh(); });
 })();
 </script>
-<script src="../assets/theme-switcher.js" defer></script>
-<script src="../assets/a11y-reader.js" defer></script>
+<script src="../assets/theme-switcher.js?v=2" defer></script>
+<script src="../assets/a11y-reader.js?v=2" defer></script>
 </body>
 </html>

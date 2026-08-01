@@ -24,15 +24,33 @@
   function currentTheme(){
     try { return localStorage.getItem(KEY) || 'rosa'; } catch(e){ return 'rosa'; }
   }
+  function syncThemeColorMeta(id){
+    var theme = THEMES.filter(function(t){ return t.id === id; })[0] || THEMES[0];
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (!meta){
+      meta = document.createElement('meta');
+      meta.setAttribute('name', 'theme-color');
+      document.head.appendChild(meta);
+    }
+    meta.setAttribute('content', theme.swatch);
+  }
   function applyTheme(id){
     document.documentElement.setAttribute('data-pastel-theme', id);
+    syncThemeColorMeta(id);
     try { localStorage.setItem(KEY, id); } catch(e){}
   }
 
   // Apply immediately (in case this file loads after paint on slow connections)
   applyTheme(currentTheme());
 
-  var panelTitleEl, fabRef;
+  var panelTitleEl, fabRef, panelRef;
+
+  function setPanelOpen(open, opts){
+    if (!panelRef || !fabRef) return;
+    panelRef.classList.toggle('open', open);
+    fabRef.setAttribute('aria-expanded', String(open));
+    if (!open && opts && opts.returnFocus) fabRef.focus();
+  }
 
   function refreshLabels(){
     if (fabRef) fabRef.setAttribute('aria-label', tr('changeTheme','Cambiar tema de color'));
@@ -72,11 +90,15 @@
     fab.id = 'cv-theme-fab';
     fab.type = 'button';
     fab.setAttribute('aria-label', tr('changeTheme','Cambiar tema de color'));
+    fab.setAttribute('aria-haspopup', 'true');
+    fab.setAttribute('aria-expanded', 'false');
+    fab.setAttribute('aria-controls', 'cv-theme-panel');
     fab.textContent = '🎨';
     fabRef = fab;
 
     var panel = document.createElement('div');
     panel.id = 'cv-theme-panel';
+    panelRef = panel;
     var title = document.createElement('h4');
     title.textContent = tr('chooseTheme','Elige un tema');
     panel.appendChild(title);
@@ -106,12 +128,15 @@
     });
 
     fab.addEventListener('click', function(){
-      panel.classList.toggle('open');
+      setPanelOpen(!panel.classList.contains('open'));
     });
     document.addEventListener('click', function(e){
       if (!panel.contains(e.target) && e.target !== fab && panel.classList.contains('open')){
-        panel.classList.remove('open');
+        setPanelOpen(false);
       }
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && panel.classList.contains('open')) setPanelOpen(false, { returnFocus: true });
     });
 
     document.body.appendChild(fab);

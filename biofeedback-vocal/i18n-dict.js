@@ -34,6 +34,7 @@ window.CV_I18N_DICT = {
     presetAndrogynous: 'Andrógina (aprox. 150-180 Hz)',
     presetCustom: 'Personalizada',
     targetMinMaxLabel: 'Rango (Hz)',
+    targetMinAriaLabel: 'Mínimo Hz', targetMaxAriaLabel: 'Máximo Hz',
     micSelectLabel: 'Micrófono',
 
     liveSectionTitle: '3 · Práctica en vivo',
@@ -99,6 +100,7 @@ window.CV_I18N_DICT = {
     presetAndrogynous: 'Andrógina (aprox. 150-180 Hz)',
     presetCustom: 'Personalizada',
     targetMinMaxLabel: 'Faixa (Hz)',
+    targetMinAriaLabel: 'Mínimo Hz', targetMaxAriaLabel: 'Máximo Hz',
     micSelectLabel: 'Microfone',
 
     liveSectionTitle: '3 · Prática ao vivo',
@@ -164,6 +166,7 @@ window.CV_I18N_DICT = {
     presetAndrogynous: 'Androgynous (approx. 150-180 Hz)',
     presetCustom: 'Custom',
     targetMinMaxLabel: 'Range (Hz)',
+    targetMinAriaLabel: 'Minimum Hz', targetMaxAriaLabel: 'Maximum Hz',
     micSelectLabel: 'Microphone',
 
     liveSectionTitle: '3 · Live practice',

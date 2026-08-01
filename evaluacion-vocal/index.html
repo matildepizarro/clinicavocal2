@@ -5,17 +5,41 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title data-i18n="pageTitle">Evaluación Clínica de Voz</title>
 <meta name="description" data-i18n-content="metaDescription" content="Batería de evaluación vocal: IDV-Cl (VHI chileno), GRBAS, tiempo máximo de fonación y relación s/z." />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Consultorio Vocal" />
+<meta property="og:locale" content="es_CL" />
+<meta property="og:title" content="Evaluación Clínica de Voz" />
+<meta property="og:description" content="Batería de evaluación vocal: IDV-Cl (VHI chileno), GRBAS, tiempo máximo de fonación y relación s/z." />
+<meta property="og:image" content="../assets/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:image" content="../assets/og-image.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Evaluación Clínica de Voz" />
+<meta name="twitter:description" content="Batería de evaluación vocal: IDV-Cl (VHI chileno), GRBAS, tiempo máximo de fonación y relación s/z." />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='7' fill='%239b7bd9'/%3E%3Cpath d='M7 11a5 5 0 0 0 10 0M12 16v3m-3 0h6M12 3a3 3 0 0 1 3 3v5a3 3 0 1 1-6 0V6a3 3 0 0 1 3-3Z' fill='none' stroke='white' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E">
-<script>document.documentElement.setAttribute('data-pastel-theme', (function(){try{return localStorage.getItem('cv-pastel-theme')||'rosa';}catch(e){return 'rosa';}})());</script>
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<script>(function(){
+  try{ document.documentElement.setAttribute('data-pastel-theme', localStorage.getItem('cv-pastel-theme')||'rosa'); }catch(e){}
+  /* Evita el "flash" de idioma incorrecto en visitas recurrentes: aplica el
+     idioma guardado al <html lang> antes del primer pintado, en vez de
+     esperar a que cargue assets/i18n-engine.js (mismo criterio que ya se
+     usaba arriba para el tema pastel). */
+  try{
+    var l = localStorage.getItem('cv-lang');
+    if(l === 'pt') document.documentElement.setAttribute('lang','pt-BR');
+    else if(l === 'en') document.documentElement.setAttribute('lang','en');
+  }catch(e){}
+})();</script>
 <script src="i18n-dict.js"></script>
-<script src="../assets/i18n-engine.js"></script>
+<script src="../assets/i18n-engine.js?v=2"></script>
 
 <!-- jsPDF (UMD) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer crossorigin="anonymous"></script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/shared.css">
+<link rel="stylesheet" href="../assets/shared.css?v=2">
 
 <style>
   :root{
@@ -285,7 +309,7 @@
     </footer>
   </div>
 
-<script src="../assets/shared.js"></script>
+<script src="../assets/shared.js?v=2"></script>
 <script>
 const LS_KEY = 'evaluacion_vocal_v1';
 let registros = JSON.parse(localStorage.getItem(LS_KEY) || '[]');
@@ -537,13 +561,16 @@ document.getElementById('tmfSaveBtn').addEventListener('click', ()=>{
 /* ============================================================
    Exportación PDF individual por tipo de evaluación
    ============================================================ */
-function pdfLibReady(){
+async function pdfLibReady(){
+  if(!window.jspdf || !window.jspdf.jsPDF){
+    try { await cvLoadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js'); } catch(e){ /* handled below */ }
+  }
   if(!window.jspdf || !window.jspdf.jsPDF){ toast(tt('toastPdfLibNoCargada','No se pudo cargar la librería de PDF (revisa tu conexión a internet) — intenta de nuevo en unos segundos.'), 'err'); return false; }
   return true;
 }
-function exportSingleReportPdf(opts){
+async function exportSingleReportPdf(opts){
   // opts: {titulo, paciente, fecha, subtitulo, blocks:[{heading, lines:[]}], citation}
-  if(!pdfLibReady()) return;
+  if(!(await pdfLibReady())) return;
   const { jsPDF } = window.jspdf;
   const pdf = new jsPDF({unit:'mm', format:'a4'});
   const margin = 16; let y = 20;
@@ -680,9 +707,9 @@ document.getElementById('clearHistBtn').addEventListener('click', ()=>{
   if(!confirm(tt('confirmBorrarTodos','¿Borrar todos los registros?'))) return;
   registros = []; localStorage.removeItem(LS_KEY); renderHistorial();
 });
-document.getElementById('exportPdfBtn').addEventListener('click', ()=>{
-  if(!window.jspdf || !window.jspdf.jsPDF){ toast(tt('toastPdfLibNoCargada','No se pudo cargar la librería de PDF (revisa tu conexión a internet) — intenta de nuevo en unos segundos.'), 'err'); return; }
+document.getElementById('exportPdfBtn').addEventListener('click', async ()=>{
   if(!registros.length){ toast(tt('toastSinRegistros','No hay registros para exportar.'), 'err'); return; }
+  if(!(await pdfLibReady())) return;
   const { jsPDF } = window.jspdf;
   const pdf = new jsPDF({unit:'mm', format:'a4'});
   const margin = 16; let y = 20; const pageWidth = pdf.internal.pageSize.getWidth(); const pageHeight = pdf.internal.pageSize.getHeight();
@@ -709,7 +736,7 @@ document.getElementById('exportPdfBtn').addEventListener('click', ()=>{
 renderHistorial();
 window.addEventListener('cv-lang-changed', ()=>{ renderIdvItems(); renderGrbas(); updateTmfSummary(); renderHistorial(); });
 </script>
-<script src="../assets/theme-switcher.js" defer></script>
-<script src="../assets/a11y-reader.js" defer></script>
+<script src="../assets/theme-switcher.js?v=2" defer></script>
+<script src="../assets/a11y-reader.js?v=2" defer></script>
 </body>
 </html>

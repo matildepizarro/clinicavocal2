@@ -5,13 +5,37 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title data-i18n-content="pageTitle">Sesión diaria — Acompañamiento Vocal Afirmativo</title>
 <meta name="description" data-i18n-content="pageDesc" content="Sesión diaria de acompañamiento vocal afirmativo: registro de práctica, grabaciones y seguimiento centrado en la persona." />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Consultorio Vocal" />
+<meta property="og:locale" content="es_CL" />
+<meta property="og:title" content="Sesión diaria — Acompañamiento Vocal Afirmativo" />
+<meta property="og:description" content="Sesión diaria de acompañamiento vocal afirmativo: registro de práctica, grabaciones y seguimiento centrado en la persona." />
+<meta property="og:image" content="../assets/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:image" content="../assets/og-image.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Sesión diaria — Acompañamiento Vocal Afirmativo" />
+<meta name="twitter:description" content="Sesión diaria de acompañamiento vocal afirmativo: registro de práctica, grabaciones y seguimiento centrado en la persona." />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='7' fill='%23e0559e'/%3E%3Cpath d='M8 17c-2.5-2.3-4-4.2-4-6.3A3.2 3.2 0 0 1 7.3 7.4C8.6 7.4 9.6 8 10 9c.4-1 1.4-1.6 2.7-1.6a3.2 3.2 0 0 1 3.3 3.3c0 2.1-1.5 4-4 6.3l-2 1.8Z' fill='white'/%3E%3C/svg%3E">
-<script>document.documentElement.setAttribute('data-pastel-theme', (function(){try{return localStorage.getItem('cv-pastel-theme')||'rosa';}catch(e){return 'rosa';}})());</script>
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<script>(function(){
+  try{ document.documentElement.setAttribute('data-pastel-theme', localStorage.getItem('cv-pastel-theme')||'rosa'); }catch(e){}
+  /* Evita el "flash" de idioma incorrecto en visitas recurrentes: aplica el
+     idioma guardado al <html lang> antes del primer pintado, en vez de
+     esperar a que cargue assets/i18n-engine.js (mismo criterio que ya se
+     usaba arriba para el tema pastel). */
+  try{
+    var l = localStorage.getItem('cv-lang');
+    if(l === 'pt') document.documentElement.setAttribute('lang','pt-BR');
+    else if(l === 'en') document.documentElement.setAttribute('lang','en');
+  }catch(e){}
+})();</script>
 <script src="i18n-dict.js"></script>
-<script src="../assets/i18n-engine.js"></script>
+<script src="../assets/i18n-engine.js?v=2"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/shared.css">
+<link rel="stylesheet" href="../assets/shared.css?v=2">
 <style>
   :root{
     /* Paleta base: ROSA (pastel, por defecto) */
@@ -583,10 +607,8 @@
     </div>
   </div>
 
-  <!-- Librerías externas -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-  <script src="../assets/shared.js"></script>
+  <!-- Librerías externas: jsPDF y JSZip se cargan bajo demanda (ver cvLoadScript en assets/shared.js) la primera vez que se exporta un informe o un ZIP, en vez de descargarse en cada visita a la página. -->
+  <script src="../assets/shared.js?v=2"></script>
 
 <script>
 /* =========================================================
@@ -1390,15 +1412,15 @@ function generateSessionCSV(){
     lines.push('');
     lines.push(tt('csvRepeticiones','Repeticiones'));
     lines.push(tt('csvActividadRepeticiones','Actividad;Repeticiones'));
-    collectReps().forEach(function(r){ lines.push('"' + r.label + '";' + r.count); });
+    collectReps().forEach(function(r){ lines.push(csvField(r.label) + ';' + r.count); });
 
     lines.push('');
     lines.push(tt('csvLecturaFrasesTitulo','Lectura de frases - análisis por variante'));
     lines.push(tt('csvLecturaFrasesHeader','Frase;Media_F0(Hz);Mediana_F0;Min_F0;Max_F0;Rango_F0;N_samples;Pct_dentro_de_rango;Grabacion'));
     for(const key in phraseResults){
       const res = phraseResults[key];
-      if(!res){ lines.push('"' + key + '";' + tt('csvNoMedido','No medido') + ';;;;;;;'); continue; }
-      lines.push('"' + (res.text||key).replace(/"/g,'""') + '";' + (res.meanF0||'') + ';' + (res.medianF0||'') + ';' + (res.minF0||'') + ';' + (res.maxF0||'') + ';' + (res.rangeF0||'') + ';' + (res.nSamples||0) + ';' + (res.pctInRange||0) + ';' + (res.recordingName||''));
+      if(!res){ lines.push(csvField(key) + ';' + tt('csvNoMedido','No medido') + ';;;;;;;'); continue; }
+      lines.push(csvField(res.text||key) + ';' + (res.meanF0||'') + ';' + (res.medianF0||'') + ';' + (res.minF0||'') + ';' + (res.maxF0||'') + ';' + (res.rangeF0||'') + ';' + (res.nSamples||0) + ';' + (res.pctInRange||0) + ';' + csvField(res.recordingName||''));
     }
 
     lines.push('');
@@ -1409,7 +1431,7 @@ function generateSessionCSV(){
 
     lines.push('');
     lines.push(tt('csvGrabacionesHeader','Grabaciones (nombre;fecha)'));
-    recordings.forEach(function(r){ lines.push('"' + r.name.replace(/"/g,'""') + '";' + r.date); });
+    recordings.forEach(function(r){ lines.push(csvField(r.name) + ';' + r.date); });
 
     const csv = lines.join('\n');
     const blob = new Blob([csv], {type: 'text/csv;charset=utf-8;'});
@@ -1423,6 +1445,12 @@ function generateSessionCSV(){
 }
 
 async function buildPdfBlob(){
+  if(!window.jspdf || !window.jspdf.jsPDF){
+    try { await cvLoadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js'); } catch(e){ /* fall through */ }
+  }
+  if(!window.jspdf || !window.jspdf.jsPDF){
+    throw new Error(tt('toastPdfLibNoCargada','No se pudo cargar la librería de PDF (revisa tu conexión a internet) — intenta de nuevo en unos segundos.'));
+  }
   const reps = collectReps();
   const borgs = collectBorgSummary();
   const tsArr = window.__a_lectura_texto_timestamps || [];
@@ -1546,6 +1574,9 @@ async function exportZipSession(){
   try{
     log(tt('logGenerandoZip','Generando PDF y empaquetando en ZIP...'));
     const pdfBlob = await buildPdfBlob();
+    if(!window.JSZip){
+      await cvLoadScript('https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js');
+    }
     const zip = new JSZip();
     const base = fileSafeName();
     zip.file('informe_sesion_' + base + '.pdf', pdfBlob);
@@ -1573,14 +1604,14 @@ async function exportZipSession(){
       lines.push('');
       lines.push(tt('csvRepeticiones','Repeticiones'));
       lines.push(tt('csvActividadRepeticiones','Actividad;Repeticiones'));
-      collectReps().forEach(function(r){ lines.push('"' + r.label + '";' + r.count); });
+      collectReps().forEach(function(r){ lines.push(csvField(r.label) + ';' + r.count); });
       lines.push('');
       lines.push(tt('csvLecturaFrasesTitulo','Lectura de frases - análisis por variante'));
       lines.push(tt('csvLecturaFrasesHeader','Frase;Media_F0(Hz);Mediana_F0;Min_F0;Max_F0;Rango_F0;N_samples;Pct_dentro_de_rango;Grabacion'));
       for(const key in phraseResults){
         const res = phraseResults[key];
-        if(!res){ lines.push('"' + key + '";' + tt('csvNoMedido','No medido') + ';;;;;;;'); continue; }
-        lines.push('"' + (res.text||key).replace(/"/g,'""') + '";' + (res.meanF0||'') + ';' + (res.medianF0||'') + ';' + (res.minF0||'') + ';' + (res.maxF0||'') + ';' + (res.rangeF0||'') + ';' + (res.nSamples||0) + ';' + (res.pctInRange||0) + ';' + (res.recordingName||''));
+        if(!res){ lines.push(csvField(key) + ';' + tt('csvNoMedido','No medido') + ';;;;;;;'); continue; }
+        lines.push(csvField(res.text||key) + ';' + (res.meanF0||'') + ';' + (res.medianF0||'') + ';' + (res.minF0||'') + ';' + (res.maxF0||'') + ';' + (res.rangeF0||'') + ';' + (res.nSamples||0) + ';' + (res.pctInRange||0) + ';' + csvField(res.recordingName||''));
       }
       lines.push('');
       lines.push(tt('csvLecturaVisualHeader','Lectura visual - Timestamps (index;timestamp_iso;SPL_dB;contador)'));
@@ -1589,7 +1620,7 @@ async function exportZipSession(){
       tsArr.forEach(function(t,i){ lines.push((i+1) + ';' + (t.ts||'') + ';' + (t.spl||'') + ';' + (t.count||'')); });
       lines.push('');
       lines.push(tt('csvGrabacionesHeader','Grabaciones (nombre;fecha)'));
-      recordings.forEach(function(r){ lines.push('"' + r.name.replace(/"/g,'""') + '";' + r.date); });
+      recordings.forEach(function(r){ lines.push(csvField(r.name) + ';' + r.date); });
       return lines.join('\n');
     })();
     zip.file('informe_sesion_' + base + '.csv', csvText);
@@ -1877,7 +1908,7 @@ window.addEventListener('cv-lang-changed', function(){
   try{ if(typeof updateSmallSummaryLabel === 'function') updateSmallSummaryLabel(); }catch(e){}
 });
 </script>
-<script src="../assets/theme-switcher.js" defer></script>
-<script src="../assets/a11y-reader.js" defer></script>
+<script src="../assets/theme-switcher.js?v=2" defer></script>
+<script src="../assets/a11y-reader.js?v=2" defer></script>
 </body>
 </html>

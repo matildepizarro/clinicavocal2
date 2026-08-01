@@ -4,11 +4,35 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title data-i18n="pageTitle">Consultorio Vocal — Matilde Pizarro Toro</title>
-<script>document.documentElement.setAttribute('data-pastel-theme', (function(){try{return localStorage.getItem('cv-pastel-theme')||'rosa';}catch(e){return 'rosa';}})());</script>
+<script>(function(){
+  try{ document.documentElement.setAttribute('data-pastel-theme', localStorage.getItem('cv-pastel-theme')||'rosa'); }catch(e){}
+  /* Evita el "flash" de idioma incorrecto en visitas recurrentes: aplica el
+     idioma guardado al <html lang> antes del primer pintado, en vez de
+     esperar a que cargue assets/i18n-engine.js (mismo criterio que ya se
+     usaba arriba para el tema pastel). */
+  try{
+    var l = localStorage.getItem('cv-lang');
+    if(l === 'pt') document.documentElement.setAttribute('lang','pt-BR');
+    else if(l === 'en') document.documentElement.setAttribute('lang','en');
+  }catch(e){}
+})();</script>
 <script src="i18n-dict.js"></script>
-<script src="assets/i18n-engine.js"></script>
+<script src="assets/i18n-engine.js?v=2"></script>
 <meta name="description" data-i18n-content="metaDescription" content="Plataforma integrada de herramientas para fonoaudiología vocal: entrenador de voz, analizador acústico, bitácora clínica, sesiones diarias, esfuerzo vocal y respiración." />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Consultorio Vocal" />
+<meta property="og:locale" content="es_CL" />
+<meta property="og:title" content="Consultorio Vocal — Matilde Pizarro Toro" />
+<meta property="og:description" content="Plataforma integrada de herramientas para fonoaudiología vocal: entrenador de voz, analizador acústico, bitácora clínica, sesiones diarias, esfuerzo vocal y respiración." />
+<meta property="og:image" content="assets/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:image" content="assets/og-image.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Consultorio Vocal — Matilde Pizarro Toro" />
+<meta name="twitter:description" content="Plataforma integrada de herramientas para fonoaudiología vocal: entrenador de voz, analizador acústico, bitácora clínica, sesiones diarias, esfuerzo vocal y respiración." />
 <link rel="icon" href="vocalizador/icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="vocalizador/icons/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">

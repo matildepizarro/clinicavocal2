@@ -63,6 +63,19 @@
     return partial || null;
   }
 
+  // Built via the RegExp constructor (not a /u-flag literal) so that on the
+  // rare engine without Unicode property support the *construction* fails
+  // and is caught here, rather than a parse-time SyntaxError taking down
+  // this entire script for every visitor on that engine.
+  var EMOJI_RE = null;
+  try { EMOJI_RE = new RegExp('[\\u{1F300}-\\u{1FAFF}\\u{2600}-\\u{27BF}\\u{2B00}-\\u{2BFF}\\u{FE0F}\\u{200D}]', 'gu'); }
+  catch(e){ EMOJI_RE = null; }
+  function stripEmojiForSpeech(text){
+    if (!EMOJI_RE) return text;
+    var cleaned = text.replace(EMOJI_RE, '').replace(/\s+/g, ' ').trim();
+    return cleaned || text; // if the text was emoji-only, speak the original rather than nothing
+  }
+
   function stateWord(key){
     return tr('a11yState' + key.charAt(0).toUpperCase() + key.slice(1),
       key === 'on' ? 'activado' : (key === 'off' ? 'desactivado' : 'seleccionado'));
@@ -153,7 +166,7 @@
     if (el === lastEl && supported && synth.speaking) return;
     if (supported){
       synth.cancel();
-      var utter = new SpeechSynthesisUtterance(text);
+      var utter = new SpeechSynthesisUtterance(stripEmojiForSpeech(text));
       var langCode = currentLangCode();
       utter.lang = langCode;
       var voice = pickVoice(langCode);
@@ -215,7 +228,9 @@
     if (text) speak(text, target);
   }
   function onKeydown(e){
-    if (e.key === 'Escape') stop();
+    if (e.key !== 'Escape') return;
+    stop();
+    if (panelRef && panelRef.classList.contains('open')) setPanelOpen(false, { returnFocus: true });
   }
 
   function attachListeners(){
@@ -236,6 +251,13 @@
     if (!on) stop();
   }
 
+  function setPanelOpen(open, opts){
+    if (!panelRef || !fabRef) return;
+    panelRef.classList.toggle('open', open);
+    fabRef.setAttribute('aria-expanded', String(open));
+    if (!open && opts && opts.returnFocus) fabRef.focus();
+  }
+
   function refreshLabels(){
     if (fabRef) fabRef.setAttribute('aria-label', tr('a11yToggleLabel', 'Lector de accesibilidad (leer al pasar el mouse o enfocar)'));
     if (panelTitleRef) panelTitleRef.textContent = tr('a11yPanelTitle', 'Lector de accesibilidad');
@@ -244,6 +266,7 @@
       ? tr('a11yHint', 'Recorré la pantalla con el mouse o el teclado (Tab) y vas a escuchar el texto de cada elemento. Presioná Esc para detener la lectura.')
       : tr('a11yNoSupport', 'Tu navegador no admite lectura en voz alta.');
     if (rateLabelRef) rateLabelRef.textContent = tr('a11yRateLabel', 'Velocidad de lectura');
+    if (rateRef) rateRef.setAttribute('aria-label', tr('a11yRateLabel', 'Velocidad de lectura'));
   }
 
   function buildWidget(){
@@ -251,10 +274,14 @@
     css.textContent = [
       '#cv-a11y-fab{position:fixed;bottom:18px;right:138px;z-index:9999;',
       'width:50px;height:50px;border-radius:50%;border:none;cursor:pointer;',
-      'background:linear-gradient(135deg,#4fb894,#5bb3e0);color:#fff;font-size:20px;',
-      'box-shadow:0 8px 24px rgba(40,90,80,.32);display:flex;align-items:center;justify-content:center;',
-      'transition:transform .18s ease,opacity .18s ease;opacity:.55;}',
-      '#cv-a11y-fab.active{opacity:1;}',
+      'background:linear-gradient(135deg,#8fa39c,#8fa8bb);color:#fff;font-size:20px;',
+      'box-shadow:0 8px 24px rgba(40,90,80,.24);display:flex;align-items:center;justify-content:center;',
+      'transition:transform .18s ease,background .18s ease;}',
+      /* Off state stays fully opaque (a translucent a11y button would be
+         ironic: it must stay easy to find for the low-vision users it is
+         meant to help) and uses a visibly muted color instead of reduced
+         contrast to signal "inactive". */
+      '#cv-a11y-fab.active{background:linear-gradient(135deg,#4fb894,#5bb3e0);}',
       '#cv-a11y-fab:hover{transform:scale(1.08) rotate(6deg);}',
       '#cv-a11y-panel{position:fixed;bottom:78px;right:138px;z-index:9999;',
       'background:#fff;border-radius:16px;padding:16px;box-shadow:0 16px 44px rgba(40,70,60,.28);',
@@ -287,6 +314,9 @@
     fab.id = 'cv-a11y-fab';
     fab.type = 'button';
     fab.textContent = '🔊';
+    fab.setAttribute('aria-haspopup', 'true');
+    fab.setAttribute('aria-expanded', 'false');
+    fab.setAttribute('aria-controls', 'cv-a11y-panel');
     fabRef = fab;
 
     var panel = document.createElement('div');
@@ -336,7 +366,6 @@
       rateInput.step = '0.1';
       rateInput.className = 'cv-a11y-rate';
       rateInput.value = String(getRate());
-      rateInput.setAttribute('aria-label', 'Velocidad de lectura');
       rateWrap.appendChild(rateInput);
       panel.appendChild(rateWrap);
       rateRef = rateInput;
@@ -348,10 +377,10 @@
     input.checked = isOn();
     input.addEventListener('change', function(){ setOn(input.checked); applyState(); });
 
-    fab.addEventListener('click', function(){ panel.classList.toggle('open'); });
+    fab.addEventListener('click', function(){ setPanelOpen(!panel.classList.contains('open')); });
     document.addEventListener('click', function(e){
       if (!panel.contains(e.target) && e.target !== fab && panel.classList.contains('open')){
-        panel.classList.remove('open');
+        setPanelOpen(false);
       }
     });
 

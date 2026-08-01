@@ -6,17 +6,41 @@
 <meta name="theme-color" content="#c94a8c" />
 <title data-i18n="pageTitle">Matilde Pizarro Toro · Fonoaudióloga | Bitácora de Sesiones</title>
 <meta name="description" data-i18n-content="metaDescription" content="Bitácora clínica de voz: registro sesión a sesión, cronómetros de ejercicios y piano en vivo con detector de nota." />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Consultorio Vocal" />
+<meta property="og:locale" content="es_CL" />
+<meta property="og:title" content="Matilde Pizarro Toro · Fonoaudióloga | Bitácora de Sesiones" />
+<meta property="og:description" content="Bitácora clínica de voz: registro sesión a sesión, cronómetros de ejercicios y piano en vivo con detector de nota." />
+<meta property="og:image" content="../assets/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:image" content="../assets/og-image.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Matilde Pizarro Toro · Fonoaudióloga | Bitácora de Sesiones" />
+<meta name="twitter:description" content="Bitácora clínica de voz: registro sesión a sesión, cronómetros de ejercicios y piano en vivo con detector de nota." />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='7' fill='%23c94a8c'/%3E%3Cpath d='M8 17c-2.5-2.3-4-4.2-4-6.3A3.2 3.2 0 0 1 7.3 7.4C8.6 7.4 9.6 8 10 9c.4-1 1.4-1.6 2.7-1.6a3.2 3.2 0 0 1 3.3 3.3c0 2.1-1.5 4-4 6.3l-2 1.8Z' fill='white'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 
 <!-- jsPDF -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
-<script>document.documentElement.setAttribute('data-pastel-theme', (function(){try{return localStorage.getItem('cv-pastel-theme')||'rosa';}catch(e){return 'rosa';}})());</script>
-<link rel="stylesheet" href="../assets/shared.css">
+<script>(function(){
+  try{ document.documentElement.setAttribute('data-pastel-theme', localStorage.getItem('cv-pastel-theme')||'rosa'); }catch(e){}
+  /* Evita el "flash" de idioma incorrecto en visitas recurrentes: aplica el
+     idioma guardado al <html lang> antes del primer pintado, en vez de
+     esperar a que cargue assets/i18n-engine.js (mismo criterio que ya se
+     usaba arriba para el tema pastel). */
+  try{
+    var l = localStorage.getItem('cv-lang');
+    if(l === 'pt') document.documentElement.setAttribute('lang','pt-BR');
+    else if(l === 'en') document.documentElement.setAttribute('lang','en');
+  }catch(e){}
+})();</script>
+<link rel="stylesheet" href="../assets/shared.css?v=2">
 <script src="i18n-dict.js"></script>
-<script src="../assets/i18n-engine.js"></script>
+<script src="../assets/i18n-engine.js?v=2"></script>
 
 <style>
 :root{
@@ -914,7 +938,7 @@ tbody tr:hover{background:var(--surface-sunken)}
 
 <div id="toastHost" aria-live="polite"></div>
 
-<script src="../assets/shared.js"></script>
+<script src="../assets/shared.js?v=2"></script>
 <script>
 const tt = (key, fallback) => (window.CV_I18N ? window.CV_I18N.t(key) : (fallback !== undefined ? fallback : key));
 /* ================= Toast system ================= */
@@ -1146,6 +1170,18 @@ window.addEventListener('cv-lang-changed', ()=>{
 function renderPatientTable(){
   const el = document.getElementById('patientTable');
   if(!el) return;
+  /* Event delegation wired once: avoids re-binding on every re-render and
+     avoids embedding patient-supplied text inside an inline onclick handler
+     (see data-patient-id below), which is not safe against HTML/JS-string
+     breakout even when quotes are manually escaped. */
+  if(!el.dataset.wired){
+    el.dataset.wired = '1';
+    el.addEventListener('click', function(e){
+      const btn = e.target.closest('button[data-patient-id]');
+      if(!btn) return;
+      filterByPatient(btn.dataset.patientId);
+    });
+  }
   if(!sessions.length){ el.innerHTML = ''; return; }
   const sinNombre = tt('sinNombre','Sin nombre');
   const map = {};
@@ -1162,7 +1198,7 @@ function renderPatientTable(){
       <td><strong>${escapeHtml(pid)}</strong></td>
       <td>${d.count}</td>
       <td>${new Date(d.last).toLocaleDateString('es-CL')}</td>
-      <td><button class="btn btn-outline btn-sm" onclick="filterByPatient('${pid.replace(/'/g,"\\'")}')">${tt('btnVerHistorial','Ver historial')}</button></td>
+      <td><button class="btn btn-outline btn-sm" data-patient-id="${escapeHtml(pid)}">${tt('btnVerHistorial','Ver historial')}</button></td>
     </tr>`;
   });
   html += '</tbody></table></div>';
@@ -2253,15 +2289,12 @@ function exportCSV(){
   const targets = getExportTargets();
   if(!targets.length){ toast(tt('toastNoHaySesionesExportar','No hay sesiones para exportar.'), 'err'); return; }
   const headers = ['Paciente','Fecha','Foco','Ejercicios realizados','Sensaciones','Observaciones','dB registrado','Nota registrada'];
-  const csvEscape = v => `"${String(v??'').replace(/"/g,'""')}"`;
   const rows = targets.map(r=>[
     r.participantId, new Date(r.date).toLocaleString('es-CL'), friendlyFocus(r.focus),
     (r.exercisesDone||[]).map(e=>`${e.name} (${e.duration}s)${e.detail?' — '+e.detail:''}`).join('; '),
     (r.sensaciones||[]).join('; '), r.observaciones, r.lastDb ?? '', r.lastNote ?? ''
-  ].map(csvEscape).join(','));
-  const csv = [headers.map(csvEscape).join(','), ...rows].join('\n');
-  const blob = new Blob(['\uFEFF'+csv], { type:'text/csv;charset=utf-8' });
-  const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `sesiones_${new Date().toISOString().slice(0,10)}.csv`; a.click(); URL.revokeObjectURL(url);
+  ]);
+  downloadCsv(`sesiones_${new Date().toISOString().slice(0,10)}.csv`, [headers, ...rows]);
   toast(window.CV_I18N ? window.CV_I18N.t('toastCsvExportado')(targets.length) : `CSV exportado (${targets.length} sesión(es))`, 'ok');
 }
 async function clearAll(){
@@ -2317,6 +2350,9 @@ async function handleImportBackup(evt){
 async function generatePDF(){
   const targets = getExportTargets();
   if(!targets.length){ toast(tt('toastNoHaySesionesInforme','No hay sesiones para generar informe.'), 'err'); return; }
+  if(!window.jspdf || !window.jspdf.jsPDF){
+    try { await cvLoadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js'); } catch(e){ /* handled below */ }
+  }
   if(!window.jspdf || !window.jspdf.jsPDF){
     toast(tt('toastPdfLibNoCargada','No se pudo cargar la librería de PDF (revisa tu conexión a internet) — intenta de nuevo en unos segundos.'), 'err');
     return;
@@ -2450,7 +2486,7 @@ async function generatePDF(){
 function getImageDimensions(dataUrl){ return new Promise((resolve,reject)=>{ const img=new Image(); img.onload = ()=> resolve({w: img.naturalWidth, h: img.naturalHeight}); img.onerror = (e)=>reject(e); img.src = dataUrl; }); }
 function detectImageType(dataUrl){ if(dataUrl.startsWith('data:image/png')) return 'PNG'; if(dataUrl.startsWith('data:image/jpeg')||dataUrl.startsWith('data:image/jpg')) return 'JPEG'; return 'JPEG'; }
 </script>
-<script src="../assets/theme-switcher.js" defer></script>
-<script src="../assets/a11y-reader.js" defer></script>
+<script src="../assets/theme-switcher.js?v=2" defer></script>
+<script src="../assets/a11y-reader.js?v=2" defer></script>
 </body>
 </html>

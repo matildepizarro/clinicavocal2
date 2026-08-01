@@ -5,14 +5,38 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title data-i18n="pageTitle">Respiración Cuadrada — Temporizador de respiración</title>
 <meta name="description" data-i18n-content="metaDescription" content="Temporizador profesional para respiración cuadrada (box breathing): biblioteca de ejercicios, editor, animación de trazo cuadrado y metrónomo sonoro." />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Consultorio Vocal" />
+<meta property="og:locale" content="es_CL" />
+<meta property="og:title" content="Respiración Cuadrada — Temporizador de respiración" />
+<meta property="og:description" content="Temporizador profesional para respiración cuadrada (box breathing): biblioteca de ejercicios, editor, animación de trazo cuadrado y metrónomo sonoro." />
+<meta property="og:image" content="../assets/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:image" content="../assets/og-image.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Respiración Cuadrada — Temporizador de respiración" />
+<meta name="twitter:description" content="Temporizador profesional para respiración cuadrada (box breathing): biblioteca de ejercicios, editor, animación de trazo cuadrado y metrónomo sonoro." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='7' fill='%23d9633a'/%3E%3Cpath d='M12 5a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7Zm0 3.2A3.8 3.8 0 0 0 8.2 12 3.8 3.8 0 0 0 12 15.8 3.8 3.8 0 0 0 15.8 12 3.8 3.8 0 0 0 12 8.2Z' fill='white'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="../assets/shared.css">
-<script>document.documentElement.setAttribute('data-pastel-theme', (function(){try{return localStorage.getItem('cv-pastel-theme')||'rosa';}catch(e){return 'rosa';}})());</script>
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="../assets/shared.css?v=2">
+<script>(function(){
+  try{ document.documentElement.setAttribute('data-pastel-theme', localStorage.getItem('cv-pastel-theme')||'rosa'); }catch(e){}
+  /* Evita el "flash" de idioma incorrecto en visitas recurrentes: aplica el
+     idioma guardado al <html lang> antes del primer pintado, en vez de
+     esperar a que cargue assets/i18n-engine.js (mismo criterio que ya se
+     usaba arriba para el tema pastel). */
+  try{
+    var l = localStorage.getItem('cv-lang');
+    if(l === 'pt') document.documentElement.setAttribute('lang','pt-BR');
+    else if(l === 'en') document.documentElement.setAttribute('lang','en');
+  }catch(e){}
+})();</script>
 <script src="i18n-dict.js"></script>
-<script src="../assets/i18n-engine.js"></script>
+<script src="../assets/i18n-engine.js?v=2"></script>
 <style>
   :root{
     --bg:#faf5ee;
@@ -371,7 +395,7 @@
     </div>
   </div>
 
-<script src="../assets/shared.js"></script>
+<script src="../assets/shared.js?v=2"></script>
 <script>
 (function(){
   "use strict";
@@ -804,7 +828,7 @@
   init();
 })();
 </script>
-<script src="../assets/theme-switcher.js" defer></script>
-<script src="../assets/a11y-reader.js" defer></script>
+<script src="../assets/theme-switcher.js?v=2" defer></script>
+<script src="../assets/a11y-reader.js?v=2" defer></script>
 </body>
 </html>

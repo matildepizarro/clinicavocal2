@@ -1,22 +1,39 @@
 // sw.js — cachea el "app shell" para que Ejercicios Vocales funcione completamente offline
 // tras la primera visita. Estrategia: cache-first con actualización en segundo plano.
 
-const CACHE_NAME = 'vocalizer2026-v3';
+const CACHE_NAME = 'vocalizer2026-v4';
 const PIANO_NOTES = ['A0','C1','Ds1','Fs1','A1','C2','Ds2','Fs2','A2','C3','Ds3','Fs3','A3','C4','Ds4','Fs4','A4','C5','Ds5','Fs5','A5','C6','Ds6','Fs6','A6','C7','Ds7','Fs7','A7','C8'];
 const ASSETS = [
-  './', './index.html', './style.css',
+  './', './index.html', './style.css', './i18n-dict.js',
   './js/app.js', './js/audio.js', './js/exercises.js', './js/mic.js',
   './js/pitch.js', './js/storage.js', './js/wav-encoder.js', './js/analysis.js',
   './manifest.webmanifest',
   './icons/icon.svg', './icons/icon-192.png', './icons/icon-512.png',
   './assets/metronome_click.wav', './assets/demo_exercise_1.wav',
   './assets/pickup_note.wav', './assets/scale_C_major.wav',
-  ...PIANO_NOTES.map(n => `./assets/piano-samples/${n}.mp3`)
+  ...PIANO_NOTES.map(n => `./assets/piano-samples/${n}.mp3`),
+  /* Shared portal engine that index.html also loads from outside this
+     folder's scope. A page controlled by this service worker still routes
+     ALL of its requests through the handlers below (scope limits which
+     PAGES get controlled, not which of a controlled page's requests are
+     intercepted) — so precaching these here means language, theme and the
+     accessibility reader keep working offline from the very first visit,
+     instead of only after a second online visit populates the cache
+     opportunistically via the fetch handler. */
+  '../assets/shared.css?v=2', '../assets/shared.js?v=2', '../assets/i18n-engine.js?v=2',
+  '../assets/theme-switcher.js?v=2', '../assets/a11y-reader.js?v=2'
 ];
 
 self.addEventListener('install', (event)=>{
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS)).then(()=> self.skipWaiting())
+    caches.open(CACHE_NAME).then(cache =>
+      // Cache each asset independently rather than cache.addAll(), which
+      // aborts the *entire* precache (and can leave the app shell only
+      // partially cached) if a single URL fails on a flaky connection.
+      Promise.all(ASSETS.map(url => cache.add(url).catch(err => {
+        console.warn('[sw] no se pudo precachear', url, err);
+      })))
+    ).then(()=> self.skipWaiting())
   );
 });
 

@@ -5,15 +5,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title data-i18n="pageTitle">Ejercicios Vocales — Entrenador vocal</title>
 <meta name="description" data-i18n-content="metaDescription" content="Entrenador vocal offline: rango vocal, ejercicios de solfeo, afinador, evaluación de grabaciones y vibrato. Funciona sin conexión." />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Consultorio Vocal" />
+<meta property="og:locale" content="es_CL" />
+<meta property="og:title" content="Ejercicios Vocales — Entrenador vocal" />
+<meta property="og:description" content="Entrenador vocal offline: rango vocal, ejercicios de solfeo, afinador, evaluación de grabaciones y vibrato. Funciona sin conexión." />
+<meta property="og:image" content="../assets/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:image" content="../assets/og-image.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Ejercicios Vocales — Entrenador vocal" />
+<meta name="twitter:description" content="Entrenador vocal offline: rango vocal, ejercicios de solfeo, afinador, evaluación de grabaciones y vibrato. Funciona sin conexión." />
 <meta name="theme-color" content="#150c1c" />
 <link rel="manifest" href="manifest.webmanifest" />
 <link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="icons/icon-192.png" />
 <link rel="stylesheet" href="style.css" />
-<link rel="stylesheet" href="../assets/shared.css" />
-<script>document.documentElement.setAttribute('data-pastel-theme', (function(){try{return localStorage.getItem('cv-pastel-theme')||'rosa';}catch(e){return 'rosa';}})());</script>
+<link rel="stylesheet" href="../assets/shared.css?v=2" />
+<script>(function(){
+  try{ document.documentElement.setAttribute('data-pastel-theme', localStorage.getItem('cv-pastel-theme')||'rosa'); }catch(e){}
+  /* Evita el "flash" de idioma incorrecto en visitas recurrentes: aplica el
+     idioma guardado al <html lang> antes del primer pintado, en vez de
+     esperar a que cargue assets/i18n-engine.js (mismo criterio que ya se
+     usaba arriba para el tema pastel). */
+  try{
+    var l = localStorage.getItem('cv-lang');
+    if(l === 'pt') document.documentElement.setAttribute('lang','pt-BR');
+    else if(l === 'en') document.documentElement.setAttribute('lang','en');
+  }catch(e){}
+})();</script>
 <script src="i18n-dict.js"></script>
-<script src="../assets/i18n-engine.js"></script>
+<script src="../assets/i18n-engine.js?v=2"></script>
 </head>
 <body>
 
@@ -438,9 +461,9 @@
   </form>
 </dialog>
 
-<script src="../assets/shared.js" defer></script>
+<script src="../assets/shared.js?v=2" defer></script>
 <script type="module" src="js/app.js"></script>
-<script src="../assets/theme-switcher.js" defer></script>
-<script src="../assets/a11y-reader.js" defer></script>
+<script src="../assets/theme-switcher.js?v=2" defer></script>
+<script src="../assets/a11y-reader.js?v=2" defer></script>
 </body>
 </html>

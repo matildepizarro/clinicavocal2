@@ -5,16 +5,40 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title data-i18n="pageTitle">Rango tonal afirmativo — Entrenamiento de tono</title>
 <meta name="description" data-i18n-content="metaDescription" content="Herramienta de entrenamiento de tono habitual y rango objetivo para voz afirmativa de género." />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Consultorio Vocal" />
+<meta property="og:locale" content="es_CL" />
+<meta property="og:title" content="Rango tonal afirmativo — Entrenamiento de tono" />
+<meta property="og:description" content="Herramienta de entrenamiento de tono habitual y rango objetivo para voz afirmativa de género." />
+<meta property="og:image" content="../assets/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:image" content="../assets/og-image.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Rango tonal afirmativo — Entrenamiento de tono" />
+<meta name="twitter:description" content="Herramienta de entrenamiento de tono habitual y rango objetivo para voz afirmativa de género." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='7' fill='%239b7bd9'/%3E%3Cpath d='M6 17 L10 9 L14 13 L18 6' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="../assets/shared.css">
-<script>document.documentElement.setAttribute('data-pastel-theme', (function(){try{return localStorage.getItem('cv-pastel-theme')||'rosa';}catch(e){return 'rosa';}})());</script>
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="../assets/shared.css?v=2">
+<script>(function(){
+  try{ document.documentElement.setAttribute('data-pastel-theme', localStorage.getItem('cv-pastel-theme')||'rosa'); }catch(e){}
+  /* Evita el "flash" de idioma incorrecto en visitas recurrentes: aplica el
+     idioma guardado al <html lang> antes del primer pintado, en vez de
+     esperar a que cargue assets/i18n-engine.js (mismo criterio que ya se
+     usaba arriba para el tema pastel). */
+  try{
+    var l = localStorage.getItem('cv-lang');
+    if(l === 'pt') document.documentElement.setAttribute('lang','pt-BR');
+    else if(l === 'en') document.documentElement.setAttribute('lang','en');
+  }catch(e){}
+})();</script>
 <script src="i18n-dict.js"></script>
-<script src="../assets/i18n-engine.js"></script>
+<script src="../assets/i18n-engine.js?v=2"></script>
 <!-- jsPDF (UMD) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer crossorigin="anonymous"></script>
+
 <style>
   :root{
     --bg:#f6f3ff; --bg-2:#ece4ff; --card:#ffffff; --card-2:#efe9ff; --line:#ded1fb;
@@ -263,6 +287,7 @@
 
 <div class="toast" id="toast"></div>
 
+<script src="../assets/shared.js?v=2"></script>
 <script>
 (function(){
   'use strict';
@@ -659,17 +684,14 @@
     state.sessions.forEach(function(s){
       rows.push([s.date, s.habitual||'', s.targetMin, s.targetMax, s.successPct, s.durationS]);
     });
-    var csv = rows.map(function(r){ return r.join(','); }).join('\n');
-    var blob = new Blob([csv], {type:'text/csv;charset=utf-8'});
-    var url = URL.createObjectURL(blob);
-    var a = document.createElement('a');
-    a.href = url; a.download = 'rango-tonal-afirmativo-progreso.csv';
-    document.body.appendChild(a); a.click(); document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    downloadCsv('rango-tonal-afirmativo-progreso.csv', rows);
   });
-  $('btnExportPdf').addEventListener('click', function(){
-    if(!window.jspdf || !window.jspdf.jsPDF){ toast(tt('toastPdfLibNoCargada','No se pudo cargar la librería de PDF (revisa tu conexión a internet) — intenta de nuevo en unos segundos.')); return; }
+  $('btnExportPdf').addEventListener('click', async function(){
     if(!state.sessions.length){ toast(tt('toastSinRegistros','No hay registros para exportar.')); return; }
+    if(!window.jspdf || !window.jspdf.jsPDF){
+      try { await cvLoadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js'); } catch(e){ /* handled below */ }
+    }
+    if(!window.jspdf || !window.jspdf.jsPDF){ toast(tt('toastPdfLibNoCargada','No se pudo cargar la librería de PDF (revisa tu conexión a internet) — intenta de nuevo en unos segundos.')); return; }
     var jsPDF = window.jspdf.jsPDF;
     var pdf = new jsPDF({unit:'mm', format:'a4'});
     var margin = 16, y = 20;
@@ -707,7 +729,7 @@
   window.addEventListener('cv-lang-changed', function(){ /* los textos estáticos ya se re-aplican vía data-i18n */ });
 })();
 </script>
-<script src="../assets/theme-switcher.js" defer></script>
-<script src="../assets/a11y-reader.js" defer></script>
+<script src="../assets/theme-switcher.js?v=2" defer></script>
+<script src="../assets/a11y-reader.js?v=2" defer></script>
 </body>
 </html>
