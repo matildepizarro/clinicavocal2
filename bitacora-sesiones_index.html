@@ -1,0 +1,2713 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="theme-color" content="#c94a8c" />
+<title data-i18n="pageTitle">Matilde Pizarro Toro · Fonoaudióloga | Bitácora de Sesiones</title>
+<meta name="description" data-i18n-content="metaDescription" content="Bitácora clínica de voz: registro sesión a sesión, cronómetros de ejercicios y piano en vivo con detector de nota." />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Consultorio Vocal" />
+<meta property="og:locale" content="es_CL" />
+<meta property="og:title" content="Matilde Pizarro Toro · Fonoaudióloga | Bitácora de Sesiones" />
+<meta property="og:description" content="Bitácora clínica de voz: registro sesión a sesión, cronómetros de ejercicios y piano en vivo con detector de nota." />
+<meta property="og:image" content="../assets/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:image" content="../assets/og-image.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Matilde Pizarro Toro · Fonoaudióloga | Bitácora de Sesiones" />
+<meta name="twitter:description" content="Bitácora clínica de voz: registro sesión a sesión, cronómetros de ejercicios y piano en vivo con detector de nota." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='7' fill='%23c94a8c'/%3E%3Cpath d='M8 17c-2.5-2.3-4-4.2-4-6.3A3.2 3.2 0 0 1 7.3 7.4C8.6 7.4 9.6 8 10 9c.4-1 1.4-1.6 2.7-1.6a3.2 3.2 0 0 1 3.3 3.3c0 2.1-1.5 4-4 6.3l-2 1.8Z' fill='white'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<!-- jsPDF -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<script>(function(){
+  try{ document.documentElement.setAttribute('data-pastel-theme', localStorage.getItem('cv-pastel-theme')||'rosa'); }catch(e){}
+  /* Evita el "flash" de idioma incorrecto en visitas recurrentes: aplica el
+     idioma guardado al <html lang> antes del primer pintado, en vez de
+     esperar a que cargue assets/i18n-engine.js (mismo criterio que ya se
+     usaba arriba para el tema pastel). */
+  try{
+    var l = localStorage.getItem('cv-lang');
+    if(l === 'pt') document.documentElement.setAttribute('lang','pt-BR');
+    else if(l === 'en') document.documentElement.setAttribute('lang','en');
+  }catch(e){}
+})();</script>
+<link rel="stylesheet" href="../assets/shared.css?v=2">
+<script src="i18n-dict.js"></script>
+<script src="../assets/i18n-engine.js?v=2"></script>
+
+<style>
+:root{
+  --ink:#4a2140;
+  --ink-soft:#7a4568;
+  --muted:#a6789a;
+  --bg:#fff5fa;
+  --surface:#ffffff;
+  --surface-sunken:#fff0f7;
+  --border:#f6d6e8;
+  --primary:#e0559e;
+  --primary-dark:#c94a8c;
+  --primary-darker:#9c3670;
+  --primary-tint:#fde6f3;
+  --peach:#ff9d81;
+  --peach-tint:#ffe9e0;
+  --gold:#e0a640;
+  --danger:#e2566b;
+  --danger-tint:#fce3e7;
+  --ok:#4caf7d;
+  --shadow-sm:0 1px 3px rgba(157,54,112,.08);
+  --shadow-md:0 8px 24px rgba(157,54,112,.10);
+  --shadow-lg:0 18px 44px rgba(157,54,112,.16);
+  --radius:20px;
+  --radius-sm:13px;
+}
+:root[data-pastel-theme="rosa"]{
+  --ink:#4a2140; --ink-soft:#7a4568; --muted:#a6789a; --bg:#fff5fa; --surface:#ffffff; --surface-sunken:#fff0f7;
+  --border:#f6d6e8; --primary:#e0559e; --primary-dark:#c94a8c; --primary-darker:#9c3670; --primary-tint:#fde6f3;
+}
+:root[data-pastel-theme="lavanda"]{
+  --ink:#3d2e5c; --ink-soft:#6a5590; --muted:#9689b3; --bg:#f6f3ff; --surface:#ffffff; --surface-sunken:#efe9ff;
+  --border:#ded1fb; --primary:#9b7bd9; --primary-dark:#7e5cc4; --primary-darker:#5f3fa3; --primary-tint:#ece3fb;
+}
+:root[data-pastel-theme="menta"]{
+  --ink:#204a3a; --ink-soft:#3f7561; --muted:#79a390; --bg:#f0fbf6; --surface:#ffffff; --surface-sunken:#e6f7ef;
+  --border:#c9ecdb; --primary:#4fb894; --primary-dark:#3a9a79; --primary-darker:#297b60; --primary-tint:#e1f7ee;
+}
+:root[data-pastel-theme="durazno"]{
+  --ink:#5c3520; --ink-soft:#8a5b3c; --muted:#c19a7e; --bg:#fff7f0; --surface:#ffffff; --surface-sunken:#ffece0;
+  --border:#ffd8bd; --primary:#ff9d66; --primary-dark:#e87f45; --primary-darker:#c2612c; --primary-tint:#ffe9dc;
+}
+:root[data-pastel-theme="cielo"]{
+  --ink:#1e3a5c; --ink-soft:#3f6690; --muted:#7fa0c0; --bg:#f0f8ff; --surface:#ffffff; --surface-sunken:#e3f2ff;
+  --border:#c9e4fb; --primary:#5bb3e0; --primary-dark:#3f96c4; --primary-darker:#2c749d; --primary-tint:#e3f4fd;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  margin:0;
+  background:
+    radial-gradient(1000px 480px at 12% -8%, #ffe1f0 0%, transparent 58%),
+    radial-gradient(820px 460px at 108% 4%, #ffe6dc 0%, transparent 55%),
+    radial-gradient(700px 520px at 50% 115%, #fbe4f2 0%, transparent 60%),
+    var(--bg);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:'Fraunces',sans-serif;letter-spacing:-0.01em;margin:0}
+::selection{background:var(--primary-tint);color:var(--primary-darker)}
+a{color:var(--primary-dark)}
+
+.skip-link{position:absolute;left:-999px;top:0;background:var(--ink);color:#fff;padding:8px 14px;border-radius:8px;z-index:999}
+.skip-link:focus{left:12px;top:12px}
+
+.container{max-width:1080px;margin:0 auto;padding:22px 20px 70px}
+
+/* ---------- Header ---------- */
+.topbar{
+  display:flex;align-items:center;gap:16px;
+  background:linear-gradient(155deg,var(--primary-darker),var(--primary) 70%);
+  border-radius:26px;
+  padding:24px 28px;
+  color:#fff;
+  box-shadow:var(--shadow-lg);
+  position:relative;
+  overflow:hidden;
+}
+.topbar::after{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(360px 230px at 92% -25%, rgba(255,255,255,.20), transparent 60%),
+    radial-gradient(260px 200px at 8% 130%, rgba(255,214,232,.22), transparent 60%);
+  pointer-events:none;
+}
+.brand-mark{
+  width:56px;height:56px;flex:0 0 auto;border-radius:18px;
+  background:rgba(255,255,255,.16);
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid rgba(255,255,255,.3);
+  position:relative;z-index:1;
+}
+.brand-mark svg{width:30px;height:30px}
+.brand-text{position:relative;z-index:1;flex:1;min-width:0}
+.brand-text h1{font-size:21px;font-weight:700;color:#fff}
+.brand-text p{margin:5px 0 0;font-size:13.5px;color:rgba(255,255,255,.86)}
+.brand-badge{
+  position:relative;z-index:1;
+  font-size:11.5px;font-weight:700;color:#fff;
+  background:rgba(255,255,255,.18);
+  border:1px solid rgba(255,255,255,.32);
+  padding:6px 13px;border-radius:999px;white-space:nowrap;
+}
+
+/* ---------- Quicknav ---------- */
+.quicknav{
+  display:flex;gap:8px;margin:18px 0;flex-wrap:wrap;
+  position:sticky;top:10px;z-index:50;
+}
+.quicknav button{
+  display:flex;align-items:center;gap:7px;
+  background:rgba(255,255,255,.86);backdrop-filter:blur(6px);
+  border:1px solid var(--border);color:var(--ink-soft);
+  font-family:'Inter',sans-serif;font-weight:700;font-size:13px;
+  padding:9px 15px;border-radius:999px;cursor:pointer;transition:all .18s ease;
+  box-shadow:var(--shadow-sm);
+}
+.quicknav button:hover{color:var(--primary-darker);border-color:var(--primary-tint);transform:translateY(-1px)}
+.quicknav button.on{background:var(--primary);color:#fff;border-color:var(--primary);box-shadow:0 6px 16px rgba(224,85,158,.35)}
+
+/* ---------- Cards / sections ---------- */
+.card{
+  background:var(--surface);border:1px solid var(--border);
+  padding:22px;border-radius:var(--radius);box-shadow:var(--shadow-sm);
+  margin-top:16px;scroll-margin-top:70px;
+}
+.card-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.card-head h2{font-size:18px;display:flex;align-items:center;gap:10px}
+.card-head .emoji{font-size:20px}
+.sub{color:var(--muted);font-size:12.5px;margin-top:3px}
+
+.sm{color:var(--muted);font-size:13px}
+label{font-size:12.5px;font-weight:700;color:var(--ink-soft);display:block;margin-bottom:6px}
+
+input[type=text],input[type=number],select,textarea{
+  font-family:inherit;font-size:13.5px;color:var(--ink);
+  padding:10px 12px;border-radius:11px;border:1px solid var(--border);
+  background:#fff;width:100%;transition:border-color .15s, box-shadow .15s;
+}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-tint)}
+textarea{resize:vertical;min-height:84px}
+
+.field-row{display:flex;gap:10px;flex-wrap:wrap}
+.field-row > *{flex:1;min-width:140px}
+
+.btn{
+  padding:10px 16px;border-radius:12px;border:1px solid transparent;cursor:pointer;
+  font-family:'Inter',sans-serif;font-weight:700;font-size:13px;
+  display:inline-flex;align-items:center;gap:7px;transition:transform .12s, box-shadow .12s, background .15s, opacity .15s;
+}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--primary);color:#fff;box-shadow:0 4px 12px rgba(224,85,158,.32)}
+.btn-primary:hover{background:var(--primary-dark)}
+.btn-ghost{background:var(--primary-tint);color:var(--primary-darker);border-color:#f7d3e9}
+.btn-ghost:hover{background:#fbd6ea}
+.btn-outline{background:#fff;color:var(--ink-soft);border-color:var(--border)}
+.btn-outline:hover{border-color:var(--primary)}
+.btn-danger{background:var(--danger-tint);color:var(--danger)}
+.btn-danger:hover{background:#f9d0d7}
+.btn-sm{padding:7px 11px;font-size:12px;border-radius:9px}
+.btn[disabled]{opacity:.55;cursor:not-allowed;transform:none}
+.controls{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin-top:16px}
+
+.chip{
+  display:inline-flex;align-items:center;background:var(--surface-sunken);
+  padding:8px 12px;border-radius:11px;font-size:12.5px;color:var(--ink-soft);
+  border:1px solid var(--border);cursor:pointer;user-select:none;gap:6px;transition:all .15s;
+}
+.chip input{margin:0}
+.chip:has(input:checked){background:var(--primary-tint);border-color:var(--primary);color:var(--primary-darker);font-weight:700}
+.chip-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}
+
+/* ---------- Mini stat strip ---------- */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media (max-width:760px){.kpi-grid{grid-template-columns:repeat(2,1fr)}}
+.kpi-card{background:var(--surface-sunken);border:1px solid var(--border);border-radius:16px;padding:16px;text-align:center}
+.kpi-card .num{font-family:'Fraunces',sans-serif;font-weight:700;font-size:26px;color:var(--primary-darker);line-height:1.1}
+.kpi-card .lbl{font-size:12px;color:var(--muted);margin-top:6px}
+
+/* ---------- Session form ---------- */
+.stat-box{background:var(--surface-sunken);border:1px solid var(--border);border-radius:13px;padding:12px}
+.stat-box .num{font-family:'Fraunces',sans-serif;font-weight:700;font-size:19px;color:var(--primary-darker)}
+.stat-box .lbl{font-size:11px;color:var(--muted);margin-top:2px}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+.checklist{display:flex;flex-direction:column;gap:8px}
+.check-item{
+  display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;flex-wrap:wrap;
+  background:var(--surface-sunken);border:1px solid var(--border);
+}
+.check-item input[type=checkbox]{width:18px;height:18px;accent-color:var(--primary)}
+.check-item .name{font-weight:700;flex:1;min-width:120px}
+.check-item .dur{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--muted)}
+.check-item .detail{
+  flex:1 1 100%;margin-top:2px;font-size:12.5px;padding:7px 10px;border-radius:9px;
+  border:1px solid var(--border);background:#fff;display:none;
+}
+.check-item.checked .detail{display:block}
+.check-item.checked{border-color:var(--primary);background:var(--primary-tint)}
+.ex-empty-inline{color:var(--muted);font-size:13px;padding:10px 4px}
+
+/* ---------- Exercises / timers ---------- */
+.ex-empty{
+  text-align:center;padding:26px 10px;color:var(--muted);font-size:13.5px;
+  background:var(--surface-sunken);border-radius:var(--radius-sm);border:1px dashed var(--border);
+}
+.ex-list{display:flex;flex-direction:column;gap:10px}
+.ex-category{border:1px solid var(--border);border-radius:14px;background:var(--surface-sunken);overflow:hidden}
+.ex-category + .ex-category{margin-top:10px}
+.ex-category summary{
+  list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;
+  padding:12px 14px;font-weight:700;color:var(--ink-soft);user-select:none;
+}
+.ex-category summary::-webkit-details-marker{display:none}
+.ex-category summary::before{content:'▸';margin-right:8px;color:var(--primary);transition:transform .15s;display:inline-block}
+.ex-category[open] summary::before{transform:rotate(90deg)}
+.ex-category summary .ex-cat-name{flex:1}
+.ex-cat-count{font-size:11.5px;font-weight:700;color:var(--muted);background:#fff;border:1px solid var(--border);padding:3px 9px;border-radius:999px;white-space:nowrap}
+.ex-list-inner{display:flex;flex-direction:column;gap:10px;padding:0 12px 12px}
+.ex-card{
+  display:flex;align-items:center;gap:12px;padding:13px;border-radius:14px;
+  border:1px solid var(--border);background:var(--surface-sunken);transition:box-shadow .15s;
+}
+.ex-card.running{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-tint)}
+.ex-info{flex:1;min-width:0}
+.ex-name-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ex-name{font-weight:700;border-radius:9px;padding:7px 9px;border:1px solid var(--border);width:170px;background:#fff}
+.ex-dur{width:66px;padding:7px 9px;border-radius:9px;border:1px solid var(--border);background:#fff}
+.ex-time{font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:15px;color:var(--primary-darker);min-width:52px;text-align:right}
+.progress-wrap{height:8px;background:#fbdcec;border-radius:999px;overflow:hidden;margin-top:9px}
+.progress-bar{height:100%;background:linear-gradient(90deg,var(--primary),var(--peach));width:0%;transition:width .3s ease}
+.ex-actions{display:flex;flex-direction:column;gap:6px;align-items:flex-end}
+.ex-actions-row{display:flex;gap:6px}
+
+/* ---------- Ejercicios v2: catálogo + sesión en curso ---------- */
+.ex-layout{display:grid;grid-template-columns:1.05fr 0.95fr;gap:18px;align-items:start}
+@media (max-width:940px){.ex-layout{grid-template-columns:1fr}}
+.ex-col-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
+.ex-col-head h3{font-size:14.5px;color:var(--ink-soft);display:flex;align-items:center;gap:7px}
+.ex-col-head h3 .n{font-family:'Fraunces',sans-serif}
+
+.catalog-card{
+  display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:13px;
+  border:1px solid var(--border);background:var(--surface-sunken);transition:all .15s ease;
+}
+.catalog-card:hover{border-color:var(--primary);box-shadow:var(--shadow-sm);transform:translateY(-1px)}
+.catalog-card.in-queue{border-color:var(--ok);background:linear-gradient(0deg,#eafaf1,#eafaf1),var(--surface-sunken)}
+.catalog-card .cc-info{flex:1;min-width:0}
+.catalog-card .cc-name{font-weight:700;font-size:13.5px;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.catalog-card .cc-meta{font-size:11.5px;color:var(--muted);font-family:'IBM Plex Mono',monospace;margin-top:2px}
+.cc-add-btn{
+  flex:0 0 auto;width:34px;height:34px;border-radius:50%;border:none;cursor:pointer;
+  background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;
+  transition:transform .15s ease, background .15s ease, box-shadow .15s ease;box-shadow:0 4px 10px rgba(224,85,158,.28);
+}
+.cc-add-btn:hover{transform:scale(1.08) rotate(90deg);background:var(--primary-dark)}
+.cc-add-btn.added{background:var(--ok);box-shadow:0 4px 10px rgba(76,175,125,.3)}
+.cc-add-btn.added:hover{transform:scale(1.08) rotate(0deg)}
+.cc-add-btn svg{width:16px;height:16px}
+.catalog-admin{margin-top:12px}
+.catalog-admin summary{cursor:pointer;font-size:12.5px;font-weight:700;color:var(--primary-darker);list-style:none;display:flex;align-items:center;gap:6px;user-select:none}
+.catalog-admin summary::-webkit-details-marker{display:none}
+.catalog-admin summary::before{content:'⚙️'}
+.catalog-admin-body{margin-top:10px;padding-top:10px;border-top:1px dashed var(--border)}
+.catalog-admin-row{display:flex;align-items:center;gap:8px;padding:7px 4px;border-bottom:1px solid var(--border);font-size:12.5px}
+.catalog-admin-row input.ex-name{width:auto;flex:1;padding:6px 8px;font-size:12.5px}
+.catalog-admin-row input.ex-dur{width:56px;padding:6px 8px;font-size:12.5px}
+
+/* Sesión actual: panel sticky con timers */
+.session-panel{
+  position:sticky;top:64px;background:linear-gradient(165deg,#fff,var(--surface-sunken));
+  border:1px solid var(--border);border-radius:18px;padding:16px;box-shadow:var(--shadow-md);
+}
+.session-panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:4px}
+.session-panel-head h3{font-size:15px;display:flex;align-items:center;gap:7px}
+.session-total-strip{
+  display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--border);
+  border-radius:14px;padding:12px 14px;margin:10px 0 14px;
+}
+.session-total-ring{position:relative;width:58px;height:58px;flex:0 0 auto}
+.session-total-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.session-total-ring .ring-track{fill:none;stroke:#f3d9e8;stroke-width:6}
+.session-total-ring .ring-fill{fill:none;stroke:var(--primary);stroke-width:6;stroke-linecap:round;transition:stroke-dashoffset .3s ease}
+.session-total-txt{flex:1;min-width:0}
+.session-total-txt .big{font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:20px;color:var(--ink);line-height:1.1}
+.session-total-txt .lbl{font-size:11.5px;color:var(--muted);margin-top:2px}
+.session-queue{display:flex;flex-direction:column;gap:10px;max-height:620px;overflow-y:auto;padding-right:4px;padding-bottom:4px;scroll-behavior:smooth}
+.session-queue::-webkit-scrollbar{width:6px}
+.session-queue::-webkit-scrollbar-thumb{background:var(--border);border-radius:99px}
+.q-empty{text-align:center;padding:24px 10px;color:var(--muted);font-size:13px;background:#fff;border:1px dashed var(--border);border-radius:14px}
+.q-card{
+  display:flex;align-items:center;gap:11px;background:#fff;border:1px solid var(--border);
+  border-radius:15px;padding:10px 11px;transition:border-color .2s ease,box-shadow .2s ease,background .2s ease;
+  position:relative;overflow:visible;flex-shrink:0;min-height:68px;
+}
+.q-card.running{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-tint)}
+.q-card.done{border-color:var(--ok);background:#f2fbf6}
+.q-ring{position:relative;width:46px;height:46px;flex:0 0 auto}
+.q-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.q-ring .ring-track{fill:none;stroke:#f3d9e8;stroke-width:5}
+.q-ring .ring-fill{fill:none;stroke:var(--primary);stroke-width:5;stroke-linecap:round;transition:stroke-dashoffset .25s linear}
+.q-card.done .q-ring .ring-fill{stroke:var(--ok)}
+.q-ring-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:10.5px;color:var(--ink)}
+.q-info{flex:1;min-width:0}
+.q-name{font-weight:700;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.q-meta{font-size:11px;color:var(--muted);margin-top:1px}
+.q-detail{width:100%;margin-top:6px;font-size:12px;padding:6px 8px;border-radius:8px;border:1px solid var(--border);background:var(--surface-sunken)}
+.q-actions{display:flex;gap:5px;flex:0 0 auto}
+.q-icon-btn{
+  width:29px;height:29px;border-radius:9px;border:1px solid var(--border);background:#fff;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink-soft);transition:all .15s;
+}
+.q-icon-btn:hover{border-color:var(--primary);color:var(--primary-darker);transform:translateY(-1px)}
+.q-icon-btn.play{background:var(--primary);color:#fff;border-color:var(--primary)}
+.q-icon-btn.play:hover{background:var(--primary-dark)}
+.q-icon-btn.pause{background:var(--gold);color:#fff;border-color:var(--gold)}
+.q-icon-btn svg{width:14px;height:14px}
+.session-panel-controls{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.chain-toggle{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink-soft);font-weight:700;margin-top:12px;padding:9px 12px;background:#fff;border:1px solid var(--border);border-radius:12px}
+.switch{position:relative;width:38px;height:22px;flex:0 0 auto}
+.switch input{opacity:0;width:0;height:0}
+.switch .slider{position:absolute;inset:0;background:#e6c8d8;border-radius:999px;cursor:pointer;transition:.2s}
+.switch .slider::before{content:"";position:absolute;width:16px;height:16px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.switch input:checked + .slider{background:var(--ok)}
+.switch input:checked + .slider::before{transform:translateX(16px)}
+@keyframes celebrate{0%{transform:scale(1)}30%{transform:scale(1.04)}100%{transform:scale(1)}}
+.q-card.just-done{animation:celebrate .45s ease}
+
+/* ---------- General modernization ---------- */
+.card{animation:cardIn .4s ease both}
+@keyframes cardIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.kpi-card{transition:transform .18s ease, box-shadow .18s ease}
+.kpi-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+.btn{will-change:transform}
+.btn-primary:hover, .btn-ghost:hover{transform:translateY(-1px)}
+
+/* ---------- Sonómetro ---------- */
+.mic-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.status-dot{width:9px;height:9px;border-radius:50%;background:#e9c8dc;display:inline-block;transition:background .2s}
+.status-dot.live{background:var(--ok);box-shadow:0 0 0 4px rgba(76,175,125,.18);animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 4px rgba(76,175,125,.18)}50%{box-shadow:0 0 0 7px rgba(76,175,125,.05)}}
+.status-label{font-size:12.5px;color:var(--muted);font-weight:700;margin-left:auto}
+
+.audio-row{display:flex;gap:18px;align-items:stretch;margin-top:16px;flex-wrap:wrap}
+.meter-card{
+  width:270px;flex:0 0 auto;padding:16px;border-radius:16px;
+  border:1px solid var(--border);background:var(--surface-sunken);
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+}
+.gauge-wrap{position:relative;width:170px;height:170px}
+.gauge-wrap svg{width:100%;height:100%;transform:rotate(-90deg)}
+.gauge-track{fill:none;stroke:#fbdcec;stroke-width:12}
+.gauge-fill{fill:none;stroke:url(#gaugeGrad);stroke-width:12;stroke-linecap:round;transition:stroke-dashoffset .18s linear}
+.gauge-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.db-value{font-family:'Fraunces',sans-serif;font-weight:700;font-size:30px;color:var(--ink)}
+.db-unit{font-size:11.5px;color:var(--muted);font-weight:700;letter-spacing:.03em}
+.range-legend{display:flex;justify-content:space-between;width:100%;font-size:11px;color:var(--muted)}
+.note-readout{width:100%;text-align:center;padding-top:10px;border-top:1px dashed var(--border)}
+.note-readout .note-name{font-family:'Fraunces',sans-serif;font-weight:700;font-size:23px;color:var(--peach)}
+.note-readout .note-freq{font-size:12px;color:var(--muted);font-family:'IBM Plex Mono',monospace}
+
+/* ---------- Sonido, volúmenes y metrónomo ---------- */
+.sound-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:820px){.sound-grid{grid-template-columns:1fr}}
+.sound-panel{background:var(--surface-sunken);border:1px solid var(--border);border-radius:16px;padding:16px}
+.sound-panel-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.sound-panel-head h3{font-size:14.5px}
+.vol-row{display:grid;grid-template-columns:88px 1fr 42px;align-items:center;gap:10px;margin-bottom:12px;font-size:12.5px;color:var(--ink-soft);font-weight:700}
+.vol-row .vol-val{text-align:right;font-family:'IBM Plex Mono',monospace;color:var(--muted);font-weight:600}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:99px;background:linear-gradient(90deg,var(--primary),var(--primary) var(--val,50%),#f0d3e5 var(--val,50%));outline:none;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:18px;height:18px;border-radius:50%;background:#fff;border:3px solid var(--primary);box-shadow:0 2px 6px rgba(157,54,112,.3);cursor:pointer;transition:transform .12s}
+input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.12)}
+input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:#fff;border:3px solid var(--primary);box-shadow:0 2px 6px rgba(157,54,112,.3);cursor:pointer}
+input[type=range]::-moz-range-track{height:6px;border-radius:99px;background:#f0d3e5}
+
+.metronome-display{display:flex;align-items:center;gap:16px;justify-content:center;padding:14px 0 18px}
+.metro-dot{width:26px;height:26px;border-radius:50%;background:#f0d3e5;border:3px solid var(--primary-tint);box-shadow:0 0 0 0 rgba(224,85,158,.5);transition:background .08s,border-color .08s}
+.metro-dot.beat{animation:metroBeat .12s ease}
+.metro-dot.accent.beat{background:var(--peach);border-color:var(--peach)}
+@keyframes metroBeat{0%{transform:scale(1.5);background:var(--primary);border-color:var(--primary)}100%{transform:scale(1);}}
+.metro-bpm{display:flex;align-items:baseline;gap:6px;font-family:'Fraunces',sans-serif}
+.metro-bpm span:first-child{font-size:40px;font-weight:800;color:var(--primary-darker);line-height:1}
+.metro-bpm-lbl{font-size:12px;color:var(--muted);font-weight:700}
+
+/* ---------- Piano v2: más grande, pulido y sin bugs de alineación ---------- */
+.piano-wrap{
+  flex:1;min-width:320px;background:linear-gradient(180deg,#fff8fb,#fdeef6);border-radius:18px;
+  padding:18px 16px 22px;border:1px solid var(--border);overflow-x:auto;box-shadow:inset 0 2px 10px rgba(157,54,112,.06);
+}
+.piano-keys{position:relative;display:flex;align-items:flex-end;height:190px;user-select:none;padding-bottom:4px}
+.white-key{
+  box-sizing:border-box;width:44px;height:186px;border-radius:0 0 10px 10px;
+  background:linear-gradient(180deg,#ffffff 0%,#fff9fc 82%,#fef0f7 100%);
+  display:flex;align-items:flex-end;justify-content:center;font-size:11px;font-weight:700;color:#c98cae;
+  border:1px solid #ecc9dc;border-top:none;flex:0 0 auto;
+  transition:background .08s, transform .07s, box-shadow .08s;
+  box-shadow:inset 0 -18px 20px rgba(224,85,158,.05), 0 3px 0 rgba(157,54,112,.05);
+}
+.white-key:last-child{border-radius:0 0 10px 10px}
+.white-key span{padding-bottom:10px}
+.black-key{
+  box-sizing:border-box;position:absolute;width:28px;height:118px;background:linear-gradient(180deg,#6a3c5e 0%,#3c1830 70%,#2c1023 100%);
+  border-radius:0 0 8px 8px;top:0;z-index:3;color:#ffe3f2;display:flex;align-items:flex-end;justify-content:center;
+  font-size:9.5px;font-weight:700;padding-bottom:9px;box-shadow:0 12px 20px rgba(74,33,64,.4), inset 0 -6px 10px rgba(0,0,0,.35);
+  transition:background .08s, transform .07s, box-shadow .08s;border:1px solid #1e0c19;
+}
+.white-key:hover{background:linear-gradient(180deg,#fff,var(--primary-tint) 90%)}
+.black-key:hover{background:linear-gradient(180deg,#7c4a70,#4a1e3c)}
+.white-key:focus-visible,.black-key:focus-visible{outline:2px solid var(--primary-darker);outline-offset:2px}
+.key-active.white-key{background:linear-gradient(180deg,var(--primary-tint),#fbd6ea);border-color:var(--primary);transform:translateY(5px);box-shadow:inset 0 6px 10px rgba(157,54,112,.15)}
+.key-active.black-key{background:linear-gradient(180deg,var(--peach),#c4502f);transform:translateY(5px);box-shadow:inset 0 6px 10px rgba(0,0,0,.3)}
+.key-live.white-key{box-shadow:0 0 0 3px var(--primary-tint), inset 0 -18px 20px rgba(224,85,158,.05)}
+.key-live.black-key{box-shadow:0 0 0 3px rgba(255,157,129,.6)}
+.piano-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:0 2px 12px}
+.piano-hint{font-size:11.5px;color:var(--muted);margin:0 2px 12px;display:block}
+.kbd-hint{display:flex;flex-wrap:wrap;gap:6px;margin:0 2px 12px}
+.kbd-hint span{
+  font-family:'IBM Plex Mono',monospace;font-size:10.5px;background:var(--surface-sunken);
+  border:1px solid var(--border);color:var(--ink-soft);padding:3px 7px;border-radius:7px;
+}
+.octave-row{display:flex;align-items:center;gap:8px;margin:0 2px 12px}
+.octave-row .oct-label{font-size:12px;color:var(--muted);font-weight:700}
+.heart-pulse{
+  position:absolute;top:-22px;font-size:15px;transform:translateX(-50%);
+  animation:heartPop .5s ease;pointer-events:none;
+}
+@keyframes heartPop{0%{opacity:0;transform:translate(-50%,4px) scale(.7)}30%{opacity:1;transform:translate(-50%,-2px) scale(1.15)}100%{opacity:0;transform:translate(-50%,-10px) scale(1)}}
+
+.playback-block{width:100%;margin-top:2px}
+audio{width:100%;height:34px}
+
+/* ---------- Table / Historial ---------- */
+.table-toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.table-toolbar input{max-width:240px}
+.selection-bar{display:flex;align-items:center;gap:12px;background:var(--primary-tint);border:1px solid #f7cfe6;padding:9px 13px;border-radius:12px;margin-bottom:12px;font-size:13px;color:var(--primary-darker);flex-wrap:wrap}
+.table-scroll{overflow-x:auto;border-radius:14px;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:760px}
+thead th{
+  background:var(--surface-sunken);color:var(--ink-soft);text-align:left;font-weight:700;
+  font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;padding:10px 12px;
+  position:sticky;top:0;
+}
+tbody td{padding:10px 12px;border-top:1px solid var(--border);vertical-align:middle}
+tbody tr:hover{background:var(--surface-sunken)}
+.badge-pill{
+  display:inline-flex;align-items:center;justify-content:center;padding:4px 10px;
+  border-radius:999px;font-weight:700;font-size:11.5px;color:var(--primary-darker);background:var(--primary-tint);
+}
+.thumb{width:44px;height:34px;object-fit:cover;border-radius:8px;border:1px solid var(--border)}
+.row-actions{display:flex;gap:6px}
+.icon-btn{
+  width:31px;height:31px;border-radius:9px;border:1px solid var(--border);background:#fff;
+  display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink-soft);transition:all .15s;
+}
+.icon-btn:hover{border-color:var(--primary);color:var(--primary-darker)}
+.icon-btn.danger:hover{border-color:var(--danger);color:var(--danger)}
+.icon-btn svg{width:15px;height:15px}
+.reg-empty{
+  text-align:center;padding:26px 10px;color:var(--muted);font-size:13.5px;
+  background:var(--surface-sunken);border-radius:var(--radius-sm);border:1px dashed var(--border);
+}
+
+.footer-note{text-align:center;color:var(--muted);font-size:12.5px;margin-top:26px;line-height:1.6}
+.footer-note strong{color:var(--ink-soft)}
+
+/* ---------- Toasts ---------- */
+#toastHost{position:fixed;bottom:20px;right:20px;display:flex;flex-direction:column;gap:10px;z-index:9999}
+.toast{
+  background:var(--ink);color:#fff;padding:12px 16px;border-radius:13px;font-size:13.5px;
+  box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:10px;min-width:220px;max-width:340px;
+  animation:toastIn .25s ease;
+}
+.toast.ok{background:var(--primary-darker)}
+.toast.err{background:var(--danger)}
+.toast svg{width:17px;height:17px;flex:0 0 auto}
+@keyframes toastIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.toast.hide{animation:toastOut .2s ease forwards}
+@keyframes toastOut{to{opacity:0;transform:translateY(6px)}}
+
+/* ---------- Modal ---------- */
+.modal-overlay{position:fixed;inset:0;background:rgba(74,33,64,.45);display:flex;align-items:center;justify-content:center;z-index:10000;padding:20px}
+.modal-overlay[hidden]{display:none}
+.modal-box{background:#fff;border-radius:20px;padding:22px;max-width:420px;width:100%;box-shadow:var(--shadow-lg);animation:modalIn .18s ease}
+@keyframes modalIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+.modal-box h3{font-size:17px;margin-bottom:8px}
+.modal-box p{margin:0;line-height:1.5}
+.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:20px}
+
+.spinner{width:13px;height:13px;border-radius:50%;border:2px solid rgba(255,255,255,.5);border-top-color:#fff;display:inline-block;animation:spin .7s linear infinite;vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- Responsive ---------- */
+@media (max-width:960px){
+  .audio-row{flex-direction:column}
+  .meter-card{width:100%}
+}
+@media (max-width:640px){
+  .topbar{flex-wrap:wrap}
+  .brand-badge{order:3;margin-left:64px}
+  .quicknav{overflow-x:auto;flex-wrap:nowrap}
+}
+.ex-layout>*{min-width:0}
+.q-card{min-width:0}
+.q-handle{cursor:grab;color:var(--muted);font-size:16px;user-select:none;padding:0 2px;flex:0 0 auto}
+.q-card.drag-over{border-color:var(--primary);box-shadow:0 -3px 0 var(--primary)}
+.q-card.dragging{opacity:.45}
+.q-dur{display:flex;gap:4px;margin-top:4px}
+.q-dur button{font-size:10.5px;padding:1px 7px;border-radius:8px;border:1px solid var(--border);background:#fff;color:var(--ink-soft);cursor:pointer}
+.q-dur button:hover{border-color:var(--primary);color:var(--primary-darker)}
+.q-tools{display:flex;flex-direction:column;gap:3px;flex:0 0 auto}
+.q-tools .q-icon-btn{width:24px;height:20px;border-radius:7px;font-size:10px}
+.cc-dose{display:inline-block;background:var(--primary-tint);color:var(--primary-darker);border-radius:8px;padding:0 6px;margin-left:4px;font-size:10.5px}
+.cc-count{background:var(--ok);color:#fff;border-radius:10px;padding:0 7px;font-size:11px;font-weight:700;margin-left:6px}
+.plans-box{margin-top:18px;border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;background:var(--surface-sunken)}
+.plans-box h3{margin:0 0 4px;font-size:15px}
+.plan-item{display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:#fff;border:1px solid var(--border);border-radius:13px;padding:10px 12px;margin-top:8px}
+.plan-item .pi-info{flex:1;min-width:180px}.plan-item .pi-name{font-weight:700;font-size:13.5px}
+.plan-item .pi-actions{display:flex;gap:6px;flex-wrap:wrap}
+.modal-box.wide{max-width:760px;max-height:90vh;overflow:auto}
+.det-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;margin:10px 0}
+.det-grid div{background:var(--surface-sunken);border-radius:10px;padding:8px 10px;font-size:12.5px}
+.det-grid b{display:block;font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.det-ex{width:100%;border-collapse:collapse;font-size:12.5px}
+.det-ex td,.det-ex th{padding:6px 8px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
+.det-ex .ok{color:var(--ok);font-weight:700}.det-ex .pend{color:var(--muted)}
+.det-cat td{background:var(--primary-tint);font-weight:700;font-size:11.5px;color:var(--primary-darker)}
+</style>
+</head>
+<body>
+<a href="../index.html" class="cv-back-link"><span class="cv-back-arrow" aria-hidden="true">←</span><span class="cv-back-text">Volver al portal</span></a>
+<a href="#main" class="skip-link" data-i18n="skipLink">Saltar al contenido</a>
+
+<div class="container">
+  <header class="topbar">
+    <div class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v10.55"/><circle cx="8.5" cy="17" r="2.5"/><circle cx="15.5" cy="19" r="2.5"/><path d="M12 3c3 0 5 2 5 4.5V15"/></svg>
+    </div>
+    <div class="brand-text">
+      <h1 data-i18n="headerTitle">Matilde Pizarro Toro — Fonoaudióloga</h1>
+      <p data-i18n="headerSub">Bitácora de sesiones, cronómetros de ejercicios y piano en vivo con detector de nota</p>
+    </div>
+    <span class="brand-badge" data-i18n="headerBadge">💗 100% local, sin servidores</span>
+  </header>
+
+  <nav class="quicknav" id="quicknav">
+    <button data-target="sec-resumen" data-i18n="navResumen">📋 Resumen</button>
+    <button data-target="sec-sesion" data-i18n="navSesion">📝 Nueva sesión</button>
+    <button data-target="sec-piano" data-i18n="navPiano">🎹 Piano en vivo</button>
+    <button data-target="sec-sonido" data-i18n="navSonido">🔊 Sonido</button>
+    <button data-target="sec-ejercicios" data-i18n="navEjercicios">⏱️ Ejercicios</button>
+    <button data-target="sec-historial" data-i18n="navHistorial">📚 Historial</button>
+    <button data-target="sec-respaldo" data-i18n="navRespaldo">💾 Respaldo</button>
+  </nav>
+
+  <main id="main">
+
+    <!-- ===================== RESUMEN ===================== -->
+    <section class="card" id="sec-resumen">
+      <div class="card-head"><h2><span class="emoji">📋</span><span data-i18n="secResumenTitle">Resumen</span></h2></div>
+      <div class="kpi-grid">
+        <div class="kpi-card"><div class="num" id="kpiTotal">0</div><div class="lbl" data-i18n="kpiTotal">Sesiones registradas</div></div>
+        <div class="kpi-card"><div class="num" id="kpiPatients">0</div><div class="lbl" data-i18n="kpiPatients">Pacientes distintos</div></div>
+        <div class="kpi-card"><div class="num" id="kpiWeek">0</div><div class="lbl" data-i18n="kpiWeek">Sesiones esta semana</div></div>
+        <div class="kpi-card"><div class="num" id="kpiActiveEx">0</div><div class="lbl" data-i18n="kpiActiveEx">Ejercicios en curso</div></div>
+      </div>
+    </section>
+
+    <!-- ===================== NUEVA SESIÓN ===================== -->
+    <section class="card" id="sec-sesion">
+      <div class="card-head">
+        <h2><span class="emoji">📝</span><span data-i18n="secSesionTitle">Registrar sesión</span></h2>
+      </div>
+
+      <div class="field-row">
+        <div>
+          <label for="participantId" data-i18n="labelPaciente">Paciente</label>
+          <input id="participantId" type="text" data-i18n-placeholder="placeholderNombreId" placeholder="Nombre o ID" list="participantList">
+          <datalist id="participantList"></datalist>
+        </div>
+        <div>
+          <label for="sessionDate" data-i18n="labelFechaHora">Fecha y hora</label>
+          <input id="sessionDate" type="text" data-i18n-placeholder="placeholderFechaAuto" placeholder="Se completa solo al guardar">
+        </div>
+        <div style="flex:2">
+          <label for="focusText"><span data-i18n="labelFoco">Foco de la sesión</span> <span class="sm" data-i18n="labelFocoOpcional">(opcional, escríbelo a tu manera)</span></label>
+          <input id="focusText" type="text" data-i18n-placeholder="placeholderFoco" placeholder="Ej: resonancia oral + calentamiento con tubo">
+        </div>
+      </div>
+
+      <div style="margin-top:16px">
+        <div class="card-head" style="margin-bottom:8px">
+          <label style="margin:0"><span data-i18n="labelEjerciciosSesion">⏱️ Ejercicios de esta sesión</span> <span class="sm" data-i18n="labelEjerciciosSesionHint">(se arman en la sección "⏱️ Ejercicios", aquí verás el resumen)</span></label>
+        </div>
+        <div id="sessionExSummary"></div>
+        <button class="btn btn-ghost btn-sm" style="margin-top:10px" onclick="scrollToSection('sec-ejercicios')" data-i18n="btnIrEjercicios">⏱️ Ir a armar los ejercicios</button>
+      </div>
+
+      <div style="margin-top:16px">
+        <label><span data-i18n="labelSensaciones">Sensaciones observadas (opcional)</span> <button class="btn btn-ghost btn-sm" onclick="toggleSensBox()" id="sensToggle" style="margin-left:6px" data-i18n="btnAgregarSensaciones">Agregar sensaciones</button></label>
+        <div id="sensBox" class="chip-row" style="display:none">
+          <label class="chip"><input type="checkbox" value="Cortes/quiebres en la voz"><span data-i18n="sensCortes">Cortes/quiebres</span></label>
+          <label class="chip"><input type="checkbox" value="Ronquera"><span data-i18n="sensRonquera">Ronquera</span></label>
+          <label class="chip"><input type="checkbox" value="Falta de aire al hablar"><span data-i18n="sensFaltaAire">Falta de aire</span></label>
+          <label class="chip"><input type="checkbox" value="Ardor al hablar"><span data-i18n="sensArdor">Ardor</span></label>
+          <label class="chip"><input type="checkbox" value="Picazón"><span data-i18n="sensPicazon">Picazón</span></label>
+          <label class="chip"><input type="checkbox" value="Dolor al hablar"><span data-i18n="sensDolor">Dolor</span></label>
+          <label class="chip"><input type="checkbox" value="Fatiga al hablar"><span data-i18n="sensFatiga">Fatiga</span></label>
+          <label class="chip"><input type="checkbox" value="Esfuerzo o tensión"><span data-i18n="sensEsfuerzo">Esfuerzo/tensión</span></label>
+          <label class="chip"><input type="checkbox" value="Tos"><span data-i18n="sensTos">Tos</span></label>
+          <label class="chip"><input type="checkbox" value="Cuerpo extraño"><span data-i18n="sensCuerpoExtrano">Cuerpo extraño</span></label>
+          <label class="chip"><input type="checkbox" value="Necesidad de carraspear"><span data-i18n="sensCarraspear">Carraspear</span></label>
+        </div>
+      </div>
+
+      <div style="margin-top:16px">
+        <label for="observaciones" data-i18n="labelNotasClinicas">Notas clínicas</label>
+        <textarea id="observaciones" data-i18n-placeholder="placeholderNotas" placeholder="Qué se trabajó, respuesta del paciente, próximos pasos…"></textarea>
+      </div>
+
+      <div class="field-row" style="margin-top:16px">
+        <div>
+          <label for="evidence" data-i18n="labelEvidencia">Imagen de evidencia (opcional)</label>
+          <input id="evidence" type="file" accept="image/*">
+        </div>
+        <div>
+          <label data-i18n="labelVozCapturada">Voz capturada en vivo</label>
+          <div class="stat-grid">
+            <div class="stat-box"><div class="num" id="lastDb">--</div><div class="lbl" data-i18n="lblDb">dB</div></div>
+            <div class="stat-box"><div class="num" id="lastNote">--</div><div class="lbl" data-i18n="lblNota">Nota</div></div>
+          </div>
+        </div>
+      </div>
+      <p class="sm" style="margin-top:8px" data-i18n-html="hintVozCapturada">Los valores de voz se capturan desde <a href="#sec-piano" onclick="scrollToSection('sec-piano');return false;">🎹 Piano en vivo</a> y se adjuntan automáticamente al guardar.</p>
+
+      <div class="controls">
+        <button class="btn btn-outline" onclick="resetSessionForm()" data-i18n="btnLimpiar">Limpiar</button>
+        <button class="btn btn-primary" onclick="saveSession()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>
+          <span data-i18n="btnGuardarSesion">Guardar sesión</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ===================== PIANO EN VIVO ===================== -->
+    <section class="card" id="sec-piano">
+      <div class="card-head">
+        <h2><span class="emoji">🎹</span><span data-i18n="secPianoTitle">Piano en vivo y sonómetro</span></h2>
+        <span class="status-label"><span class="status-dot" id="statusDot"></span> <span id="statusText" data-i18n="micInactivo">Micrófono inactivo</span></span>
+      </div>
+
+      <div class="mic-controls">
+        <button id="micBtn" class="btn btn-primary" onclick="toggleMic()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4"/></svg>
+          <span data-i18n="btnIniciarMic">Iniciar micrófono</span>
+        </button>
+        <button id="stopMicBtn" class="btn btn-outline" onclick="stopMic()" data-i18n="btnDetenerMic">Detener</button>
+        <button id="recBtn" class="btn btn-ghost" onclick="toggleRecord()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="6"/></svg>
+          <span data-i18n="btnGrabar">Grabar</span>
+        </button>
+      </div>
+
+      <div class="audio-row">
+        <div class="meter-card">
+          <div class="gauge-wrap">
+            <svg viewBox="0 0 160 160">
+              <defs>
+                <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#e0559e"/>
+                  <stop offset="55%" stop-color="#e0a640"/>
+                  <stop offset="100%" stop-color="#ff9d81"/>
+                </linearGradient>
+              </defs>
+              <circle class="gauge-track" cx="80" cy="80" r="68"></circle>
+              <circle class="gauge-fill" id="gaugeFill" cx="80" cy="80" r="68" stroke-dasharray="427" stroke-dashoffset="427"></circle>
+            </svg>
+            <div class="gauge-center">
+              <div class="db-value" id="dbDisplay">--</div>
+              <div class="db-unit" data-i18n="lblDbEstimados">dB estimados</div>
+            </div>
+          </div>
+          <div class="range-legend"><span>30 dB</span><span>110 dB</span></div>
+          <div class="note-readout">
+            <div class="note-name" id="noteName">--</div>
+            <div class="note-freq" id="freqDisplay">-- Hz</div>
+          </div>
+          <div class="playback-block">
+            <audio id="playbackAudio" controls style="display:none"></audio>
+            <a id="downloadAudio" class="btn btn-ghost btn-sm" style="display:none;margin-top:8px;width:100%;justify-content:center" data-i18n="btnDescargarWav">Descargar WAV</a>
+          </div>
+        </div>
+
+        <div class="piano-wrap" id="pianoWrap" data-i18n-title="pianoTitleAttr" title="Toca una tecla para oír la nota de referencia.">
+          <span class="piano-hint" data-i18n="pianoHint">Haz clic (o Tab + Enter) en una tecla para escuchar la nota · desliza para ver más octavas</span>
+          <div class="kbd-hint">
+            <span data-i18n="kbdHint1">A S D F G H J K L Ñ = teclas blancas</span>
+            <span data-i18n="kbdHint2">W E T Y U O P = teclas negras</span>
+            <span data-i18n="kbdHint3">Z / X = cambia de octava</span>
+          </div>
+          <div class="octave-row">
+            <span class="oct-label" data-i18n="labelOctava">Octava del teclado:</span>
+            <button class="btn btn-outline btn-sm" onclick="shiftOctave(-1)" aria-label="Bajar una octava">−</button>
+            <span class="oct-label" id="octaveIndicator">central</span>
+            <button class="btn btn-outline btn-sm" onclick="shiftOctave(1)" aria-label="Subir una octava">+</button>
+          </div>
+          <div class="piano-keys" id="pianoKeys"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SONIDO Y METRÓNOMO ===================== -->
+    <section class="card" id="sec-sonido">
+      <div class="card-head">
+        <h2><span class="emoji">🔊</span><span data-i18n="secSonidoTitle">Sonido, alertas y metrónomo</span></h2>
+        <span class="sm" data-i18n="secSonidoSub">Ajusta el volumen de cada sonido de la app o silencia todo, y usa el metrónomo durante los ejercicios</span>
+      </div>
+      <div class="sound-grid">
+        <div class="sound-panel">
+          <div class="sound-panel-head">
+            <h3 data-i18n="fgVolumenes">🔈 Volúmenes</h3>
+            <label class="switch" data-i18n-title="mutearTodo" title="Silenciar toda la app">
+              <input type="checkbox" id="muteAll" onchange="onMuteToggle(this.checked)">
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="vol-row"><span id="volMasterLbl" data-i18n="volGeneral">General</span><input type="range" id="volMaster" aria-labelledby="volMasterLbl" min="0" max="100" value="80" oninput="onVolChange('master',this.value)"><span class="vol-val" id="volMasterVal">80%</span></div>
+          <div class="vol-row"><span id="volPianoLbl" data-i18n="volPiano">🎹 Piano</span><input type="range" id="volPiano" aria-labelledby="volPianoLbl" min="0" max="100" value="90" oninput="onVolChange('piano',this.value)"><span class="vol-val" id="volPianoVal">90%</span></div>
+          <div class="vol-row"><span id="volExercisesLbl" data-i18n="volEjercicios">⏱️ Ejercicios</span><input type="range" id="volExercises" aria-labelledby="volExercisesLbl" min="0" max="100" value="80" oninput="onVolChange('exercises',this.value)"><span class="vol-val" id="volExercisesVal">80%</span></div>
+          <div class="vol-row"><span id="volMetronomeLbl" data-i18n="volMetronomo">🥁 Metrónomo</span><input type="range" id="volMetronome" aria-labelledby="volMetronomeLbl" min="0" max="100" value="70" oninput="onVolChange('metronome',this.value)"><span class="vol-val" id="volMetronomeVal">70%</span></div>
+          <label class="chain-toggle" style="margin-top:6px">
+            <span class="switch"><input type="checkbox" id="tickEnabled" checked onchange="onTickToggle(this.checked)"><span class="slider"></span></span>
+            <span data-i18n="tickToggle">Sonido de "tic" cada segundo mientras corre un cronómetro</span>
+          </label>
+          <p class="sm" style="margin-top:10px" data-i18n="sonidoHint">Al iniciar un ejercicio suena un aviso corto, y al terminar suena un carillón. Todo respeta estos volúmenes.</p>
+        </div>
+
+        <div class="sound-panel">
+          <div class="sound-panel-head"><h3 data-i18n="fgMetronomo">🥁 Metrónomo</h3></div>
+          <div class="metronome-display">
+            <div class="metro-dot" id="metroDot"></div>
+            <div class="metro-bpm"><span id="metroBpmVal">100</span><span class="metro-bpm-lbl">BPM</span></div>
+          </div>
+          <input type="range" id="metroSlider" data-i18n-aria="labelBpmExacto" aria-label="BPM" min="30" max="240" value="100" oninput="setMetroBpm(this.value)">
+          <div class="field-row" style="margin-top:10px">
+            <div style="flex:1">
+              <label for="metroBpmInput" data-i18n="labelBpmExacto">BPM exacto</label>
+              <input type="number" id="metroBpmInput" min="30" max="240" value="100" oninput="setMetroBpm(this.value)">
+            </div>
+            <div style="align-self:flex-end">
+              <button class="btn btn-outline" onclick="tapTempo()" data-i18n="btnTapTempo">👆 Tap tempo</button>
+            </div>
+          </div>
+          <div class="controls" style="justify-content:flex-start;margin-top:14px">
+            <button class="btn btn-primary" id="metroToggleBtn" onclick="toggleMetronome()" data-i18n="btnIniciarMetronomo">▶️ Iniciar metrónomo</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== EJERCICIOS ===================== -->
+    <section class="card" id="sec-ejercicios">
+      <div class="card-head">
+        <h2><span class="emoji">⏱️</span><span data-i18n="secEjerciciosTitle">Ejercicios y cronómetros</span></h2>
+        <span class="sm" data-i18n="secEjerciciosSub">Arma la sesión de hoy: agrega ejercicios del catálogo y controla sus cronómetros en un solo lugar</span>
+      </div>
+
+      <div class="ex-layout">
+        <!-- ---------- Columna izquierda: catálogo ---------- -->
+        <div>
+          <div class="ex-col-head">
+            <h3><span data-i18n="catalogoTitle">📚 Catálogo de ejercicios</span> <span class="n" id="catalogCount">(0)</span></h3>
+          </div>
+          <input id="exSearch" type="text" data-i18n-placeholder="placeholderBuscarEj" placeholder="Buscar ejercicio por nombre…" oninput="renderExercises()">
+          <div id="exList" class="ex-list" style="margin-top:12px"></div>
+
+          <details class="catalog-admin">
+            <summary data-i18n="detalleAgregarEditar">Agregar o editar ejercicios del catálogo</summary>
+            <div class="catalog-admin-body">
+              <div class="field-row">
+                <div style="flex:2">
+                  <label for="newExName" data-i18n="labelNombreEj">Nombre del ejercicio</label>
+                  <input id="newExName" type="text" data-i18n-placeholder="placeholderNombreEj" placeholder="Ej: Vibración labial">
+                </div>
+                <div>
+                  <label for="newExDur" data-i18n="labelDuracionS">Duración (s)</label>
+                  <input id="newExDur" type="number" placeholder="60">
+                </div>
+                <div style="flex:1.4">
+                  <label for="newExCat" data-i18n="labelCategoria">Categoría</label>
+                  <select id="newExCat"></select>
+                </div>
+                <div style="flex:1.2">
+                  <label for="newExDose">Dosis</label>
+                  <input id="newExDose" type="text" placeholder="5 repeticiones">
+                </div>
+                <div style="flex:0 0 auto;align-self:flex-end">
+                  <button class="btn btn-primary" onclick="addExercise()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                    <span data-i18n="btnAgregar">Agregar</span>
+                  </button>
+                </div>
+              </div>
+              <p class="sm" style="margin-top:10px" data-i18n="hintCatalogAdmin">Edita nombre/duración directo sobre cada tarjeta del catálogo, o elimínalos con el ícono 🗑️ que aparece aquí una vez que expandes esta sección.</p>
+              <div id="catalogAdminList" style="margin-top:10px"></div>
+            </div>
+          </details>
+        </div>
+
+        <!-- ---------- Columna derecha: sesión en curso ---------- -->
+        <div class="session-panel">
+          <div class="session-panel-head">
+            <h3 data-i18n="sesionHoyTitle">🔥 Sesión de hoy</h3>
+            <span class="sm" id="queueCountLbl">0 ejercicios</span>
+          </div>
+
+          <div class="session-total-strip">
+            <div class="session-total-ring">
+              <svg viewBox="0 0 64 64">
+                <circle class="ring-track" cx="32" cy="32" r="27"></circle>
+                <circle class="ring-fill" id="totalRing" cx="32" cy="32" r="27" stroke-dasharray="169.6" stroke-dashoffset="169.6"></circle>
+              </svg>
+            </div>
+            <div class="session-total-txt">
+              <div class="big" id="totalTimeLeft">00:00</div>
+              <div class="lbl"><span data-i18n="lblTiempoRestante">tiempo restante ·</span> <span id="totalTimeAll">00:00</span> <span data-i18n="lblEnTotal">en total</span></div>
+            </div>
+          </div>
+
+          <div id="sessionQueue" class="session-queue"></div>
+
+          <label class="chain-toggle">
+            <span class="switch">
+              <input type="checkbox" id="chainMode" onchange="localStorage.setItem('chain_mode_v1', this.checked ? '1' : '')">
+              <span class="slider"></span>
+            </span>
+            <span data-i18n="chainToggle">Encadenar: al terminar uno, iniciar el siguiente automáticamente</span>
+          </label>
+
+          <div class="session-panel-controls">
+            <button class="btn btn-primary btn-sm" onclick="startAllQueue()" data-i18n="btnIniciarTodo">▶️ Iniciar todo</button>
+            <button class="btn btn-outline btn-sm" onclick="pauseAllQueue()" data-i18n="btnPausarTodo">⏸️ Pausar todo</button>
+            <button class="btn btn-ghost btn-sm" onclick="resetAllQueue()" data-i18n="btnReiniciar">↺ Reiniciar</button>
+            <button class="btn btn-danger btn-sm" onclick="clearQueue()" data-i18n="btnVaciarSesion">Vaciar sesión</button>
+          </div>
+        </div>
+      </div>
+      <div class="plans-box" id="plansBox">
+        <h3>📅 Planes de sesión (preparar con anticipación)</h3>
+        <p class="sm">Arma la sesión arriba y guárdala como plan. Luego puedes cargarla, repetirla, exportarla a un archivo o importarla en otro equipo.</p>
+        <div class="field-row" style="margin-top:10px">
+          <div style="flex:2"><label for="planName">Nombre del plan</label><input id="planName" type="text" placeholder="Ej: Matilde · Resonancia + TVSO"></div>
+          <div><label for="planPatient">Paciente (opcional)</label><input id="planPatient" type="text" list="participantList"></div>
+          <div><label for="planWhen">Programada para (opcional)</label><input id="planWhen" type="datetime-local"></div>
+        </div>
+        <div class="controls" style="justify-content:flex-start;margin-top:10px">
+          <button class="btn btn-primary btn-sm" onclick="savePlan()">💾 Guardar como plan</button>
+          <button class="btn btn-outline btn-sm" onclick="exportCurrentQueue()">⬇️ Exportar sesión actual</button>
+          <button class="btn btn-ghost btn-sm" onclick="document.getElementById('importPlanInput').click()">⬆️ Importar plan</button>
+          <input type="file" id="importPlanInput" accept="application/json" style="display:none" onchange="handleImportPlan(event)">
+        </div>
+        <div id="plansList"></div>
+      </div>
+      <p class="sm" style="margin-top:16px" data-i18n="hintEjercicios">Cada ejercicio suena un aviso al llegar a 0. El resumen de esta sesión se adjunta automáticamente al guardar en "📝 Registrar sesión".</p>
+    </section>
+
+    <!-- ===================== HISTORIAL ===================== -->
+    <section class="card" id="sec-historial">
+      <div class="card-head">
+        <h2><span class="emoji">📚</span><span data-i18n="secHistorialTitle">Historial de sesiones</span></h2>
+      </div>
+
+      <div id="patientTable" style="margin-bottom:16px"></div>
+
+      <div class="table-toolbar">
+        <input id="searchReg" type="text" data-i18n-placeholder="placeholderBuscarReg" placeholder="Buscar por paciente, foco o nota…" oninput="renderRegContainer()">
+        <span class="sm" id="regCount" style="margin-left:auto"></span>
+      </div>
+
+      <div id="selectionBar" class="selection-bar" style="display:none">
+        <span><strong id="selectionCount">0</strong> <span id="selectionCountLbl"></span></span>
+        <button class="btn btn-ghost btn-sm" onclick="clearSelection()" data-i18n="btnLimpiarSeleccion">Limpiar selección</button>
+      </div>
+
+      <div id="regContainer"></div>
+      <p class="sm" id="exportScopeHint" style="margin-top:12px"></p>
+
+      <div class="controls">
+        <button class="btn btn-outline" onclick="exportCSV()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          <span data-i18n="btnExportarCsv">Exportar CSV</span>
+        </button>
+        <button class="btn btn-ghost" onclick="exportJSON()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          <span data-i18n="btnExportarJson">Exportar JSON</span>
+        </button>
+        <button id="pdfBtn" class="btn btn-primary" onclick="generatePDF()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/></svg>
+          <span data-i18n="btnGenerarPdf">Generar informe PDF</span>
+        </button>
+        <button class="btn btn-danger" onclick="clearAll()" data-i18n="btnBorrarTodas">Borrar todas</button>
+      </div>
+    </section>
+
+    <!-- ===================== RESPALDO ===================== -->
+    <section class="card" id="sec-respaldo">
+      <div class="card-head">
+        <h2><span class="emoji">💾</span><span data-i18n="secRespaldoTitle">Respaldo y restauración</span></h2>
+      </div>
+      <p class="sm" data-i18n="respaldoText">Todos los datos viven únicamente en este navegador. Se recomienda exportar un respaldo periódicamente para no perder información si se borra el historial del navegador o se cambia de equipo.</p>
+      <div class="controls" style="justify-content:flex-start;margin-top:12px">
+        <button class="btn btn-outline" onclick="exportBackup()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          <span data-i18n="btnExportarRespaldo">Exportar respaldo completo</span>
+        </button>
+        <button class="btn btn-ghost" onclick="triggerImportBackup()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 9V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v4M7 14l5-5 5 5M12 9v12"/></svg>
+          <span data-i18n="btnImportarRespaldo">Importar respaldo</span>
+        </button>
+        <input type="file" id="importBackupInput" accept="application/json" style="display:none" onchange="handleImportBackup(event)">
+      </div>
+    </section>
+
+    <p class="footer-note" data-i18n-html="footerNote">Procesado 100% local en su equipo — audio, imágenes e informes nunca salen del navegador.<br>
+      <strong>Autora de la plataforma:</strong> Matilde Pizarro Toro, fonoaudióloga 💗</p>
+  </main>
+</div>
+
+<div id="modalOverlay" class="modal-overlay" hidden>
+  <div class="modal-box" role="alertdialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalMessage">
+    <h3 id="modalTitle" data-i18n="modalConfirmarTitulo">¿Confirmar acción?</h3>
+    <p id="modalMessage" class="sm"></p>
+    <div class="modal-actions">
+      <button id="modalCancelBtn" class="btn btn-outline" data-i18n="modalCancelar">Cancelar</button>
+      <button id="modalConfirmBtn" class="btn btn-danger" data-i18n="modalConfirmar">Confirmar</button>
+    </div>
+  </div>
+</div>
+
+<div id="detailOverlay" class="modal-overlay" hidden>
+  <div class="modal-box wide" role="dialog" aria-modal="true" aria-labelledby="detTitle">
+    <div id="detailBody"></div>
+  </div>
+</div>
+
+<div id="toastHost" aria-live="polite"></div>
+
+<script src="../assets/shared.js?v=2"></script>
+<script>
+const tt = (key, fallback) => (window.CV_I18N ? window.CV_I18N.t(key) : (fallback !== undefined ? fallback : key));
+/* ================= Toast system ================= */
+function toast(msg, type='info'){
+  const host = document.getElementById('toastHost');
+  const el = document.createElement('div');
+  el.className = 'toast ' + (type==='ok'?'ok':type==='err'?'err':'');
+  const icon = type==='ok'
+    ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>'
+    : type==='err'
+    ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v5M12 16h.01"/></svg>'
+    : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>';
+  el.innerHTML = icon + '<span>' + escapeHtml(msg) + '</span>';
+  host.appendChild(el);
+  setTimeout(()=>{ el.classList.add('hide'); setTimeout(()=>el.remove(), 220); }, 3400);
+}
+
+/* ================= Confirm modal ================= */
+function confirmModal({title='¿Confirmar acción?', message='', confirmText='Confirmar', danger=true} = {}){
+  return new Promise(resolve=>{
+    const overlay = document.getElementById('modalOverlay');
+    const confirmBtn = document.getElementById('modalConfirmBtn');
+    const cancelBtn = document.getElementById('modalCancelBtn');
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('modalMessage').textContent = message;
+    confirmBtn.textContent = confirmText;
+    confirmBtn.className = 'btn ' + (danger ? 'btn-danger' : 'btn-primary');
+    overlay.hidden = false;
+    document.body.style.overflow = 'hidden';
+
+    function cleanup(result){
+      overlay.hidden = true;
+      document.body.style.overflow = '';
+      confirmBtn.removeEventListener('click', onConfirm);
+      cancelBtn.removeEventListener('click', onCancel);
+      overlay.removeEventListener('click', onOverlayClick);
+      document.removeEventListener('keydown', onKey);
+      resolve(result);
+    }
+    function onConfirm(){ cleanup(true); }
+    function onCancel(){ cleanup(false); }
+    function onOverlayClick(e){ if(e.target === overlay) cleanup(false); }
+    function onKey(e){ if(e.key === 'Escape') cleanup(false); }
+
+    confirmBtn.addEventListener('click', onConfirm);
+    cancelBtn.addEventListener('click', onCancel);
+    overlay.addEventListener('click', onOverlayClick);
+    document.addEventListener('keydown', onKey);
+    setTimeout(()=>confirmBtn.focus(), 30);
+  });
+}
+
+/* ================= Quicknav scroll ================= */
+function scrollToSection(id){
+  const el = document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+document.querySelectorAll('.quicknav button').forEach(btn=>{
+  btn.addEventListener('click', ()=> scrollToSection(btn.dataset.target));
+});
+(function setupScrollSpy(){
+  const sections = ['sec-resumen','sec-sesion','sec-piano','sec-sonido','sec-ejercicios','sec-historial','sec-respaldo'].map(id=>document.getElementById(id)).filter(Boolean);
+  const buttons = document.querySelectorAll('.quicknav button');
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        buttons.forEach(b=>b.classList.toggle('on', b.dataset.target === entry.target.id));
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+  sections.forEach(s=>obs.observe(s));
+})();
+
+/* ----------------- Utilities ----------------- */
+/* escapeHtml() ahora se carga desde assets/shared.js (compartido entre herramientas) */
+const FOCUS_LABELS = {'/a/':'/a/ sostenida','/i/':'/i/ sostenida','capev':'Lectura CAPE-V','relato':'Relato espontáneo','respiracion':'Respiración / apoyo','resonancia':'Resonancia'};
+function friendlyFocus(t){ if(!t) return '—'; return FOCUS_LABELS[t] || t; }
+
+/* ----------------- State ----------------- */
+let exercises = JSON.parse(localStorage.getItem('exercises_rosa_v1') || '[]');
+let sessions = JSON.parse(localStorage.getItem('sesiones_rosa_v1') || '[]');
+let sessionQueue = JSON.parse(localStorage.getItem('session_queue_v1') || '[]');
+let selectedSessionIds = new Set();
+
+/* ----------------- Plantilla de ejercicios sugeridos ----------------- */
+/* Se agregan una sola vez (si aún no existen por nombre) para no duplicar
+   ni revivir ejercicios que la usuaria haya borrado a propósito. */
+/* Categorías en el orden clínico de una sesión: postura → respiración → calentamiento → trabajo resonancial → transferencia → enfriamiento */
+const EXERCISE_CATEGORIES = [
+  'Postura y movilidad','Respiración y apoyo','Nebulización','Fonación con /b/','TVSO (tubo de resonancia)',
+  'Resonancia nasal','Resonancia oral','Canto y transferencia','Enfriamiento vocal','Otros'
+];
+const LEGACY_CAT_MAP = {'Respiración':'Respiración y apoyo','Movilidad cervical y de hombros':'Postura y movilidad','Fonación /b/':'Fonación con /b/','Canto':'Canto y transferencia'};
+/* [categoría, nombre, dosis, segundos]. Escala de tiempos: 30 s ejercicios breves · 1 min variantes · 2 min bloques base · 3 min canto/respiración profunda */
+const DEFAULT_EXERCISES = ((rows)=>rows.map(([category,name,dosage,duration])=>({name,dosage,duration,category})))([
+  ...['Estiramiento cervical lateral','Flexión cervical','Rotación cervical','Movilidad de hombros'].map(n=>['Postura y movilidad',n,'30 s',30]),
+  ['Respiración y apoyo','Respiración cuadrada simple','3 ciclos de 5 tiempos',60],
+  ['Respiración y apoyo','Respiración cuadrada con /z/ continua','3 ciclos de 5 tiempos',60],
+  ['Respiración y apoyo','Respiración cuadrada con /z/ entrecortada','3 ciclos de 5 tiempos',60],
+  ['Respiración y apoyo','Respiración costo-diafragmática con movimiento','3 min',180],
+  ['Nebulización','Nebulización: solo vapor','2 min',120],
+  ...['sostenida','en staccato','en glissando ascendente','en sirena','en espiral','en glissando + espiral'].map(n=>['Nebulización','Nebulización con /b/ '+n,'1 min',60]),
+  ['Fonación con /b/','/b/ prolongada sostenida','5 repeticiones',30],
+  ['Fonación con /b/','/b/ prolongada en staccato','5 repeticiones',30],
+  ['TVSO (tubo de resonancia)','TVSO: solo burbujas','2 min',120],
+  ['TVSO (tubo de resonancia)','TVSO con /u/ sostenida','2 min',120],
+  ...['en staccato','en glissando ascendente','en sirena','en espiral'].map(n=>['TVSO (tubo de resonancia)','TVSO con /u/ '+n,'1 min',60]),
+  ['TVSO (tubo de resonancia)','TVSO con /u/ en melodía "Cumpleaños Feliz"','5 repeticiones',60],
+  ['TVSO (tubo de resonancia)','TVSO con /u/ en canción completa','1 canción',180],
+  ...['en sirena','en glissando ascendente','en glissando descendente'].map(n=>['Resonancia nasal','/m/ '+n,'5 repeticiones',30]),
+  ['Resonancia nasal','/m/ en melodía "Cumpleaños Feliz"','3 repeticiones',60],
+  ['Resonancia nasal','Resonancia nasal sostenida (/mmm/)','5 repeticiones',30],
+  ['Resonancia nasal','/mmi-mmi-mmi/ en staccato','5 repeticiones',30],
+  ['Resonancia nasal','/mmm-aaa/','5 repeticiones',30],
+  ['Resonancia nasal','Sirena en /ng/','5 repeticiones',30],
+  ...['/va-va-va/','/za-za-za/','/mi-me-ma-mo-mu/','/ni-na-ni-na/','/lu-li-lu-li/'].map(n=>['Resonancia oral','Resonancia oral con '+n,'5 repeticiones',30]),
+  ['Canto y transferencia','Canto sentado','1 canción',180],
+  ['Canto y transferencia','Canto de pie con apoyo del tubo','1 canción',180],
+  ...['/E/','/I/','/O/','/U/','/A/'].map(v=>['Enfriamiento vocal','Enfriamiento vocal con bostezo ('+v+')','5 repeticiones',30])
+]);
+const T = (k, es)=>{ const v = tt(k, es); return v===k ? es : v; };
+const catRank = c => { const i = EXERCISE_CATEGORIES.indexOf(c); return i<0 ? 99 : i; };
+const LEGACY_DEFAULT_EXERCISES = [
+  { name:'Respiración cuadrada simple — 5 tiempos por fase', duration:20, category:'Respiración' },
+  { name:'Respiración cuadrada con /z/ continua — 5 tiempos por fase', duration:20, category:'Respiración' },
+  { name:'Respiración cuadrada con /z/ entrecortada — 5 tiempos por fase', duration:20, category:'Respiración' },
+  { name:'Respiración costo-diafragmática con movimiento — 4 minutos', duration:240, category:'Respiración' },
+  { name:'Estiramiento cervical lateral — 30 segundos', duration:30, category:'Movilidad cervical y de hombros' },
+  { name:'Flexión cervical — 30 segundos', duration:30, category:'Movilidad cervical y de hombros' },
+  { name:'Rotación cervical — 30 segundos', duration:30, category:'Movilidad cervical y de hombros' },
+  { name:'Movilidad de hombros — 30 segundos', duration:30, category:'Movilidad cervical y de hombros' },
+  { name:'/b/ prolongada sostenida — 5 repeticiones', duration:30, category:'Fonación /b/' },
+  { name:'/b/ prolongada en staccato — 5 repeticiones', duration:30, category:'Fonación /b/' },
+  { name:'/m/ en sirena — 5 repeticiones', duration:30, category:'Resonancia nasal' },
+  { name:'/m/ en glissando ascendente — 5 repeticiones', duration:30, category:'Resonancia nasal' },
+  { name:'/m/ en glissando descendente — 5 repeticiones', duration:30, category:'Resonancia nasal' },
+  { name:'/m/ en melodía "Cumpleaños Feliz" — 3 repeticiones', duration:60, category:'Resonancia nasal' },
+  { name:'Resonancia nasal sostenida (/mmm/) — 5 repeticiones', duration:30, category:'Resonancia nasal' },
+  { name:'/mmi-mmi-mmi/ en staccato — 5 repeticiones', duration:30, category:'Resonancia nasal' },
+  { name:'/mmm-aaa/ — 5 repeticiones', duration:30, category:'Resonancia nasal' },
+  { name:'Sirena en /ng/ — 5 repeticiones', duration:30, category:'Resonancia nasal' },
+  { name:'Resonancia oral con /va-va-va/ — 5 repeticiones', duration:30, category:'Resonancia oral' },
+  { name:'Resonancia oral con /za-za-za/ — 5 repeticiones', duration:30, category:'Resonancia oral' },
+  { name:'Resonancia oral con /mi-me-ma-mo-mu/ — 5 repeticiones', duration:30, category:'Resonancia oral' },
+  { name:'Resonancia oral con /ni-na-ni-na/ — 5 repeticiones', duration:30, category:'Resonancia oral' },
+  { name:'Resonancia oral con /lu-li-lu-li/ — 5 repeticiones', duration:30, category:'Resonancia oral' },
+  { name:'Nebulización: solo vapor — 2 minutos', duration:120, category:'Nebulización' },
+  { name:'Nebulización con /b/ sostenida — 2 minutos', duration:120, category:'Nebulización' },
+  { name:'Nebulización con /b/ en staccato — 2 minutos', duration:120, category:'Nebulización' },
+  { name:'Nebulización con /b/ en glissando ascendente — 2 minutos', duration:120, category:'Nebulización' },
+  { name:'Nebulización con /b/ en sirena — 2 minutos', duration:120, category:'Nebulización' },
+  { name:'Nebulización con /b/ en espiral — 2 minutos', duration:120, category:'Nebulización' },
+  { name:'Nebulización con /b/ en glissando + espiral — 2 minutos', duration:120, category:'Nebulización' },
+  { name:'TVSO: solo burbujas — 2 minutos', duration:120, category:'TVSO (tubo de resonancia)' },
+  { name:'TVSO con /u/ sostenida — 2 minutos', duration:120, category:'TVSO (tubo de resonancia)' },
+  { name:'TVSO con /u/ en staccato — 2 minutos', duration:120, category:'TVSO (tubo de resonancia)' },
+  { name:'TVSO con /u/ en glissando ascendente — 2 minutos', duration:120, category:'TVSO (tubo de resonancia)' },
+  { name:'TVSO con /u/ en sirena — 2 minutos', duration:120, category:'TVSO (tubo de resonancia)' },
+  { name:'TVSO con /u/ en espiral — 2 minutos', duration:120, category:'TVSO (tubo de resonancia)' },
+  { name:'TVSO con /u/ en melodía "Cumpleaños Feliz" — 5 repeticiones', duration:60, category:'TVSO (tubo de resonancia)' },
+  { name:'TVSO con /u/ en canción completa — 1 canción', duration:180, category:'TVSO (tubo de resonancia)' },
+  { name:'Canto sentado — 1 canción', duration:180, category:'Canto' },
+  { name:'Canto de pie con apoyo del tubo — 1 canción', duration:180, category:'Canto' },
+  { name:'Enfriamiento vocal con bostezo (/E/) — 5 repeticiones', duration:30, category:'Enfriamiento vocal' },
+  { name:'Enfriamiento vocal con bostezo (/I/) — 5 repeticiones', duration:30, category:'Enfriamiento vocal' },
+  { name:'Enfriamiento vocal con bostezo (/O/) — 5 repeticiones', duration:30, category:'Enfriamiento vocal' },
+  { name:'Enfriamiento vocal con bostezo (/U/) — 5 repeticiones', duration:30, category:'Enfriamiento vocal' },
+  { name:'Enfriamiento vocal con bostezo (/A/) — 5 repeticiones', duration:30, category:'Enfriamiento vocal' }
+];
+function exCategory(ex){ return (ex && ex.category) ? ex.category : 'Otros'; }
+const EXERCISES_SEED_KEY = 'exercises_seed_v3_done';
+/* Migración v3: reemplaza el catálogo de fábrica anterior por el reorganizado (nombres limpios + dosis aparte).
+   Los ejercicios creados por la usuaria se conservan; solo se actualiza el nombre de su categoría si era una antigua. */
+function seedDefaultExercises(){
+  if(localStorage.getItem(EXERCISES_SEED_KEY)) return;
+  const legacy = new Set(LEGACY_DEFAULT_EXERCISES.map(e=>e.name.trim().toLowerCase()));
+  const custom = exercises.filter(e=>!legacy.has((e.name||'').trim().toLowerCase())).map(e=>({...e, category: LEGACY_CAT_MAP[e.category]||e.category||'Otros'}));
+  const fresh = DEFAULT_EXERCISES.map(d=>({ id: Date.now()+Math.random(), name:d.name, dosage:d.dosage, duration:d.duration, remaining:d.duration, running:false, intervalId:null, category:d.category }));
+  exercises = [...fresh, ...custom];
+  localStorage.setItem(EXERCISES_SEED_KEY, '1');
+  localStorage.setItem('exercises_rosa_v1', JSON.stringify(exercises));
+}
+seedDefaultExercises();
+
+let recorder = { recording:false, buffer:[], node:null, source:null, lastDataUrl:null, lastObjectUrl:null, lastFilename:null };
+
+window.audioContext = null;
+let analyser = null, mediaStream = null;
+let lastDbValue = null, lastNoteDetected = null;
+
+const GAUGE_CIRC = 2 * Math.PI * 68;
+
+/* ---------- Piano config ---------- */
+const PIANO_START_MIDI = 48; // C3
+const PIANO_END_MIDI = 83;   // B5
+const NOTE_NAMES_LATIN = ['Do','Do#','Re','Re#','Mi','Fa','Fa#','Sol','Sol#','La','La#','Si'];
+const BLACK_MAP = {1:true,3:true,6:true,8:true,10:true};
+let midiToKeyEl = {};
+let keyboardOctaveShift = 0; // -2..+2 relative to base C4
+
+/* ---------- Init ---------- */
+document.addEventListener('DOMContentLoaded', ()=>{
+  populateCategorySelect();
+  initSoundUI();
+  const bpmValEl0 = document.getElementById('metroBpmVal'); if(bpmValEl0) bpmValEl0.textContent = metro.bpm;
+  const sliderEl0 = document.getElementById('metroSlider'); if(sliderEl0) sliderEl0.value = metro.bpm;
+  const inputEl0 = document.getElementById('metroBpmInput'); if(inputEl0) inputEl0.value = metro.bpm;
+  renderExercises();
+  renderQueue(); renderPlans();
+  const chainEl = document.getElementById('chainMode');
+  if(chainEl) chainEl.checked = !!localStorage.getItem('chain_mode_v1');
+  renderRegContainer();
+  renderKpis();
+  buildPiano();
+  attachPianoPlay();
+  attachKeyboardPiano();
+  addPlayDetectedButton();
+});
+
+/* ---------- Persistence ---------- */
+function persistExercises(){ localStorage.setItem('exercises_rosa_v1', JSON.stringify(exercises)); renderExercises(); renderKpis(); }
+function persistSessions(){ localStorage.setItem('sesiones_rosa_v1', JSON.stringify(sessions)); renderRegContainer(); renderKpis(); updateParticipantList(); }
+
+function updateParticipantList(){
+  const dl = document.getElementById('participantList');
+  if(!dl) return;
+  const ids = [...new Set(sessions.map(r=>r.participantId).filter(Boolean))];
+  dl.innerHTML = ids.map(id=>`<option value="${escapeHtml(id)}">`).join('');
+}
+
+/* ---------- KPIs ---------- */
+function renderKpis(){
+  const total = sessions.length;
+  const uniqueParticipants = new Set(sessions.map(r=>r.participantId||tt('sinNombre','Sin nombre'))).size;
+  const now = new Date();
+  const weekAgo = new Date(now.getTime() - 7*24*60*60*1000);
+  const thisWeek = sessions.filter(r=> new Date(r.date) >= weekAgo).length;
+  const activeExercises = sessionQueue.filter(q=>q.running).length;
+  document.getElementById('kpiTotal').textContent = total;
+  document.getElementById('kpiPatients').textContent = uniqueParticipants;
+  document.getElementById('kpiWeek').textContent = thisWeek;
+  document.getElementById('kpiActiveEx').textContent = activeExercises;
+}
+
+window.addEventListener('cv-lang-changed', ()=>{
+  renderExercises(); renderQueue(); renderRegContainer(); renderKpis(); renderPatientTable(); renderPlans();
+});
+
+function renderPatientTable(){
+  const el = document.getElementById('patientTable');
+  if(!el) return;
+  /* Event delegation wired once: avoids re-binding on every re-render and
+     avoids embedding patient-supplied text inside an inline onclick handler
+     (see data-patient-id below), which is not safe against HTML/JS-string
+     breakout even when quotes are manually escaped. */
+  if(!el.dataset.wired){
+    el.dataset.wired = '1';
+    el.addEventListener('click', function(e){
+      const btn = e.target.closest('button[data-patient-id]');
+      if(!btn) return;
+      filterByPatient(btn.dataset.patientId);
+    });
+  }
+  if(!sessions.length){ el.innerHTML = ''; return; }
+  const sinNombre = tt('sinNombre','Sin nombre');
+  const map = {};
+  sessions.forEach(r=>{
+    const pid = r.participantId || sinNombre;
+    if(!map[pid]) map[pid] = { count:0, last:r.date };
+    map[pid].count++;
+    if(new Date(r.date) > new Date(map[pid].last)) map[pid].last = r.date;
+  });
+  const rows = Object.entries(map).sort((a,b)=> new Date(b[1].last) - new Date(a[1].last));
+  let html = `<div class="table-scroll"><table><thead><tr><th>${tt('thPaciente','Paciente')}</th><th>${tt('thSesiones','Sesiones')}</th><th>${tt('thUltimaSesion','Última sesión')}</th><th></th></tr></thead><tbody>`;
+  rows.forEach(([pid, d])=>{
+    html += `<tr>
+      <td><strong>${escapeHtml(pid)}</strong></td>
+      <td>${d.count}</td>
+      <td>${new Date(d.last).toLocaleDateString('es-CL')}</td>
+      <td><button class="btn btn-outline btn-sm" data-patient-id="${escapeHtml(pid)}">${tt('btnVerHistorial','Ver historial')}</button></td>
+    </tr>`;
+  });
+  html += '</tbody></table></div>';
+  el.innerHTML = html;
+}
+
+function filterByPatient(pid){
+  const search = document.getElementById('searchReg');
+  search.value = pid === tt('sinNombre','Sin nombre') ? '' : pid;
+  renderRegContainer();
+  scrollToSection('sec-historial');
+  search.focus();
+}
+
+/* ---------- Exercises ---------- */
+function populateCategorySelect(){
+  const sel = document.getElementById('newExCat');
+  if(!sel) return;
+  sel.innerHTML = EXERCISE_CATEGORIES.map(c=>`<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join('');
+}
+function addExercise(){
+  const nameInput = document.getElementById('newExName');
+  const name = nameInput.value.trim() || 'Ejercicio';
+  let dur = parseInt(document.getElementById('newExDur').value,10); if(!dur || dur < 1) dur = 60;
+  const category = document.getElementById('newExCat')?.value || 'Otros';
+  const dosage = (document.getElementById('newExDose')?.value||'').trim();
+  const ex = { id: Date.now()+Math.random(), name, dosage, duration: dur, remaining: dur, running:false, intervalId:null, category };
+  exercises.push(ex); persistExercises();
+  nameInput.value=''; document.getElementById('newExDur').value=''; if(document.getElementById('newExDose')) document.getElementById('newExDose').value='';
+  toast(tt('toastEjercicioAgregado','Ejercicio agregado'), 'ok');
+}
+
+let openExCategories = new Set(); // categorías expandidas por la usuaria (persiste entre renders)
+let categoriesInitialized = false;
+
+function groupByCategory(list){
+  const groups = {};
+  list.forEach(item=>{
+    const cat = exCategory(item.ex);
+    if(!groups[cat]) groups[cat] = [];
+    groups[cat].push(item);
+  });
+  // Orden: categorías conocidas primero (en el orden definido), luego cualquier otra alfabéticamente
+  const known = EXERCISE_CATEGORIES.filter(c=>groups[c]);
+  const extra = Object.keys(groups).filter(c=>!EXERCISE_CATEGORIES.includes(c)).sort();
+  return [...known, ...extra].map(cat=>({ cat, items: groups[cat] }));
+}
+
+function isInQueue(exId){ return queueCount(exId)>0; }
+function queueCount(exId){ return sessionQueue.filter(q=>String(q.exId)===String(exId)).length; }
+
+function renderExercises(){
+  const list = document.getElementById('exList');
+  const countEl = document.getElementById('catalogCount');
+  if(countEl) countEl.textContent = `(${exercises.length})`;
+  if(!exercises.length){ list.innerHTML = '<div class="ex-empty">No hay ejercicios aún. Agrégalos en "Agregar o editar ejercicios del catálogo" 💗</div>'; renderCatalogAdmin(); return; }
+
+  const q = (document.getElementById('exSearch')?.value || '').toLowerCase().trim();
+  const withIdx = exercises.map((ex, idx)=>({ex, idx})).filter(({ex})=> !q || ex.name.toLowerCase().includes(q));
+
+  if(!withIdx.length){ list.innerHTML = '<div class="ex-empty">Ningún ejercicio coincide con la búsqueda.</div>'; renderCatalogAdmin(); return; }
+
+  const groups = groupByCategory(withIdx);
+  // Al abrir la página, deja la primera categoría abierta para orientar; luego respeta lo que la usuaria expanda/colapse.
+  if(!categoriesInitialized){ if(groups[0]) openExCategories.add(groups[0].cat); categoriesInitialized = true; }
+
+  let html = '';
+  groups.forEach(({cat, items})=>{
+    const inQueueCount = items.filter(({ex})=>isInQueue(ex.id)).length;
+    const isOpen = q ? true : (openExCategories.has(cat) || inQueueCount > 0);
+    html += `<details class="ex-category" data-cat="${escapeHtml(cat)}" ${isOpen ? 'open' : ''}>
+      <summary>
+        <span class="ex-cat-name">${escapeHtml(cat)}</span>
+        <span class="ex-cat-count">${items.length}${inQueueCount ? ' · ✓ '+inQueueCount+' en sesión' : ''}</span>
+      </summary>
+      <div class="ex-list-inner">`;
+    items.forEach(({ex})=>{
+      const n = queueCount(ex.id), added = n>0;
+      html += `<div class="catalog-card ${added?'in-queue':''}" data-id="${ex.id}">
+        <div class="cc-info">
+          <div class="cc-name">${escapeHtml(ex.name)}</div>
+          <div class="cc-meta">${formatMMSS(ex.duration)}${ex.dosage?'<span class="cc-dose">'+escapeHtml(ex.dosage)+'</span>':''}${n?'<span class="cc-count">×'+n+' en sesión</span>':''}</div>
+        </div>
+        <button class="cc-add-btn" title="Añadir a la sesión de hoy (puedes repetirlo las veces que necesites)" onclick="addToQueue('${ex.id}')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+      </div>`;
+    });
+    html += `</div></details>`;
+  });
+  list.innerHTML = html;
+
+  document.querySelectorAll('.ex-category').forEach(det=>{
+    det.addEventListener('toggle', ()=>{
+      const cat = det.dataset.cat;
+      if(det.open) openExCategories.add(cat); else openExCategories.delete(cat);
+    });
+  });
+  renderCatalogAdmin();
+}
+
+function renderCatalogAdmin(){
+  const wrap = document.getElementById('catalogAdminList');
+  if(!wrap) return;
+  if(!exercises.length){ wrap.innerHTML = '<div class="ex-empty-inline">No hay ejercicios en el catálogo aún.</div>'; return; }
+  let html = '';
+  exercises.forEach((ex, idx)=>{
+    html += `<div class="catalog-admin-row">
+      <input data-idx="${idx}" class="ex-name" value="${escapeHtml(ex.name)}" aria-label="${tt('ariaNombreEjercicio','Nombre del ejercicio')} ${idx+1}">
+      <input data-idx="${idx}" class="ex-dose" placeholder="Dosis" value="${escapeHtml(ex.dosage||'')}" aria-label="Dosis" style="max-width:130px"><span class="sm">Dur (s):</span><input data-idx="${idx}" class="ex-dur" type="number" value="${ex.duration}" aria-label="${tt('ariaDuracionEjercicio','Duración en segundos del ejercicio')} ${idx+1}">
+      <button class="icon-btn danger" title="Eliminar del catálogo" onclick="deleteExercise('${ex.id}')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6"/></svg>
+      </button>
+    </div>`;
+  });
+  wrap.innerHTML = html;
+  wrap.querySelectorAll('.ex-name').forEach(inp=>{
+    inp.addEventListener('change', e=>{ exercises[parseInt(e.target.dataset.idx,10)].name = e.target.value; persistExercises(); });
+  });
+  wrap.querySelectorAll('.ex-dose').forEach(inp=>{ inp.addEventListener('change', e=>{ exercises[parseInt(e.target.dataset.idx,10)].dosage = e.target.value.trim(); persistExercises(); }); });
+  wrap.querySelectorAll('.ex-dur').forEach(inp=>{
+    inp.addEventListener('change', e=>{
+      const i = parseInt(e.target.dataset.idx,10);
+      let v = parseInt(e.target.value,10); if(!v || v < 1) v = 1;
+      exercises[i].duration = v;
+      persistExercises();
+    });
+  });
+}
+
+function findExercise(id){ return exercises.find(e=>String(e.id)===String(id)); }
+function deleteExercise(id){
+  const idx = exercises.findIndex(e=>String(e.id)===String(id));
+  if(idx>=0){ exercises.splice(idx,1); persistExercises(); }
+  if(sessionQueue.some(q=>String(q.exId)===String(id))){ sessionQueue = sessionQueue.filter(q=>String(q.exId)!==String(id)); persistQueue(); }
+}
+
+/* ---------- Sesión de hoy: cola de ejercicios con cronómetros ---------- */
+function formatMMSS(totalSeconds){
+  const s = Math.max(0, Math.round(totalSeconds));
+  const m = Math.floor(s/60);
+  const r = s%60;
+  return String(m).padStart(2,'0') + ':' + String(r).padStart(2,'0');
+}
+
+function addToQueue(exId){
+  const ex = findExercise(exId); if(!ex) return;
+  sessionQueue.push(mkQItem(ex));
+  persistQueue();
+  renderExercises();
+  toast(window.CV_I18N ? window.CV_I18N.t('toastAnadidoASesion')(ex.name) : `"${ex.name}" añadido a la sesión de hoy`, 'ok');
+}
+function mkQItem(ex){ return { qid: Date.now()+Math.random(), exId: ex.id ?? null, name: ex.name, category: ex.category||'Otros', dosage: ex.dosage||'', duration: ex.duration, remaining: ex.duration, running:false, done:false, detail: ex.detail||'' }; }
+function qIndex(qid){ return sessionQueue.findIndex(q=>String(q.qid)===String(qid)); }
+function moveQueueItem(qid, dir){ const i = qIndex(qid), j = i+dir; if(i<0||j<0||j>=sessionQueue.length) return; [sessionQueue[i],sessionQueue[j]] = [sessionQueue[j],sessionQueue[i]]; persistQueue(); }
+function dupQueueItem(qid){ const i = qIndex(qid); if(i<0) return; sessionQueue.splice(i+1,0,mkQItem(sessionQueue[i])); persistQueue(); renderExercises(); }
+function adjQueueDur(qid, delta){
+  const q = sessionQueue[qIndex(qid)]; if(!q) return;
+  const nd = Math.max(15, q.duration+delta), real = nd-q.duration;
+  q.remaining = (q.remaining===q.duration || q.done) ? nd : Math.max(0, q.remaining+real);
+  q.duration = nd; if(q.done && q.remaining>0) q.done=false;
+  persistQueue();
+}
+let dragQid = null;
+function wireQueueDrag(wrap){
+  wrap.querySelectorAll('.q-card').forEach(card=>{
+    const h = card.querySelector('.q-handle'); if(!h) return;
+    h.addEventListener('dragstart', e=>{ dragQid = card.dataset.qid; card.classList.add('dragging'); e.dataTransfer.setData('text/plain', dragQid); e.dataTransfer.setDragImage(card,20,20); });
+    h.addEventListener('dragend', ()=>{ card.classList.remove('dragging'); wrap.querySelectorAll('.drag-over').forEach(c=>c.classList.remove('drag-over')); });
+    card.addEventListener('dragover', e=>{ if(dragQid){ e.preventDefault(); card.classList.add('drag-over'); } });
+    card.addEventListener('dragleave', ()=>card.classList.remove('drag-over'));
+    card.addEventListener('drop', e=>{
+      e.preventDefault(); card.classList.remove('drag-over');
+      const from = qIndex(dragQid), to = qIndex(card.dataset.qid); dragQid = null;
+      if(from<0||to<0||from===to) return;
+      const [it] = sessionQueue.splice(from,1); sessionQueue.splice(to,0,it); persistQueue();
+    });
+  });
+}
+function qMetaText(q){ return `${formatMMSS(q.duration)}${q.dosage?' · '+q.dosage:''} ${q.running?tt('qCardEnCurso','· ⏳ en curso'):q.done?tt('qCardCompletado','· completado'):''}`; }
+function removeFromQueue(qid){
+  const idx = sessionQueue.findIndex(q=>String(q.qid)===String(qid));
+  if(idx>=0){ sessionQueue.splice(idx,1); persistQueue(); renderExercises(); }
+}
+function clearQueue(){
+  if(!sessionQueue.length) return;
+  confirmModal({title:tt('modalVaciarTitulo','Vaciar sesión de hoy'), message:tt('modalVaciarMsg','Se quitarán todos los ejercicios de la sesión en curso (el catálogo no se ve afectado). ¿Continuar?'), confirmText:tt('modalVaciarBtn','Vaciar')}).then(ok=>{
+    if(!ok) return;
+    sessionQueue = [];
+    persistQueue();
+    renderExercises();
+  });
+}
+function toggleQueueItem(qid){
+  const q = sessionQueue.find(x=>String(x.qid)===String(qid)); if(!q) return;
+  if(q.running){ q.running = false; }
+  else {
+    if(q.remaining <= 0){ q.remaining = q.duration; q.done = false; }
+    q.running = true;
+    playChime('start');
+  }
+  persistQueue();
+}
+function resetQueueItem(qid){
+  const q = sessionQueue.find(x=>String(x.qid)===String(qid)); if(!q) return;
+  q.remaining = q.duration; q.running = false; q.done = false;
+  persistQueue();
+}
+function startAllQueue(){
+  let any = false;
+  sessionQueue.forEach(q=>{ if(!q.done){ if(q.remaining<=0) q.remaining=q.duration; q.running = true; any = true; } });
+  if(any) playChime('start');
+  persistQueue();
+}
+function pauseAllQueue(){ sessionQueue.forEach(q=> q.running = false); persistQueue(); }
+function resetAllQueue(){ sessionQueue.forEach(q=>{ q.remaining = q.duration; q.running = false; q.done = false; }); persistQueue(); }
+
+/* ---------- Sistema de sonido: volúmenes, silencio y avisos ---------- */
+let soundSettings = Object.assign({ muted:false, master:0.8, piano:0.9, exercises:0.8, metronome:0.7, tickEnabled:true },
+  JSON.parse(localStorage.getItem('sound_settings_v1') || '{}'));
+
+function saveSoundSettings(){ localStorage.setItem('sound_settings_v1', JSON.stringify(soundSettings)); }
+function effectiveVol(channel){ if(soundSettings.muted) return 0; const ch = soundSettings[channel]; return soundSettings.master * (typeof ch === 'number' ? ch : 1); }
+
+function onMuteToggle(checked){ soundSettings.muted = checked; saveSoundSettings(); }
+function onTickToggle(checked){ soundSettings.tickEnabled = checked; saveSoundSettings(); }
+function onVolChange(channel, val){
+  const pct = parseInt(val,10);
+  soundSettings[channel] = pct/100;
+  const labelEl = document.getElementById('vol'+channel.charAt(0).toUpperCase()+channel.slice(1)+'Val');
+  if(labelEl) labelEl.textContent = pct+'%';
+  const rangeEl = document.getElementById('vol'+channel.charAt(0).toUpperCase()+channel.slice(1));
+  if(rangeEl) rangeEl.style.setProperty('--val', pct+'%');
+  saveSoundSettings();
+}
+
+function initSoundUI(){
+  const setRange = (id, val)=>{ const el = document.getElementById(id); if(el){ el.value = val; el.style.setProperty('--val', val+'%'); } };
+  setRange('volMaster', Math.round(soundSettings.master*100));
+  setRange('volPiano', Math.round(soundSettings.piano*100));
+  setRange('volExercises', Math.round(soundSettings.exercises*100));
+  setRange('volMetronome', Math.round(soundSettings.metronome*100));
+  const setTxt = (id, val)=>{ const el = document.getElementById(id); if(el) el.textContent = val+'%'; };
+  setTxt('volMasterVal', Math.round(soundSettings.master*100));
+  setTxt('volPianoVal', Math.round(soundSettings.piano*100));
+  setTxt('volExercisesVal', Math.round(soundSettings.exercises*100));
+  setTxt('volMetronomeVal', Math.round(soundSettings.metronome*100));
+  const muteEl = document.getElementById('muteAll'); if(muteEl) muteEl.checked = !!soundSettings.muted;
+  const tickEl = document.getElementById('tickEnabled'); if(tickEl) tickEl.checked = soundSettings.tickEnabled !== false;
+}
+
+/* kind: 'start' | 'end' | 'tick' — todos respetan el volumen de "Ejercicios" y el silencio general */
+function playChime(kind='end'){
+  const vol = effectiveVol('exercises');
+  if(vol <= 0) return;
+  try{
+    const ctx = new (window.AudioContext||window.webkitAudioContext)();
+    const now = ctx.currentTime;
+    let notes, gainPeak, dur;
+    if(kind === 'end'){ notes = [880, 1320]; gainPeak = 0.4*vol; dur = 0.5; }
+    else if(kind === 'start'){ notes = [523]; gainPeak = 0.32*vol; dur = 0.22; }
+    else { notes = [1500]; gainPeak = 0.14*vol; dur = 0.045; } // tick
+    notes.forEach((freq, i)=>{
+      const o = ctx.createOscillator(); const g = ctx.createGain();
+      o.type = kind==='tick' ? 'square' : 'sine'; o.frequency.value = freq;
+      o.connect(g); g.connect(ctx.destination);
+      const t0 = now + i*0.12;
+      g.gain.setValueAtTime(0.0001, t0);
+      g.gain.exponentialRampToValueAtTime(gainPeak, t0+0.012);
+      g.gain.exponentialRampToValueAtTime(0.0001, t0+dur);
+      o.start(t0); o.stop(t0+dur+0.03);
+    });
+    setTimeout(()=>{ try{ ctx.close(); }catch(e){} }, (dur+0.3)*1000+200);
+  }catch(e){}
+}
+
+/* ---------- Metrónomo ---------- */
+let metro = { bpm: parseInt(localStorage.getItem('metro_bpm_v1'),10) || 100, running:false, timer:null, beatCount:0 };
+let tapTimes = [];
+
+function setMetroBpm(v){
+  let bpm = parseInt(v,10);
+  if(!bpm || isNaN(bpm)) bpm = metro.bpm;
+  bpm = Math.max(30, Math.min(240, bpm));
+  metro.bpm = bpm;
+  localStorage.setItem('metro_bpm_v1', String(bpm));
+  const bpmValEl = document.getElementById('metroBpmVal'); if(bpmValEl) bpmValEl.textContent = bpm;
+  const sliderEl = document.getElementById('metroSlider'); if(sliderEl) sliderEl.value = bpm;
+  const inputEl = document.getElementById('metroBpmInput'); if(inputEl) inputEl.value = bpm;
+  if(metro.running){ stopMetronomeTimer(); startMetronomeTimer(); }
+}
+function playMetroClick(accent){
+  const vol = effectiveVol('metronome');
+  if(vol <= 0) return;
+  try{
+    const ctx = new (window.AudioContext||window.webkitAudioContext)();
+    const now = ctx.currentTime;
+    const o = ctx.createOscillator(); const g = ctx.createGain();
+    o.type = 'square'; o.frequency.value = accent ? 1600 : 1000;
+    o.connect(g); g.connect(ctx.destination);
+    g.gain.setValueAtTime(0.0001, now);
+    g.gain.exponentialRampToValueAtTime(0.5*vol, now+0.004);
+    g.gain.exponentialRampToValueAtTime(0.0001, now+0.06);
+    o.start(now); o.stop(now+0.08);
+    setTimeout(()=>{ try{ ctx.close(); }catch(e){} }, 200);
+  }catch(e){}
+}
+function tickMetro(){
+  const accent = metro.beatCount % 4 === 0;
+  playMetroClick(accent);
+  const dot = document.getElementById('metroDot');
+  if(dot){
+    dot.classList.remove('beat','accent'); void dot.offsetWidth;
+    dot.classList.add('beat'); if(accent) dot.classList.add('accent');
+  }
+  metro.beatCount++;
+}
+function startMetronomeTimer(){
+  metro.beatCount = 0;
+  tickMetro();
+  metro.timer = setInterval(tickMetro, 60000/metro.bpm);
+}
+function stopMetronomeTimer(){ if(metro.timer){ clearInterval(metro.timer); metro.timer = null; } }
+function toggleMetronome(){
+  metro.running = !metro.running;
+  const btn = document.getElementById('metroToggleBtn');
+  if(metro.running){
+    startMetronomeTimer();
+    if(btn){ btn.textContent = '⏸️ Detener metrónomo'; btn.classList.remove('btn-primary'); btn.classList.add('btn-danger'); }
+  } else {
+    stopMetronomeTimer();
+    if(btn){ btn.textContent = '▶️ Iniciar metrónomo'; btn.classList.remove('btn-danger'); btn.classList.add('btn-primary'); }
+  }
+}
+function tapTempo(){
+  const now = Date.now();
+  tapTimes = tapTimes.filter(t=> now - t < 2200);
+  tapTimes.push(now);
+  if(tapTimes.length >= 2){
+    const intervals = []; for(let i=1;i<tapTimes.length;i++) intervals.push(tapTimes[i]-tapTimes[i-1]);
+    const avg = intervals.reduce((a,b)=>a+b,0)/intervals.length;
+    setMetroBpm(Math.round(60000/avg));
+  }
+}
+
+
+function renderSessionExSummary(){
+  const wrap = document.getElementById('sessionExSummary');
+  if(!wrap) return;
+  if(!sessionQueue.length){ wrap.innerHTML = `<div class="ex-empty-inline">${tt('sessionExSummaryVacio','Aún no has agregado ejercicios a la sesión de hoy.')}</div>`; return; }
+  const totalDur = sessionQueue.reduce((a,q)=>a+q.duration,0);
+  let html = `<div class="sm" style="margin-bottom:6px">${window.CV_I18N ? window.CV_I18N.t('exNumEjercicios')(sessionQueue.length) : sessionQueue.length+' ejercicio(s)'} · ${formatMMSS(totalDur)} ${tt('qCardTotal','total')}</div><div class="checklist">`;
+  sessionQueue.forEach(q=>{
+    html += `<div class="check-item ${q.done?'checked':''}">
+      <span class="name">${escapeHtml(q.name)}${q.dosage?' <span class="sm">· '+escapeHtml(q.dosage)+'</span>':''}</span>
+      <span class="dur">${formatMMSS(q.duration)}${q.done?' '+tt('qCardHecho','· ✓ hecho'):''}</span>
+    </div>`;
+  });
+  html += '</div>';
+  wrap.innerHTML = html;
+}
+
+function renderQueue(){
+  const wrap = document.getElementById('sessionQueue');
+  const countLbl = document.getElementById('queueCountLbl');
+  if(countLbl) countLbl.textContent = window.CV_I18N ? window.CV_I18N.t('exNumEjercicios')(sessionQueue.length) : `${sessionQueue.length} ejercicio${sessionQueue.length===1?'':'s'}`;
+  if(!wrap) return;
+
+  if(!sessionQueue.length){
+    wrap.innerHTML = `<div class="q-empty">${tt('queueVacio','Agrega ejercicios del catálogo con el botón ➕ para armar la sesión de hoy 💗')}</div>`;
+  } else {
+    const focusValues = {};
+    wrap.querySelectorAll('.q-detail').forEach(inp=>{ focusValues[inp.dataset.qid] = { value: inp.value, focused: document.activeElement===inp, selStart: inp.selectionStart }; });
+
+    let html = '';
+    sessionQueue.forEach(q=>{
+      const pct = q.duration>0 ? Math.max(0, Math.min(1, 1 - q.remaining/q.duration)) : 0;
+      const circ = 2*Math.PI*20;
+      const dash = circ * (1-pct);
+      html += `<div class="q-card ${q.running?'running':''} ${q.done?'done':''}" data-qid="${q.qid}">
+        <span class="q-handle" draggable="true" title="Arrastra para reordenar" aria-hidden="true">⠿</span>
+        <div class="q-ring">
+          <svg viewBox="0 0 46 46">
+            <circle class="ring-track" cx="23" cy="23" r="20"></circle>
+            <circle class="ring-fill" cx="23" cy="23" r="20" stroke-dasharray="${circ.toFixed(1)}" stroke-dashoffset="${dash.toFixed(1)}"></circle>
+          </svg>
+          <div class="q-ring-num">${q.done?'✓':formatMMSS(q.remaining)}</div>
+        </div>
+        <div class="q-info">
+          <div class="q-name">${escapeHtml(q.name)}</div>
+          <div class="q-meta">${escapeHtml(qMetaText(q))}</div>
+          <div class="q-dur"><button onclick="adjQueueDur('${q.qid}',-15)" title="Restar 15 s">−15 s</button><button onclick="adjQueueDur('${q.qid}',15)" title="Sumar 15 s">+15 s</button></div>
+          <input class="q-detail" data-qid="${q.qid}" type="text" placeholder="${tt('qDetailPlaceholder','Nota rápida: series, dificultad…')}" value="${escapeHtml(q.detail||'')}">
+        </div>
+        <div class="q-actions">
+          <button class="q-icon-btn ${q.running?'pause':'play'}" title="${q.running?tt('qBtnPausar','Pausar'):tt('qBtnIniciar','Iniciar')}" onclick="toggleQueueItem('${q.qid}')">
+            ${q.running
+              ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>'
+              : '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7Z"/></svg>'}
+          </button>
+          <button class="q-icon-btn" title="${tt('qBtnReiniciar','Reiniciar')}" onclick="resetQueueItem('${q.qid}')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
+          </button>
+          <button class="q-icon-btn" title="${tt('qBtnQuitar','Quitar de la sesión')}" onclick="removeFromQueue('${q.qid}')" style="color:var(--danger)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          </button>
+        </div>
+        <div class="q-tools">
+          <button class="q-icon-btn" title="Subir" aria-label="Subir" onclick="moveQueueItem('${q.qid}',-1)">▲</button>
+          <button class="q-icon-btn" title="Bajar" aria-label="Bajar" onclick="moveQueueItem('${q.qid}',1)">▼</button>
+          <button class="q-icon-btn" title="Duplicar ejercicio" aria-label="Duplicar" onclick="dupQueueItem('${q.qid}')">⧉</button>
+        </div>
+      </div>`;
+    });
+    wrap.innerHTML = html;
+    wireQueueDrag(wrap);
+
+    wrap.querySelectorAll('.q-detail').forEach(inp=>{
+      inp.addEventListener('input', e=>{
+        const q = sessionQueue.find(x=>String(x.qid)===String(e.target.dataset.qid));
+        if(q) q.detail = e.target.value;
+        localStorage.setItem('session_queue_v1', JSON.stringify(sessionQueue));
+      });
+      const saved = focusValues[inp.dataset.qid];
+      if(saved && saved.focused){ inp.focus(); try{ inp.setSelectionRange(saved.selStart, saved.selStart); }catch(e){} }
+    });
+  }
+
+  // Totales generales
+  const totalAll = sessionQueue.reduce((a,q)=>a+q.duration,0);
+  const totalLeft = sessionQueue.reduce((a,q)=>a+q.remaining,0);
+  document.getElementById('totalTimeAll').textContent = formatMMSS(totalAll);
+  document.getElementById('totalTimeLeft').textContent = formatMMSS(totalLeft);
+  const ring = document.getElementById('totalRing');
+  if(ring){
+    const circ = 2*Math.PI*27;
+    const frac = totalAll>0 ? (totalLeft/totalAll) : 0;
+    ring.setAttribute('stroke-dasharray', circ.toFixed(1));
+    ring.style.strokeDashoffset = String(circ * (1-(1-frac)));
+  }
+  renderSessionExSummary();
+}
+
+function persistQueue(){ localStorage.setItem('session_queue_v1', JSON.stringify(sessionQueue)); renderQueue(); renderKpis(); }
+
+/* Actualización liviana por tick: solo toca los nodos que cambian
+   (aro de progreso, número, texto "en curso"/"completado", botón
+   pausar/iniciar) SIN reconstruir el HTML completo de la cola cada
+   segundo. Esto evita el bug de que, con varias tarjetas agregadas,
+   el scroll se reiniciara y el texto se viera superpuesto/ilegible
+   por el redibujado constante del contenedor entero cada 1000ms. */
+function updateQueueTicks(){
+  const wrap = document.getElementById('sessionQueue');
+  if(!wrap) return;
+  sessionQueue.forEach(q=>{
+    const card = wrap.querySelector(`.q-card[data-qid="${q.qid}"]`);
+    if(!card) return;
+    card.classList.toggle('running', !!q.running);
+    card.classList.toggle('done', !!q.done);
+
+    const pct = q.duration>0 ? Math.max(0, Math.min(1, 1 - q.remaining/q.duration)) : 0;
+    const circ = 2*Math.PI*20;
+    const ringFill = card.querySelector('.ring-fill');
+    if(ringFill) ringFill.setAttribute('stroke-dashoffset', (circ*(1-pct)).toFixed(1));
+    const ringNum = card.querySelector('.q-ring-num');
+    if(ringNum) ringNum.textContent = q.done ? '✓' : formatMMSS(q.remaining);
+
+    const meta = card.querySelector('.q-meta');
+    if(meta) meta.textContent = qMetaText(q);
+
+    const playBtn = card.querySelector('.q-actions .q-icon-btn');
+    if(playBtn){
+      playBtn.classList.toggle('play', !q.running);
+      playBtn.classList.toggle('pause', !!q.running);
+      playBtn.title = q.running ? tt('qBtnPausar','Pausar') : tt('qBtnIniciar','Iniciar');
+      playBtn.innerHTML = q.running
+        ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>'
+        : '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7Z"/></svg>';
+    }
+  });
+
+  const totalAll = sessionQueue.reduce((a,q)=>a+q.duration,0);
+  const totalLeft = sessionQueue.reduce((a,q)=>a+q.remaining,0);
+  const totalTimeAllEl = document.getElementById('totalTimeAll'); if(totalTimeAllEl) totalTimeAllEl.textContent = formatMMSS(totalAll);
+  const totalTimeLeftEl = document.getElementById('totalTimeLeft'); if(totalTimeLeftEl) totalTimeLeftEl.textContent = formatMMSS(totalLeft);
+  const ring = document.getElementById('totalRing');
+  if(ring){
+    const circ = 2*Math.PI*27;
+    const frac = totalAll>0 ? (totalLeft/totalAll) : 0;
+    ring.setAttribute('stroke-dasharray', circ.toFixed(1));
+    ring.style.strokeDashoffset = String(circ * (1-(1-frac)));
+  }
+  renderSessionExSummary();
+}
+
+/* Ticker único: recorre la cola cada segundo y avanza los cronómetros en curso */
+setInterval(()=>{
+  if(!sessionQueue.length) return;
+  let changed = false;
+  let structural = false;
+  const chain = document.getElementById('chainMode')?.checked;
+  sessionQueue.forEach((q, idx)=>{
+    if(!q.running) return;
+    changed = true;
+    q.remaining = Math.max(0, q.remaining - 1);
+    if(q.remaining <= 0){
+      q.running = false; q.done = true;
+      playChime('end');
+      toast(window.CV_I18N ? window.CV_I18N.t('toastEjercicioCompletado')(q.name) : `Ejercicio "${q.name}" completado`, 'ok');
+      const card = document.querySelector(`.q-card[data-qid="${q.qid}"]`);
+      if(card){ card.classList.add('just-done'); setTimeout(()=>card.classList.remove('just-done'), 460); }
+      if(chain){
+        const next = sessionQueue[idx+1];
+        if(next && !next.done){ next.running = true; if(next.remaining<=0) next.remaining = next.duration; playChime('start'); structural = true; }
+      }
+    } else if(soundSettings.tickEnabled !== false){
+      playChime('tick');
+    }
+  });
+  if(changed){
+    localStorage.setItem('session_queue_v1', JSON.stringify(sessionQueue));
+    // Solo reconstruimos el HTML completo cuando cambia la estructura visual
+    // de los botones de encadenado (modo cadena activa el siguiente ejercicio);
+    // el resto de los segundos solo actualizamos los nodos necesarios.
+    if(structural) renderQueue(); else updateQueueTicks();
+    renderKpis();
+  }
+}, 1000);
+
+/* (El antiguo checklist de ejercicios por sesión fue reemplazado por la cola
+   "Sesión de hoy" en la sección Ejercicios — ver renderSessionExSummary/renderQueue) */
+
+/* ---------- Piano build (fixed alignment) ---------- */
+function buildPiano(){
+  const keysContainer = document.getElementById('pianoKeys');
+  if(!keysContainer) return;
+  keysContainer.innerHTML = '';
+  midiToKeyEl = {};
+  const whiteWidth = 44, blackWidth = 28;
+  let whiteIndex = 0;
+
+  // First pass: white keys, in document flow inside the same positioned container
+  for(let m=PIANO_START_MIDI; m<=PIANO_END_MIDI; m++){
+    const noteIndex = m % 12;
+    if(!BLACK_MAP[noteIndex]){
+      const octave = Math.floor(m/12)-1;
+      const label = NOTE_NAMES_LATIN[noteIndex] + octave;
+      const wk = document.createElement('div');
+      wk.className = 'white-key'; wk.dataset.midi = m; wk.dataset.note = NOTE_NAMES_LATIN[noteIndex];
+      wk.setAttribute('tabindex','0'); wk.setAttribute('role','button'); wk.setAttribute('aria-label', `Reproducir nota ${label}`);
+      wk.innerHTML = `<div style="padding-bottom:6px">${label}</div>`;
+      keysContainer.appendChild(wk);
+      midiToKeyEl[m] = wk; whiteIndex++;
+    }
+  }
+
+  // Second pass: black keys, appended to the SAME container so their absolute
+  // positioning is relative to the exact same coordinate system as the white keys
+  // (this is what fixes the old visual misalignment bug).
+  whiteIndex = 0;
+  for(let m=PIANO_START_MIDI; m<=PIANO_END_MIDI; m++){
+    const noteIndex = m % 12;
+    if(!BLACK_MAP[noteIndex]){ whiteIndex++; continue; }
+    const octave = Math.floor(m/12)-1;
+    const label = NOTE_NAMES_LATIN[noteIndex] + octave;
+    const left = whiteIndex * whiteWidth - (blackWidth/2);
+    const bk = document.createElement('div');
+    bk.className = 'black-key'; bk.style.left = left + 'px'; bk.dataset.midi = m; bk.dataset.note = NOTE_NAMES_LATIN[noteIndex];
+    bk.setAttribute('tabindex','0'); bk.setAttribute('role','button'); bk.setAttribute('aria-label', `Reproducir nota ${label}`);
+    bk.innerHTML = `<div style="padding-bottom:5px">${label}</div>`;
+    keysContainer.appendChild(bk);
+    midiToKeyEl[m] = bk;
+  }
+  attachPianoPlay();
+}
+
+/* ---------- Audio: mic, sonómetro y pitch detection ---------- */
+async function ensureAudioContext(){
+  if(window.audioContext) return window.audioContext;
+  window.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  return window.audioContext;
+}
+
+async function toggleMic(){ if(!window.audioContext) await startMic(); else { if(!mediaStream) await startMic(); } }
+async function startMic(){
+  try{
+    mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+    const audioCtx = await ensureAudioContext();
+    const source = audioCtx.createMediaStreamSource(mediaStream);
+    analyser = audioCtx.createAnalyser(); analyser.fftSize = 2048;
+    source.connect(analyser);
+
+    const buffer = new Float32Array(analyser.fftSize);
+    function update(){
+      analyser.getFloatTimeDomainData(buffer);
+      let rms = 0; for(let i=0;i<buffer.length;i++) rms += buffer[i]*buffer[i];
+      rms = Math.sqrt(rms / buffer.length);
+      const db = (rms > 0) ? (20 * Math.log10(rms) + 100) : -Infinity;
+      const clamped = isFinite(db) ? Math.max(0, Math.min(110, Math.round(db))) : null;
+      document.getElementById('dbDisplay').textContent = clamped !== null ? clamped : '--';
+      const frac = clamped !== null ? Math.min(1, clamped/110) : 0;
+      document.getElementById('gaugeFill').style.strokeDashoffset = String(GAUGE_CIRC * (1-frac));
+      lastDbValue = clamped; document.getElementById('lastDb').textContent = clamped !== null ? clamped : '--';
+
+      const pitch = autoCorrelate(buffer, audioCtx.sampleRate);
+      if(pitch && pitch !== -1){
+        const note = freqToNote(pitch);
+        highlightMidi(note.midi, true);
+        document.getElementById('noteName').textContent = `${note.name} (${note.cents.toFixed(1)}¢)`;
+        document.getElementById('freqDisplay').textContent = pitch.toFixed(1) + ' Hz';
+        lastNoteDetected = note.name + ' @' + pitch.toFixed(1) + 'Hz';
+        document.getElementById('lastNote').textContent = note.name;
+        centerPianoOnKey(note.midi);
+      } else {
+        highlightMidi(null, true);
+        document.getElementById('noteName').textContent = '--';
+        document.getElementById('freqDisplay').textContent = '-- Hz';
+        lastNoteDetected = null;
+        document.getElementById('lastNote').textContent = '--';
+      }
+      if(window.audioContext) requestAnimationFrame(update);
+    }
+    update();
+    document.getElementById('micBtn').innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4"/></svg> Mic activo';
+    document.getElementById('statusDot').classList.add('live');
+    document.getElementById('statusText').textContent = 'Escuchando…';
+  }catch(err){
+    console.error('Mic error', err);
+    toast((window.CV_I18N ? window.CV_I18N.t('toastErrorMic')(err.message || err) : 'No se pudo acceder al micrófono: ' + (err.message || err)), 'err');
+  }
+}
+
+function stopMic(){
+  if(mediaStream){ mediaStream.getTracks().forEach(t=>t.stop()); mediaStream = null; }
+  if(window.audioContext){ try{ window.audioContext.close(); }catch(e){} window.audioContext = null; analyser = null; }
+  highlightMidi(null, true);
+  document.getElementById('dbDisplay').textContent = '--';
+  document.getElementById('gaugeFill').style.strokeDashoffset = String(GAUGE_CIRC);
+  document.getElementById('noteName').textContent = '--'; document.getElementById('freqDisplay').textContent = '-- Hz';
+  document.getElementById('micBtn').innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4"/></svg> Iniciar micrófono';
+  document.getElementById('statusDot').classList.remove('live');
+  document.getElementById('statusText').textContent = 'Micrófono inactivo';
+}
+
+/* autocorrelation robust */
+function autoCorrelate(buf, sampleRate){
+  const SIZE = buf.length;
+  let rms = 0;
+  for(let i=0;i<SIZE;i++) rms += buf[i]*buf[i];
+  rms = Math.sqrt(rms / SIZE);
+  if(rms < 0.01) return -1;
+  let r1 = 0, r2 = SIZE - 1;
+  for(let i=0;i<SIZE/2;i++){ if(Math.abs(buf[i]) < 0.2){ r1 = i; break; } }
+  for(let i=1;i<SIZE/2;i++){ if(Math.abs(buf[SIZE - i]) < 0.2){ r2 = SIZE - i; break; } }
+  const trimmed = buf.slice(r1, r2);
+  const newSize = trimmed.length;
+  const c = new Array(newSize).fill(0);
+  for(let i=0;i<newSize;i++){ for(let j=0;j<newSize - i;j++){ c[i] += trimmed[j] * trimmed[j + i]; } }
+  let d = 0;
+  while(c[d] > c[d+1]) d++;
+  let maxPos = d;
+  for(let i=d;i<newSize;i++) if(c[i] > c[maxPos]) maxPos = i;
+  let T0 = maxPos;
+  if(!T0) return -1;
+  const x1 = c[T0-1], x2 = c[T0], x3 = c[T0+1];
+  const a = (x1 + x3 - 2 * x2) / 2;
+  const b = (x3 - x1) / 2;
+  if(a) T0 = T0 - b / (2 * a);
+  const frequency = sampleRate / T0;
+  if(frequency < 50 || frequency > 2000) return -1;
+  return frequency;
+}
+
+function freqToNote(freq){
+  const midiFloat = 69 + 12 * Math.log2(freq / 440);
+  const midi = Math.round(midiFloat);
+  const octave = Math.floor(midi / 12) - 1;
+  const name = (NOTE_NAMES_LATIN[midi % 12] || '?') + octave;
+  const exactFreq = 440 * Math.pow(2, (midi - 69) / 12);
+  const cents = 1200 * Math.log2(freq / exactFreq);
+  return { midi, name, freq: exactFreq, cents };
+}
+
+function highlightMidi(midi, isLive){
+  const cls = isLive ? 'key-live' : 'key-active';
+  Object.values(midiToKeyEl).forEach(el => { if(el && el.classList) el.classList.remove(cls); });
+  if(!midi) return;
+  const el = midiToKeyEl[midi];
+  if(el){
+    el.classList.add(cls);
+    if(isLive) spawnHeartPulse(el);
+  }
+}
+
+function spawnHeartPulse(keyEl){
+  const now = Date.now();
+  if(keyEl._lastHeart && now - keyEl._lastHeart < 550) return;
+  keyEl._lastHeart = now;
+  const heart = document.createElement('div');
+  heart.className = 'heart-pulse'; heart.textContent = '💗';
+  heart.style.left = '50%';
+  // Las teclas blancas son position:static por defecto (viven en el flex del
+  // piano) y necesitan un contexto posicionado para que el corazón flotante
+  // se ubique bien; las negras YA son position:absolute vía CSS con un
+  // `left` inline que las coloca sobre las blancas, así que no se tocan
+  // (sobrescribir su position las sacaría de su lugar y rompería el piano).
+  if(getComputedStyle(keyEl).position === 'static') keyEl.style.position = 'relative';
+  keyEl.appendChild(heart);
+  setTimeout(()=> heart.remove(), 520);
+}
+
+function centerPianoOnKey(midi){
+  const el = midiToKeyEl[midi];
+  const pianoWrap = document.getElementById('pianoWrap');
+  if(!el || !pianoWrap) return;
+  const rect = el.getBoundingClientRect();
+  const wrapRect = pianoWrap.getBoundingClientRect();
+  const offset = (rect.left + rect.width/2) - (wrapRect.left + wrapRect.width/2);
+  pianoWrap.scrollLeft += offset;
+}
+
+/* ---------- Recording WAV ---------- */
+async function toggleRecord(){ if(!recorder.recording) await startRecording(); else stopRecording(); }
+async function startRecording(){
+  if(recorder.recording) return;
+  if(!mediaStream){
+    try{ mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false }); }catch(e){ toast(tt('toastDebePermitirMic','Debe permitir el micrófono para grabar.'), 'err'); return; }
+  }
+  if(!window.audioContext) await ensureAudioContext();
+  recorder.buffer = []; recorder.lastDataUrl = null; recorder.lastObjectUrl = null; recorder.lastFilename = null;
+
+  const src = window.audioContext.createMediaStreamSource(mediaStream);
+  const script = window.audioContext.createScriptProcessor(4096,1,1);
+  script.onaudioprocess = function(e){
+    if(!recorder.recording) return;
+    const ch = e.inputBuffer.getChannelData(0);
+    recorder.buffer.push(new Float32Array(ch));
+  };
+  src.connect(script);
+  script.connect(window.audioContext.destination);
+
+  recorder.node = script; recorder.source = src; recorder.recording = true;
+  document.getElementById('recBtn').innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="6" width="12" height="12" rx="2"/></svg> Detener';
+  document.getElementById('recBtn').classList.add('btn-danger');
+}
+
+function stopRecording(){
+  if(!recorder.recording) return;
+  recorder.recording = false;
+  if(recorder.node){ try{ recorder.node.disconnect(); }catch(e){} recorder.node = null; }
+  if(recorder.source){ try{ recorder.source.disconnect(); }catch(e){} recorder.source = null; }
+
+  let length = 0; for(const b of recorder.buffer) length += b.length;
+  const merged = new Float32Array(length); let offset = 0;
+  for(const b of recorder.buffer){ merged.set(b, offset); offset += b.length; }
+
+  const wavView = encodeWAV(merged, window.audioContext.sampleRate);
+  const blob = new Blob([wavView], { type: 'audio/wav' });
+
+  const ts = new Date();
+  const pad = (n)=> String(n).padStart(2,'0');
+  const filename = `sesion_${ts.getFullYear()}${pad(ts.getMonth()+1)}${pad(ts.getDate())}_${pad(ts.getHours())}${pad(ts.getMinutes())}${pad(ts.getSeconds())}.wav`;
+  recorder.lastFilename = filename;
+
+  if(recorder.lastObjectUrl) URL.revokeObjectURL(recorder.lastObjectUrl);
+  const objectUrl = URL.createObjectURL(blob);
+  recorder.lastObjectUrl = objectUrl;
+
+  const player = document.getElementById('playbackAudio'); player.src = objectUrl; player.style.display = 'block';
+  const dl = document.getElementById('downloadAudio'); dl.href = objectUrl; dl.download = filename; dl.style.display = 'inline-flex'; dl.textContent = 'Descargar WAV';
+
+  const reader = new FileReader();
+  reader.onload = function(e){ recorder.lastDataUrl = e.target.result; };
+  reader.readAsDataURL(blob);
+
+  document.getElementById('recBtn').innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="6"/></svg> Grabar';
+  document.getElementById('recBtn').classList.remove('btn-danger');
+  toast(tt('toastGrabacionLista','Grabación lista para descargar'), 'ok');
+}
+
+function encodeWAV(samples, sampleRate){
+  const buffer = new ArrayBuffer(44 + samples.length * 2);
+  const view = new DataView(buffer);
+  function writeString(view, offset, string){ for(let i=0;i<string.length;i++) view.setUint8(offset + i, string.charCodeAt(i)); }
+  let offset = 0;
+  writeString(view, offset, 'RIFF'); offset += 4;
+  view.setUint32(offset, 36 + samples.length * 2, true); offset += 4;
+  writeString(view, offset, 'WAVE'); offset += 4;
+  writeString(view, offset, 'fmt '); offset += 4;
+  view.setUint32(offset, 16, true); offset += 4;
+  view.setUint16(offset, 1, true); offset += 2;
+  view.setUint16(offset, 1, true); offset += 2;
+  view.setUint32(offset, sampleRate, true); offset += 4;
+  view.setUint32(offset, sampleRate * 2, true); offset += 4;
+  view.setUint16(offset, 2, true); offset += 2;
+  view.setUint16(offset, 16, true); offset += 2;
+  writeString(view, offset, 'data'); offset += 4;
+  view.setUint32(offset, samples.length * 2, true); offset += 4;
+  for(let i=0;i<samples.length;i++){
+    let s = Math.max(-1, Math.min(1, samples[i]));
+    view.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
+    offset += 2;
+  }
+  return view;
+}
+
+/* ---------- Playable piano (simple synth) + keyboard play ---------- */
+(function(){
+  const midiToFreq = midi => 440 * Math.pow(2, (midi - 69) / 12);
+  function ensureAudioCtx(){ if(window.audioContext) return window.audioContext; window.audioContext = new (window.AudioContext || window.webkitAudioContext)(); return window.audioContext; }
+
+  function playNote(midi, duration = 1.0, velocity = 0.9){
+    const volFactor = (typeof effectiveVol === 'function') ? effectiveVol('piano') : 1;
+    if(volFactor <= 0) return;
+    velocity = velocity * volFactor;
+    const audioCtx = ensureAudioCtx();
+    const now = audioCtx.currentTime;
+    const masterGain = audioCtx.createGain();
+    const filter = audioCtx.createBiquadFilter();
+    filter.type = 'lowpass'; filter.frequency.value = 3000;
+    masterGain.gain.value = 0; masterGain.connect(filter); filter.connect(audioCtx.destination);
+
+    const freq = midiToFreq(midi);
+    const osc1 = audioCtx.createOscillator(); osc1.type = 'sine'; osc1.frequency.value = freq;
+    const g1 = audioCtx.createGain(); g1.gain.value = 0; osc1.connect(g1); g1.connect(masterGain);
+
+    const osc2 = audioCtx.createOscillator(); osc2.type = 'sine'; osc2.frequency.value = freq * 2.0;
+    const g2 = audioCtx.createGain(); g2.gain.value = 0; osc2.connect(g2); g2.connect(masterGain);
+
+    const osc3 = audioCtx.createOscillator(); osc3.type = 'sine'; osc3.frequency.value = freq * 3.0;
+    const g3 = audioCtx.createGain(); g3.gain.value = 0; osc3.connect(g3); g3.connect(masterGain);
+
+    const attack = 0.01; const release = Math.max(0.18, duration * 0.28);
+    osc1.start(now); osc2.start(now); osc3.start(now);
+
+    g1.gain.setValueAtTime(0, now); g1.gain.linearRampToValueAtTime(1.0 * velocity, now + attack); g1.gain.exponentialRampToValueAtTime(0.0001, now + duration + release);
+    g2.gain.setValueAtTime(0, now); g2.gain.linearRampToValueAtTime(0.45 * velocity, now + attack); g2.gain.exponentialRampToValueAtTime(0.0001, now + duration + release);
+    g3.gain.setValueAtTime(0, now); g3.gain.linearRampToValueAtTime(0.18 * velocity, now + attack); g3.gain.exponentialRampToValueAtTime(0.0001, now + duration + release);
+
+    masterGain.gain.setValueAtTime(0.0001, now); masterGain.gain.linearRampToValueAtTime(1.0 * velocity, now + attack + 0.005); masterGain.gain.exponentialRampToValueAtTime(0.0005, now + duration + release);
+
+    filter.frequency.setValueAtTime(1200, now); filter.frequency.exponentialRampToValueAtTime(3200, now + 0.03); filter.frequency.exponentialRampToValueAtTime(800, now + duration + release);
+
+    const stopTime = now + duration + release + 0.05;
+    osc1.stop(stopTime); osc2.stop(stopTime); osc3.stop(stopTime);
+    setTimeout(()=>{ try{ osc1.disconnect(); osc2.disconnect(); osc3.disconnect(); g1.disconnect(); g2.disconnect(); g3.disconnect(); masterGain.disconnect(); filter.disconnect(); }catch(e){} }, (duration + release + 0.2)*1000);
+  }
+  window._playNote = playNote;
+
+  function flashKey(midi){
+    const el = midiToKeyEl[midi];
+    if(!el) return;
+    el.classList.add('key-active');
+    clearTimeout(el._flashTimer);
+    el._flashTimer = setTimeout(()=> el.classList.remove('key-active'), 220);
+  }
+  window._flashKey = flashKey;
+
+  window.attachPianoPlay = function attachPianoPlay(){
+    const keys = Array.from(document.querySelectorAll('.white-key, .black-key'));
+    keys.forEach(k=>{
+      if(k.dataset._listenerAttached) return;
+      const midi = parseInt(k.dataset.midi,10);
+      if(!isFinite(midi)) return;
+      k.addEventListener('pointerdown', (ev)=>{
+        ev.preventDefault();
+        playNote(midi, 1.1, 0.95);
+        flashKey(midi);
+      }, {passive:false});
+      k.addEventListener('keydown', (ev)=>{
+        if(ev.key === 'Enter' || ev.key === ' '){
+          ev.preventDefault();
+          playNote(midi, 1.1, 0.95);
+          flashKey(midi);
+        }
+      });
+      k.dataset._listenerAttached = '1';
+    });
+  };
+
+  /* ---- Computer-keyboard piano ---- */
+  const KEY_SEMITONES = {
+    'a':0, 'w':1, 's':2, 'e':3, 'd':4, 'f':5, 't':6, 'g':7, 'y':8, 'h':9, 'u':10, 'j':11,
+    'k':12, 'o':13, 'l':14, 'p':15, 'ñ':16, "'":16, ';':16
+  };
+  const heldKeys = new Set();
+
+  window.attachKeyboardPiano = function attachKeyboardPiano(){
+    document.addEventListener('keydown', (ev)=>{
+      const tag = (document.activeElement && document.activeElement.tagName) || '';
+      if(['INPUT','TEXTAREA','SELECT'].includes(tag)) return;
+      const key = ev.key.toLowerCase();
+      if(key === 'z'){ shiftOctave(-1); return; }
+      if(key === 'x'){ shiftOctave(1); return; }
+      if(!(key in KEY_SEMITONES)) return;
+      if(heldKeys.has(key)) return; // ignore key-repeat
+      heldKeys.add(key);
+      const midi = 60 + keyboardOctaveShift*12 + KEY_SEMITONES[key];
+      if(midi < PIANO_START_MIDI || midi > PIANO_END_MIDI) return;
+      ev.preventDefault();
+      playNote(midi, 1.0, 0.95);
+      flashKey(midi);
+    });
+    document.addEventListener('keyup', (ev)=>{
+      heldKeys.delete(ev.key.toLowerCase());
+    });
+  };
+
+  window.shiftOctave = function shiftOctave(dir){
+    keyboardOctaveShift = Math.max(-1, Math.min(1, keyboardOctaveShift + dir));
+    const label = keyboardOctaveShift === 0 ? 'central' : (keyboardOctaveShift > 0 ? `+${keyboardOctaveShift}` : String(keyboardOctaveShift));
+    document.getElementById('octaveIndicator').textContent = label;
+  };
+
+  window.addPlayDetectedButton = function addPlayDetectedButton(){
+    const noteEl = document.getElementById('noteName');
+    if(!noteEl) return;
+    if(document.getElementById('playDetectedBtn')) return;
+    const btn = document.createElement('button');
+    btn.id = 'playDetectedBtn';
+    btn.className = 'btn btn-ghost btn-sm';
+    btn.style.marginTop = '8px';
+    btn.textContent = 'Tocar nota';
+    btn.title = 'Reproducir la nota detectada como referencia';
+    btn.addEventListener('click', ()=>{
+      const text = (noteEl.textContent || '').trim();
+      if(!text || text === '--'){ toast(tt('toastSinNotaDetectada','No hay nota detectada para reproducir.'), 'err'); return; }
+      const m = text.match(/^([A-Za-z#♯]+\-?\d+)/);
+      let nameOct = m ? m[1] : null;
+      if(!nameOct && window.lastNoteDetected){
+        const mm = window.lastNoteDetected.match(/^([A-Za-z#♯]+\-?\d+)/);
+        if(mm) nameOct = mm[1];
+      }
+      if(nameOct){
+        const mapping = {'Do':0,'Do#':1,'Re':2,'Re#':3,'Mi':4,'Fa':5,'Fa#':6,'Sol':7,'Sol#':8,'La':9,'La#':10,'Si':11};
+        const nm = nameOct.replace(/♯/g,'#');
+        const noteName = nm.replace(/\d+$/,'');
+        const octave = parseInt(nm.match(/\d+$/)? nm.match(/\d+$/)[0] : '4',10);
+        const semitone = mapping[noteName];
+        if(semitone !== undefined){
+          const midi = (octave + 1) * 12 + semitone;
+          playNote(midi, 1.2, 0.95);
+          return;
+        }
+      }
+      const freqText = (document.getElementById('freqDisplay')?.textContent || '').trim();
+      const freqMatch = freqText.match(/([\d\.]+)\s*Hz/);
+      if(freqMatch){
+        const f = parseFloat(freqMatch[1]);
+        if(isFinite(f)){
+          const midiFloat = 69 + 12 * Math.log2(f / 440);
+          const midi = Math.round(midiFloat);
+          playNote(midi, 1.2, 0.95);
+          return;
+        }
+      }
+      toast(tt('toastNoIdentificoNota','No se pudo identificar la nota detectada.'), 'err');
+    });
+    noteEl.insertAdjacentElement('afterend', btn);
+  };
+})();
+
+/* ---------- Sesión: sensaciones toggle & guardado ---------- */
+function toggleSensBox(){
+  const s=document.getElementById('sensBox'), b=document.getElementById('sensToggle');
+  if(!s) return;
+  const showing = s.style.display==='none' || s.style.display==='';
+  s.style.display = showing ? 'flex' : 'none';
+  b.textContent = showing ? 'Ocultar sensaciones' : 'Agregar sensaciones';
+}
+
+function resetSessionForm(){
+  document.getElementById('participantId').value='';
+  document.getElementById('focusText').value='';
+  document.getElementById('observaciones').value='';
+  document.getElementById('evidence').value='';
+  document.getElementById('sessionDate').value='';
+  if(document.getElementById('sensBox')) document.querySelectorAll('#sensBox input[type="checkbox"]').forEach(c=>c.checked=false);
+  renderSessionExSummary();
+}
+
+function saveSession(){
+  if(recorder.recording){ toast(tt('toastDetengaGrabacion','Detenga la grabación antes de guardar la sesión.'), 'err'); return; }
+  const pid = document.getElementById('participantId').value.trim();
+  if(!pid){ toast(tt('toastIngreseNombrePaciente','Ingrese el nombre o ID del paciente.'), 'err'); return; }
+  const focus = document.getElementById('focusText').value.trim();
+  const sens = Array.from(document.querySelectorAll('#sensBox input[type="checkbox"]')).filter(i=>i.checked).map(i=>i.value);
+  const observations = document.getElementById('observaciones').value.trim();
+  const file = document.getElementById('evidence').files[0];
+
+  const exercisesDone = sessionQueue.map(q=>({ name: q.name, category: q.category||'Otros', dosage: q.dosage||'', duration: q.duration, detail: (q.detail||'').trim(), completed: !!q.done }));
+
+  const dateInput = document.getElementById('sessionDate').value.trim();
+  const dParsed = dateInput ? new Date(dateInput) : new Date();
+  const dateIso = (isNaN(dParsed.getTime()) ? new Date() : dParsed).toISOString();
+
+  const session = {
+    id: Date.now(),
+    participantId: pid,
+    focus,
+    sensaciones: sens,
+    observaciones: observations || '',
+    date: isNaN(new Date(dateIso).getTime()) ? new Date().toISOString() : dateIso,
+    evidence: null,
+    audioWav: recorder.lastDataUrl || null,
+    audioFilename: recorder.lastFilename || null,
+    exercisesDone,
+    lastDb: lastDbValue ?? null,
+    lastNote: lastNoteDetected || null
+  };
+
+  const push = ()=>{
+    sessions.push(session); persistSessions(); resetSessionForm();
+    sessionQueue = []; persistQueue();
+    toast(tt('toastSesionGuardada','Sesión guardada correctamente 💗'), 'ok');
+  };
+  if(file){
+    const reader = new FileReader();
+    reader.onload = e=>{ session.evidence = e.target.result; push(); };
+    reader.onerror = ()=>{ toast(tt('toastErrorImagen','Error leyendo imagen'), 'err'); push(); };
+    reader.readAsDataURL(file);
+  } else push();
+}
+
+/* ---------- Historial UI ---------- */
+function getFilteredSessions(){
+  const q = (document.getElementById('searchReg')?.value || '').toLowerCase().trim();
+  return sessions.map((r, idx)=>({r, idx})).filter(({r})=>{
+    if(!q) return true;
+    const hay = `${r.participantId} ${r.focus} ${r.observaciones}`.toLowerCase();
+    return hay.includes(q);
+  });
+}
+
+function getExportTargets(){
+  if(selectedSessionIds.size) return sessions.filter(r=>selectedSessionIds.has(r.id));
+  return getFilteredSessions().map(o=>o.r);
+}
+
+function updateExportScopeHint(){
+  const hint = document.getElementById('exportScopeHint');
+  if(!hint) return;
+  if(selectedSessionIds.size){
+    hint.textContent = window.CV_I18N ? window.CV_I18N.t('scopeSeleccionadas')(selectedSessionIds.size) : `Las exportaciones incluirán las ${selectedSessionIds.size} sesión(es) seleccionadas.`;
+  } else {
+    const filteredCount = getFilteredSessions().length;
+    hint.textContent = filteredCount === sessions.length
+      ? (window.CV_I18N ? window.CV_I18N.t('scopeTodas')(sessions.length) : `Las exportaciones incluirán las ${sessions.length} sesión(es) del historial.`)
+      : (window.CV_I18N ? window.CV_I18N.t('scopeFiltro')(filteredCount) : `Las exportaciones incluirán las ${filteredCount} sesión(es) que coinciden con el filtro actual.`);
+  }
+}
+
+function toggleSelectReg(id, checked){
+  if(checked) selectedSessionIds.add(id); else selectedSessionIds.delete(id);
+  updateSelectionUI(); updateExportScopeHint();
+}
+function toggleSelectAllVisible(checkbox){
+  const filtered = getFilteredSessions();
+  filtered.forEach(({r})=>{ if(checkbox.checked) selectedSessionIds.add(r.id); else selectedSessionIds.delete(r.id); });
+  renderRegContainer();
+}
+function updateSelectionUI(){
+  const count = selectedSessionIds.size;
+  const bar = document.getElementById('selectionBar');
+  bar.style.display = count > 0 ? 'flex' : 'none';
+  document.getElementById('selectionCount').textContent = count;
+  const lbl = document.getElementById('selectionCountLbl');
+  if(lbl) lbl.textContent = window.CV_I18N ? window.CV_I18N.t('selEtiqueta')(count) : (count===1?'sesión seleccionada':'sesiones seleccionadas');
+}
+function clearSelection(){ selectedSessionIds.clear(); renderRegContainer(); }
+
+function renderRegContainer(){
+  const cont = document.getElementById('regContainer');
+  const countEl = document.getElementById('regCount');
+  renderPatientTable();
+  const filtered = getFilteredSessions();
+  if(countEl) countEl.textContent = window.CV_I18N ? window.CV_I18N.t('conteoFiltrado')(filtered.length, sessions.length) : `${filtered.length} de ${sessions.length} sesión(es)`;
+  updateSelectionUI();
+  updateExportScopeHint();
+  if(!sessions.length){ cont.innerHTML = `<div class="reg-empty">${tt('regVacioSinSesiones','Aún no hay sesiones registradas. Complétalas desde "📝 Registrar sesión".')}</div>`; return; }
+  if(!filtered.length){ cont.innerHTML = `<div class="reg-empty">${tt('regVacioSinCoincidencias','No hay sesiones que coincidan con la búsqueda.')}</div>`; return; }
+
+  const allVisibleSelected = filtered.every(({r})=>selectedSessionIds.has(r.id));
+  let html = `<div class="table-scroll"><table><thead><tr>
+    <th><input type="checkbox" ${allVisibleSelected?'checked':''} onclick="toggleSelectAllVisible(this)" aria-label="${tt('ariaSeleccionarTodas','Seleccionar todas las visibles')}"></th>
+    <th>${tt('thPaciente','Paciente')}</th><th>${tt('thFecha','Fecha')}</th><th>${tt('thFoco','Foco')}</th><th>${tt('thEjercicios','Ejercicios')}</th><th>${tt('thEvidencia','Evidencia')}</th><th>${tt('thAudio','Audio')}</th><th></th></tr></thead><tbody>`;
+  filtered.forEach(({r, idx})=>{
+    const audioCell = r.audioWav ? `<a href="${r.audioWav}" download="${r.audioFilename || 'sesion_'+(idx+1)+'.wav'}">${tt('btnDescargar','Descargar')}</a>` : '<span class="sm">—</span>';
+    const exCell = (r.exercisesDone && r.exercisesDone.length) ? `<button class="badge-pill" style="border:0;cursor:pointer" title="Ver detalle" onclick="openSessionDetail(${idx})">${window.CV_I18N ? window.CV_I18N.t('exNumEjercicios')(r.exercisesDone.length) : r.exercisesDone.length+' ejercicio(s)'}</button>` : '<span class="sm">—</span>';
+    html += `<tr>
+      <td><input type="checkbox" ${selectedSessionIds.has(r.id)?'checked':''} onchange="toggleSelectReg(${r.id}, this.checked)" aria-label="${tt('ariaSeleccionarSesion','Seleccionar sesión')}"></td>
+      <td><strong>${escapeHtml(r.participantId)||'—'}</strong></td>
+      <td>${new Date(r.date).toLocaleString('es-CL')}</td>
+      <td>${escapeHtml(friendlyFocus(r.focus))}</td>
+      <td>${exCell}</td>
+      <td>${r.evidence ? '<img class="thumb" src="'+r.evidence+'">' : '<span class="sm">—</span>'}</td>
+      <td>${audioCell}</td>
+      <td><div class="row-actions">
+        <button class="icon-btn" title="Ver detalle" aria-label="Ver detalle de la sesión" onclick="openSessionDetail(${idx})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8Z"/><circle cx="12" cy="12" r="3"/></svg></button>
+        <button class="icon-btn" title="${tt('titleExportarRegistro','Exportar')}" aria-label="${tt('ariaExportarRegistro','Exportar este registro')}" onclick="exportRegistro(${idx})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></button>
+        <button class="icon-btn danger" title="${tt('titleEliminarRegistro','Eliminar')}" aria-label="${tt('ariaEliminarRegistro','Eliminar este registro')}" onclick="deleteRegistro(${idx})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6"/></svg></button>
+      </div></td>
+    </tr>`;
+  });
+  html += '</tbody></table></div>';
+  cont.innerHTML = html;
+}
+
+async function deleteRegistro(i){
+  const ok = await confirmModal({ title:tt('modalEliminarSesionTitulo','Eliminar sesión'), message:tt('modalEliminarSesionMsg','¿Eliminar esta sesión? Esta acción no se puede deshacer.'), confirmText:tt('modalEliminarBtn','Eliminar'), danger:true });
+  if(!ok) return;
+  const [removed] = sessions.splice(i,1);
+  if(removed) selectedSessionIds.delete(removed.id);
+  persistSessions();
+  toast(tt('toastSesionEliminada','Sesión eliminada'), 'ok');
+}
+function exportRegistro(i){ const blob = new Blob([JSON.stringify(sessions[i], null, 2)], { type:'application/json' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `sesion_${i+1}.json`; a.click(); URL.revokeObjectURL(url); }
+
+function exportJSON(){
+  const targets = getExportTargets();
+  if(!targets.length){ toast(tt('toastNoHaySesionesExportar','No hay sesiones para exportar.'), 'err'); return; }
+  const blob = new Blob([JSON.stringify(targets,null,2)], { type:'application/json' });
+  const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `sesiones_${new Date().toISOString().slice(0,10)}.json`; a.click(); URL.revokeObjectURL(url);
+  toast(window.CV_I18N ? window.CV_I18N.t('toastJsonExportado')(targets.length) : `JSON exportado (${targets.length} sesión(es))`, 'ok');
+}
+function exportCSV(){
+  const targets = getExportTargets();
+  if(!targets.length){ toast(tt('toastNoHaySesionesExportar','No hay sesiones para exportar.'), 'err'); return; }
+  const headers = ['Paciente','Fecha','Foco','Ejercicios realizados','Sensaciones','Observaciones','dB registrado','Nota registrada'];
+  const rows = targets.map(r=>[
+    r.participantId, new Date(r.date).toLocaleString('es-CL'), friendlyFocus(r.focus),
+    (r.exercisesDone||[]).map(e=>`${e.name} (${e.duration}s)${e.detail?' — '+e.detail:''}`).join('; '),
+    (r.sensaciones||[]).join('; '), r.observaciones, r.lastDb ?? '', r.lastNote ?? ''
+  ]);
+  downloadCsv(`sesiones_${new Date().toISOString().slice(0,10)}.csv`, [headers, ...rows]);
+  toast(window.CV_I18N ? window.CV_I18N.t('toastCsvExportado')(targets.length) : `CSV exportado (${targets.length} sesión(es))`, 'ok');
+}
+async function clearAll(){
+  const ok = await confirmModal({ title:tt('modalBorrarTodasTitulo','Borrar todas las sesiones'), message:tt('modalBorrarTodasMsg','¿Borrar todas las sesiones? Esta acción no se puede deshacer.'), confirmText:tt('modalBorrarTodoBtn','Borrar todo'), danger:true });
+  if(!ok) return;
+  sessions = []; selectedSessionIds.clear(); persistSessions();
+  toast(tt('toastHistorialBorrado','Historial borrado'), 'ok');
+}
+
+
+/* ================= Planes de sesión (preparar, guardar, repetir, exportar/importar) ================= */
+let plans = JSON.parse(localStorage.getItem('session_plans_v1') || '[]');
+function persistPlans(){ localStorage.setItem('session_plans_v1', JSON.stringify(plans)); renderPlans(); }
+const planItem = e => ({ exId: e.exId ?? (exercises.find(x=>x.name===e.name)?.id ?? null), name:e.name, category:e.category||'Otros', dosage:e.dosage||'', duration:Math.max(1,parseInt(e.duration,10)||60), detail:e.detail||'' });
+const planTotal = p => p.items.reduce((a,i)=>a+i.duration,0);
+function dl(name, obj){ const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([JSON.stringify(obj,null,2)],{type:'application/json'})); a.download=name; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),500); }
+const slug = t => (t||'sesion').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/gi,'_').toLowerCase().slice(0,40);
+
+function savePlan(){
+  if(!sessionQueue.length){ toast('Primero agrega ejercicios a la sesión de hoy','err'); return; }
+  const patient = (document.getElementById('planPatient').value || document.getElementById('participantId').value).trim();
+  const when = document.getElementById('planWhen').value;
+  const name = document.getElementById('planName').value.trim() || ((patient||'Plan')+' · '+new Date().toLocaleDateString('es-CL'));
+  const data = { name, patient, scheduledFor: when||'', focus: document.getElementById('focusText').value.trim(), items: sessionQueue.map(planItem), updatedAt: new Date().toISOString() };
+  const ex = plans.find(p=>p.name.toLowerCase()===name.toLowerCase());
+  if(ex){ Object.assign(ex,data); toast('Plan actualizado: '+name,'ok'); }
+  else { plans.push({ id: Date.now(), createdAt: data.updatedAt, ...data }); toast('Plan guardado: '+name,'ok'); }
+  persistPlans(); document.getElementById('planName').value='';
+}
+function loadPlan(id, append){
+  const p = plans.find(x=>x.id===id); if(!p) return;
+  const go = ()=>{
+    const items = p.items.map(i=>({ ...mkQItem({...i, id:i.exId}), qid: Date.now()+Math.random() }));
+    sessionQueue = append ? [...sessionQueue, ...items] : items;
+    const pid = document.getElementById('participantId'), fo = document.getElementById('focusText');
+    if(!append){ if(p.patient && !pid.value) pid.value = p.patient; if(p.focus && !fo.value) fo.value = p.focus; }
+    persistQueue(); renderExercises();
+    toast((append?'Agregado: ':'Plan cargado: ')+p.name,'ok');
+  };
+  if(!append && sessionQueue.length) confirmModal({title:'Cargar plan', message:'La sesión de hoy tiene ejercicios. ¿Reemplazarla por "'+p.name+'"?', confirmText:'Reemplazar', danger:false}).then(ok=>ok&&go()); else go();
+}
+function deletePlan(id){ const p = plans.find(x=>x.id===id); if(!p) return; confirmModal({title:'Eliminar plan', message:'¿Eliminar "'+p.name+'"?', confirmText:'Eliminar'}).then(ok=>{ if(ok){ plans = plans.filter(x=>x.id!==id); persistPlans(); } }); }
+function exportPlan(id){ const p = plans.find(x=>x.id===id); if(p) dl('plan_'+slug(p.name)+'.json', { type:'consultorio-plan-sesion', version:1, plans:[p] }); }
+function exportCurrentQueue(){
+  if(!sessionQueue.length){ toast('No hay ejercicios en la sesión de hoy','err'); return; }
+  const name = document.getElementById('planName').value.trim() || 'Sesión '+new Date().toLocaleDateString('es-CL');
+  dl('plan_'+slug(name)+'.json', { type:'consultorio-plan-sesion', version:1, plans:[{ name, patient: document.getElementById('participantId').value.trim(), focus: document.getElementById('focusText').value.trim(), items: sessionQueue.map(planItem) }] });
+  toast('Sesión exportada','ok');
+}
+async function handleImportPlan(evt){
+  const f = evt.target.files[0]; if(!f) return;
+  try{
+    const d = JSON.parse(await f.text());
+    let list = Array.isArray(d) ? d : (d.plans || [d]);
+    list = list.map(x=> x.items ? x : (x.exercisesDone ? { name:'Sesión de '+(x.participantId||'')+' '+new Date(x.date).toLocaleDateString('es-CL'), patient:x.participantId, focus:x.focus, items:x.exercisesDone } : null)).filter(Boolean);
+    if(!list.length) throw new Error('vacío');
+    list.forEach(x=>plans.push({ id: Date.now()+Math.floor(Math.random()*1e6), name:x.name||'Plan importado', patient:x.patient||'', scheduledFor:x.scheduledFor||'', focus:x.focus||'', items:x.items.map(planItem), createdAt:new Date().toISOString(), updatedAt:new Date().toISOString() }));
+    persistPlans(); toast(list.length+' plan(es) importado(s)','ok');
+  }catch(e){ toast('No se pudo importar: el archivo no es un plan válido','err'); }
+  evt.target.value='';
+}
+function renderPlans(){
+  const el = document.getElementById('plansList'); if(!el) return;
+  if(!plans.length){ el.innerHTML = '<div class="ex-empty-inline" style="margin-top:10px">Aún no hay planes guardados.</div>'; return; }
+  const sorted = [...plans].sort((a,b)=> (b.scheduledFor||b.updatedAt||'').localeCompare(a.scheduledFor||a.updatedAt||''));
+  el.innerHTML = sorted.map(p=>`<div class="plan-item">
+    <div class="pi-info"><div class="pi-name">${escapeHtml(p.name)}</div>
+      <div class="sm">${p.patient?escapeHtml(p.patient)+' · ':''}${p.scheduledFor?'📅 '+new Date(p.scheduledFor).toLocaleString('es-CL',{dateStyle:'short',timeStyle:'short'})+' · ':''}${p.items.length} ejercicio(s) · ${formatMMSS(planTotal(p))}</div></div>
+    <div class="pi-actions">
+      <button class="btn btn-primary btn-sm" onclick="loadPlan(${p.id},false)">Cargar</button>
+      <button class="btn btn-outline btn-sm" onclick="loadPlan(${p.id},true)" title="Agregar al final de la sesión actual">+ Agregar</button>
+      <button class="btn btn-ghost btn-sm" onclick="exportPlan(${p.id})">⬇️ Exportar</button>
+      <button class="btn btn-danger btn-sm" onclick="deletePlan(${p.id})">🗑️</button>
+    </div></div>`).join('');
+}
+
+/* ================= Detalle de sesión guardada ================= */
+function closeSessionDetail(){ document.getElementById('detailOverlay').hidden = true; document.body.style.overflow=''; }
+function openSessionDetail(i){
+  const r = sessions[i]; if(!r) return;
+  const ex = r.exercisesDone || [];
+  const tot = ex.reduce((a,e)=>a+(e.duration||0),0), done = ex.filter(e=>e.completed).length;
+  let rows = '', lastCat = null;
+  ex.forEach((e,n)=>{
+    if(e.category && e.category!==lastCat){ rows += `<tr class="det-cat"><td colspan="5">${escapeHtml(e.category)}</td></tr>`; lastCat = e.category; }
+    rows += `<tr><td>${n+1}</td><td>${escapeHtml(e.name)}${e.detail?'<br><span class="sm">📝 '+escapeHtml(e.detail)+'</span>':''}</td><td>${escapeHtml(e.dosage||'')}</td><td>${formatMMSS(e.duration||0)}</td><td class="${e.completed?'ok':'pend'}">${e.completed?'✓ hecho':'○ no marcado'}</td></tr>`;
+  });
+  const box = document.getElementById('detailBody');
+  box.innerHTML = `<h3 id="detTitle">${escapeHtml(r.participantId||'—')} · ${new Date(r.date).toLocaleString('es-CL')}</h3>
+    <div class="det-grid"><div><b>Foco</b>${escapeHtml(friendlyFocus(r.focus))}</div><div><b>Ejercicios</b>${done}/${ex.length} completados</div><div><b>Duración planificada</b>${formatMMSS(tot)}</div>${r.lastDb!=null?`<div><b>dB / nota</b>${r.lastDb} dB · ${escapeHtml(r.lastNote||'—')}</div>`:''}</div>
+    ${(r.sensaciones||[]).length?`<p class="sm"><strong>Sensaciones:</strong> ${r.sensaciones.map(escapeHtml).join(', ')}</p>`:''}
+    ${r.observaciones?`<p class="sm"><strong>Notas clínicas:</strong> ${escapeHtml(r.observaciones)}</p>`:''}
+    ${ex.length?`<div class="table-scroll"><table class="det-ex"><thead><tr><th>#</th><th>Ejercicio</th><th>Dosis</th><th>Tiempo</th><th>Estado</th></tr></thead><tbody>${rows}</tbody></table></div>`:'<p class="sm">Esta sesión no tiene ejercicios registrados.</p>'}
+    ${r.evidence?`<p><img src="${r.evidence}" alt="Evidencia" style="max-width:100%;border-radius:12px;margin-top:10px"></p>`:''}
+    ${r.audioWav?`<audio controls src="${r.audioWav}" style="width:100%;margin-top:10px"></audio>`:''}
+    <div class="modal-actions" style="flex-wrap:wrap;margin-top:14px">
+      <button class="btn btn-outline" onclick="closeSessionDetail()">Cerrar</button>
+      ${ex.length?`<button class="btn btn-ghost" onclick="planFromSession(${i})">💾 Guardar como plan</button><button class="btn btn-primary" onclick="repeatSession(${i})">🔁 Repetir esta sesión</button>`:''}
+    </div>`;
+  document.getElementById('detailOverlay').hidden = false; document.body.style.overflow='hidden';
+}
+function repeatSession(i){
+  const r = sessions[i]; if(!r) return;
+  const go = ()=>{
+    sessionQueue = (r.exercisesDone||[]).map(e=>mkQItem({...planItem(e), id:planItem(e).exId}));
+    const pid = document.getElementById('participantId'), fo = document.getElementById('focusText');
+    if(!pid.value) pid.value = r.participantId||''; if(!fo.value) fo.value = r.focus||'';
+    persistQueue(); renderExercises(); closeSessionDetail(); scrollToSection('sec-ejercicios'); toast('Sesión cargada para repetirla','ok');
+  };
+  if(sessionQueue.length) confirmModal({title:'Repetir sesión', message:'La sesión de hoy tiene ejercicios. ¿Reemplazarla?', confirmText:'Reemplazar', danger:false}).then(ok=>ok&&go()); else go();
+}
+function planFromSession(i){
+  const r = sessions[i]; if(!r) return;
+  plans.push({ id: Date.now(), name:'Sesión de '+(r.participantId||'')+' '+new Date(r.date).toLocaleDateString('es-CL'), patient:r.participantId||'', scheduledFor:'', focus:r.focus||'', items:(r.exercisesDone||[]).map(planItem), createdAt:new Date().toISOString(), updatedAt:new Date().toISOString() });
+  persistPlans(); closeSessionDetail(); toast('Guardada como plan','ok');
+}
+document.getElementById('detailOverlay').addEventListener('click', e=>{ if(e.target.id==='detailOverlay') closeSessionDetail(); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape' && !document.getElementById('detailOverlay').hidden) closeSessionDetail(); });
+
+/* ---------- Respaldo completo (import/export) ---------- */
+function exportBackup(){
+  const payload = { version:2, exportedAt: new Date().toISOString(), exercises, sessions, plans };
+  const blob = new Blob([JSON.stringify(payload,null,2)], { type:'application/json' });
+  const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `respaldo_bitacora_${new Date().toISOString().slice(0,10)}.json`; a.click(); URL.revokeObjectURL(url);
+  toast(tt('toastRespaldoExportado','Respaldo completo exportado'), 'ok');
+}
+function triggerImportBackup(){ document.getElementById('importBackupInput').click(); }
+async function handleImportBackup(evt){
+  const file = evt.target.files[0];
+  if(!file) return;
+  try{
+    const text = await file.text();
+    const data = JSON.parse(text);
+    const sessionsIn = data.sessions || data.registros; // acepta respaldos antiguos también
+    if(!data || (!Array.isArray(sessionsIn) && !Array.isArray(data.exercises))) throw new Error('Formato no reconocido');
+    const ok = await confirmModal({
+      title: tt('modalImportarTitulo','Importar respaldo'),
+      message: window.CV_I18N ? window.CV_I18N.t('modalImportarMsg')(sessionsIn?.length||0, data.exercises?.length||0) : `Se combinarán ${sessionsIn?.length||0} sesión(es) y ${data.exercises?.length||0} ejercicio(s) con los datos actuales, evitando duplicados. ¿Continuar?`,
+      confirmText: tt('modalImportarBtn','Importar'),
+      danger: false
+    });
+    if(!ok){ evt.target.value=''; return; }
+    let addedRegs = 0, addedEx = 0;
+    if(Array.isArray(sessionsIn)){
+      const existingIds = new Set(sessions.map(r=>r.id));
+      sessionsIn.forEach(r=>{ if(r && !existingIds.has(r.id)){ sessions.push(r); existingIds.add(r.id); addedRegs++; } });
+    }
+    if(Array.isArray(data.exercises)){
+      const existingIds = new Set(exercises.map(e=>e.id));
+      data.exercises.forEach(e=>{ if(e && !existingIds.has(e.id)){ exercises.push({...e, running:false, intervalId:null}); existingIds.add(e.id); addedEx++; } });
+    }
+    if(Array.isArray(data.plans)){ const ids = new Set(plans.map(p=>p.id)); data.plans.forEach(p=>{ if(p && !ids.has(p.id)){ plans.push(p); ids.add(p.id); } }); persistPlans(); }
+    persistSessions(); persistExercises();
+    toast(window.CV_I18N ? window.CV_I18N.t('toastImportado')(addedRegs, addedEx) : `Importado: ${addedRegs} sesión(es) y ${addedEx} ejercicio(s) nuevos`, 'ok');
+  }catch(err){
+    console.error(err);
+    toast(tt('toastFormatoInvalido','No se pudo importar el archivo: formato inválido'), 'err');
+  } finally {
+    evt.target.value = '';
+  }
+}
+
+/* ---------- PDF generation (jsPDF) ---------- */
+async function generatePDF(){
+  const targets = getExportTargets();
+  if(!targets.length){ toast(tt('toastNoHaySesionesInforme','No hay sesiones para generar informe.'), 'err'); return; }
+  if(!window.jspdf || !window.jspdf.jsPDF){
+    try { await cvLoadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js'); } catch(e){ /* handled below */ }
+  }
+  if(!window.jspdf || !window.jspdf.jsPDF){
+    toast(tt('toastPdfLibNoCargada','No se pudo cargar la librería de PDF (revisa tu conexión a internet) — intenta de nuevo en unos segundos.'), 'err');
+    return;
+  }
+  const btn = document.getElementById('pdfBtn');
+  const originalHtml = btn.innerHTML;
+  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> ' + escapeHtml(tt('toastGenerando','Generando…'));
+
+  try{
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF({ unit:'mm', format:'a4', orientation:'portrait' });
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+    const margin = 14;
+    const lineHeight = 7;
+    const maxWidth = pageWidth - margin*2;
+    const authorLine = tt('pdfAutorLinea','Autora: Matilde Pizarro Toro');
+    const locale = tt('localeCode','es-CL');
+
+    /* ---- Cover page ---- */
+    pdf.setFillColor(201,74,140);
+    pdf.rect(0,0,pageWidth,58,'F');
+    pdf.setTextColor(255,255,255);
+    pdf.setFontSize(19); pdf.setFont(undefined,'bold');
+    pdf.text(tt('pdfPortadaTitulo','Informe de Sesiones Fonoaudiológicas'), margin, 27);
+    pdf.setFontSize(11); pdf.setFont(undefined,'normal');
+    pdf.text(tt('pdfPortadaSub','Bitácora clínica de voz — Matilde Pizarro Toro, Fonoaudióloga'), margin, 37);
+    pdf.setFontSize(9);
+    pdf.text((window.CV_I18N ? window.CV_I18N.t('pdfGeneradoEl')(new Date().toLocaleString(locale)) : `Generado el ${new Date().toLocaleString(locale)}`), margin, 46);
+
+    pdf.setTextColor(20,20,20);
+    let coverY = 74;
+    pdf.setFontSize(12); pdf.setFont(undefined,'bold'); pdf.text(tt('pdfResumenInforme','Resumen del informe'), margin, coverY); coverY += 9;
+    pdf.setFont(undefined,'normal'); pdf.setFontSize(10.5);
+    const uniqueP = new Set(targets.map(r=>r.participantId||tt('sinNombre','Sin nombre'))).size;
+    const sortedDates = targets.map(r=>new Date(r.date)).sort((a,b)=>a-b);
+    const rangeStr = sortedDates.length ? `${sortedDates[0].toLocaleDateString(locale)} — ${sortedDates[sortedDates.length-1].toLocaleDateString(locale)}` : '-';
+    [
+      (window.CV_I18N ? window.CV_I18N.t('pdfTotalSesiones')(targets.length) : `Total de sesiones incluidas: ${targets.length}`),
+      (window.CV_I18N ? window.CV_I18N.t('pdfPacientesDistintos')(uniqueP) : `Pacientes distintos: ${uniqueP}`),
+      (window.CV_I18N ? window.CV_I18N.t('pdfRangoFechas')(rangeStr) : `Rango de fechas cubierto: ${rangeStr}`)
+    ].forEach(line=>{ pdf.text(line, margin, coverY); coverY += 7.5; });
+
+    pdf.setDrawColor(220); pdf.line(margin, coverY+2, pageWidth-margin, coverY+2);
+    pdf.setFontSize(8.5); pdf.setTextColor(120,120,120);
+    pdf.text(tt('pdfDisclaimer','Este documento fue generado automáticamente y procesado en su totalidad en el navegador del profesional; ningún dato fue enviado a servidores externos.'), margin, coverY+10, { maxWidth });
+
+    /* ---- Detail pages ---- */
+    pdf.addPage();
+    let cursorY = margin;
+    function addHeader(title){
+      pdf.setTextColor(20,20,20);
+      pdf.setFontSize(13); pdf.setFont(undefined,'bold'); pdf.text(title, margin, cursorY);
+      pdf.setFontSize(9); pdf.setFont(undefined,'normal');
+      pdf.text((window.CV_I18N ? window.CV_I18N.t('pdfGenerado')(new Date().toLocaleString(locale)) : `Generado: ${new Date().toLocaleString(locale)}`), pageWidth - margin, cursorY, {align:'right'});
+      cursorY += 8; pdf.setDrawColor(230); pdf.line(margin, cursorY, pageWidth - margin, cursorY); cursorY += 8;
+    }
+    const detalleTitulo = tt('pdfDetalleTitulo','Sesiones fonoaudiológicas — Detalle');
+    function newPage(){ pdf.addPage(); cursorY = margin; addHeader(detalleTitulo); }
+
+    addHeader(detalleTitulo);
+
+    for(let i=0;i<targets.length;i++){
+      const r = targets[i];
+      if(cursorY + 60 > pageHeight - margin) newPage();
+      pdf.setFontSize(11); pdf.setFont(undefined,'bold');
+      const headerLine = window.CV_I18N ? window.CV_I18N.t('pdfSesionHeader')(i+1, r.participantId || '-', new Date(r.date).toLocaleString(locale)) : `Sesión ${i+1} — Paciente: ${r.participantId || '-'}   Fecha: ${new Date(r.date).toLocaleString(locale)}`;
+      const headLines = pdf.splitTextToSize(headerLine, maxWidth);
+      headLines.forEach(hl=>{ if(cursorY + lineHeight > pageHeight - margin) newPage(); pdf.text(hl, margin, cursorY); cursorY += lineHeight; });
+      cursorY += 2;
+
+      function write(title, text){
+        pdf.setFontSize(10); pdf.setFont(undefined,'bold'); pdf.text(title, margin, cursorY); cursorY += lineHeight - 2;
+        pdf.setFont(undefined,'normal');
+        const lines = pdf.splitTextToSize(text || '-', maxWidth);
+        lines.forEach(ln=>{ if(cursorY + lineHeight > pageHeight - margin) newPage(); pdf.text(ln, margin, cursorY); cursorY += lineHeight; });
+        cursorY += 4;
+      }
+
+      write(tt('pdfFocoSesion','Foco de la sesión:'), friendlyFocus(r.focus) || '-');
+      write(tt('pdfEjerciciosRealizados','Ejercicios realizados:'), (r.exercisesDone && r.exercisesDone.length) ? r.exercisesDone.map(e=>`${e.name} (${e.duration}s)${e.detail?' — '+e.detail:''}`).join('; ') : '-');
+      write(tt('pdfSensaciones','Sensaciones:'), (r.sensaciones && r.sensaciones.length) ? r.sensaciones.join(', ') : '-');
+      write(tt('pdfNotasClinicas','Notas clínicas:'), r.observaciones || '-');
+      write(tt('pdfUltimoNivel','Último nivel estimado (dB):'), r.lastDb !== null && r.lastDb !== undefined ? String(r.lastDb) + ' dB' : '-');
+      write(tt('pdfUltimaNota','Última nota detectada (si aplica):'), r.lastNote || '-');
+
+      if(r.evidence){
+        try{
+          const dims = await getImageDimensions(r.evidence);
+          const wmm = dims.w * 25.4 / 96;
+          const hmm = dims.h * 25.4 / 96;
+          let drawW = Math.min(wmm, maxWidth);
+          let drawH = (hmm * drawW)/wmm;
+          const maxH = pageHeight - margin - cursorY - 20;
+          if(drawH > maxH){ const s = maxH/drawH; drawW *= s; drawH *= s; }
+          if(cursorY + drawH > pageHeight - margin) newPage();
+          pdf.addImage(r.evidence, detectImageType(r.evidence), margin, cursorY, drawW, drawH);
+          cursorY += drawH + 8;
+        }catch(e){ console.warn('Imagen no añadida', e); }
+      }
+
+      if(r.audioWav) write(tt('pdfAudioAdjunto','Audio adjunto:'), (window.CV_I18N ? window.CV_I18N.t('pdfAudioDisponible')(r.audioFilename || 'sesion.wav') : `Archivo WAV disponible en la interfaz con nombre: ${r.audioFilename || 'sesion.wav'}`));
+
+      pdf.setDrawColor(230); pdf.line(margin, cursorY, pageWidth - margin, cursorY); cursorY += 8;
+    }
+
+    if(cursorY + 20 > pageHeight - margin) newPage();
+    pdf.setFont(undefined,'bold'); pdf.text(authorLine, margin, cursorY);
+
+    /* ---- Footer with page numbers (skip cover page) ---- */
+    const totalPages = pdf.internal.getNumberOfPages();
+    const footerAuthor = tt('pdfAutorFooter','Matilde Pizarro Toro · Fonoaudióloga');
+    for(let p=2;p<=totalPages;p++){
+      pdf.setPage(p);
+      pdf.setFontSize(8.5); pdf.setTextColor(130,130,130);
+      pdf.text((window.CV_I18N ? window.CV_I18N.t('pdfPaginaDe')(p-1, totalPages-1) : `Página ${p-1} de ${totalPages-1}`), pageWidth/2, pageHeight-8, { align:'center' });
+      pdf.text(footerAuthor, margin, pageHeight-8);
+    }
+
+    const fileName = `Informe_Sesiones_${new Date().toISOString().slice(0,19).replace(/[:T]/g,'_')}.pdf`;
+    pdf.save(fileName);
+    toast(window.CV_I18N ? window.CV_I18N.t('toastInformePdfGenerado')(targets.length) : `Informe PDF generado (${targets.length} sesión(es))`, 'ok');
+  }catch(err){
+    console.error(err);
+    toast(tt('toastErrorPdf','Ocurrió un error generando el PDF'), 'err');
+  } finally {
+    btn.disabled = false; btn.innerHTML = originalHtml;
+  }
+}
+
+function getImageDimensions(dataUrl){ return new Promise((resolve,reject)=>{ const img=new Image(); img.onload = ()=> resolve({w: img.naturalWidth, h: img.naturalHeight}); img.onerror = (e)=>reject(e); img.src = dataUrl; }); }
+function detectImageType(dataUrl){ if(dataUrl.startsWith('data:image/png')) return 'PNG'; if(dataUrl.startsWith('data:image/jpeg')||dataUrl.startsWith('data:image/jpg')) return 'JPEG'; return 'JPEG'; }
+</script>
+<script src="../assets/theme-switcher.js?v=2" defer></script>
+<script src="../assets/a11y-reader.js?v=2" defer></script>
+</body>
+</html>
